@@ -1,0 +1,26 @@
+/* border-box VS content-box */
+/* applique la prop border-box à l'elt */
+.box-sizing (@box-model: border-box) { 
+	-webkit-box-sizing: @box-model;
+	   -moz-box-sizing: @box-model;
+		 -o-box-sizing: @box-model;
+		-ms-box-sizing: @box-model;
+			box-sizing: @box-model;
+}
+/*     sections, total,   padding-left           clear,         float,          */
+.divise (@nb: 1, @total:1, @mypadleft: @gutter*2, @myclear:none, @myfloat:none) {
+	.box-sizing();
+	clear: @myclear;
+	float: @myfloat;
+	width: (@nb/@total)*100%;
+	padding-left: @mypadleft;
+	min-height:@unit;
+}
+
+.divise2 (@nb: 1, @total:1, @mypadleft: @gutter*2, @myclear:none, @myfloat:none) {
+	clear: @myclear;
+	float: @myfloat;
+	width: (@nb/@total)*100%;
+	padding-left: @mypadleft;
+	min-height:@unit;
+}
