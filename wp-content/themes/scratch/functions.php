@@ -28,22 +28,22 @@ function remove_wmp_image_sizes( $sizes) {
 
 // supprime les bouton radio relatifs aux tailles d'image //
 function custom_wmu_image_sizes($sizes) {
-       unset( $sizes['medium']);
-       unset( $sizes['large']);
-	   unset( $sizes['thumbnail']);
-       return $sizes;
+  unset( $sizes['medium']);
+  unset( $sizes['large']);
+	unset( $sizes['thumbnail']);
+  return $sizes;
 }
 add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
 
 
 // ajout de metaboxes //
-if (is_admin()) {
+//if (is_admin()) {
   include_once 'metaboxes/setup.php';
   include_once 'metaboxes/repeating-mediagallery-spec.php';
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
   include_once 'metaboxes/repeating-external-links-spec.php';
  // include_once 'metaboxes/datepicker-meta-spec.php';
  // include_once 'metaboxes/simple-image-spec.php';
-}
+//}
 
 ?>
