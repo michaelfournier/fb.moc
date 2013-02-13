@@ -46,4 +46,53 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
  // include_once 'metaboxes/simple-image-spec.php';
 //}
 
+add_filter('json_api_encode', 'my_encode_meta');
+
+
+function my_encode_meta($response) {
+  global $json_api;
+  $mylang = qtrans_getLanguage();
+  // ajoute le paramètre lang au fichier json //
+  $response['lang'] = qtrans_getLanguage();
+  // si la var url custom_field est présente et qu'il ya des posts alors //
+  if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && $json_api->query->custom_fields && isset($response['posts'])) {
+    $keys = explode(',', $json_api->query->custom_fields);
+    foreach ($response['posts'] as $post) {
+      //$post->test = get_post_meta($post->id, "_pinfos_description_fr", TRUE);
+      $wp_custom_fields = get_post_custom($post->id);
+      foreach ($keys as $key) {
+        if (isset($wp_custom_fields[$key])) {
+          $post->custom_fields->$key = $wp_custom_fields[$key];
+        } else if ($mylang == "fr") {
+          if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+        } else {
+            if(isset($wp_custom_fields[$key."_en"])) {
+              $post->custom_fields->$key = $wp_custom_fields[$key."_en"];
+          } else {
+             if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+          }
+        }
+      }
+    }
+  } else if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
+      $wp_custom_fields = get_post_custom($post->id);
+      foreach ($keys as $key) {
+        if (isset($wp_custom_fields[$key])) {
+          $post->custom_fields->$key = $wp_custom_fields[$key];
+        } else if ($mylang == "fr") {
+          if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+        } else {
+            if(isset($wp_custom_fields[$key."_en"])) {
+              $post->custom_fields->$key = $wp_custom_fields[$key."_en"];
+          } else {
+             if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+          }
+        }
+      }
+  }
+  return $response;
+}
+
+
+
 ?>
