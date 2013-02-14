@@ -44,7 +44,7 @@ class JSON_API_Core_Controller {
   
   public function get_post() {
     global $json_api, $post;
-    extract($json_api->query->get(array('id', 'slug', 'post_id', 'post_slug')));
+    extract($json_api->query->get(array('id', 'slug', 'post_id', 'post_slug', 'meta_key')));
     if ($id || $post_id) {
       if (!$id) {
         $id = $post_id;
@@ -325,6 +325,36 @@ class JSON_API_Core_Controller {
       'count' => count($posts),
       'pages' => (int) $wp_query->max_num_pages,
       $object_key => $object,
+      'posts' => $posts
+    );
+  }
+
+  // Retrieve posts based on custom field key/value pair
+  public function get_custom_posts() {
+    global $json_api;
+
+    // Make sure we have key/value query vars
+    // if (!$json_api->query->key || !$json_api->query->value) {
+    //   $json_api->error("Include a 'key' and 'value' query var.");
+    // }
+    $mytaxquery = array(
+      array(
+        'taxonomy' => 'photography',
+        'terms' =>  (string)$myqual,
+        'field' => 'slug',  
+      )
+    );
+
+    // See also: http://codex.wordpress.org/Template_Tags/query_posts
+    $posts = $json_api->introspector->get_posts(array(
+      'meta_key' => $json_api->query->key,
+      'meta_value' => $json_api->query->value,
+      'orderby' => $json_api->query->key
+    ));
+
+    return array(
+      'key' => $json_api->query->key,
+      'value' => $json_api->query->value,
       'posts' => $posts
     );
   }

@@ -93,6 +93,4 @@ function my_encode_meta($response) {
   return $response;
 }
 
-
-
 ?>

@@ -293,6 +293,7 @@ class JSON_API_Introspector {
       query_posts($query);
     }
   }
+
   
 }
 
