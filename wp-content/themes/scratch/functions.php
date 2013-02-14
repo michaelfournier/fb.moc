@@ -93,4 +93,17 @@ function my_encode_meta($response) {
   return $response;
 }
 
+    // Add a custom controller
+    add_filter('json_api_controllers', 'add_my_controller');
+    function add_my_controller($controllers) {
+      $controllers[] = 'Mikictrl';
+      return $controllers;
+    }
+
+    // Register the source file for our controller
+    add_filter('json_api_mikictrl_controller_path', 'mikictrl_controller_path');
+    function mikictrl_controller_path($default_path) {
+      return get_stylesheet_directory() . '/mikictrl.php';
+    }
+
 ?>
