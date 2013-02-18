@@ -25,7 +25,7 @@ front page
 			 while ( $allposts->have_posts() ) : $allposts->the_post(); ?>
 			<section>
 				<h2>
-					<a href="<?= get_permalink(); ?>"><? the_title(); ?></a>
+					<a href="/#hello"><? the_title(); ?></a>
 				</h2>
 			</section>
 
