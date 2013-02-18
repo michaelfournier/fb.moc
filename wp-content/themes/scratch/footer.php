@@ -18,11 +18,12 @@ $tab_vars = array( "single" => is_single(), "blogname" => $blogname, "lang" => $
 <?
 // si on est sur la home page : requete des images de la home //
 if (is_front_page()) {	
-	get_template_part( 'loop', 'homebgdpics' );
-	// sinon //
-	} else {
+	// echo "front";
+	// get_template_part( 'loop', 'homebgdpics' );
+	// // sinon //
+	// } else {
 	$tab_vars = array( "single" => is_single(), "blogname" => $blogname, "lang" => $malangue, "blogurl" => $blogurl, "themepath" => get_template_directory_uri());
-	 wp_localize_script (  "my-scripts" , 'wp_vars' , $tab_vars);
+	 wp_localize_script (  "my-app" , 'wp_vars' , $tab_vars);
 	};
 ?>
 

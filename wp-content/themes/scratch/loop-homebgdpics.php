@@ -13,6 +13,6 @@ if ( $homepost->have_posts() ):
  	}
  	$tab_pics = array("front" => is_front_page(), "pics" => $bgdurl);
  // on print le tableau d'images //
- wp_localize_script ("my-scripts" , 'wp_vars' , $tab_pics);
+ wp_localize_script ("my-app" , 'wp_vars' , $tab_pics);
  endwhile; endif;
 ?>

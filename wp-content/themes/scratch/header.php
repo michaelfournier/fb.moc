@@ -32,7 +32,7 @@
 
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
     <link type="text/plain" rel="author" href="/humans.txt" />
-    <script src="<?= get_template_directory_uri(); ?>/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>
     <?php wp_head(); ?>
 </head>
 
