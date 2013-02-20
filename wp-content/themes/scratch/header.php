@@ -43,6 +43,19 @@
 <div id="tablette">tablette</div>
 <div id="main_wrapper">
 	<header id="main_header">
-		<nav id="main_nav">			
+		<nav id="main_nav">	
+<?
+$args = array('post_type' => 'page', 'posts_per_page' => -1);
+$allposts = new WP_query($args);
+?>
+		<ul id="mainmenu">
+			<? if ( $allposts->have_posts() ):
+			 while ( $allposts->have_posts() ) : $allposts->the_post(); ?>
+			<ul>
+				<a href='<?= "#".$post->post_name;?>'><? the_title(); ?></a>
+			</ul>
+			<? endwhile; else : ?> No posts <? endif; ?>
+		</ul><!-- #container -->
+		<? wp_reset_query(); ?>		
 		</nav>
 	</header>
