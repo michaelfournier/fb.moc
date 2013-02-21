@@ -2,11 +2,12 @@
 // charge les scripts //
 //http://shailan.com/2161/adding-javascript-to-your-theme-using-wp_enqueue_script/
 function my_theme_scripts() {
-  wp_enqueue_script( 'jquery');
-  wp_enqueue_script( 'underscore');
-  wp_enqueue_script( 'backbone');
-  wp_enqueue_script( 'plugins', get_template_directory_uri() . '/app/plugins.js', 'jquery', false, false );
-  wp_enqueue_script( 'yepnope', get_template_directory_uri() . '/app/libs/vendors/yepnope.1.5.4-min.js', 'jquery', false, true ); 
+ // wp_enqueue_script( 'jquery');
+ // wp_enqueue_script( 'underscore');
+  //wp_enqueue_script( 'backbone');
+  //wp_enqueue_script( 'plugins', get_template_directory_uri() . '/app/plugins.js', 'jquery', false, true );
+  wp_enqueue_script( 'yepnope', get_template_directory_uri() . '/app/libs/vendors/yepnope.js', 'jquery', false, true );
+  wp_enqueue_script( 'require', get_template_directory_uri() . '/app/libs/vendors/require.js', 'jquery', false, true );  
   wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/main.js', 'backbone', false, true );
   //wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/models/home.js', null, false, true );
  // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/models/post.js', 'backbone', false, true );

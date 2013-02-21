@@ -32,7 +32,8 @@
 
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
     <link type="text/plain" rel="author" href="/humans.txt" />
-    <script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>
+   <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
+    <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
     <?php wp_head(); ?>
 </head>
 
@@ -44,10 +45,10 @@
 <div id="main_wrapper">
 	<header id="main_header">
 		<nav id="main_nav">	
-<?
-$args = array('post_type' => 'page', 'posts_per_page' => -1);
-$allposts = new WP_query($args);
-?>
+		<?
+		$args = array('post_type' => 'page', 'posts_per_page' => -1);
+		$allposts = new WP_query($args);
+		?>
 		<ul id="mainmenu">
 			<? if ( $allposts->have_posts() ):
 			 while ( $allposts->have_posts() ) : $allposts->the_post(); ?>
@@ -59,3 +60,20 @@ $allposts = new WP_query($args);
 		<? wp_reset_query(); ?>		
 		</nav>
 	</header>
+
+	<div id="mainbb"></div>
+
+	<!-- template pour les works -->
+	<script type="text/template" id="works_list_template">
+
+	    <% _.each(works ,function(work){ %>
+	        <h1><%= work.get("title") %></h1>
+	        <p><%= _.escape(work.get("custom_fields")['_pinfos_description']) %></p>
+
+              <% if (_.isEmpty(work.get('attachments')) === false) { %>
+                    <a href="#works/<%= work.get('slug') %>" style="display:block;"><img src='<%= work.get('attachments')[0]['images']['thumbnail']['url'] %>' /></a>
+              <% } %>  
+              <hr>     
+	    <% }); %>
+
+	</script>

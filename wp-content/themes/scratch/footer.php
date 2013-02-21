@@ -17,8 +17,9 @@ $tab_vars = array( "single" => is_single(), "blogname" => $blogname, "lang" => $
 
 <?
 // si on est sur la home page : requete des images de la home //
-// if (is_front_page()) {	
-// 	// echo "front";
+ if (is_front_page()) {	
+ 	 echo "front";
+ 	}
 // 	get_template_part( 'loop', 'homebgdpics' );
 // 	// sinon //
 // 	} else {
@@ -26,7 +27,7 @@ $tab_vars = array( "single" => is_single(), "blogname" => $blogname, "lang" => $
 	 wp_localize_script (  "my-app" , 'wp_vars' , $tab_vars);
 	//};
 ?>
-
+<script id="mic" type="text/javascript"></script>
 <?php wp_footer(); ?>
 </body>
 </html>
