@@ -65,11 +65,17 @@
 
 	<!-- template pour les works -->
 	<script type="text/template" id="works_list_template">
+		<section id="workslist">
+			    <% _.each(works ,function(work){ %>
+		              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+		                    <a title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
+		              <% } %>    
+			    <% }); %>
+		</section>
+	</script>
 
-	    <% _.each(works ,function(work){ %>
-              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-                    <a title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
-              <% } %>    
-	    <% }); %>
 
+	<!-- template pour la sidebar -->
+	<script type="text/template" id="sidebar_works_template">
+		<section id="sidebar">oooo</section>
 	</script>
