@@ -65,42 +65,70 @@ function my_encode_meta($response) {
   // ajoute le paramètre lang au fichier json //
   $response['lang'] = qtrans_getLanguage();
   // si la var url custom_field est présente et qu'il ya des posts alors //
-  if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && $json_api->query->custom_fields && isset($response['posts'])) {
-    $keys = explode(',', $json_api->query->custom_fields);
+  if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['posts'])) {
+
     foreach ($response['posts'] as $post) {
+      add_gallery($post);
       //$post->test = get_post_meta($post->id, "_pinfos_description_fr", TRUE);
       $wp_custom_fields = get_post_custom($post->id);
-      foreach ($keys as $key) {
-        if (isset($wp_custom_fields[$key])) {
-          $post->custom_fields->$key = $wp_custom_fields[$key];
-        } else if ($mylang == "fr") {
-          if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+      //foreach ($keys as $key) {
+       if ($mylang == "fr") {
+          if(isset($wp_custom_fields['_pinfos_description_fr'])) { 
+            $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];
+          };
         } else {
-            if(isset($wp_custom_fields[$key."_en"])) {
-              $post->custom_fields->$key = $wp_custom_fields[$key."_en"];
-          } else {
-             if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
-          }
-        }
-      }
-    }
+            if(isset($wp_custom_fields['_pinfos_description_en'])) {
+              $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_en'];
+            } else if(isset($wp_custom_fields['_pinfos_description_fr'])) {
+              $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];
+            };
+        };
+      //}
+    };
   } else if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
+    add_gallery($response['post']);
       $wp_custom_fields = get_post_custom($post->id);
-      foreach ($keys as $key) {
-        if (isset($wp_custom_fields[$key])) {
-          $post->custom_fields->$key = $wp_custom_fields[$key];
-        } else if ($mylang == "fr") {
-          if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+      //foreach ($keys as $key) {
+       if ($mylang == "fr") {
+          if(isset($wp_custom_fields['_pinfos_description_fr'])) { $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];}
         } else {
-            if(isset($wp_custom_fields[$key."_en"])) {
-              $post->custom_fields->$key = $wp_custom_fields[$key."_en"];
+            if(isset($wp_custom_fields["_pinfos_description_en"])) { $post->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_en"];
           } else {
-             if(isset($wp_custom_fields[$key."_fr"])) $post->custom_fields->$key = $wp_custom_fields[$key."_fr"];
+             if(isset($wp_custom_fields["_pinfos_description_fr"])) { $post->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_fr"];}
           }
         }
-      }
+
+      //}
   }
+
   return $response;
+}
+
+
+function add_gallery($post) {
+  $gallery = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
+  $themepath = get_bloginfo('template_url');
+  if(isset($gallery)) {
+    foreach($gallery as $idpic) {
+      $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
+      $imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=250&h=160&zc=1';  
+      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');   
+      $imagemetas = get_post($idpic['image']);
+      $tabgallery = array(
+      'thumbnail' => $imagethumb,
+      'large' =>   $imagelarge[0],   
+      'full' =>  $imagefull[0],        
+      'title' =>  $imagemetas->post_title,
+      'description' =>  $imagemetas->post_content,
+      'alt' =>  get_post_meta($idpic['image'], '_wp_attachment_image_alt', true),
+      'legend' => $imagemetas->post_excerpt
+      );
+
+      $post->gallery[] = $tabgallery;
+    }
+
+  } 
+  return;
 }
 
 // Add a custom controller

@@ -5,6 +5,7 @@ $gallery_mb = new WPAlchemy_MetaBox(array
 	'title' => 'Galerie des média',
   'types' => array('works', 'page'),
   'prefix' => '_pmediagallery_',
+  'mode' => WPALCHEMY_MODE_EXTRACT,
 	'template' => get_stylesheet_directory() . '/metaboxes/repeating-mediagallery.php',
 	'init_action' => 'kia_metabox_init'
 ));  

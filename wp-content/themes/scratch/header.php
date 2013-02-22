@@ -67,13 +67,9 @@
 	<script type="text/template" id="works_list_template">
 
 	    <% _.each(works ,function(work){ %>
-	        <h1><%= work.get("title") %></h1>
-	        <p><%= _.escape(work.get("custom_fields")['_pinfos_description']) %></p>
-
-              <% if (_.isEmpty(work.get('attachments')) === false) { %>
-                    <a href="#works/<%= work.get('slug') %>" style="display:block;"><img src='<%= work.get('attachments')[0]['images']['thumbnail']['url'] %>' /></a>
-              <% } %>  
-              <hr>     
+              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+                    <a title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
+              <% } %>    
 	    <% }); %>
 
 	</script>
