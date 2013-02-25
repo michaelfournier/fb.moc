@@ -46,13 +46,6 @@ function my_admin_print_footer_scripts()
 		<? } ?>
 			
 	<? } else { ?>
-	<? if($mb->is_first()) { ?>
-		<style type="text/css">
-			.wpa_loop .first {
-				display:none;
-			}
-		</style>
-	<? } ?>
 
 	<!-- lien -->
 		<div class="mylink">	
