@@ -62,18 +62,27 @@
 	</header>
 
 	<div id="mainbb">
-		<section class="tools"></section>
 	</div>
+
+	<!-- template pour mainwork -->
+	<script type="text/template" id="mainworks_template">
+		<section class="tools"></section>
+		<section id="sidebar">
+			<h3></h3>
+			<h4></h4>
+			<p></p>
+		</section>
+		<section class="maincontent" id="workslist">
+		</section>
+	</script>
 
 	<!-- template pour la workslist -->
 	<script type="text/template" id="works_list_template">
-		<section class="maincontent" id="workslist">
-			    <% _.each(works ,function(work){ %>
-		              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-		                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
-		              <% } %>    
-			    <% }); %>
-		</section>
+	    <% _.each(works ,function(work){ %>
+              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
+              <% } %>    
+	    <% }); %>
 	</script>
 
 
@@ -88,12 +97,9 @@
 
 	<!-- template pour work -->
 	<script type="text/template" id="work_template">
-
-		<section class="maincontent" id="work">
 			    <% _.each(work.attributes.post.gallery ,function(pic){ %>
 		                    <img src='<%= pic['full'] %>' />  
 			    <% }); %>			
-		</section>
 	</script>
 
 	<!-- template pour worklistmini -->
