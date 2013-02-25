@@ -65,13 +65,14 @@
 
 	<!-- template pour la workslist -->
 	<script type="text/template" id="works_list_template">
-			<section class="maincontent" id="workslist">
-				    <% _.each(works ,function(work){ %>
-			              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-			                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
-			              <% } %>    
-				    <% }); %>
-			</section>
+		<section class="tools"></section>
+		<section class="maincontent" id="workslist">
+			    <% _.each(works ,function(work){ %>
+		              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+		                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
+		              <% } %>    
+			    <% }); %>
+		</section>
 	</script>
 
 
@@ -84,11 +85,25 @@
 		</section>
 	</script>
 
-		<!-- template pour work -->
-	<script type="text/template" id="work_template">
-			<section class="maincontent" id="work">
-				    <% _.each(work.attributes.post.gallery ,function(pic){ %>
-			                    <img src='<%= pic['full'] %>' />  
-				    <% }); %>			
-			</section>
+	<!-- template pour work -->
+	<script type="text/template" id="work_template">			
+		<section class="maincontent" id="work">
+			    <% _.each(work.attributes.post.gallery ,function(pic){ %>
+		                    <img src='<%= pic['full'] %>' />  
+			    <% }); %>			
+		</section>
 	</script>
+
+	<!-- template pour worklistmini -->
+	<script type="text/template" id="works_listmini_template">
+		<section class="tools">	
+			<nav id="workslistmini">	
+			    <% _.each(works ,function(work){ %>
+		              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+		                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+		              <% } %>    
+			    <% }); %>
+			</nav>
+		</section>
+	</script>
+
