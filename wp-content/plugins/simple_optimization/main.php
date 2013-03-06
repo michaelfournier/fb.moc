@@ -44,7 +44,7 @@ function tags_to_keywords(){
         }
     }
 }
-add_action('wp_head','tags_to_keywords'); // Add tags_to_keywords to wp_head function
+//add_action('wp_head','tags_to_keywords'); // Add tags_to_keywords to wp_head function
 // add except as description
 function excerpt_to_description(){
     global $post; // get access to the $post object

@@ -1,4 +1,3 @@
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
 /*
 Theme Name: scratch
 Theme URI: 
@@ -34,7 +33,9 @@ summary {
 /**
  * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
  */
-audio, canvas, video {
+audio,
+canvas,
+video {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -68,8 +69,6 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
-  /* 2 */
-
   -ms-text-size-adjust: 100%;
   /* 2 */
 
@@ -103,7 +102,8 @@ a:focus {
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-a:active, a:hover {
+a:active,
+a:hover {
   outline: 0;
 }
 /* ==========================================================================
@@ -147,7 +147,8 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
  */
-b, strong {
+b,
+strong {
   font-weight: bold;
 }
 blockquote {
@@ -178,7 +179,8 @@ mark {
 /**
  * Address margins set differently in IE 6/7.
  */
-p, pre {
+p,
+pre {
   margin: 1em 0;
 }
 /**
@@ -209,7 +211,8 @@ q {
 /**
  * Address `quotes` property not supported in Safari 4.
  */
-q:before, q:after {
+q:before,
+q:after {
   content: '';
   content: none;
 }
@@ -222,7 +225,8 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-sub, sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -252,13 +256,16 @@ dd {
 /**
  * Address paddings set differently in IE 6/7.
  */
-menu, ol, ul {
+menu,
+ol,
+ul {
   padding: 0 0 0 40px;
 }
 /**
  * Correct list images handled incorrectly in IE 7.
  */
-nav ul, nav ol {
+nav ul,
+nav ol {
   list-style: none;
   list-style-image: none;
 }
@@ -343,8 +350,6 @@ textarea {
   /* 2 */
 
   vertical-align: baseline;
-  /* 3 */
-
   *vertical-align: middle;
   /* 3 */
 
@@ -353,7 +358,8 @@ textarea {
  * Address Firefox 3+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-button, input {
+button,
+input {
   line-height: normal;
 }
 /**
@@ -362,7 +368,8 @@ button, input {
  * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
  * Correct `select` style inheritance in Firefox 4+ and Opera.
  */
-button, select {
+button,
+select {
   text-transform: none;
 }
 /**
@@ -391,7 +398,8 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 /**
@@ -400,7 +408,8 @@ button[disabled], html input[disabled] {
  * 3. Remove excess padding in IE 7.
  *    Known issue: excess padding remains in IE 6.
  */
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
 
@@ -408,8 +417,6 @@ input[type="checkbox"], input[type="radio"] {
   /* 2 */
 
   *height: 13px;
-  /* 3 */
-
   *width: 13px;
   /* 3 */
 
@@ -433,13 +440,15 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 /**
  * Remove inner padding and border in Firefox 3+.
  */
-button::-moz-focus-inner, input::-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -758,7 +767,9 @@ SMARTPHONES
   #smartphone {
     display: block;
   }
-  #tablette, #intermediaire, #bureau {
+  #tablette,
+  #intermediaire,
+  #bureau {
     display: none;
   }
 }
@@ -770,7 +781,9 @@ SMARTPHONES
   #tablette {
     display: block;
   }
-  #smartphone, #intermediaire, #bureau {
+  #smartphone,
+  #intermediaire,
+  #bureau {
     display: none;
   }
 }
@@ -780,9 +793,11 @@ SMARTPHONES
    ========================================================================== */
 @media only screen and (min-device-width: 767px) {
   #intermediaire {
-    display: block;
+    display: none;
   }
-  #smartphone, #tablette, #bureau {
+  #smartphone,
+  #tablette,
+  #bureau {
     display: none;
   }
 }
@@ -841,7 +856,8 @@ IE OLDIES
  * Extends the .visuallyhidden class to allow the element to be focusable
  * when navigated to via the keyboard: h5bp.com/p
  */
-.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
   clip: auto;
   height: auto;
   margin: 0;
@@ -866,7 +882,8 @@ IE OLDIES
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   content: " ";
   /* 1 */
 
@@ -891,10 +908,7 @@ IE OLDIES
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
-@media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
+@media print, (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 /* ==========================================================================
@@ -910,7 +924,8 @@ IE OLDIES
     box-shadow: none !important;
     text-shadow: none !important;
   }
-  a, a:visited {
+  a,
+  a:visited {
     text-decoration: underline;
   }
   a[href]:after {
@@ -922,10 +937,13 @@ IE OLDIES
   /*
        * Don't show links for images, or javascript/internal links
        */
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
     content: "";
   }
-  pre, blockquote {
+  pre,
+  blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -934,7 +952,8 @@ IE OLDIES
     /* h5bp.com/t */
   
   }
-  tr, img {
+  tr,
+  img {
     page-break-inside: avoid;
   }
   img {
@@ -943,11 +962,14 @@ IE OLDIES
   @page  {
     margin: 0.5cm;
   }
-  p, h2, h3 {
+  p,
+  h2,
+  h3 {
     orphans: 3;
     widows: 3;
   }
-  h2, h3 {
+  h2,
+  h3 {
     page-break-after: avoid;
   }
 }
