@@ -2,8 +2,28 @@
   BUREAU INTERMÉDIAIRE
    ========================================================================== */
 @media
-only screen and (min-device-width: 767px)
+only screen and (min-width: 500px) and (min-device-width: 768px)
 {
-#intermediaire { display: none;}
-#smartphone, #tablette, #bureau { display: none;}
+	#bureau { display: block;}
+	#smartphone, #tablette, #intermediaire { display: none;}
+
+	html, body {
+		overflow-y:	hidden;
+	}
+
+	#main_wrapper {
+		max-width: 1480px;
+		.divise(1,1, 0, none, none);
+		padding: 0 50px;
+		margin: 0 auto;
+	}
+	#main_nav {
+		max-width: 1480px;
+		display: block;
+		.divise(1,1, 0, none, none);
+		padding: 0 50px;
+		margin: 0 auto;
+	}
+
+
 }

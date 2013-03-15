@@ -19,27 +19,69 @@ Tags: html5, boilerplate, responsive
 Author: vacuumRandom
 ========================================================================== */  
 
+/*------------------*/
+/*		general		*/
+/*------------------*/
 
+html, body {
+	height: 100%;
+}
 
-body h3 {
-	color: #ffffff;
+#smartphone, #bureau, #tablette, #intermediaire {
+	position:fixed;
+	top: 0;
+	right: 0;
+	background-color: #FFFF99;
+	z-index: 9999;
+	display:none;
+	font-size:(10/@font-size)*1em;
+}
+
+body {
+	background-color: #F9F9F9;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:(12/@font-size)*1em;
+	line-height: @line/12;
+	color: @black60;
+}
+
+h3 {
+	color: @black90;
+}
+
+ul { padding: 0; margin: 0;} 
+
+#main_header { 
+	margin: 0 0 @unit 0;
+	padding: @unit/2 0;
+	background-color: white;
+	width: 100%;
+	float: left;
 }
 
 #mainmenu li {
 	display: inline-block;
+	float:left;
 }
 
+#mainmenu li:first-child a {
+	padding-left: 0px;
+	border: 0px;
+}
 #mainmenu a {
-	color: green;
+	letter-spacing: 1px;
+	border-left: 1px solid @black10;
+	color: @black60;
+	text-transform: lowercase;
 	display: block;
-	font-size: 0.9em;
+	padding: @unit/3 @unit;
+	font-size:(11/@font-size)*1em;
 	text-decoration: none;
 }
 
 .maincontent img {
 	max-width: 100%;
 }
-
 
 /* =============================================================================
 Media Queries

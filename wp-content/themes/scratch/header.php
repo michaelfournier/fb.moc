@@ -37,12 +37,12 @@
     <?php wp_head(); ?>
 </head>
 
+
 <body <?php body_class(); ?>>
-<div id="bureau">bureau</div>
-<div id="intermediaire">intermediaire</div>
-<div id="smartphone">smarphone</div>
-<div id="tablette">tablette</div>
-<div id="main_wrapper">
+	<div id="bureau">bureau</div>
+	<div id="intermediaire">intermediaire</div>
+	<div id="smartphone">smarphone</div>
+	<div id="tablette">tablette</div>
 	<header id="main_header">
 		<nav id="main_nav">	
 		<?
@@ -60,6 +60,9 @@
 		<? wp_reset_query(); ?>		
 		</nav>
 	</header>
+<div id="main_wrapper">
+
+
 
 	<div id="mainbb">
 	</div>
