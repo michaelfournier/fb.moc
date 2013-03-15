@@ -1,7 +1,7 @@
 var Blog = (function () {
 	var blog = {
 		init: function () {
-
+			
 		}
 	};
 

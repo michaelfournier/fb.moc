@@ -52,9 +52,9 @@
 		<ul id="mainmenu">
 			<? if ( $allposts->have_posts() ):
 			 while ( $allposts->have_posts() ) : $allposts->the_post(); ?>
-			<ul>
+			<li>
 				<a href='<?= "#".$post->post_name;?>'><? the_title(); ?></a>
-			</ul>
+			</li>
 			<? endwhile; else : ?> No posts <? endif; ?>
 		</ul><!-- #container -->
 		<? wp_reset_query(); ?>		
