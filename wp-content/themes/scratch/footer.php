@@ -7,6 +7,7 @@
  * @subpackage scratch
  */
 ?>
+</div><!-- fin de php-page -->
 </div><!-- fin #main_wrapper -->
 <?
 $malangue = qtrans_getLanguage(); 

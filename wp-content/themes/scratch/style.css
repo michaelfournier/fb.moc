@@ -783,6 +783,9 @@ ul {
   padding: 0;
   margin: 0;
 }
+#php-page {
+  display: none;
+}
 #main_header {
   margin: 0 0 1.1428571428571428em 0;
   padding: 0.5714285714285714em 0;
@@ -799,12 +802,12 @@ ul {
   border: 0px;
 }
 #mainmenu a {
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   border-left: 1px solid #dcdcdc;
-  color: #666666;
+  color: #1a1a1a;
   text-transform: lowercase;
   display: block;
-  padding: 0.38095238095238093em 1.1428571428571428em;
+  padding: 0.22857142857142856em 1.1428571428571428em;
   font-size: 0.7857142857142857em;
   text-decoration: none;
 }
