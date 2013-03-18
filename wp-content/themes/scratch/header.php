@@ -75,6 +75,7 @@
 		</section>
 		<section class="maincontent" id="workslist">
 		</section>
+		<nav id="timeline"></nav>
 	</script>
 
 	<!-- template pour la workslist -->

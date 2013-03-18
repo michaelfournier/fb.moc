@@ -12,7 +12,7 @@ var Blog = (function (blog) {
             var renderedContent = this.template({works : this.collection.models});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
-            this.$el.find(".tools").html(renderedContent).find('a').each(function() {
+            this.$el.find("#timeline").html(renderedContent).find('a').each(function() {
                 $(this).delay(i * 50).fadeIn();
                 i++;
                 //console.log($(this).attr('href'));

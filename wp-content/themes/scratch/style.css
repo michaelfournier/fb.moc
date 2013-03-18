@@ -792,6 +792,7 @@ ul {
   background-color: white;
   width: 100%;
   float: left;
+  opacity: .8;
 }
 #mainmenu li {
   display: inline-block;
@@ -812,7 +813,7 @@ ul {
   text-decoration: none;
 }
 .tools {
-  height: 9.142857142857142em;
+  height: 3.4285714285714284em;
 }
 .maincontent img {
   max-width: 100%;
@@ -899,6 +900,7 @@ SMARTPHONES
     width: 75%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
+    padding-left: 6.857142857142857em;
   }
   #sidebar {
     -webkit-box-sizing: border-box;
@@ -920,10 +922,14 @@ SMARTPHONES
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     clear: none;
-    float: none;
+    float: left;
     width: 100%;
-    padding-left: 0 none;
+    padding-left: 0;
     min-height: 1.1428571428571428em;
+  }
+  #timeline {
+    position: absolute;
+    bottom: 1.1428571428571428em;
   }
 }
 /* only screen and (min-width: 810px) */

@@ -13,7 +13,7 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            this.$el.find('.tools').html("");
+            this.$el.find('#timeline').html("");
 
             var renderedContent = this.template({works : this.collection.models});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
