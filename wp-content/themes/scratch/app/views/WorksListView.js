@@ -36,7 +36,7 @@ var Blog = (function (blog) {
         },
         events : {
             "mouseover a"  : "showTitle",
-            "click #workslist a"  : "mydelete"
+            "click #workslist a"  : "mydelete",
         },
 
         mydelete: function() {

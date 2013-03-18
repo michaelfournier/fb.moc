@@ -13,13 +13,28 @@ var Blog = (function (blog){
                 // on instancie la vue myworkslistview
                 Blog.myworkslistview = new blog.Views.WorksListView(Blog.myworkslist);                 
                 // on instancie l'objet mywork
-                Blog.mywork = new blog.Models.Work();                 
+                Blog.mywork = new blog.Models.Work();
+                // on applique la fonction myheight //
+                this.myheight();
+                // on écoute l'évenement resize pour appliquer la fonction myheight //
+                $(window).on("resize", _.bind(this.myheight, this));
+
             },
             routes : {
                 "works/:slug_post" : "displayWork",
                 "works" : "displayWorksList",
                 "bio" : "bio",
                 "*path" : "root"
+            },
+            // fonction pour donner une hauteur à #mainbb //
+             myheight: function() {
+                    var offset = $('#mainbb').offset();
+                    // topOffset = distance entre le bloc #content et le haut de la fenetre //  
+                    var topOffset = offset.top; 
+                    // on calcul la hauteur de la div #content //
+                    var contentheight = $(window).height()-topOffset-50;
+                    $('#mainbb').css("height", contentheight);
+                    console.log(contentheight);   
             },
             root : function () {
                 blog.myhomepage.fetch({
