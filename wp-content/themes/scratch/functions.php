@@ -111,13 +111,13 @@ function add_gallery($post) {
   if(isset($gallery)) {
     foreach($gallery as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
-      //$imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=250&h=160&zc=1';
-      $imagethumb = wp_get_attachment_image_src($idpic['image'], 'thumbnail'); 
-      $imagethumbmini = $themepath.'/timthumb.php?src='.$imagethumb[0].'&w=80&h=50&zc=1';    
+      $imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=200&h=120&zc=1';
+      $imagethumb2 = wp_get_attachment_image_src($idpic['image'], 'thumbnail'); 
+      $imagethumbmini = $themepath.'/timthumb.php?src='.$imagethumb2[0].'&w=80&h=50&zc=1';    
       $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');   
       $imagemetas = get_post($idpic['image']);
       $tabgallery = array(
-      'thumbnail' => $imagethumb[0],
+      'thumbnail' => $imagethumb,
       'thumbnailmini' => $imagethumbmini,
       'large' =>   $imagelarge[0],   
       'full' =>  $imagefull[0],        

@@ -62,8 +62,6 @@
 	</header>
 <div id="main_wrapper">
 
-
-
 	<div id="mainbb">
 	</div>
 

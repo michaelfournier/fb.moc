@@ -765,13 +765,19 @@ html, body {
 }
 body {
   background-color: #F9F9F9;
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8571428571428571em;
   line-height: 1.3333333333333333;
   color: #666666;
 }
 h3 {
   color: #1a1a1a;
+  margin: 0 0 1.1428571428571428em 0;
+  font-size: 1em;
+}
+p {
+  font-size: 0.7857142857142857em;
+  text-align: justify;
 }
 ul {
   padding: 0;
@@ -801,6 +807,9 @@ ul {
   padding: 0.38095238095238093em 1.1428571428571428em;
   font-size: 0.7857142857142857em;
   text-decoration: none;
+}
+.tools {
+  height: 9.142857142857142em;
 }
 .maincontent img {
   max-width: 100%;
@@ -875,6 +884,43 @@ SMARTPHONES
     min-height: 1.1428571428571428em;
     padding: 0 50px;
     margin: 0 auto;
+  }
+  .maincontent {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: right;
+    width: 75%;
+    padding-left: 0;
+    min-height: 1.1428571428571428em;
+  }
+  #sidebar {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: left;
+    width: 25%;
+    padding-left: 0;
+    min-height: 1.1428571428571428em;
+    padding-right: 1.1428571428571428em;
+  }
+  #mainbb {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: none;
+    width: 100%;
+    padding-left: 0 none;
+    min-height: 1.1428571428571428em;
   }
 }
 /* only screen and (min-width: 810px) */
