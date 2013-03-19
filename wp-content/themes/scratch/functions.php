@@ -87,18 +87,19 @@ function my_encode_meta($response) {
     };
   } else if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
     add_gallery($response['post']);
-      $wp_custom_fields = get_post_custom($post->id);
+      $wp_custom_fields = get_post_custom($response['post']->id);
       //foreach ($keys as $key) {
        if ($mylang == "fr") {
-          if(isset($wp_custom_fields['_pinfos_description_fr'])) { $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];}
+          if(isset($wp_custom_fields['_pinfos_description_fr'])) { 
+            $response['post']->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];
+          };
         } else {
-            if(isset($wp_custom_fields["_pinfos_description_en"])) { $post->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_en"];
-          } else {
-             if(isset($wp_custom_fields["_pinfos_description_fr"])) { $post->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_fr"];}
+            if(isset($wp_custom_fields["_pinfos_description_en"])) {
+              $response['post']->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_en"];
+          } else if(isset($wp_custom_fields["_pinfos_description_fr"])) {
+            $response['post']->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_fr"];
           }
         }
-
-      //}
   }
 
   return $response;

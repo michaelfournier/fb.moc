@@ -63,18 +63,21 @@
 <div id="main_wrapper">
 
 	<div id="mainbb">
+
 	</div>
 
 	<!-- template pour mainwork -->
-	<script type="text/template" id="mainworks_template">
-		<section class="tools"></section>
-		<section id="sidebar">
-			<h3></h3>
-			<h4></h4>
-			<p></p>
-		</section>
-		<section class="maincontent" id="workslist">
-		</section>
+	<script type="text/template" id="mainworks_template">	
+		<section id="tools"></section>	
+		<div id="wrapper">
+			<section id="sidebar">
+				<h3></h3>
+				<h4></h4>
+				<p></p>
+			</section>
+			<section class="maincontent" id="workslist">
+			</section>
+		</div>
 		<nav id="timeline"></nav>
 	</script>
 
@@ -99,9 +102,7 @@
 
 	<!-- template pour work -->
 	<script type="text/template" id="work_template">
-			    <% _.each(work.attributes.post.gallery ,function(pic){ %>
-		                    <img src='<%= pic['full'] %>' />  
-			    <% }); %>			
+		<img src='<%= work.attributes.post.gallery[0]['full'] %>' width="" />  		
 	</script>
 
 	<!-- template pour worklistmini -->
