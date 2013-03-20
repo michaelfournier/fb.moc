@@ -74,19 +74,22 @@ ul { padding: 0; margin: 0;}
 	float:left;
 }
 
-#mainmenu li:first-child a {
+#mainmenu li:first-child a span {
 	padding-left: 0px;
 	border: 0px;
 }
-#mainmenu a {
-	letter-spacing: 2px;
+#mainmenu a span {
 	border-left: 1px solid @black10;
-	color: @black90;
-	text-transform: lowercase;
-	display: block;
-	padding: @unit/5 @unit;
+	padding: 0 @unit;
+}
+
+#mainmenu a {
 	font-size:(11/@font-size)*1em;
 	text-decoration: none;
+	color: @black90;
+	text-transform: lowercase;	
+	letter-spacing: 2px;
+		display: block;
 }
 
 #wrapper {
@@ -97,6 +100,8 @@ ul { padding: 0; margin: 0;}
 #tools {
 	height: @unit*3;
 }
+
+#picture img { display: none;}
 
 .maincontent img {
 	max-width: 100%;

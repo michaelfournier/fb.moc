@@ -4,10 +4,6 @@ var Blog = (function (blog){
             initialize : function(args) {
                 // on instancie l'objet myhomepage
                 Blog.myhomepage = new blog.Collections.HomePicslist();
-                // on instancie l'objet mymenu
-                Blog.mymenu = new blog.Collections.MenuList();
-                // on recupère les données du menu
-                Blog.mymenu.fetch();
                 // on instancie l'objet myworkslist
                 Blog.myworkslist = new blog.Collections.WorksList();
                 // on instancie la vue myworkslistview
@@ -37,6 +33,8 @@ var Blog = (function (blog){
                     console.log(contentheight);   
             },
             root : function () {
+                // on efface le contenu de #mainbb
+                $("#mainbb").html("");
                 blog.myhomepage.fetch({
                     success:function(result){
                     	
@@ -60,11 +58,11 @@ var Blog = (function (blog){
             displayWorksList : function () { 
               this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (Blog.mymainworksview === undefined) {               
+           
                   // on instancie la vue MainWorksView
                   Blog.mymainworksview = new blog.Views.MainWorksView();  
                   Blog.mymainworksview.render();
-              }
+
               // on charge les données dans myworkslist
               Blog.myworkslist.all().fetch({
                 update: true,

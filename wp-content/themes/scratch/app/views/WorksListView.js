@@ -19,7 +19,7 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             console.log(this.$el);
-            this.$el.find(".maincontent").html(renderedContent).find('a').each(function() {
+            this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('a').each(function() {
                 $(this).delay(i * 80).fadeIn();
                 i++;
                 //console.log($(this).attr('href'));
@@ -35,7 +35,7 @@ var Blog = (function (blog) {
             return this;
         },
         events : {
-            "mouseover #workslist a"  : "showTitle",
+            "mouseover a.workthumb"  : "showTitle",
             "click #workslist a"  : "mydelete",
         },
 
@@ -54,7 +54,7 @@ var Blog = (function (blog) {
             myid = $(e.currentTarget).attr('data-id');
             this.$el.find('#sidebar h3').html(e.currentTarget.title);
             this.$el.find('#sidebar h4').html(this.collection.get(myid).get('custom_fields')['_pinfos_annee'][0]);
-            this.$el.find('#sidebar p').html(this.collection.get(myid).get('custom_fields')['_pinfos_description'][0]);
+            this.$el.find('#sidebar #description').html(this.collection.get(myid).get('custom_fields')['_pinfos_description'][0]);
         } 
      
     });

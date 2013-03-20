@@ -53,7 +53,7 @@
 			<? if ( $allposts->have_posts() ):
 			 while ( $allposts->have_posts() ) : $allposts->the_post(); ?>
 			<li>
-				<a href='<?= "#".$post->post_name;?>'><? the_title(); ?></a>
+				<a href='<?= "#".$post->post_name;?>'><span><? the_title(); ?></span></a>
 			</li>
 			<? endwhile; else : ?> No posts <? endif; ?>
 		</ul><!-- #container -->
@@ -73,9 +73,10 @@
 			<section id="sidebar">
 				<h3></h3>
 				<h4></h4>
-				<p></p>
+				<p id="description"></p>
+				<div id="text"></div>
 			</section>
-			<section class="maincontent" id="workslist">
+			<section class="maincontent">
 			</section>
 		</div>
 		<nav id="timeline"></nav>
@@ -85,7 +86,7 @@
 	<script type="text/template" id="works_list_template">
 	    <% _.each(works ,function(work){ %>
               <% if (_.isEmpty(work.get('gallery')) === false) { %>
-                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
+                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
               <% } %>    
 	    <% }); %>
 	</script>
@@ -100,10 +101,21 @@
 		</section>
 	</script>
 
-	<!-- template pour work -->
+	<!-- template pour la nav picture gallery --> 
+    <script type="text/template" id="navgallery_template">
+    	<ul id="navgal">
+        <% _.each(gallery, function (picture, i) { %>       	
+            	<li><a data-bypass="<%= i %>" href="#" class="linkTab">&bull;</a></li>
+        <% }); %>
+       </ul>
+    </script>
+
+	<!-- template pour image -->
 	<script type="text/template" id="work_template">
-		<img src='<%= work.attributes.post.gallery[0]['full'] %>' width="" />  		
+			<a href="#" data-bypass id="picture"></a>
 	</script>
+
+
 
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">

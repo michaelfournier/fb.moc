@@ -798,19 +798,21 @@ ul {
   display: inline-block;
   float: left;
 }
-#mainmenu li:first-child a {
+#mainmenu li:first-child a span {
   padding-left: 0px;
   border: 0px;
 }
-#mainmenu a {
-  letter-spacing: 2px;
+#mainmenu a span {
   border-left: 1px solid #dcdcdc;
-  color: #1a1a1a;
-  text-transform: lowercase;
-  display: block;
-  padding: 0.22857142857142856em 1.1428571428571428em;
+  padding: 0 1.1428571428571428em;
+}
+#mainmenu a {
   font-size: 0.7857142857142857em;
   text-decoration: none;
+  color: #1a1a1a;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  display: block;
 }
 #wrapper {
   float: left;
@@ -818,6 +820,9 @@ ul {
 }
 #tools {
   height: 3.4285714285714284em;
+}
+#picture img {
+  display: none;
 }
 .maincontent img {
   max-width: 100%;
@@ -907,7 +912,6 @@ SMARTPHONES
     min-height: 1.1428571428571428em;
     width: 100%;
     height: 100%;
-    text-align: center;
   }
   #sidebar {
     -webkit-box-sizing: border-box;

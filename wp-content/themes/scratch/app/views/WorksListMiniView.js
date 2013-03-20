@@ -18,19 +18,7 @@ var Blog = (function (blog) {
                 //console.log($(this).attr('href'));
             });
             return this;
-        },
-        events : {
-            "click a" : "mydelete2"
-        },
-        mydelete2: function() {
-            
-        },
-        showTitle : function(e) {
-            myid = $(e.currentTarget).attr('data-id');
-            this.$el.find('#sidebar h3').html(e.currentTarget.title);
-            this.$el.find('#sidebar h4').html(this.collection.get(myid).get('custom_fields')['_pinfos_annee'][0]);
-            this.$el.find('#sidebar p').html(this.collection.get(myid).get('custom_fields')['_pinfos_description'][0]);
-        } 
+        }
      
     });
 

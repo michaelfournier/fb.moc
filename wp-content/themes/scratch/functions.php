@@ -66,8 +66,9 @@ function my_encode_meta($response) {
   $response['lang'] = qtrans_getLanguage();
   // si la var url custom_field est présente et qu'il ya des posts alors //
   if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['posts'])) {
-
     foreach ($response['posts'] as $post) {
+      // on écrit qq chose dans pinfos_description pour éviter les erreurs lors de l'appel sur le front //
+      $post->custom_fields->_pinfos_description = "";
       add_gallery($post);
       //$post->test = get_post_meta($post->id, "_pinfos_description_fr", TRUE);
       $wp_custom_fields = get_post_custom($post->id);
@@ -87,8 +88,9 @@ function my_encode_meta($response) {
     };
   } else if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
     add_gallery($response['post']);
+    // on écrit qq chose dans pinfos_description pour éviter les erreurs lors de l'appel sur le front //
+    $response['post']->custom_fields->_pinfos_description = "";
       $wp_custom_fields = get_post_custom($response['post']->id);
-      //foreach ($keys as $key) {
        if ($mylang == "fr") {
           if(isset($wp_custom_fields['_pinfos_description_fr'])) { 
             $response['post']->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];

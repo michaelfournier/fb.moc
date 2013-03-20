@@ -23,6 +23,7 @@ yepnope({
         home               : wp_vars.themepath+'/app/models/home.js',
         menu                : wp_vars.themepath+'/app/models/menu.js',
         work               : wp_vars.themepath+'/app/models/work.js',
+        picture            : wp_vars.themepath+'/app/models/picture.js',
 
         //Controllers
         MainWorksView       : wp_vars.themepath+'/app/views/MainWorksView.js',
@@ -31,6 +32,7 @@ yepnope({
         WorksListView       : wp_vars.themepath+'/app/views/WorksListView.js',
         WorksListMiniView   : wp_vars.themepath+'/app/views/WorksListMiniView.js',       
         SidebarWorksView    : wp_vars.themepath+'/app/views/SidebarWorksView.js',
+        PicturesGalNavView  : wp_vars.themepath+'/app/views/PicturesGalNavView.js',
 
 
         //Routes
