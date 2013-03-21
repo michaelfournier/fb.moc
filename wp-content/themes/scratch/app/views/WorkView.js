@@ -37,7 +37,9 @@ var Blog = (function (blog) {
                 $(this).find('#sidebar p#description').html(mymodel.attributes.post.custom_fields['_pinfos_description'][0]);
                 $(this).find('#sidebar #text').html(mymodel.attributes.post.content);
                 // on déclare un objet collection contenant les images liées au post //
-
+                if (Blog.picturesgalview) {
+                   Blog.picturesgalview.undelegateEvents();
+                } 
                     Blog.picturesgal = new blog.Collections.PicturesGallery(mymodel.attributes.post.gallery); 
                     // on déclare un objet vue de notre galerie d'images //
                     Blog.picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
