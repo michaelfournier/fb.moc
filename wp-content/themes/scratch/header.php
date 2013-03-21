@@ -105,7 +105,7 @@
     <script type="text/template" id="navgallery_template">
     	<ul id="navgal">
         <% _.each(gallery, function (picture, i) { %>       	
-            	<li><a data-bypass="<%= i %>" href="#" class="linkTab">&bull;</a></li>
+            	<li><a data-bypass="<%= i %>" class="linkpic" href="#" class="linkTab">&bull;</a></li>
         <% }); %>
        </ul>
     </script>

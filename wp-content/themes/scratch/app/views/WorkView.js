@@ -19,10 +19,6 @@ var Blog = (function (blog) {
                 $('#wrapper').css("height", contentheight);  
         },
 
-        writeinfos : function() {
-
-        },
-
         render : function () {
             var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
@@ -36,21 +32,20 @@ var Blog = (function (blog) {
                 $(this).find('#sidebar h4').html(mymodel.attributes.post.custom_fields['_pinfos_annee'][0]);
                 $(this).find('#sidebar p#description').html(mymodel.attributes.post.custom_fields['_pinfos_description'][0]);
                 $(this).find('#sidebar #text').html(mymodel.attributes.post.content);
-                // on déclare un objet collection contenant les images liées au post //
+                // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
                 if (Blog.picturesgalview) {
                    Blog.picturesgalview.undelegateEvents();
                 } 
-                    Blog.picturesgal = new blog.Collections.PicturesGallery(mymodel.attributes.post.gallery); 
-                    // on déclare un objet vue de notre galerie d'images //
-                    Blog.picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
+                // on déclare un objet collection contenant les images liées au post //
+                Blog.picturesgal = new blog.Collections.PicturesGallery(mymodel.attributes.post.gallery); 
+                // on déclare un objet vue de notre galerie d'images //
+                Blog.picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
                 
 
                 // on rend la vue //
                 Blog.picturesgalview.render();    
                 $(this).find('.maincontent').html('').css("text-align","center").html(renderedContent).parent().fadeIn('fast');
-            });
-
-       
+            });    
 
             if (Blog.myworkslistminiview  === undefined) {
                 // on instancie la vue myworkslistminiview
