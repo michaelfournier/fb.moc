@@ -60,6 +60,10 @@ ul { padding: 0; margin: 0;}
 
 #php-page { display: none;}
 
+#navgal li a.actif {
+	color: #0D0AFF;
+}
+
 #main_header { 
 	margin: 0 0 @unit 0;
 	padding: @unit/2 0;
@@ -69,12 +73,12 @@ ul { padding: 0; margin: 0;}
 	opacity: .8;
 }
 
-#mainmenu li {
+#mainmenu li, #navgal li{
 	display: inline-block;
 	float:left;
 }
 
-#mainmenu li:first-child a span {
+#mainmenu li:first-child a span,  #navgal li:first-child a{
 	padding-left: 0px;
 	border: 0px;
 }
@@ -99,6 +103,13 @@ ul { padding: 0; margin: 0;}
 
 #tools {
 	height: @unit*3;
+}
+
+#navgal li a {
+	font-size:(18/@font-size)*1em;
+	padding: @unit/3 @unit/2;
+	text-decoration: none;
+	color: @black10;
 }
 
 #picture img { display: none;}

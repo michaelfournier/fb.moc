@@ -103,11 +103,13 @@
 
 	<!-- template pour la nav picture gallery --> 
     <script type="text/template" id="navgallery_template">
-    	<ul id="navgal">
-        <% _.each(gallery, function (picture, i) { %>       	
-            	<li><a data-bypass="<%= i %>" class="linkpic" href="#" class="linkTab">&bull;</a></li>
-        <% }); %>
-       </ul>
+    	<nav id="navgal">
+    		<ul>
+		        <% _.each(gallery, function (picture, i) { %>       	
+		            	<li><a data-bypass="<%= i %>" class="linkpic" href="#" class="linkTab">&bull;</a></li>
+		        <% }); %>
+        	</ul>
+       </nav>
     </script>
 
 	<!-- template pour image -->
