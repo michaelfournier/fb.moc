@@ -103,16 +103,18 @@
 
 	<!-- template pour la nav picture gallery --> 
     <script type="text/template" id="navgallery_template">
+    <% if(_.size(gallery) > 1) { %>
     	<nav id="navgal">
     		<ul>
 		        <% _.each(gallery, function (picture, i) { %>       	
-		            	<li><a data-bypass="<%= i %>" class="linkpic" href="#" class="linkTab">&bull;</a></li>
+		            	<li><a data-bypass="<%= i %>" class="linkpic" href="#">&bull;</a></li>
 		        <% }); %>
         	</ul>
        </nav>
+     <% } %>
     </script>
 
-	<!-- template pour image -->
+	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="work_template">
 			<a href="#" data-bypass id="picture"></a>
 	</script>

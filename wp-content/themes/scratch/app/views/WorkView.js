@@ -19,12 +19,26 @@ var Blog = (function (blog) {
                 $('#wrapper').css("height", contentheight);  
         },
 
+        renderPictures : function () {
+            // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
+            if (Blog.picturesgalview) {
+               Blog.picturesgalview.undelegateEvents();
+            }
+             // on déclare un objet collection contenant les images liées au post //
+            Blog.picturesgal = new blog.Collections.PicturesGallery(this.model.attributes.post.gallery); 
+            // on déclare un objet vue de notre galerie d'images //
+            Blog.picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
+            // on rend la vue //
+            Blog.picturesgalview.render();             
+        },
+
         render : function () {
             var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
             // on crée une variable contenant le nombre d'image dans la galerie //
-            this.gallerylength = this.model.attributes.post.gallery.length;
+            var gallerylength = this.model.attributes.post.gallery.length;
 
+            var that = this;
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
                 // on écrit les infos dans la side bar//
@@ -32,20 +46,16 @@ var Blog = (function (blog) {
                 $(this).find('#sidebar h4').html(mymodel.attributes.post.custom_fields['_pinfos_annee'][0]);
                 $(this).find('#sidebar p#description').html(mymodel.attributes.post.custom_fields['_pinfos_description'][0]);
                 $(this).find('#sidebar #text').html(mymodel.attributes.post.content);
-                // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
-                if (Blog.picturesgalview) {
-                   Blog.picturesgalview.undelegateEvents();
-                } 
-                // on déclare un objet collection contenant les images liées au post //
-                Blog.picturesgal = new blog.Collections.PicturesGallery(mymodel.attributes.post.gallery); 
-                // on déclare un objet vue de notre galerie d'images //
-                Blog.picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
-                
 
-                // on rend la vue //
-                Blog.picturesgalview.render();    
-                $(this).find('.maincontent').html('').css("text-align","center").html(renderedContent).parent().fadeIn('fast');
-            });    
+                // on rend la vue qui gère les images
+                
+               // renderPic();
+               that.renderPictures();
+                 
+
+                $(this).find('.maincontent').css("text-align","center").parent().fadeIn('fast');
+            });   
+
 
             if (Blog.myworkslistminiview  === undefined) {
                 // on instancie la vue myworkslistminiview
@@ -57,7 +67,7 @@ var Blog = (function (blog) {
                     Blog.myworkslistminiview.render(results);
                   }
                 }); 
-            } else if ($("#workslistmini").length <= 0 ){
+            } else if ($("#workslistmini").length <= 0 ) {
                 // on charge les données dans workslistmini //
                 Blog.myworkslist.all().fetch({ 
                   update: true,
