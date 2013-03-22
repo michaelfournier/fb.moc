@@ -19,7 +19,7 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             console.log(this.$el);
-            this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('a').each(function() {
+            this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
                 $(this).delay(i * 80).fadeIn();
                 i++;
                 //console.log($(this).attr('href'));

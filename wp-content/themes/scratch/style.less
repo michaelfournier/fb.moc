@@ -38,7 +38,7 @@ html, body {
 }
 
 body {
-	background-color: #F9F9F9;
+	background-color: @bgcolor;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size:(12/@font-size)*1em;
 	line-height: @line/12;
@@ -117,6 +117,39 @@ ul { padding: 0; margin: 0;}
 .maincontent img {
 	max-width: 100%;
 	max-height: 100%;
+}
+
+.wrapthumb {
+	position: relative;
+	float: left;
+	margin-left: -@unit;
+	margin-right: @unit;
+}
+
+.sortitem {
+	font-size:(12/@font-size)*1em;
+	position : absolute;
+	padding: 0 @unit/2 0 @unit*1.2;
+	top : -@unit/2;
+	background-color: @bgcolor;
+	color: @black30;
+}
+
+
+#wraplist {
+	float: left;
+	overflow: hidden;
+	padding-top: @unit/2;
+
+}
+
+.workthumb {
+	display: block;
+	float: left;
+	border-top: 1px solid @black10;
+	padding-top: @unit;
+	padding-left: @unit;
+	padding-bottom: @unit;
 }
 
 /* =============================================================================

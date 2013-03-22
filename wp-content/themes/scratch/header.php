@@ -84,11 +84,26 @@
 
 	<!-- template pour la workslist -->
 	<script type="text/template" id="works_list_template">
-	    <% _.each(works ,function(work){ %>
+	<div id="wraplist">
+      	<%  var tab = [];
+             tab[-1] = 0;
+         %>
+	    <% _.each(works ,function(work, i){ %>
               <% if (_.isEmpty(work.get('gallery')) === false) { %>
-                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnail'] %>' /></a>
+              	<%  
+              		tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
+              	%>
+              	<div class="wrapthumb" style="display:none;">
+              	<% if ( Number(tab[i-1]) !== Number(tab[i])) { %>
+              		<div class="sortitem"><%= tab[i] %></div>
+              	<% } %>
+                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+                    	<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+                    </a>
+                 </div>
               <% } %>    
 	    <% }); %>
+	   </div>
 	</script>
 
 

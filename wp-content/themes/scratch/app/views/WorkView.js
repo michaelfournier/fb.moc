@@ -42,6 +42,7 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
                 // on écrit les infos dans la side bar//
+                $(this).find('.maincontent').empty();
                 $(this).find('#sidebar h3').html(mymodel.attributes.post.title);
                 $(this).find('#sidebar h4').html(mymodel.attributes.post.custom_fields['_pinfos_annee'][0]);
                 $(this).find('#sidebar p#description').html(mymodel.attributes.post.custom_fields['_pinfos_description'][0]);
@@ -50,10 +51,10 @@ var Blog = (function (blog) {
                 // on rend la vue qui gère les images
                 
                // renderPic();
-               that.renderPictures();
+
                  
 
-                $(this).find('.maincontent').css("text-align","center").parent().fadeIn('fast');
+                $(this).find('.maincontent').css("text-align","center").parent().fadeIn('fast', function() { that.renderPictures();});
             });   
 
 
