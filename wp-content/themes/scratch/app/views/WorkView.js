@@ -81,9 +81,7 @@ var Blog = (function (blog) {
             this.myheight();
 
             return this;
-        },
-
-     
+        }  
     });
 
     return blog;

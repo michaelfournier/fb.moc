@@ -110,7 +110,7 @@ var Blog = (function (blog){
 
   // Trigger the initial route and enable HTML5 History API support, set the
   // root folder to '/' by default.  Change in app.js.
-  if (wp_vars.lang != 'fr') { myroot = wp_vars.lang; } else { myroot = "/";}
+  if (wp_vars.lang != 'fr') { myroot = wp_vars.lang; } else { myroot = "";}
   Backbone.history.start({ pushState: true, root: myroot });
 
   // All navigation that is relative should be passed through the navigate

@@ -74,6 +74,7 @@
 				<h3></h3>
 				<h4></h4>
 				<p id="description"></p>
+				<p id="cat"></p>
 				<div id="text"></div>
 			</section>
 			<section class="maincontent">
@@ -91,10 +92,14 @@
 	    <% _.each(works ,function(work, i){ %>
               <% if (_.isEmpty(work.get('gallery')) === false) { %>
               	<%  
-              		tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
+              		if (sortkey === 'annees') {
+              			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
+              		} else if (sortkey === 'categories') {
+              			tab[i] = works[i].get('categories')[0]['slug'];
+              		}
               	%>
               	<div class="wrapthumb" style="display:none;">
-              	<% if ( Number(tab[i-1]) !== Number(tab[i])) { %>
+              	<% if ( String(tab[i-1]) !== String(tab[i])) { %>
               		<div class="sortitem"><%= tab[i] %></div>
               	<% } %>
                     <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
