@@ -95,7 +95,7 @@
               		if (sortkey === 'annees') {
               			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
               		} else if (sortkey === 'categories') {
-              			tab[i] = works[i].get('categories')[0]['slug'];
+              			tab[i] = works[i].get('categories')[0]['title'];
               		}
               	%>
               	<div class="wrapthumb" style="display:none;">

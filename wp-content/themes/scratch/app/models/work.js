@@ -39,19 +39,26 @@ var Blog = (function (blog) {
                     return [model.get('categories')[0]['slug'], model.get('slug')];
                 };
                 this.sortkey = 'categories';
+
                 this.sort();
                 console.log(this.models);
         },
         // fonction qui trie la collection par catégories, groupée par titre //
         sortByDate : function() {
-                this.comparator = function(model) {
-                    return [model.get('custom_fields')['_pinfos_annee'], model.get('slug')];
+                //http://www.experts-exchange.com/Programming/Languages/Scripting/JavaScript/A_3586-Sorting-Arrays-and-Collections-in-JavaScript.html
+                this.comparator = function(v1,v2) {
+                    var t=v1; v1=v2; v2=t;
+                    if ( v1.get('custom_fields')['_pinfos_annee'] < v2.get('custom_fields')['_pinfos_annee'] ) return -1; 
+                    if ( v1.get('custom_fields')['_pinfos_annee'] > v2.get('custom_fields')['_pinfos_annee'] ) return 1; 
+                    // else, they are equal
+
+                       if ( v1.get('slug') < v2.get('slug') ) return 1; 
+                       if ( v1.get('slug') > v2.get('slug') ) return -1; 
+                   
+                   return 0;
                 };
-                this.sortkey = 'annees';     
-
+                this.sortkey = 'annees';
                 this.sort();
-
-                console.log(this.models);
         },
         // on parse la réponse pour avoir accès aux posts
         parse: function(response) {
