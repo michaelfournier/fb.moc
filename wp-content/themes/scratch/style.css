@@ -770,10 +770,12 @@ body {
   line-height: 1.3333333333333333;
   color: #666666;
 }
-h3 {
+h3, h4 {
   color: #1a1a1a;
   margin: 0 0 1.1428571428571428em 0;
-  font-size: 1em;
+  letter-spacing: 1px;
+  font-weight: normal;
+  font-size: 0.8571428571428571em;
 }
 p {
   font-size: 0.7857142857142857em;
@@ -863,6 +865,9 @@ ul {
   padding-top: 1.1428571428571428em;
   padding-left: 1.1428571428571428em;
   padding-bottom: 1.1428571428571428em;
+}
+.segment {
+  display: inline;
 }
 /* =============================================================================
 Media Queries
@@ -991,6 +996,12 @@ SMARTPHONES
   #timeline {
     position: absolute;
     bottom: 1.1428571428571428em;
+  }
+  .segment:hover * a.workthumb {
+    border-top: 1px solid #666666;
+  }
+  .segment:hover .sortitem {
+    color: #666666;
   }
 }
 /* only screen and (min-width: 810px) */

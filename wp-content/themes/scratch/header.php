@@ -98,14 +98,24 @@
               			tab[i] = works[i].get('categories')[0]['title'];
               		}
               	%>
-              	<div class="wrapthumb" style="display:none;">
+              	
               	<% if ( String(tab[i-1]) !== String(tab[i])) { %>
-              		<div class="sortitem"><%= tab[i] %></div>
+              		<% if(i > 0) { %></div><% } %>
+              		<div class="segment">
+	              		<div class="wrapthumb" style="display:none;">
+	              			<div class="sortitem"><%= tab[i] %></div>
+		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+		                    	<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    </a>
+	                 	</div>             			
+              	<% } else { %>
+	              		<div class="wrapthumb" style="display:none;">
+		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+		                    	<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    </a>
+	                 	</div>                  		
               	<% } %>
-                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-                    	<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
-                    </a>
-                 </div>
+
               <% } %>    
 	    <% }); %>
 	   </div>
