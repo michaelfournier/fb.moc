@@ -10,6 +10,8 @@ var Blog = (function (blog){
                 Blog.myworkslistview = new blog.Views.WorksListView(Blog.myworkslist);                 
                 // on instancie l'objet mywork
                 Blog.mywork = new blog.Models.Work();
+                // on instancie la vue worklisttools //
+                Blog.myworkslisttoolsview = new blog.Views.WorksListToolsView(); 
                 // on applique la fonction myheight //
                 this.myheight();
                 // on écoute l'évenement resize pour appliquer la fonction myheight //
@@ -57,11 +59,12 @@ var Blog = (function (blog){
 
             displayWorksList : function () { 
               this.killbackstrech();
-              // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-           
-                  // on instancie la vue MainWorksView
-                  Blog.mymainworksview = new blog.Views.MainWorksView();  
-                  Blog.mymainworksview.render();
+       
+              // on instancie la vue MainWorksView
+              Blog.mymainworksview = new blog.Views.MainWorksView();  
+              Blog.mymainworksview.render();
+
+
 
               // on charge les données dans myworkslist
               Blog.myworkslist.all().fetch({
@@ -69,6 +72,8 @@ var Blog = (function (blog){
                 success: function(results) {
                   console.log(results.toJSON());
                   Blog.myworkslistview.render(results); 
+                  // on rend la vue workslisttoolsview //
+                  Blog.myworkslisttoolsview.render(); 
                 }
               });         
               //alert(blog.myworkslist);              

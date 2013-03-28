@@ -83,8 +83,8 @@
 		<nav id="timeline"></nav>
 	</script>
 
-	<!-- template pour la workslist -->
-	<script type="text/template" id="works_list_template">
+	<!-- template pour la workslist thumb -->
+	<script type="text/template" id="works_list_template_thumb">
 	<div id="wraplist">
       	<%  var tab = [];
              tab[-1] = 0;
@@ -119,6 +119,62 @@
               <% } %>    
 	    <% }); %>
 	   </div>
+	</script>
+
+	<!-- template pour la workslist list -->
+	<script type="text/template" id="works_list_template_list">
+	<div id="wraplist-list" style="">
+      	<%  var tab = [];
+             tab[-1] = 0;
+         %>
+	    <% _.each(works ,function(work, i){ %>
+              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+              	<%  
+              		if (sortkey === 'annees') {
+              			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
+              		} else if (sortkey === 'categories') {
+              			tab[i] = works[i].get('categories')[0]['title'];
+              		}
+              	%>
+               	<% if ( String(tab[i-1]) !== String(tab[i])) { %>
+              		<% if(i > 0) { %></div><% } %>
+              		<div class="segment">
+	              		<div class="wrapthumb">
+	              			<div class="sortitem"><%= tab[i] %></div>
+		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+		                    	<img  width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    </a>
+	                 	</div>             			
+              	<% } else { %>
+	              		<div class="wrapthumb">
+		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+		                    	<img width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    </a>
+	                 	</div>                  		
+              	<% } %>             	
+            			
+              	
+
+              <% } %>    
+	    <% }); %>
+	</div>
+	</script>
+
+	<!-- template pour les outils de trie et d'affichage de workslist -->
+	<script type="text/template" id="workslisttools_template">
+			<nav id="sorting">
+				<span style="float:left; display:none">trie par :</span>
+				<ul>
+					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate' href='#date'>date</a></li>
+					<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass href='#cat' id='sortbycat'>categories</a></li>
+				</ul>
+			</nav>
+			<nav id="displaying">
+				<ul>
+					<li><a data-bypass id='displaylist' href="#list">liste</a></li>
+					<li><a data-bypass id='displaythumb' href="#thumb">mosa</a></li>
+				</ul>
+			</nav>
 	</script>
 
 

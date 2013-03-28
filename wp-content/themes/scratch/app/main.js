@@ -30,7 +30,8 @@ yepnope({
         HomeView            : wp_vars.themepath+'/app/views/HomeView.js',
         WorksView           : wp_vars.themepath+'/app/views/WorkView.js',
         WorksListView       : wp_vars.themepath+'/app/views/WorksListView.js',
-        WorksListMiniView   : wp_vars.themepath+'/app/views/WorksListMiniView.js',       
+        WorksListMiniView   : wp_vars.themepath+'/app/views/WorksListMiniView.js',
+        WorksListToolsView  : wp_vars.themepath+'/app/views/WorksListToolsView.js',     
         SidebarWorksView    : wp_vars.themepath+'/app/views/SidebarWorksView.js',
         PicturesGalNavView  : wp_vars.themepath+'/app/views/PicturesGalNavView.js',
 

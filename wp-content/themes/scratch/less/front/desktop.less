@@ -35,6 +35,10 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		.divise(1,1, 250px, none, left);
 	}
 
+	#displaying {
+		float: right;
+	}
+
 	#sidebar {
 		.divise(1,4, 0, none, left);
 		position: absolute;
@@ -53,6 +57,10 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	.segment:hover * a.workthumb {
 		border-top: 1px solid @black60;
+	}
+
+	#wraplist-list .segment:hover .sortitem {
+		border-bottom: 1px solid @black60;
 	}
 
 	.segment:hover .sortitem {
