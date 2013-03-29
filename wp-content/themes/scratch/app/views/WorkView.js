@@ -64,8 +64,7 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
-                    // on assigne une url à nextwork //
-                    that.nextwork();
+
                   }
 
                 }); 
@@ -75,8 +74,6 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
-                    // on assigne une url à nextwork //
-                    that.nextwork();
                   }
                 });
             };
@@ -90,7 +87,6 @@ var Blog = (function (blog) {
             //on cherche le numéro d'index du model dans lacollection //
             var index = this.collection.indexOf(this.model);
             var lastindex = this.collection.length - 1;
-            console.log(this.collection.length - 1);
             // on détermine le slug du prochain model dans la collection //
             nextmodel = this.collection.at(index+1);
             prevmodel = this.collection.at(index-1);
@@ -106,26 +102,9 @@ var Blog = (function (blog) {
             } else {
                 nexthref = "#works/"+this.collection.at(0).get('slug');
             }
-            //nexthref = "#works/"+nextslug;
-
-            // nextelt = this.$el.find("#workslistmini a[data-id="+currentid+"]").next();
-            // prevelt = this.$el.find("#workslistmini a[data-id="+currentid+"]").prev();
-
-            // if (nextelt.attr("href")) {
-            //     nexthref = "#works/"+nextelt.attr("data-slug");
-            // } else {
-            //     nexthref = $("#workslistmini a:first-child").attr("href");
-            // }
-
-            // if (prevelt.attr("href")) {
-            //     prevhref = "#works/"+prevelt.attr("data-slug");
-            // } else {
-            //     prevhref = $("#workslistmini a:last-child").attr("href");
-            // }
 
             this.$el.find("#nextwork a").attr('href', nexthref);
             this.$el.find("#prevwork a").attr('href', prevhref);
-            console.log(nexthref);
         }      
 
     });

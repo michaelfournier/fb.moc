@@ -17,6 +17,15 @@ var Blog = (function (blog) {
                 i++;
                 //console.log($(this).attr('href'));
             });
+            // on applique l'autoscroll //
+            $('#workslistmini').thumbnailScroller({
+                scrollerType: 'hoverPrecise',
+                scrollerOrientation : 'horizontal',
+                scrollSpeed : 1,
+                acceleration: 4,
+                scrollSpeed: 800,
+                noScrollCenterSpace: 100,
+            });
             return this;
         }
      

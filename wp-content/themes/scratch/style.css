@@ -1067,8 +1067,7 @@ SMARTPHONES
     left: 0;
   }
   #timeline {
-    position: absolut
-  		e;
+    position: absolute;
     bottom: 1.1428571428571428em;
   }
   .segment:hover * a.workthumb {
@@ -1079,6 +1078,30 @@ SMARTPHONES
   }
   .segment:hover .sortitem {
     color: #666666;
+  }
+  #workslistmini {
+    overflow: hidden;
+    width: 100%;
+    height: 90px;
+  }
+  #workslistmini a {
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0;
+    height: 90px;
+    overflow: hidden;
+  }
+  .jThumbnailScroller .jTscrollerContainer {
+    position: absolute;
+  }
+  .jTscroller {
+    position: relative;
+    height: 90px;
+    margin: 0;
+    left: 0;
+    top: 0;
+    display: inline-block;
   }
 }
 /* only screen and (min-width: 810px) */

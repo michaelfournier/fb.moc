@@ -215,12 +215,16 @@
 
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">
-			<nav id="workslistmini">	
-			    <% _.each(works ,function(work){ %>
-		              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-		                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" data-slug="<%= work.get("slug") %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
-		              <% } %>    
-			    <% }); %>
+			<nav id="workslistmini" class="jThumbnailScroller ltn">
+				<div class="jTscrollerContainer">
+					<div class="jTscroller">
+					    <% _.each(works ,function(work){ %>
+				              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+				                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" data-slug="<%= work.get("slug") %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				              <% } %>    
+					    <% }); %>
+					</div>
+				</div>
 			</nav>
 	</script>
 
