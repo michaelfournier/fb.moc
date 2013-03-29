@@ -21,7 +21,7 @@ var Blog = (function (blog) {
         render : function () {
            // this.$el.find('#timeline').html("");
 
-            var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey });
+            var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
@@ -55,13 +55,20 @@ var Blog = (function (blog) {
             this.collection.sortByDate();
         },
 // fonction pour l'affichage par liste
-        displaylist : function() {
+        displaylist : function(e) {
+            $("#displaying a").removeClass();
+            $(e.currentTarget).removeClass().addClass("actif");
             this.template = this.templatelist;
+            this.collection.displaymode = 'list';
+            console.log(this.collection.displaymode);
             this.render();
         },
 // fonction pour l'affichage par vignettes
-        displaythumb : function() {
+        displaythumb : function(e) {
+            $("#displaying a").removeClass();
+            $(e.currentTarget).removeClass().addClass("actif");
             this.template = this.templatethumb;
+            this.collection.displaymode = 'thumbs';
             this.render();
         },
         mydelete: function() {

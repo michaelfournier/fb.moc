@@ -24,6 +24,11 @@ var Blog = (function (blog){
                 "bio" : "bio",
                 "*path" : "root"
             },
+            // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
+            selectMenu: function (route) {
+              $('#mainmenu a').removeClass('actif');
+              $('#mainmenu a[href="#'+route+'"]').addClass('actif');
+            },
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     var offset = $('#mainbb').offset();
@@ -35,11 +40,11 @@ var Blog = (function (blog){
                     console.log(contentheight);   
             },
             root : function () {
+              this.selectMenu();
                 // on efface le contenu de #mainbb
                 $("#mainbb").html("");
                 blog.myhomepage.fetch({
-                    success:function(result){
-                    	
+                    success:function(result){                    	
                     	attachments = result.toJSON();                   
                     	var picsArray = []
                       _.each(attachments, function(data) {
@@ -52,25 +57,23 @@ var Blog = (function (blog){
             },
 
             bio : function () {
+              this.selectMenu('bio');
               this.killbackstrech();
                 //$(".hero-unit > h1").html("Hello World !!!");
                 //alert("bio");
             },
 
-            displayWorksList : function () { 
-              this.killbackstrech();
-       
+            displayWorksList : function () {
+              this.selectMenu('works');
+              this.killbackstrech();     
               // on instancie la vue MainWorksView
-              Blog.mymainworksview = new blog.Views.MainWorksView();  
+              Blog.mymainworksview = new blog.Views.MainWorksView();
               Blog.mymainworksview.render();
-
-
-
               // on charge les données dans myworkslist
               Blog.myworkslist.all().fetch({
                 update: true,
                 success: function(results) {
-                  console.log(results.toJSON());
+                  //console.log(results.toJSON());
                   Blog.myworkslistview.render(results); 
                   // on rend la vue workslisttoolsview //
                   Blog.myworkslisttoolsview.render(); 
@@ -80,6 +83,7 @@ var Blog = (function (blog){
             },
 
             displayWork : function (slug_post) {
+              this.selectMenu('works');
               this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (Blog.mymainworksview === undefined) {               
@@ -87,15 +91,27 @@ var Blog = (function (blog){
                   Blog.mymainworksview = new blog.Views.MainWorksView();  
                   Blog.mymainworksview.render();
               }
-              Blog.myworkview = new blog.Views.WorkView(Blog.mywork);
-                // on charge les données dans myworkslist
-                Blog.mywork.query(slug_post).fetch({
-                  update: true,
-                  success: function(results) {
-                    // on rend la vue avec les resultats de la requete //
-                    Blog.myworkview.render(results);
-                  }
-                });
+              // on charge les données dans myworkslist
+              Blog.myworkslist.all().fetch({
+                update: true,
+                success: function(results) {
+                  myworkid = results.where({'slug': slug_post})[0]['id'];
+                  mywork = Blog.myworkslist.get(myworkid)
+                  Blog.myworkview = new blog.Views.WorkView(mywork);
+                  Blog.myworkview.render(mywork);
+                }
+              });  
+              // Blog.myworkview = new blog.Views.WorkView(Blog.mywork);
+              //   // on charge les données dans myworkslist
+              //   Blog.mywork.query(slug_post).fetch({
+              //     update: true,
+              //     success: function(results) {
+              //       // on rend la vue avec les resultats de la requete //
+              //       Blog.myworkview.render(results);
+              //     }
+              //   });
+
+              
 
             },
 

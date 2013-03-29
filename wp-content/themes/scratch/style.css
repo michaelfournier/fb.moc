@@ -825,6 +825,7 @@ nav {
   letter-spacing: 2px;
 }
 nav a {
+  float: left;
   text-decoration: none;
   color: #1a1a1a;
   text-transform: lowercase;
@@ -968,7 +969,6 @@ SMARTPHONES
     overflow-y: hidden;
   }
   #main_wrapper {
-    max-width: 1480px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -979,24 +979,6 @@ SMARTPHONES
     width: 100%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
-    padding: 0 50px;
-    margin: 0 auto;
-  }
-  #main_nav {
-    max-width: 1480px;
-    display: block;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    clear: none;
-    float: none;
-    width: 100%;
-    padding-left: 0;
-    min-height: 1.1428571428571428em;
-    padding: 0 50px;
-    margin: 0 auto;
   }
   .maincontent {
     -webkit-box-sizing: border-box;
@@ -1042,7 +1024,7 @@ SMARTPHONES
     padding-right: 1.1428571428571428em;
     max-width: 250px;
   }
-  #mainbb {
+  #mainbb, #main_nav {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -1050,12 +1032,43 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 100%;
+    width: 77.77777777777779%;
+    padding-left: 0;
+    min-height: 1.1428571428571428em;
+    margin: 0 11.11111111111111% 0 11.11111111111111%;
+  }
+  .nextprevworks {
+    height: 80%;
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: left;
+    width: 11.11111111111111%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
   }
+  .nextprevworks a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  .nextprevworks a:hover {
+    background-color: #F1F1F1;
+  }
+  #nextwork {
+    float: right;
+    right: 0;
+  }
+  #prevwork {
+    left: 0;
+  }
   #timeline {
-    position: absolute;
+    position: absolut
+  		e;
     bottom: 1.1428571428571428em;
   }
   .segment:hover * a.workthumb {

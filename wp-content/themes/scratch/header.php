@@ -68,8 +68,14 @@
 
 	<!-- template pour mainwork -->
 	<script type="text/template" id="mainworks_template">	
-		<section id="tools"></section>	
-		<div id="wrapper">
+		<section id="tools"></section>
+		<nav class="nextprevworks" id="prevwork">
+			<a href=""> < prev</a>
+		</nav>	
+		<nav class="nextprevworks" id="nextwork">
+			<a href="">next > </a>
+		</nav>
+		<div id="wrapper">			
 			<section id="sidebar">
 				<h3></h3>
 				<h4></h4>
@@ -80,7 +86,7 @@
 			<section class="maincontent">
 			</section>
 		</div>
-		<nav id="timeline"></nav>
+		<section id="timeline"></section>
 	</script>
 
 	<!-- template pour la workslist thumb -->
@@ -171,8 +177,8 @@
 			</nav>
 			<nav id="displaying">
 				<ul>
-					<li><a data-bypass id='displaylist' href="#list">liste</a></li>
-					<li><a data-bypass id='displaythumb' href="#thumb">mosa</a></li>
+					<li><a <% if (displaymode === "list") { %> class="actif" <% } %> data-bypass id='displaylist' href="#list">liste</a></li>
+					<li><a <% if (displaymode === "thumbs") { %> class="actif" <% } %> data-bypass id='displaythumb' href="#thumb">mosa</a></li>
 				</ul>
 			</nav>
 	</script>
@@ -212,7 +218,7 @@
 			<nav id="workslistmini">	
 			    <% _.each(works ,function(work){ %>
 		              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-		                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+		                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" data-slug="<%= work.get("slug") %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
 		              <% } %>    
 			    <% }); %>
 			</nav>
