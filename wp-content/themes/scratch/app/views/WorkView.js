@@ -36,7 +36,6 @@ var Blog = (function (blog) {
         render : function () {
             var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
-            console.log(mymodel);
             // on crée une variable contenant le nombre d'image dans la galerie //
             var gallerylength = this.model.get('gallery').length;
             // on assigne une url à nextwork si workslist est définie//
@@ -88,25 +87,41 @@ var Blog = (function (blog) {
         },
 
         nextwork : function() {
-            console.log(this.model);
-            console.log(Blog.myworkslist);
-            // on détermine l'id du post actuel //
-            currentid = this.model.get('id');
-            // on assigne l'url du btn à l'url correspondant au prochain elt de la workslistmini
-            nextelt = this.$el.find("#workslistmini a[data-id="+currentid+"]").next();
-            prevelt = this.$el.find("#workslistmini a[data-id="+currentid+"]").prev();
+            //on cherche le numéro d'index du model dans lacollection //
+            var index = this.collection.indexOf(this.model);
+            var lastindex = this.collection.length - 1;
+            console.log(this.collection.length - 1);
+            // on détermine le slug du prochain model dans la collection //
+            nextmodel = this.collection.at(index+1);
+            prevmodel = this.collection.at(index-1);
 
-            if (nextelt.attr("href")) {
-                nexthref = "#works/"+nextelt.attr("data-slug");
+            if(prevmodel) {
+                prevhref = "#works/"+prevmodel.get('slug');
             } else {
-                nexthref = $("#workslistmini a:first-child").attr("href");
+                prevhref = "#works/"+this.collection.at(lastindex).get('slug');
             }
 
-            if (prevelt.attr("href")) {
-                prevhref = "#works/"+prevelt.attr("data-slug");
+            if(nextmodel) {
+                nexthref = "#works/"+nextmodel.get('slug');
             } else {
-                prevhref = $("#workslistmini a:last-child").attr("href");
+                nexthref = "#works/"+this.collection.at(0).get('slug');
             }
+            //nexthref = "#works/"+nextslug;
+
+            // nextelt = this.$el.find("#workslistmini a[data-id="+currentid+"]").next();
+            // prevelt = this.$el.find("#workslistmini a[data-id="+currentid+"]").prev();
+
+            // if (nextelt.attr("href")) {
+            //     nexthref = "#works/"+nextelt.attr("data-slug");
+            // } else {
+            //     nexthref = $("#workslistmini a:first-child").attr("href");
+            // }
+
+            // if (prevelt.attr("href")) {
+            //     prevhref = "#works/"+prevelt.attr("data-slug");
+            // } else {
+            //     prevhref = $("#workslistmini a:last-child").attr("href");
+            // }
 
             this.$el.find("#nextwork a").attr('href', nexthref);
             this.$el.find("#prevwork a").attr('href', prevhref);
