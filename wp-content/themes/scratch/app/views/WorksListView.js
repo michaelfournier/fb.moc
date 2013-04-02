@@ -9,7 +9,6 @@ var Blog = (function (blog) {
             this.templatelist = _.template($("#works_list_template_list").html());
             // par défaut le template et l'affichage par vignettes
             this.template = this.templatethumb;
-
             //_.bindAll(this, 'render');
             // on s'abonne aux tris de la collection avec la fonction this.render()
              this.collection.bind("sort", this.render, this); // remember: every function that uses 'this' as the current object should be in here
@@ -19,17 +18,13 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-           // this.$el.find('#timeline').html("");
-
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
                 $(this).delay(i * 80).fadeIn();
                 i++;
-                //console.log($(this).attr('href'));
             });
-
 
             return this;
         },

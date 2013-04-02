@@ -9,17 +9,18 @@ var Blog = (function (blog) {
         },
         render : function () {
             //this.$el.find('.maincontent').remove();
-            var renderedContent = this.template({works : this.collection.models});
+            var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.find("#timeline").html(renderedContent);
-            // this.$el.find("#timeline").html(renderedContent).find('a').each(function() {
-            //     $(this).delay(i * 50).fadeIn();
-            //     i++;
-            //     //console.log($(this).attr('href'));
-            // });
-            // on applique l'autoscroll //
-            $('#workslistmini').imagesLoaded(function() {         
+
+            // on applique l'autoscroll quand toutes les vignettes sont chargée//
+            $('#workslistmini').imagesLoaded(function() {  
+                $(this).find('a').each(function() {
+                    $(this).delay(i * 50).animate({'opacity': 1}, 400);
+                    i++;
+                    //console.log($(this).attr('href'));
+                });       
                    // fonction auto scroll vignettes // 
                     function makeScrollable(thumbs, wrapper) {
                         var width = wrapper.innerWidth();           
@@ -34,7 +35,7 @@ var Blog = (function (blog) {
                                 var scrollAmt = thumbs.outerWidth(true) - wrapper.innerWidth();
                                 //wrapper.scrollLeft(perc * scrollAmt);
                                 //wrapper.stop(true,false).animate({"scrollLeft": (perc * scrollAmt)}, "slow");                     
-                            wrapper.bind('mousemove', function(e) {
+                            wrapper.on('mousemove', function(e) {
                                 var xPos = e.pageX - wrapper.offset().left - leftBuffer;
                                 var xMax = wrapper.innerWidth() - rightBuffer;             
                                 var perc = xPos / (xMax - leftBuffer);
@@ -50,7 +51,6 @@ var Blog = (function (blog) {
                             }
                             // imx = initial mouse x position //
                             $('.st_wrapper').hover(function(imx) {
-                                
                                 mytimeout = setTimeout( scrollMe, 150, imx);
                             }, function() {
                                 clearTimeout(mytimeout);
@@ -76,6 +76,7 @@ var Blog = (function (blog) {
             });
             return this;
         }
+     
      
     });
 

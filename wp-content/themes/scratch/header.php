@@ -129,7 +129,7 @@
 
 	<!-- template pour la workslist list -->
 	<script type="text/template" id="works_list_template_list">
-	<div id="wraplist-list" style="">
+	<div id="wraplist-list">
       	<%  var tab = [];
              tab[-1] = 0;
          %>
@@ -215,12 +215,29 @@
 
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">
-			<nav id="workslistmini" class="jThumbnailScroller ltn">
-				<div class="st_wrapper st_thumbs_wrapper jTscrollerContainer">
-					<div class="jTscroller st_thumbs">
-					    <% _.each(works ,function(work){ %>
+  	<%  var tab = [];
+         tab[-1] = 0;
+     %>
+			<nav id="workslistmini">
+				<div class="st_wrapper st_thumbs_wrapper">	
+					<div class="st_thumbs">						
+					    <% _.each(works ,function(work, i){ %>
 				              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-				                    <a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" data-slug="<%= work.get("slug") %>"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+						          	<%  
+						          		if (sortkey === 'annees') {
+						          			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
+						          		} else if (sortkey === 'categories') {
+						          			tab[i] = works[i].get('categories')[0]['title'];
+						          		}
+						          	%>
+									<% if ( String(tab[i-1]) !== String(tab[i])) { %>
+										<% if(i > 0) { %></div><% } %>
+										<div class="segment">	
+											<div class="sortitem"><%= tab[i] %></div>				          	
+				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" style="opacity:0;" class="thumb_color" data-slug="<%= work.get("slug") %>"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    <% } else { %>
+				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" style="opacity:0;" class="thumb_color" data-slug="<%= work.get("slug") %>"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    <% } %>
 				              <% } %>    
 					    <% }); %>
 					</div>
