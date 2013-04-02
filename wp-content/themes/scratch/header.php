@@ -216,11 +216,11 @@
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">
 			<nav id="workslistmini" class="jThumbnailScroller ltn">
-				<div class="jTscrollerContainer">
-					<div class="jTscroller">
+				<div class="st_wrapper st_thumbs_wrapper jTscrollerContainer">
+					<div class="jTscroller st_thumbs">
 					    <% _.each(works ,function(work){ %>
 				              <% if (_.isEmpty(work.get('gallery')) === false) { %>
-				                    <a data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>" data-slug="<%= work.get("slug") %>" style="display:none;"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    <a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" data-slug="<%= work.get("slug") %>"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
 				              <% } %>    
 					    <% }); %>
 					</div>

@@ -1025,6 +1025,7 @@ SMARTPHONES
     max-width: 250px;
   }
   #mainbb, #main_nav {
+    position: relative;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -1039,7 +1040,7 @@ SMARTPHONES
   }
   .nextprevworks {
     height: 80%;
-    position: absolute;
+    position: fixed;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -1069,6 +1070,7 @@ SMARTPHONES
   #timeline {
     position: absolute;
     bottom: 1.1428571428571428em;
+    width: 100%;
   }
   .segment:hover * a.workthumb {
     border-top: 1px solid #666666;
@@ -1080,28 +1082,24 @@ SMARTPHONES
     color: #666666;
   }
   #workslistmini {
+    position: relative;
+    display: block;
+    margin: 0 0 0 0;
+    white-space: nowrap;
     overflow: hidden;
+  }
+  .st_wrapper {
     width: 100%;
-    height: 90px;
+    overflow: hidden;
+  }
+  .st_thumbs {
+    margin: 0;
+    float: left;
   }
   #workslistmini a {
     position: relative;
-    display: block;
-    float: left;
-    margin: 0;
-    height: 90px;
-    overflow: hidden;
-  }
-  .jThumbnailScroller .jTscrollerContainer {
-    position: absolute;
-  }
-  .jTscroller {
-    position: relative;
-    height: 90px;
-    margin: 0;
-    left: 0;
-    top: 0;
     display: inline-block;
+    padding: 0 0.5714285714285714em 0 0;
   }
 }
 /* only screen and (min-width: 810px) */

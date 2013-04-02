@@ -36,7 +36,7 @@ var Blog = (function (blog){
                     var topOffset = offset.top; 
                     // on calcul la hauteur de la div #content //
                     var contentheight = $(window).height()-topOffset-($(window).find("#main_header").height() + $(window).find(".tools").height());
-                    $('#mainbb').css("height", contentheight);
+                    $('#mainbb').css("height", contentheight);            
                     console.log(contentheight);   
             },
             root : function () {
