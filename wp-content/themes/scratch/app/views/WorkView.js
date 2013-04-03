@@ -20,7 +20,6 @@ var Blog = (function (blog) {
         },
 
         renderPictures : function () {
-
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
             if (Blog.picturesgalview) {
                Blog.picturesgalview.undelegateEvents();
@@ -45,6 +44,7 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
                 // on écrit les infos dans la side bar//
+                console.log(mymodel);
                 $(this).find('.maincontent').empty();
                 $(this).find('#sidebar h3').html(mymodel.get('title'));
                 $(this).find('#sidebar h4').html(mymodel.get('custom_fields')['_pinfos_annee'][0]);
@@ -55,7 +55,6 @@ var Blog = (function (blog) {
             });  
 
 
-
             if (Blog.myworkslistminiview  === undefined) {
                 // on instancie la vue myworkslistminiview
                 Blog.myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
@@ -64,7 +63,7 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
-
+                    that.scrolltoactive();
                   }
 
                 }); 
@@ -74,6 +73,7 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
+                    that.scrolltoactive();
                   }
                 });
             };
@@ -81,6 +81,23 @@ var Blog = (function (blog) {
             this.myheight();
 
             return this;
+        },
+
+        scrolltoactive : function () {
+            var activeitem = this.$el.find("#"+this.collection.workslug);
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );  
+        },
+
+        scrolltonextprev : function(e) {
+            elt = $(e.currentTarget).find('a').attr('data-slug');
+            var activeitem = this.$el.find("#"+elt);
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
+            this.undelegateEvents();           
+        },
+
+        showactif : function(item) {
+            this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
+            item.find('img').css('opacity', 1);
         },
 
         nextwork : function() {
@@ -92,20 +109,25 @@ var Blog = (function (blog) {
             prevmodel = this.collection.at(index-1);
 
             if(prevmodel) {
-                prevhref = "#works/"+prevmodel.get('slug');
+                slugprev = prevmodel.get('slug');
             } else {
-                prevhref = "#works/"+this.collection.at(lastindex).get('slug');
+                slugprev = this.collection.at(lastindex).get('slug');
             }
+            prevhref = "#works/"+slugprev;
 
             if(nextmodel) {
-                nexthref = "#works/"+nextmodel.get('slug');
+                slugnext = nextmodel.get('slug');
             } else {
-                nexthref = "#works/"+this.collection.at(0).get('slug');
+                slugnext = this.collection.at(0).get('slug');
             }
+            nexthref = "#works/"+slugnext;
 
-            this.$el.find("#nextwork a").attr('href', nexthref);
-            this.$el.find("#prevwork a").attr('href', prevhref);
-        }      
+            this.$el.find("#nextwork a").attr({'href': nexthref, 'data-slug': slugnext});
+            this.$el.find("#prevwork a").attr({'href': prevhref, 'data-slug': slugprev});
+        },
+        events: {
+            "click .nextprevworks" : "scrolltonextprev"
+        }     
 
     });
 

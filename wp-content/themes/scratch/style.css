@@ -1,4 +1,3 @@
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
 /*
 Theme Name: scratch
 Theme URI: 
@@ -845,8 +844,9 @@ nav a {
   text-decoration: none;
   color: #dcdcdc;
 }
-#picture img {
-  display: none;
+a.picture {
+  display: block;
+  height: 100%;
 }
 .maincontent img {
   max-width: 100%;
@@ -989,7 +989,7 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 250px;
+    padding-left: 20%;
     min-height: 1.1428571428571428em;
     width: 100%;
     height: 100%;
@@ -1003,7 +1003,7 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 250px;
+    padding-left: 20%;
     min-height: 1.1428571428571428em;
   }
   #displaying {
@@ -1017,7 +1017,7 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 25%;
+    width: 20%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
     position: absolute;
@@ -1033,10 +1033,10 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 77.77777777777779%;
+    width: 81.81818181818183%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
-    margin: 0 11.11111111111111% 0 11.11111111111111%;
+    margin: 0 9.090909090909092%;
   }
   .nextprevworks {
     height: 80%;
@@ -1048,7 +1048,7 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 11.11111111111111%;
+    width: 9.090909090909092%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
   }
@@ -1072,10 +1072,10 @@ SMARTPHONES
     bottom: 1.1428571428571428em;
     width: 100%;
   }
-  #workslist .segment:hover .sortitem {
+  #wraplist .segment:hover .sortitem {
     color: #666666;
   }
-  #workslist .segment:hover * a {
+  #wraplist .segment:hover * a {
     border-top: 1px solid #666666;
   }
   #workslistmini {
@@ -1095,22 +1095,33 @@ SMARTPHONES
   }
   #workslistmini a {
     position: relative;
+    float: none;
     display: inline-block;
-    border-top: 1px solid #dcdcdc;
-    padding: 0.5714285714285714em 0.5714285714285714em 0 0;
+    padding: 0.5714285714285714em 0 0 0;
+  }
+  #workslistmini a:last-child {
+    padding-right: 0;
   }
   #workslistmini .segment {
+    border-top: 1px solid #dcdcdc;
     display: inline-block;
     position: relative;
-    float: left;
-    padding-top: 1.1428571428571428em;
+    float: none;
+    padding: 0.2857142857142857em 0 0 0;
+    margin-top: 0.5714285714285714em;
   }
   #workslistmini .sortitem {
-    top: 0.7619047619047619em;
+    top: -0.7619047619047619em;
     left: 0;
     padding: 0 0 0 0;
     background-color: #f9f9f9;
     z-index: 9;
+  }
+  .thumb_color:hover img {
+    opacity: 1;
+  }
+  .thumb_color img, .thumb_nb img {
+    opacity: 0.4;
   }
 }
 /* only screen and (min-width: 810px) */

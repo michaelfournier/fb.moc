@@ -234,9 +234,9 @@
 										<% if(i > 0) { %></div><% } %>
 										<div class="segment">	
 											<div class="sortitem"><%= tab[i] %></div>				          	
-				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" style="opacity:0;" class="thumb_color" data-slug="<%= work.get("slug") %>"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>"><img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
 				                    <% } else { %>
-				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" style="opacity:0;" class="thumb_color" data-slug="<%= work.get("slug") %>"><img src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>"  class="thumb_color" id="<%= work.get("slug") %>"><img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
 				                    <% } %>
 				              <% } %>    
 					    <% }); %>

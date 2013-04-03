@@ -4,10 +4,12 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
+            
             this.template = _.template($("#works_listmini_template").html());
             _.bindAll(this, 'render');
         },
         render : function () {
+            console.log("eeee"+this.bb);
             //this.$el.find('.maincontent').remove();
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
@@ -16,11 +18,11 @@ var Blog = (function (blog) {
 
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             $('#workslistmini').imagesLoaded(function() {  
-                $(this).find('a').each(function() {
-                    $(this).delay(i * 50).animate({'opacity': 1}, 400);
-                    i++;
-                    //console.log($(this).attr('href'));
-                });       
+                // $(this).find('a').each(function() {
+                //     $(this).delay(i * 50).animate({'opacity': .4}, 400);
+                //     i++;
+                //     //console.log($(this).attr('href'));
+                // });       
                    // fonction auto scroll vignettes // 
                     function makeScrollable(thumbs, wrapper) {
                         var width = wrapper.innerWidth();           
@@ -73,6 +75,8 @@ var Blog = (function (blog) {
                         }
                         
                         $(this).on('mouseover', buildThumbs());
+
+                        
             });
             return this;
         }

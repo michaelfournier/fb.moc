@@ -95,8 +95,10 @@ var Blog = (function (blog){
               Blog.myworkslist.all().fetch({
                 update: true,
                 success: function(results) {
+                  // on stock le slug du post dans la collection pour gérer le item actif dans workslistmini //
+                  Blog.myworkslist.workslug = slug_post;                  
                   myworkid = results.where({'slug': slug_post})[0]['id'];
-                  mywork = Blog.myworkslist.get(myworkid)
+                  mywork = Blog.myworkslist.get(myworkid);
                   Blog.myworkview = new blog.Views.WorkView(mywork);
                   Blog.myworkview.render(mywork);
                 }
@@ -110,9 +112,6 @@ var Blog = (function (blog){
               //       Blog.myworkview.render(results);
               //     }
               //   });
-
-              
-
             },
 
             killbackstrech : function () {

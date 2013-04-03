@@ -132,7 +132,11 @@ nav a {
 	color: @black10;
 }
 
-#picture img { display: none;}
+a.picture {
+	display: block;
+	height: 100%;
+}
+
 
 .maincontent img {
 	max-width: 100%;
@@ -231,15 +235,17 @@ nav a {
 }
 
 #wraplist-list .sortitem {
-		border-bottom: 1px solid @black10;
-		padding: 0 0 @unit/3 0;
-		width: 100%;
-		float: left;
+	border-bottom: 1px solid @black10;
+	padding: 0 0 @unit/3 0;
+	width: 100%;
+	float: left;
 	position: relative;
 	clear: both;
 	display: block;
 	top: inherit;
 }
+
+
 
 /* =============================================================================
 Media Queries

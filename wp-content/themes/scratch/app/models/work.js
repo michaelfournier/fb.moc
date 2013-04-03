@@ -26,7 +26,7 @@ var Blog = (function (blog) {
 	blog.Collections.WorksList = Backbone.Collection.extend({
 		model : blog.Models.Work,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=works&key=_pinfos_annee&custom_fields=_pinfos_annee,_pinfos_description&order=desc&include=id,title,categories,gallery,custom_fields,slug&count=-1';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=works&key=_pinfos_annee&custom_fields=_pinfos_annee,_pinfos_description&order=desc&include=id,title,categories,content,gallery,custom_fields,slug&count=-1';
             return this;
         },
         query : function () {

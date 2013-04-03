@@ -27,14 +27,14 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 	.maincontent {
-		.divise(1,1, 250px, none, left);
+		.divise(1,1, (1/5)*100%, none, left);
 
 		width: 100%;
 		height: 100%;
 	}
 
 	#tools {
-		.divise(1,1, 250px, none, left);
+		.divise(1,1, (1/5)*100%, none, left);
 	}
 
 	#displaying {
@@ -42,7 +42,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 	#sidebar {
-		.divise(1,4, 0, none, left);
+		.divise(1,5, 0, none, left);
 		position: absolute;
 		padding-right: @unit;
 		max-width: 250px;
@@ -50,14 +50,14 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#mainbb, #main_nav {
 		position:relative;
-		.divise(7,9, 0, none, left);
-		margin: 0 (1/9)*100% 0 (1/9)*100%;
+		.divise(9,11, 0, none, left);
+		margin: 0 (1/11)*100%;
 	}
 
 	.nextprevworks {
 		height : 80%;
 		position:fixed;
-		.divise(1,9, 0, none, left);
+		.divise(1,11, 0, none, left);
 
 		//position: absolute;
 	}
@@ -87,11 +87,11 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		width: 100%;
 	}
 
-	#workslist .segment:hover .sortitem {
+	#wraplist .segment:hover .sortitem {
 		color: @black60;
 	}
 
-	#workslist .segment:hover * a {
+	#wraplist .segment:hover * a {
 		border-top: 1px solid @black60;
 	}
 
@@ -116,32 +116,39 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#workslistmini a {
 		position: relative;
+		float: none;
 		display: inline-block;  
-		border-top: 1px solid @black10;
-		padding: @unit/2 @unit/2 0 0;
+
+		padding: @unit/2 0 0 0;
+	}
+
+	#workslistmini a:last-child {
+		padding-right: 0;
 	}
 
 	#workslistmini .segment {
+		border-top: 1px solid @black10;
 		display: inline-block;
 		position: relative;
-		float: left;
-		padding-top:@unit;
+		float: none;
+		padding: @unit/4 0 0 0;
+		margin-top: @unit/2;
 	}
 
 	#workslistmini .sortitem {
-		top: @unit/1.5;
+		top: -@unit/1.5;
 		left: 0;
 		padding: 0 0 0 0;
 		background-color: @bgcolor;
 		z-index: 9;
 	}
 
-	// .thumb_color, .thumb_nb {
-	// 	position: absolute;
-	// 	left:0;
-	// 	top:0;
-	// 	/*max-height: 100%;*/
-	// 	display: none;
-	// }
+	.thumb_color:hover img {
+		opacity: 1;
+	}
+
+	.thumb_color img, .thumb_nb img {
+		opacity: 0.4;
+	}
 
 }
