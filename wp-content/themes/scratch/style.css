@@ -833,9 +833,11 @@ nav a {
 #wrapper {
   float: left;
   width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #tools {
-  height: 3.4285714285714284em;
+  height: 2.2857142857142856em;
 }
 #navgal li a {
   font-size: 1.2857142857142858em;
@@ -851,6 +853,7 @@ a.picture {
 .maincontent img {
   max-width: 100%;
   max-height: 100%;
+  min-height: inherit;
 }
 .wrapthumb {
   position: relative;
@@ -1033,10 +1036,10 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 81.81818181818183%;
+    width: 83.33333333333334%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
-    margin: 0 9.090909090909092%;
+    margin: 0 8.333333333333332%;
   }
   .nextprevworks {
     height: 80%;
@@ -1048,7 +1051,7 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 9.090909090909092%;
+    width: 8.333333333333332%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
   }
@@ -1068,9 +1071,8 @@ SMARTPHONES
     left: 0;
   }
   #timeline {
-    position: absolute;
-    bottom: 1.1428571428571428em;
     width: 100%;
+    float: left;
   }
   #wraplist .segment:hover .sortitem {
     color: #666666;

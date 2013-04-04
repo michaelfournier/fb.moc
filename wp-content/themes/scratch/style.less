@@ -118,10 +118,12 @@ nav a {
 #wrapper {
 	float: left;
 	width:	100%;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #tools {
-	height: @unit*3;
+	height: @unit*2;
 }
 
 #navgal li a {
@@ -141,6 +143,8 @@ a.picture {
 .maincontent img {
 	max-width: 100%;
 	max-height: 100%;
+
+	min-height: inherit;
 }
 
 .wrapthumb {

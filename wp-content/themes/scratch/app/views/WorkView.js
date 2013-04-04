@@ -10,7 +10,7 @@ var Blog = (function (blog) {
            // console.log(this.i);           
             // on calcule la hauteur de #wrapper //
             _.bindAll(this, 'render');
-            $(window).on("resize", _.bind(this.myheight, this));
+            //$(window).on("resize", _.bind(this.myheight, this));
         },
         // fonction pour donner une hauteur à #mainbb //
          myheight: function() {
@@ -78,7 +78,7 @@ var Blog = (function (blog) {
                 });
             };
 
-            this.myheight();
+            //this.myheight();
 
             return this;
         },

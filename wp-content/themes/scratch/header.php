@@ -111,13 +111,13 @@
 	              		<div class="wrapthumb" style="display:none;">
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    	<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    </a>
 	                 	</div>             			
               	<% } else { %>
 	              		<div class="wrapthumb" style="display:none;">
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    	<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    </a>
 	                 	</div>                  		
               	<% } %>
