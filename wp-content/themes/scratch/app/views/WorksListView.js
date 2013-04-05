@@ -39,20 +39,21 @@ var Blog = (function (blog) {
         },
 // fonction pour le tri par années
         sortbycat : function(e) {
-            $("#sorting a").removeClass();
-            $(e.currentTarget).removeClass().addClass("actif");
+            $("#sorting a").removeClass("actif");
+            $(e.currentTarget).addClass("actif");
             this.collection.sortByCat();
         },
 // fonction  pour le tri par catégories
         sortbydate : function(e) {
-            $("#sorting a").removeClass();
+
+            $("#sorting a").removeClass("actif");
             $(e.currentTarget).addClass("actif");
             this.collection.sortByDate();
         },
 // fonction pour l'affichage par liste
         displaylist : function(e) {
-            $("#displaying a").removeClass();
-            $(e.currentTarget).removeClass().addClass("actif");
+            $("#displaying a").removeClass("actif");
+            $(e.currentTarget).addClass("actif");
             this.template = this.templatelist;
             this.collection.displaymode = 'list';
             console.log(this.collection.displaymode);
@@ -60,8 +61,8 @@ var Blog = (function (blog) {
         },
 // fonction pour l'affichage par vignettes
         displaythumb : function(e) {
-            $("#displaying a").removeClass();
-            $(e.currentTarget).removeClass().addClass("actif");
+            $("#displaying a").removeClass("actif");
+            $(e.currentTarget).addClass("actif");
             this.template = this.templatethumb;
             this.collection.displaymode = 'thumbs';
             this.render();

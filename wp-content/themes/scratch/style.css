@@ -774,7 +774,7 @@ h3, h4 {
   margin: 0 0 1.1428571428571428em 0;
   letter-spacing: 1px;
   font-weight: normal;
-  font-size: 0.8571428571428571em;
+  font-size: 0.7857142857142857em;
 }
 #sidebar h3 {
   color: #0d0aff;
@@ -782,6 +782,9 @@ h3, h4 {
 p {
   font-size: 0.7857142857142857em;
   text-align: justify;
+}
+.actif {
+  color: #0d0aff;
 }
 ul {
   padding: 0;
@@ -791,7 +794,7 @@ ul {
   display: none;
 }
 #navgal li a.actif, nav li a.actif {
-  color: #0D0AFF;
+  color: #0d0aff;
 }
 #main_header {
   margin: 0 0 1.1428571428571428em 0;
@@ -816,9 +819,6 @@ nav li {
 nav#sorting li:first-child a {
   border: 0px;
 }
-nav#sorting {
-  padding-top: 0.5714285714285714em;
-}
 nav {
   font-size: 0.7857142857142857em;
   letter-spacing: 2px;
@@ -835,13 +835,15 @@ nav a {
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 #tools {
-  height: 2.2857142857142856em;
+  height: 3.4285714285714284em;
+  padding-top: 0.5714285714285714em;
 }
 #navgal li a {
   font-size: 1.2857142857142858em;
-  padding: 0.38095238095238093em 0.5714285714285714em;
+  padding: 0 0.5714285714285714em 0.2857142857142857em;
   border: 0;
   text-decoration: none;
   color: #dcdcdc;
@@ -878,9 +880,9 @@ a.picture {
   display: block;
   float: left;
   border-top: 1px solid #dcdcdc;
-  padding-top: 1.1428571428571428em;
-  padding-left: 1.1428571428571428em;
-  padding-bottom: 1.1428571428571428em;
+  padding-top: 0.7619047619047619em;
+  padding-left: 0.7619047619047619em;
+  padding-bottom: 0.7619047619047619em;
 }
 .segment {
   display: inline;
@@ -930,6 +932,41 @@ a.picture {
   clear: both;
   display: block;
   top: inherit;
+}
+/*-----------*/
+#tools #displaying a {
+  padding: 0;
+  border: 0;
+}
+#displaying li {
+  border-left: 1px solid #dcdcdc;
+}
+#displaying li:last-child {
+  border-right: 1px solid #dcdcdc;
+}
+#displaylist {
+  display: block;
+  float: left;
+  background: url('img/btn-list.png') no-repeat;
+  width: 20px;
+  height: 13px;
+  padding: 0;
+  margin: 0 1.1428571428571428em;
+}
+#displaythumb {
+  display: block;
+  float: left;
+  background: url('img/btn-thumbs.png') no-repeat;
+  width: 14px;
+  height: 13px;
+  padding: 0;
+  margin: 0 1.1428571428571428em;
+}
+#displaythumb, #displaylist {
+  background-color: #b3b3b3;
+}
+#displaythumb.actif, #displaylist.actif {
+  background-color: #0d0aff;
 }
 /* =============================================================================
 Media Queries
@@ -992,7 +1029,7 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 20%;
+    padding-left: 200px;
     min-height: 1.1428571428571428em;
     width: 100%;
     height: 100%;
@@ -1006,23 +1043,19 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 20%;
+    padding-left: 200px;
     min-height: 1.1428571428571428em;
   }
   #displaying {
     float: right;
   }
   #sidebar {
+    width: 200px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    clear: none;
-    float: left;
-    width: 20%;
-    padding-left: 0;
-    min-height: 1.1428571428571428em;
     position: absolute;
     padding-right: 1.1428571428571428em;
     max-width: 250px;
@@ -1036,10 +1069,10 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 83.33333333333334%;
+    width: 88.88888888888889%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
-    margin: 0 8.333333333333332%;
+    margin: 0 5.555555555555555%;
   }
   .nextprevworks {
     height: 80%;
@@ -1051,24 +1084,28 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 8.333333333333332%;
+    width: 5.555555555555555%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
+    display: none;
   }
   .nextprevworks a {
     display: block;
     height: 100%;
     width: 100%;
   }
-  .nextprevworks a:hover {
-    background-color: #F1F1F1;
+  #nextwork:hover, #prevwork:hover {
+    opacity: 1;
   }
   #nextwork {
-    float: right;
     right: 0;
+    opacity: .15;
+    background: url('img/chevron_droite.png') no-repeat center center;
   }
   #prevwork {
     left: 0;
+    opacity: .15;
+    background: url('img/chevron_gauche.png') no-repeat center center;
   }
   #timeline {
     width: 100%;

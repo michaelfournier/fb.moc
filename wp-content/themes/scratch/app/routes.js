@@ -12,11 +12,6 @@ var Blog = (function (blog){
                 Blog.mywork = new blog.Models.Work();
                 // on instancie la vue worklisttools //
                 Blog.myworkslisttoolsview = new blog.Views.WorksListToolsView(); 
-                // on applique la fonction myheight //
-                this.myheight();
-                // on écoute l'évenement resize pour appliquer la fonction myheight //
-                $(window).on("resize", _.bind(this.myheight, this));
-
             },
             routes : {
                 "works/:slug_post" : "displayWork",
@@ -28,16 +23,6 @@ var Blog = (function (blog){
             selectMenu: function (route) {
               $('#mainmenu a').removeClass('actif');
               $('#mainmenu a[href="#'+route+'"]').addClass('actif');
-            },
-            // fonction pour donner une hauteur à #mainbb //
-             myheight: function() {
-                    var offset = $('#mainbb').offset();
-                    // topOffset = distance entre le bloc #content et le haut de la fenetre //  
-                    var topOffset = offset.top; 
-                    // on calcul la hauteur de la div #content //
-                    var contentheight = $(window).height()-(topOffset + $("#main_header").height() + $("#tools").height() + 43);
-                    $('#wrapper').css("height", contentheight);            
-                    console.log(contentheight);   
             },
             root : function () {
               this.selectMenu();

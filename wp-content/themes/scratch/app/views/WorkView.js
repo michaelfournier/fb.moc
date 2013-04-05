@@ -40,7 +40,7 @@ var Blog = (function (blog) {
             // on assigne une url à nextwork si workslist est définie//
             if (Blog.myworkslist) { this.nextwork(); }
             var that = this;
-
+            this.$el.find('.nextprevworks').css('display', 'block');
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
                 // on écrit les infos dans la side bar//
@@ -49,7 +49,9 @@ var Blog = (function (blog) {
                 $(this).find('#sidebar h3').html(mymodel.get('title'));
                 $(this).find('#sidebar h4').html(mymodel.get('custom_fields')['_pinfos_annee'][0]);
                 $(this).find('#sidebar p#description').html(mymodel.get('custom_fields')['_pinfos_description'][0]);
-                $(this).find('#sidebar #text').html(mymodel.get('content'));
+                $(this).find('#sidebar #text').empty().html(mymodel.get('content'));
+
+
 
                 $(this).find('.maincontent').css("text-align","center").parent().fadeIn('fast', function() { that.renderPictures();});
             });  

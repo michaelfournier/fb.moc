@@ -70,10 +70,10 @@
 	<script type="text/template" id="mainworks_template">	
 		<section id="tools"></section>
 		<nav class="nextprevworks" id="prevwork">
-			<a href=""> < prev</a>
+			<a href=""></a>
 		</nav>	
 		<nav class="nextprevworks" id="nextwork">
-			<a href="">next > </a>
+			<a href=""></a>
 		</nav>
 		<div id="wrapper">			
 			<section id="sidebar">
@@ -177,8 +177,15 @@
 			</nav>
 			<nav id="displaying">
 				<ul>
-					<li><a <% if (displaymode === "list") { %> class="actif" <% } %> data-bypass id='displaylist' href="#list">liste</a></li>
-					<li><a <% if (displaymode === "thumbs") { %> class="actif" <% } %> data-bypass id='displaythumb' href="#thumb">mosa</a></li>
+					<li>
+						<a <% if (displaymode === "thumbs") { %> class="actif" <% } %> data-bypass id='displaythumb' href="#thumb">
+						</a>
+					</li>
+					<li>
+						<a <% if (displaymode === "list") { %> class="actif" <% } %> data-bypass id='displaylist' href="#list">
+						</a>
+					</li>
+					
 				</ul>
 			</nav>
 	</script>
