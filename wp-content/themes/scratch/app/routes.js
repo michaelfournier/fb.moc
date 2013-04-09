@@ -87,7 +87,9 @@ var Blog = (function (blog){
                   Blog.myworkview = new blog.Views.WorkView(mywork);
                   Blog.myworkview.render(mywork);
                 }
+
               });  
+               if (Blog.myworkview) Blog.myworkview.undelegateEvents();
               // Blog.myworkview = new blog.Views.WorkView(Blog.mywork);
               //   // on charge les données dans myworkslist
               //   Blog.mywork.query(slug_post).fetch({

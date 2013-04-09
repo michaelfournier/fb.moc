@@ -75,6 +75,9 @@
 		<nav class="nextprevworks" id="nextwork">
 			<a href=""></a>
 		</nav>
+		<div id="unfoldworks">
+			<a data-bypass href="#"><span></span></a>
+		</div>
 		<div id="wrapper">			
 			<section id="sidebar">
 				<h3></h3>
@@ -202,15 +205,13 @@
 
 	<!-- template pour la nav picture gallery --> 
     <script type="text/template" id="navgallery_template">
-    <% if(_.size(gallery) > 1) { %>
-    	<nav id="navgal">
-    		<ul>
-		        <% _.each(gallery, function (picture, i) { %>       	
-		            	<li><a data-bypass="<%= i %>" class="linkpic" href="#">&bull;</a></li>
-		        <% }); %>
-        	</ul>
-       </nav>
-     <% } %>
+	    <% if(_.size(gallery) > 1) { %>
+	    		<ul>
+			        <% _.each(gallery, function (picture, i) { %>       	
+			            	<li><a data-bypass="<%= i %>" class="linkpic" href="#">&bull;</a></li>
+			        <% }); %>
+	        	</ul>
+	     <% } %>
     </script>
 
 	<!-- template pour image avec lien (gallery) -->
@@ -218,6 +219,14 @@
 			<a href="#" data-bypass id="picture"></a>
 	</script>
 
+	<!-- template pour video -->
+	<script type="text/template" id="video_template">
+
+		<div id="video">
+			<%= myvideo.get('html') %>
+		</div>
+
+	</script>
 
 
 	<!-- template pour worklistmini -->

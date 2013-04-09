@@ -1,3 +1,4 @@
+/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
 /*
 Theme Name: scratch
 Theme URI: 
@@ -796,6 +797,9 @@ ul {
 #navgal li a.actif, nav li a.actif {
   color: #0d0aff;
 }
+nav#picvidswitcher {
+  float: right;
+}
 #main_header {
   margin: 0 0 1.1428571428571428em 0;
   padding: 0.5714285714285714em 0;
@@ -812,7 +816,10 @@ nav li {
   padding-left: 0px;
   border: 0px;
 }
-#mainmenu a span, #tools nav a {
+#tools nav li:last-child a {
+  padding-right: 0;
+}
+#mainmenu a span, #tools li a {
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
 }
@@ -968,6 +975,18 @@ a.picture {
 #displaythumb.actif, #displaylist.actif {
   background-color: #0d0aff;
 }
+#video {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+#video iframe, #video object, #video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 /* =============================================================================
 Media Queries
 ========================================================================== */
@@ -1094,6 +1113,45 @@ SMARTPHONES
     height: 100%;
     width: 100%;
   }
+  #unfoldworks {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: left;
+    width: 5.555555555555555%;
+    padding-left: 0;
+    min-height: 1.1428571428571428em;
+    left: 0;
+    display: none;
+    height: 32px;
+    bottom: 0.38095238095238093em;
+    left: 0;
+    border-right: 1px solid #dcdcdc;
+    position: fixed;
+  }
+  #unfoldworks a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+  #unfoldworks a span {
+    width: 19px;
+    height: 16px;
+    margin: 6px auto 0;
+    display: block;
+    background: #b3b3b3 url('img/btn-unfold.png') no-repeat center center;
+  }
+  #unfoldworks a.fold span {
+    background: #b3b3b3 url('img/btn-fold.png') no-repeat center center;
+  }
+  #unfoldworks a:hover span {
+    background-color: #1a1a1a;
+  }
   #nextwork:hover, #prevwork:hover {
     opacity: 1;
   }
@@ -1108,8 +1166,10 @@ SMARTPHONES
     background: url('img/chevron_gauche.png') no-repeat center center;
   }
   #timeline {
-    width: 100%;
+    width: 0%;
     float: left;
+    position: absolute;
+    bottom: 0;
   }
   #wraplist .segment:hover .sortitem {
     color: #666666;
@@ -1119,6 +1179,9 @@ SMARTPHONES
   }
   #workslistmini {
     position: relative;
+    background-color: #f9f9f9;
+    bottom: 0;
+    width: 100%;
     display: block;
     margin: 0 0 0 0;
     white-space: nowrap;
@@ -1136,7 +1199,7 @@ SMARTPHONES
     position: relative;
     float: none;
     display: inline-block;
-    padding: 0.5714285714285714em 0 0 0;
+    padding: 0.2857142857142857em 0 0 0;
   }
   #workslistmini a:last-child {
     padding-right: 0;

@@ -68,9 +68,45 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		display: block;
 		height: 100%;
 		width: 100%;
-		
+	}
+
+	#unfoldworks {
+		.divise(1,18, 0, none, left);
+		left: 0;
+		display: none;
+		height: 32px;
+		bottom: @unit/3;
+		left: 0;
+		border-right: 1px solid @black10;
+		position: fixed;
 
 	}
+
+	#unfoldworks a {
+position: relative;
+		display: block;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+
+	#unfoldworks a span {
+		width: 19px;
+		height: 16px;
+		margin: 6px auto 0;
+		display: block;
+		background: @black30 url('img/btn-unfold.png') no-repeat center center;
+	}
+
+	#unfoldworks a.fold span {
+		background: @black30 url('img/btn-fold.png') no-repeat center center;
+	}
+
+	#unfoldworks a:hover span {
+		background-color: @black90;
+	}
+
+
 
 	#nextwork:hover, #prevwork:hover{
 		opacity: 1;
@@ -89,8 +125,10 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 	#timeline {
-		width: 100%;
+		width: 0%;
 		float:left;
+		position: absolute;
+		bottom: 0;
 	}
 
 	#wraplist .segment:hover .sortitem {
@@ -103,6 +141,9 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#workslistmini {
 	    position:relative;
+	    background-color: @bgcolor;
+	    bottom: 0;
+	    width: 100%;
 	    display:block;
 	    margin:0 0 0 0;
 	    white-space: nowrap;
@@ -125,7 +166,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		float: none;
 		display: inline-block;  
 
-		padding: @unit/2 0 0 0;
+		padding: @unit/4 0 0 0;
 	}
 
 	#workslistmini a:last-child {

@@ -50,6 +50,7 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
 //if (is_admin()) {
   include_once 'metaboxes/setup.php';
   include_once 'metaboxes/repeating-mediagallery-spec.php';
+  include_once 'metaboxes/repeating-videogallery-spec.php';
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
   include_once 'metaboxes/repeating-external-links-spec.php';
  // include_once 'metaboxes/datepicker-meta-spec.php';
@@ -109,10 +110,11 @@ function my_encode_meta($response) {
 
 
 function add_gallery($post) {
-  $gallery = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
+  $gallerypics = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
+  $galleryvideos = get_post_meta($post->id, "_pvideosgallery_blocsvideos", TRUE);
   $themepath = get_bloginfo('template_url');
-  if(isset($gallery)) {
-    foreach($gallery as $idpic) {
+  if(isset($gallerypics)) {
+    foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
       $imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=200&h=120&zc=1';
       $imagethumb2 = wp_get_attachment_image_src($idpic['image'], 'thumbnail'); 
@@ -132,8 +134,14 @@ function add_gallery($post) {
 
       $post->gallery[] = $tabgallery;
     }
-
-  } 
+  }
+  ///
+  if(isset($galleryvideos)) {
+    foreach($galleryvideos as $id => $video) {
+      $tabvideos = array('videourl' => $video['media']);
+      $post->galleryvideos[] = $tabvideos;
+    }   
+  }
   return;
 }
 

@@ -45,7 +45,6 @@ var Blog = (function (blog) {
         },
 // fonction  pour le tri par catégories
         sortbydate : function(e) {
-
             $("#sorting a").removeClass("actif");
             $(e.currentTarget).addClass("actif");
             this.collection.sortByDate();
@@ -56,7 +55,7 @@ var Blog = (function (blog) {
             $(e.currentTarget).addClass("actif");
             this.template = this.templatelist;
             this.collection.displaymode = 'list';
-            console.log(this.collection.displaymode);
+            //console.log(this.collection.displaymode);
             this.render();
         },
 // fonction pour l'affichage par vignettes

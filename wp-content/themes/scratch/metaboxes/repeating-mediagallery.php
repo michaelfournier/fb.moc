@@ -111,7 +111,7 @@
 		<h3 class="handle">↓ <?php _e('Media (audio/vidéo)');?></h3>
 		<? $mb->the_field('media'); ?>			
 		<div class="inside">
-			<textarea id="<?php $mb->the_name(); ?>" rows="10" cols="50" name="<?php $mb->the_name(); ?>" rows="3"><?php echo $mb->get_the_value(); ?></textarea>
+			<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
 		</div>
 	</div>	
 		
@@ -127,7 +127,7 @@
 
 	<p class="block">
 		<a href="#" class="docopy-blocspics addpic button">Ajouter une image</a>
-		<a href="#" class="docopy-blocspics addmedia button">Ajouter un media</a>
+		<!-- <a href="#" class="docopy-blocspics addmedia button">Ajouter un media</a> -->
 	</p>
 
 

@@ -74,6 +74,10 @@ ul { padding: 0; margin: 0;}
 	.actif();
 }
 
+nav#picvidswitcher {
+	float: right;
+}
+
 #main_header { 
 	margin: 0 0 @unit 0;
 	padding: @unit/2 0;
@@ -92,7 +96,12 @@ nav li{
 	padding-left: 0px;
 	border: 0px;
 }
-#mainmenu a span, #tools nav a {
+
+#tools nav li:last-child a {
+	padding-right: 0;
+}
+
+#mainmenu a span, #tools li a {
 	border-left: 1px solid @black10;
 	padding: 0 @unit;
 }
@@ -298,7 +307,21 @@ a.picture {
 	background-color: @hovercolor;
 }
 
+#video {
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+}
 
+#video iframe,  
+#video object,  
+#video embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
 
 
 /* =============================================================================
