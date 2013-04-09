@@ -219,6 +219,20 @@
 			<a href="#" data-bypass id="picture"></a>
 	</script>
 
+	<!-- template pour image avec lien (gallery) -->
+	<script type="text/template" id="picture_template">
+		<figure id="picture">
+			<a href="#" data-bypass class="btn-picture"><img src="<%= mypicture.get('full') %>" /></a>
+		</figure>
+	</script>
+
+	<!-- template pour image seule -->
+	<script type="text/template" id="picturesingle_template">
+		<figure id="picture">
+			<img src="<%= mypicture.get('full') %>" />
+		</figure>
+	</script>
+
 	<!-- template pour video -->
 	<script type="text/template" id="video_template">
 

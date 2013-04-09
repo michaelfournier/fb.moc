@@ -12,12 +12,22 @@ var Blog = (function (blog){
                 Blog.mywork = new blog.Models.Work();
                 // on instancie la vue worklisttools //
                 Blog.myworkslisttoolsview = new blog.Views.WorksListToolsView(); 
+                // on calcule la hauteur de #wrapper //
+                $(window).on("resize", _.bind(this.myheight, this));
+                this.myheight();
             },
             routes : {
                 "works/:slug_post" : "displayWork",
                 "works" : "displayWorksList",
                 "bio" : "bio",
                 "*path" : "root"
+            },
+            // fonction pour donner une hauteur à #mainbb //
+             myheight: function() {
+                    // on calcule la hauteur de la div #content //
+                    var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true);
+                    $('#wrapper').css("height", contentheight);  
+                    console.log($(window).height());
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {

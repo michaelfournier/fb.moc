@@ -4,19 +4,18 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#work_template").html());
+            //this.template = _.template($("#work_template").html());
             // on remt i à 0 //
             this.i = 0;
-           // console.log(this.i);           
             // on calcule la hauteur de #wrapper //
-            _.bindAll(this, 'render');
-            //$(window).on("resize", _.bind(this.myheight, this));
+            $(window).on("resize", _.bind(this.myheight, this));
         },
         // fonction pour donner une hauteur à #mainbb //
          myheight: function() {
                 // on calcule la hauteur de la div #content //
-                var contentheight = $('#mainbb').height() - $('#tools').height() - $('#main_header').height() - $('#timeline').height() ;
+                var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true);
                 $('#wrapper').css("height", contentheight);  
+                console.log($(window).height());
         },
 
         renderPictures : function () {
@@ -64,7 +63,7 @@ var Blog = (function (blog) {
         },
 
         render : function () {
-            var renderedContent = this.template({work : this.model});
+            //var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
             // on crée une variable contenant le nombre d'image dans la galerie //
             var galleryimageslength;

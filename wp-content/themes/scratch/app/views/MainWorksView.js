@@ -12,14 +12,14 @@ var Blog = (function (blog) {
             // this.collection.bind('add', this.render);
             // this.collection.bind('remove', this.render);
             // on écoute l'évenement resize pour appliquer la fonction myheight //
-            $(window).on("resize", _.bind(this.myheight, this));
+           // $(window).on("resize", _.bind(this.myheight, this));
         },
         render : function () {
             var renderedContent = this.template();
 
             // on fait apparaitre dans #mainbb le work //
             this.$el.html(renderedContent);
-            this.myheight();
+            //this.myheight();
             return this;
         },
         // fonction pour donner une hauteur à #mainbb //

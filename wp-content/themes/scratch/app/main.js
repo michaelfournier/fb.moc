@@ -36,6 +36,8 @@ yepnope({
         PicturesGalNavView  : wp_vars.themepath+'/app/views/PicturesGalNavView.js',
         VideosGalNavView    : wp_vars.themepath+'/app/views/VideosGalNavView.js',
         VideoView          : wp_vars.themepath+'/app/views/VideoView.js',
+        PictureView          : wp_vars.themepath+'/app/views/PictureView.js',
+        PictureSingleView    : wp_vars.themepath+'/app/views/PictureSingleView.js',
 
 
         //Routes
