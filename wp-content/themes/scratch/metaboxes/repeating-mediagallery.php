@@ -42,34 +42,26 @@
 			<p>
 				<span id="pic_name"><em><? if(!empty($file_id)) echo get_the_title($mb->get_the_value());?></em></span>
 			</p>
+
+			<!-- champ texte légende -->
+
+			<div class="block">
+				<? $mb->the_field('legende_fr'); ?>	
+				<h4>Légende <span>(français)</span></h4>
+				<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
+				<? $mb->the_field('legende_en'); ?>	
+				<h4>Légende <span>(english)</span></h4>
+				<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
+			</div>
+
 		</div>
 	</div>
-	<? } ?>
-	
-<!-- media -->
-<? if ($metabox->get_the_value("media")) { ?>
-	<div class="mymedia">	
-		<h3 class="handle">↓ <?php _e('Media (audio/vidéo)');?></h3>
-		<? $mb->the_field('media'); ?>			
-		<div class="inside">
-			<textarea id="<?php $mb->the_name(); ?>" rows="10" cols="30" name="<?php $mb->the_name(); ?>" rows="3"><?php echo html_entity_decode($mb->get_the_value()); ?></textarea>
-		</div>
-		<div class="inside">
-			<?php $yo = get_post_meta($post->ID, "_contentflux", true);
-
-			//echo($yo['repeating_textareas'][$idx]['media']);
-
-			 ?>
-		</div>
-	</div>
-<? } ?>
-		
+	<? } ?>		
 	
 	<? } else { ?>
 	<? if($mb->is_first()) { ?>
 		<style type="text/css">
 			.wpa_loop .first {
-				display:none;
 			}
 		</style>
 	<? } ?>
@@ -102,18 +94,20 @@
 			<p>
 				<span id="pic_name"><em><? if(!empty($file_id)) echo get_the_title($mb->get_the_value());?></em></span>
 			</p>
+			<!-- champ texte légende -->
+
+			<div class="block">
+				<? $mb->the_field('legende_fr'); ?>	
+				<h4>Légende <span>(français)</span></h4>
+				<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
+				<? $mb->the_field('legende_en'); ?>	
+				<h4>Légende <span>(english)</span></h4>
+				<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
+			</div>
 		</div>
 	</div>
 		
-
-<!-- media -->
-	<div class="mymedia">	
-		<h3 class="handle">↓ <?php _e('Media (audio/vidéo)');?></h3>
-		<? $mb->the_field('media'); ?>			
-		<div class="inside">
-			<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
-		</div>
-	</div>	
+	
 		
 	<? } ?>
 

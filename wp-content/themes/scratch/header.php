@@ -208,7 +208,7 @@
 	    <% if(_.size(gallery) > 1) { %>
 	    		<ul>
 			        <% _.each(gallery, function (picture, i) { %>       	
-			            	<li><a data-bypass="<%= i %>" class="linkpic" href="#">&bull;</a></li>
+			            	<li><a data-bypass="<%= i %>" class="linkpic">&bull;</a></li>
 			        <% }); %>
 	        	</ul>
 	     <% } %>
@@ -216,14 +216,15 @@
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="work_template">
-			<a href="#" data-bypass id="picture"></a>
+			<a data-bypass id="picture"></a>
 	</script>
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
 		<figure id="picture">
-			<a href="#" data-bypass class="btn-picture"><img src="<%= mypicture.get('full') %>" /></a>
+			<a data-bypass class="btn-picture"><img src="<%= mypicture.get('full') %>" /></a>
 		</figure>
+		<figcaption><%= mypicture.get('legend') %></figcaption>
 	</script>
 
 	<!-- template pour image seule -->
@@ -231,6 +232,7 @@
 		<figure id="picture">
 			<img src="<%= mypicture.get('full') %>" />
 		</figure>
+		<figcaption><%= mypicture.get('legend') %></figcaption>
 	</script>
 
 	<!-- template pour video -->

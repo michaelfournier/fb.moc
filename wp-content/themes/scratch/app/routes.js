@@ -25,7 +25,7 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true);
+                    var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true) - $('#timeline').outerHeight(true);
                     $('#wrapper').css("height", contentheight);  
                     console.log($(window).height());
             },
@@ -71,7 +71,8 @@ var Blog = (function (blog){
                   //console.log(results.toJSON());
                   Blog.myworkslistview.render(results); 
                   // on rend la vue workslisttoolsview //
-                  Blog.myworkslisttoolsview.render(); 
+                  Blog.myworkslisttoolsview.render();
+
                 }
               });         
               //alert(blog.myworkslist);              
@@ -122,7 +123,7 @@ var Blog = (function (blog){
 	//Backbone.history.start({pushState: true});
 
     // on instantie le routeur
-      blog.myapprouter = new blog.Router.RoutesManager;
+      Blog.myapprouter = new blog.Router.RoutesManager;
       //Backbone.history.start({pushState: true, hasChange: true, root: "/"});
 
   // Trigger the initial route and enable HTML5 History API support, set the

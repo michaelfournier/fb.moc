@@ -7,15 +7,6 @@ var Blog = (function (blog) {
             //this.template = _.template($("#work_template").html());
             // on remt i à 0 //
             this.i = 0;
-            // on calcule la hauteur de #wrapper //
-            $(window).on("resize", _.bind(this.myheight, this));
-        },
-        // fonction pour donner une hauteur à #mainbb //
-         myheight: function() {
-                // on calcule la hauteur de la div #content //
-                var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true);
-                $('#wrapper').css("height", contentheight);  
-                console.log($(window).height());
         },
 
         renderPictures : function () {
@@ -80,13 +71,15 @@ var Blog = (function (blog) {
 
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
+                // on desactive la scroll bar //
+                $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
                 $(this).find('.maincontent').empty();
                 $(this).find('#sidebar h3').empty().html(mymodel.get('title'));
                 $(this).find('#sidebar h4').empty().html(mymodel.get('custom_fields')['_pinfos_annee'][0]);
                 $(this).find('#sidebar p#description').empty().html(mymodel.get('custom_fields')['_pinfos_description'][0]);
                 $(this).find('#sidebar #text').empty().html(mymodel.get('content'));
-                $(this).find('.maincontent').css("text-align","center").parent().fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
+                $(this).find('.maincontent').css({"text-align":"center", "overflow-y": "hidden"}).parent().fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
 
             }); 
 
@@ -99,6 +92,7 @@ var Blog = (function (blog) {
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
                     //that.scrolltoactive();
+                    Blog.myapprouter.myheight();
                   }
 
                 }); 
@@ -108,6 +102,7 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
+                    Blog.myapprouter.myheight();
                   }
                 });
             };

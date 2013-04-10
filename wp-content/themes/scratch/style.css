@@ -777,12 +777,20 @@ h3, h4 {
   font-weight: normal;
   font-size: 0.7857142857142857em;
 }
+a:hover {
+  cursor: pointer;
+}
 #sidebar h3 {
   color: #0d0aff;
+  letter-spacing: 1px;
 }
 p {
   font-size: 0.7857142857142857em;
   text-align: justify;
+}
+figcaption {
+  font-size: 0.7857142857142857em;
+  color: #666666;
 }
 .actif {
   color: #0d0aff;
@@ -843,6 +851,7 @@ nav a {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  margin-bottom: 44px;
 }
 #tools {
   height: 2.2857142857142856em;
@@ -873,7 +882,7 @@ figure#picture {
   margin-right: 1.1428571428571428em;
 }
 .sortitem {
-  font-size: 0.8571428571428571em;
+  font-size: 0.7142857142857143em;
   position: absolute;
   padding: 0 0.5714285714285714em 0 1.3714285714285712em;
   top: -0.5714285714285714em;
@@ -1052,9 +1061,9 @@ SMARTPHONES
     width: 100%;
     padding-left: 200px;
     min-height: 1.1428571428571428em;
+    padding-bottom: 1.1428571428571428em;
     width: 100%;
     height: 100%;
-    padding-bottom: 44px;
   }
   #tools {
     -webkit-box-sizing: border-box;
@@ -1081,6 +1090,9 @@ SMARTPHONES
     position: absolute;
     padding-right: 1.1428571428571428em;
     max-width: 250px;
+    height: 100%;
+    overflow-y: auto;
+    border-bottom: 1.1428571428571428em solid #f9f9f9;
   }
   #mainbb, #main_nav {
     position: relative;
@@ -1172,7 +1184,7 @@ SMARTPHONES
     width: 0%;
     float: left;
     position: absolute;
-    bottom: 0;
+    bottom: 0.38095238095238093em;
   }
   #wraplist .segment:hover .sortitem {
     color: #666666;

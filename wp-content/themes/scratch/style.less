@@ -53,13 +53,23 @@ h3 , h4 {
 	font-size:(11/@font-size)*1em;
 }
 
+a:hover {
+	cursor: pointer;
+}
+
 #sidebar h3 {
 	color: @hovercolor;
+	letter-spacing: 1px;
 }
 
 p {
 	font-size:(11/@font-size)*1em;
 	text-align: justify;
+}
+
+figcaption {
+	font-size:(11/@font-size)*1em;	
+	color: @black60;
 }
 
 .actif {
@@ -131,6 +141,7 @@ nav a {
 	overflow-y: auto;
 	overflow-x: hidden;
 	position: relative;
+	margin-bottom: 44px;
 }
 
 #tools {
@@ -169,7 +180,7 @@ figure#picture {
 }
 
 .sortitem {
-	font-size:(12/@font-size)*1em;
+	font-size:(10/@font-size)*1em;
 	position : absolute;
 	padding: 0 @unit/2 0 @unit*1.2;
 	top : -@unit/2;

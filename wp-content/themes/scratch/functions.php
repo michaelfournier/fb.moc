@@ -110,6 +110,7 @@ function my_encode_meta($response) {
 
 
 function add_gallery($post) {
+  $mylang = qtrans_getLanguage();
   $gallerypics = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
   $galleryvideos = get_post_meta($post->id, "_pvideosgallery_blocsvideos", TRUE);
   $themepath = get_bloginfo('template_url');
@@ -129,7 +130,7 @@ function add_gallery($post) {
       'title' =>  $imagemetas->post_title,
       'description' =>  $imagemetas->post_content,
       'alt' =>  get_post_meta($idpic['image'], '_wp_attachment_image_alt', true),
-      'legend' => $imagemetas->post_excerpt
+      'legend' => $idpic['legende_'.$mylang]
       );
 
       $post->gallery[] = $tabgallery;
@@ -138,7 +139,7 @@ function add_gallery($post) {
   ///
   if(isset($galleryvideos)) {
     foreach($galleryvideos as $id => $video) {
-      $tabvideos = array('videourl' => $video['media']);
+      $tabvideos = array('videourl' => $video['media'], 'legend' => $video['legende_'.$mylang]);
       $post->galleryvideos[] = $tabvideos;
     }   
   }

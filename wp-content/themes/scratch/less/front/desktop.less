@@ -28,9 +28,9 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	.maincontent {
 		.divise(1,1, 200px, none, left);
+		padding-bottom: @unit;
 		width: 100%;
 		height: 100%;
-		padding-bottom: 44px;
 	}
 
 	#tools {
@@ -48,6 +48,9 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		position: absolute;
 		padding-right: @unit;
 		max-width: 250px;
+		height: 100%;
+		overflow-y: auto;
+		border-bottom: @unit solid @bgcolor;
 	}
 
 	#mainbb, #main_nav {
@@ -128,7 +131,7 @@ position: relative;
 		width: 0%;
 		float:left;
 		position: absolute;
-		bottom: 0;
+		bottom: @unit/3;
 	}
 
 	#wraplist .segment:hover .sortitem {
