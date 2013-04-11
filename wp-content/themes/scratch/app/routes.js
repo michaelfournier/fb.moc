@@ -26,8 +26,13 @@ var Blog = (function (blog){
              myheight: function() {
                     // on calcule la hauteur de la div #content //
                     var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true) - $('#timeline').outerHeight(true);
-                    $('#wrapper').css("height", contentheight);  
-                    console.log($(window).height());
+
+                    $('#wrapper').css("height", contentheight);
+
+                    imageheight = $("#wrapper figure img").height();
+                    legendheight = $("#wrapper #legend").height();
+                    $('#wrapper').find('img').css("max-height", contentheight - legendheight);
+                    console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {

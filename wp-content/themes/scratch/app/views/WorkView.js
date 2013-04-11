@@ -54,6 +54,7 @@ var Blog = (function (blog) {
         },
 
         render : function () {
+            
             //var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
             // on crée une variable contenant le nombre d'image dans la galerie //
@@ -91,8 +92,7 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
-                    //that.scrolltoactive();
-                    Blog.myapprouter.myheight();
+
                   }
 
                 }); 
@@ -102,7 +102,6 @@ var Blog = (function (blog) {
                   update: true,
                   success: function(results) {
                     Blog.myworkslistminiview.render(results);
-                    Blog.myapprouter.myheight();
                   }
                 });
             };

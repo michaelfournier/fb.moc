@@ -221,18 +221,23 @@
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
+
 		<figure id="picture">
-			<a data-bypass class="btn-picture"><img src="<%= mypicture.get('full') %>" /></a>
+			<a data-bypass class="btn-picture">
+				<img src="<%= mypicture.get('full') %>" />
+			</a>
+			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
 		</figure>
-		<figcaption><%= mypicture.get('legend') %></figcaption>
+		
 	</script>
 
 	<!-- template pour image seule -->
 	<script type="text/template" id="picturesingle_template">
 		<figure id="picture">
-			<img src="<%= mypicture.get('full') %>" />
+			<div class="btn-picture"><img src="<%= mypicture.get('full') %>" /></div>
+			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
 		</figure>
-		<figcaption><%= mypicture.get('legend') %></figcaption>
+		
 	</script>
 
 	<!-- template pour video -->
