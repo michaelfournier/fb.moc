@@ -72,16 +72,36 @@ var Blog = (function (blog) {
 
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
+                if($(this).hasClass("mCustomScrollbar")) {
+                   $(this).mCustomScrollbar("destroy");
+                };  
+                var sidebar = $(this).find('#sidebar');
+
+
                 // on desactive la scroll bar //
                 $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
                 $(this).find('.maincontent').empty();
+               
+
                 $(this).find('#sidebar h3').empty().html(mymodel.get('title'));
                 $(this).find('#sidebar h4').empty().html(mymodel.get('custom_fields')['_pinfos_annee'][0]);
                 $(this).find('#sidebar p#description').empty().html(mymodel.get('custom_fields')['_pinfos_description'][0]);
                 $(this).find('#sidebar #text').empty().html(mymodel.get('content'));
-                $(this).find('.maincontent').css({"text-align":"center", "overflow-y": "hidden"}).parent().fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
-
+                $(this).find('.maincontent').css({"text-align":"center", "overflow-y": "hidden"});
+                
+                // si la sidebar n'a pas de mCustomscrollbar alors on l'applique //
+                if(!sidebar.hasClass("mCustomScrollbar")) {
+                    sidebar.mCustomScrollbar({
+                        set_height: "100%",
+                        scrollInertia: 150,
+                        theme: "dark"
+                    });
+                }
+                // on desactive la scrollbar, on la reactivera quand l'image ou la video sera chargée et que l'on aura donné une hauteur à wrapper//
+                sidebar.mCustomScrollbar("disable"); 
+                $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
+                
             }); 
 
             if (Blog.myworkslistminiview  === undefined) {
@@ -105,6 +125,7 @@ var Blog = (function (blog) {
                   }
                 });
             };
+            
             return this;
         },
 

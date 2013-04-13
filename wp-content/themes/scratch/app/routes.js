@@ -31,6 +31,7 @@ var Blog = (function (blog){
 
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
+                   // $("#wrapper").find("#sidebar").css("height", imageheight);
                     $('#wrapper').find('img').css("max-height", contentheight - legendheight);
                     console.log(legendheight);
             },
@@ -66,9 +67,13 @@ var Blog = (function (blog){
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();     
-              // on instancie la vue MainWorksView
-              Blog.mymainworksview = new blog.Views.MainWorksView();
-              Blog.mymainworksview.render();
+              // on instancie la vue MainWorksView et on la rend si elle n'existe pas
+              if (Blog.mymainworksview === undefined) {               
+                  // on instancie la vue MainWorksView
+                  Blog.mymainworksview = new blog.Views.MainWorksView();  
+                }
+                Blog.mymainworksview.render();
+              
               // on charge les données dans myworkslist
               Blog.myworkslist.all().fetch({
                 update: true,
@@ -92,6 +97,8 @@ var Blog = (function (blog){
                   Blog.mymainworksview = new blog.Views.MainWorksView();  
                   Blog.mymainworksview.render();
               }
+              
+              
               // on charge les données dans myworkslist
               Blog.myworkslist.all().fetch({
                 update: true,

@@ -78,8 +78,8 @@
 		<div id="unfoldworks">
 			<a data-bypass href="#"><span></span></a>
 		</div>
-		<div id="wrapper">			
-			<section id="sidebar">
+		<div id="wrapper" class="myscroll">			
+			<section id="sidebar" class="myscroll">
 				<h3></h3>
 				<h4></h4>
 				<p id="description"></p>
@@ -111,14 +111,14 @@
               	<% if ( String(tab[i-1]) !== String(tab[i])) { %>
               		<% if(i > 0) { %></div><% } %>
               		<div class="segment">
-	              		<div class="wrapthumb" style="display:none;">
+	              		<div class="wrapthumb" style="opacity:0">
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    </a>
 	                 	</div>             			
               	<% } else { %>
-	              		<div class="wrapthumb" style="display:none;">
+	              		<div class="wrapthumb" style="opacity: 0">
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    </a>
@@ -174,18 +174,18 @@
 			<nav id="sorting">
 				<span style="float:left; display:none">trie par :</span>
 				<ul>
-					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate' href='#date'>date</a></li>
-					<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass href='#cat' id='sortbycat'>categories</a></li>
+					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate'>date</a></li>
+					<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass  id='sortbycat'>categories</a></li>
 				</ul>
 			</nav>
 			<nav id="displaying">
 				<ul>
 					<li>
-						<a <% if (displaymode === "thumbs") { %> class="actif" <% } %> data-bypass id='displaythumb' href="#thumb">
+						<a <% if (displaymode === "thumbs") { %> class="actif" <% } %> data-bypass id='displaythumb'>
 						</a>
 					</li>
 					<li>
-						<a <% if (displaymode === "list") { %> class="actif" <% } %> data-bypass id='displaylist' href="#list">
+						<a <% if (displaymode === "list") { %> class="actif" <% } %> data-bypass id='displaylist'>
 						</a>
 					</li>
 					

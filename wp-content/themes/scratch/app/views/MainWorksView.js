@@ -15,9 +15,9 @@ var Blog = (function (blog) {
            // $(window).on("resize", _.bind(this.myheight, this));
         },
         render : function () {
-            var renderedContent = this.template();
 
-            // on fait apparaitre dans #mainbb le work //
+            var renderedContent = this.template();
+            //on fait apparaitre dans #mainbb le work //
             this.$el.html(renderedContent);
             //this.myheight();
             return this;

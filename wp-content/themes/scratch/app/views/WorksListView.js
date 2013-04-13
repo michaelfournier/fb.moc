@@ -19,12 +19,28 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
+            //this.$el.find("#wrapper").mCustomScrollbar("update");
+            this.hideInfos();
+          // this.$el.find("#sidebar").mCustomScrollbar("destroy");
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
-                $(this).delay(i * 80).fadeIn();
+                $(this).delay(i * 80).animate({opacity: 1});
                 i++;
             });
+
+
+            wrapper = this.$el.find("#wrapper");
+            if(!wrapper.hasClass("mCustomScrollbar")) {
+                wrapper.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    theme: "dark"
+                });
+            }
+            Blog.myapprouter.myheight();
+            wrapper.mCustomScrollbar("update");
+
 
             return this;
         },
