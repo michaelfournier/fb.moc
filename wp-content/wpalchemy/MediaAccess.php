@@ -396,7 +396,6 @@
 						send_to_editor = function(html)
 						{
 							clearInterval(interval);
-
 							if (wpalchemy_mediafield)
 							{
 								var src = html.match(/src=['|"](.*?)['|"] alt=/i);
@@ -404,16 +403,19 @@
 
 								var href = html.match(/href=['|"](.*?)['|"]/i);
 								href = (href && href[1]) ? href[1] : '' ;
-
 								var url = src ? src : href ;
+								
+								var mediaID = html.match(/(wp-att-){1}[0-9]+/i);
 
-								var mediaID = html.match(/wp-image-(.*)"/i);
-								mediaID = (mediaID && mediaID[1]) ? mediaID[1] : '' ;
+								mediaID = (mediaID && mediaID[1]) ? mediaID[0] : '' ;
+								mediaID = mediaID.split('-');
+								mediaID = mediaID[2];
+
 								wpalchemy_mediafield.val(url);
+
 								wpalchemy_mediaidfield.val(mediaID);
 								
 								send_myid(mediaID, wpalchemy_mediafield_selector);
-
 								// reset insert button label
 								setInsertButtonLabel(wpalchemy_insert_button_label);
 

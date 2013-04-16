@@ -1,4 +1,30 @@
 <? global $wp_media_access;?>
+<?
+add_action('admin_print_footer_scripts', 'my_action_javascript', 99);
+
+function my_action_javascript() { ?>
+<script type="text/javascript">
+      function send_myid(leid, leselect) {
+      console.log(leselect);
+      var data = {
+        action: 'my_action_callback',
+        monid: leid,
+        monselect: leselect
+      };
+      // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+      
+      jQuery.post(ajaxurl, data, function(response) {
+        // affiche la vignette //
+        console.log(response);
+        jQuery(response.selector).closest('.wpa_group, .mypic').find('.preview').html(response.image_html);
+        // affiche le nom de l'image
+        jQuery(response.selector).closest('.wpa_group').find('#pic_name').html(response.file_name);
+      });
+  }
+</script>
+<?php
+}
+?>
 <div class="my_meta_control">
  <?// $z =0; ?>
  
@@ -37,7 +63,7 @@
 				<? echo $wp_media_access->getIdField(array('name'=> $mb->get_the_name(), 'value'=> $mb->get_the_value())); ?>
 			</div>
 			<!-- bouton ajouter image -->	
-				<? echo $wp_media_access->getButton(array('text'=> 'Choisir une image')); ?>
+				<? echo $wp_media_access->getButton(array('label'=> 'Choisir une image')); ?>
 			<!-- nom de l'image -->
 			<p>
 				<span id="pic_name"><em><? if(!empty($file_id)) echo get_the_title($mb->get_the_value());?></em></span>

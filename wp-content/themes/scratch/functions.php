@@ -17,6 +17,25 @@ function my_theme_scripts() {
   // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/views/WorksList.js', 'backbone', false, true );
 } 
 
+// permet l'appel ajax des vignettes dans les metabox ///
+add_action('wp_ajax_my_action_callback', 'my_action_callback', 99); 
+function my_action_callback() {
+  $file_id = intval( $_POST['monid'] );
+  $file_name = get_the_title($file_id);
+  $selector = $_POST['monselect'];
+
+  $image_thumbnail = wp_get_attachment_image_src( $file_id, 'thumbnail', true );
+  $image_html = "<img src='$image_thumbnail[0]' width='$image_thumbnail[1]' height='$image_thumbnail[2]' alt='' />";
+
+  $pdflogo_html = "<img src='".get_template_directory_uri()."/img/file-pdf.png' width='50px' />";
+
+  $results = array("file_id"=> $file_id, "file_name" => $file_name, "selector"=> $selector, "pdflogo_html" => $pdflogo_html, "image_html" => $image_html);
+
+  header( "Content-Type: application/json" );
+  echo json_encode($results);
+  die(); // this is required to return a proper result
+}
+
 function is_login_page() {
     return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
 }
@@ -24,6 +43,17 @@ function is_login_page() {
 if (!is_admin() && !is_login_page()) {    
 	add_action('init', 'my_theme_scripts'); 
 };
+
+function modify_post_mime_types( $post_mime_types ) {
+  // select the mime type, here: 'application/pdf'
+  // then we define an array with the label values
+  $post_mime_types['application/pdf'] = array( __( 'PDFs' ), __( 'Manage PDFs' ), _n_noop( 'PDF <span class="count">(%s)</span>', 'PDFs <span class="count">(%s)</span>' ) );
+  // then we return the $post_mime_types variable
+  return $post_mime_types;
+}
+
+// Add Filter Hook
+add_filter( 'post_mime_types', 'modify_post_mime_types' );
 
 
 // desactive la taille d'image medium //

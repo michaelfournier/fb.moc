@@ -62,13 +62,10 @@ function my_admin_print_footer_scripts()
 
 					<? $mb->the_field('linkurl'); ?>
 					<span>url du lien</span>
-					<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">
-									
+					<input id="<?php $mb->the_name(); ?>" name="<?php $mb->the_name(); ?>" type="text" value="<?php echo $mb->get_the_value(); ?>">									
 				</div>
 		</div>
-		
 	<? } ?>
-
 	<div class="block">
 		<a href="#" class="dodelete button"><?php _e('Delete');?></a>
 	</div>
