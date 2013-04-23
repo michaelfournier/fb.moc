@@ -96,8 +96,9 @@ function my_encode_meta($response) {
   $mylang = qtrans_getLanguage();
   // ajoute le paramètre lang au fichier json //
   $response['lang'] = qtrans_getLanguage();
+  $mytype = $json_api->query->get('post_type');
   // si la var url custom_field est présente et qu'il ya des posts alors //
-  if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['posts'])) {
+  if ($mytype == 'works' && $json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['posts'])) {
     foreach ($response['posts'] as $post) {
       // on écrit qq chose dans pinfos_description pour éviter les erreurs lors de l'appel sur le front //
       $post->custom_fields->_pinfos_description = "";
@@ -118,7 +119,7 @@ function my_encode_meta($response) {
         };
       //}
     };
-  } else if ($json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
+  } else if ($mytype == 'works' && $json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
     add_gallery($response['post']);
     // on écrit qq chose dans pinfos_description pour éviter les erreurs lors de l'appel sur le front //
     $response['post']->custom_fields->_pinfos_description = "";
@@ -134,6 +135,14 @@ function my_encode_meta($response) {
             $response['post']->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_fr"];
           }
         }
+  }
+//add_myauthors($response['posts']);
+  if($mytype == 'textes' && isset($response['posts'])) {
+    foreach ($response['posts'] as $post) {
+      add_myauthors($post);
+    }
+  } else if ($mytype == 'textes' && isset($response['post'])){
+    add_myauthors($response['post']);
   }
 
   return $response;
@@ -175,6 +184,19 @@ function add_gallery($post) {
     }   
   }
   return;
+}
+
+
+function add_myauthors($post) {
+  $mylang = qtrans_getLanguage();
+  $tabauthors = get_post_meta($post->id, "_pinfostextes_blocsauteurs", TRUE);
+  if(isset($tabauthors)) {
+    foreach($tabauthors as $id => $author) {
+      $allauthors = array('nom' => $author['nom'], 'prenom' => $author['prenom']);
+      $post->auteurs[] = $allauthors;
+    }
+  }
+  return;  
 }
 
 // Add a custom controller
