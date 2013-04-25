@@ -12,6 +12,10 @@ var Blog = (function (blog){
                 Blog.mywork = new blog.Models.Work();
                 // on instancie la vue worklisttools //
                 Blog.myworkslisttoolsview = new blog.Views.WorksListToolsView(); 
+
+                Blog.mytexteslist = new blog.Collections.TextesList();
+                Blog.mytexte = new blog.Models.Texte();
+
                 // on calcule la hauteur de #wrapper //
                 $(window).on("resize", _.bind(this.myheight, this));
                 this.myheight();
@@ -19,6 +23,7 @@ var Blog = (function (blog){
             routes : {
                 "works/:slug_post" : "displayWork",
                 "works" : "displayWorksList",
+                "texts" : "displayTextsList",
                 "bio" : "bio",
                 "*path" : "root"
             },
@@ -122,6 +127,23 @@ var Blog = (function (blog){
               //       Blog.myworkview.render(results);
               //     }
               //   });
+            },
+
+            displayTextsList : function () {
+              this.selectMenu('texts');
+              this.killbackstrech();     
+              // on instancie la vue TextesMainView et on la rend si elle n'existe pas
+              if (Blog.texteslistview === undefined) {               
+                  // on instancie la vue MainWorksView
+                  Blog.textesmainview = new blog.Views.TextesMainView();  
+                }
+
+                Blog.textesmainview.render(); 
+            },           
+
+            displaytext : function (slug_post) {
+              this.selectMenu('texts');
+
             },
 
             killbackstrech : function () {

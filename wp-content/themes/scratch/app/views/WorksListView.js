@@ -29,7 +29,6 @@ var Blog = (function (blog) {
                 i++;
             });
 
-
             wrapper = this.$el.find("#wrapper");
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({

@@ -21,11 +21,13 @@ yepnope({
 
         //Models
         home               : wp_vars.themepath+'/app/models/home.js',
-        menu                : wp_vars.themepath+'/app/models/menu.js',
+        menu               : wp_vars.themepath+'/app/models/menu.js',
         work               : wp_vars.themepath+'/app/models/work.js',
         picture            : wp_vars.themepath+'/app/models/picture-video.js',
+        texte              : wp_vars.themepath+'/app/models/texte.js',
 
         //Controllers
+        BaseView            : wp_vars.themepath+'/app/views/BaseView.js',
         MainWorksView       : wp_vars.themepath+'/app/views/MainWorksView.js',
         HomeView            : wp_vars.themepath+'/app/views/HomeView.js',
         WorksView           : wp_vars.themepath+'/app/views/WorkView.js',
@@ -38,6 +40,8 @@ yepnope({
         VideoView          : wp_vars.themepath+'/app/views/VideoView.js',
         PictureView          : wp_vars.themepath+'/app/views/PictureView.js',
         PictureSingleView    : wp_vars.themepath+'/app/views/PictureSingleView.js',
+        TextesMainView       : wp_vars.themepath+'/app/views/TextesMainView.js',
+        TextesSidebarView       : wp_vars.themepath+'/app/views/TextesSidebarView.js',        
 
 
         //Routes

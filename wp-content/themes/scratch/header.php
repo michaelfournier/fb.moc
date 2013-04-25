@@ -78,8 +78,8 @@
 		<div id="unfoldworks">
 			<a data-bypass href="#"><span></span></a>
 		</div>
-		<div id="wrapper" class="myscroll">			
-			<section id="sidebar" class="myscroll">
+		<div id="wrapper">			
+			<section id="sidebar">
 				<h3></h3>
 				<h4></h4>
 				<p id="description"></p>
@@ -249,7 +249,6 @@
 
 	</script>
 
-
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">
   	<%  var tab = [];
@@ -281,6 +280,32 @@
 				</div>
 			</nav>
 	</script>
+
+	<!-- template pour maintextes -->
+	<script type="text/template" id="maintexts_template">	
+		<section id="tools"></section>
+		<div id="wrapper">		
+			<section id="sidebar">
+			</section>
+			<section class="maincontent">
+			</section>
+		</div>
+	</script>
+
+	<!-- template  pour textes sidebar -->
+	<script type="text/template" id="sidebar_texts_template">
+		<div id="sidebarwrapper">		
+			 <% _.each(textes, function (texte, i) { %>
+			 	<h3><%= texte.get('title') %></h3>
+			 	<h4>
+			 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>
+			 		<%= auteur['prenom']+" "+auteur['nom'] %>
+			 	<% }); %>
+			 	</h4>
+			 <% }); %>
+		 </div>
+	</script>
+
 
 	<div id="php-page">
 
