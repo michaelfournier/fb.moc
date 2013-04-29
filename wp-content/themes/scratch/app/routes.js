@@ -16,6 +16,8 @@ var Blog = (function (blog){
                 Blog.mytexteslist = new blog.Collections.TextesList();
                 Blog.mytexte = new blog.Models.Texte();
 
+                Blog.mybio = new blog.Models.Bio();
+
                 // on calcule la hauteur de #wrapper //
                 $(window).on("resize", _.bind(this.myheight, this));
                 this.myheight();
@@ -23,7 +25,8 @@ var Blog = (function (blog){
             routes : {
                 "works/:slug_post" : "displayWork",
                 "works" : "displayWorksList",
-                "texts" : "displayTextsList",
+                "texts" : "displayTextsDefault",
+                "texts/:slug_post" : "displayText",
                 "bio" : "bio",
                 "*path" : "root"
             },
@@ -64,7 +67,17 @@ var Blog = (function (blog){
 
             bio : function () {
               this.selectMenu('bio');
-              this.killbackstrech();
+              //this.killbackstrech();
+                  // on instancie la vue Bio
+                  Blog.bioview = new blog.Views.BioView(Blog.mybio);
+                  // on charge les données dans mybio
+                Blog.mybio.query().fetch({
+                  update: true,
+                  success: function(results) {
+                    //console.log(results.toJSON());
+                    Blog.bioview.render(results); 
+                  }
+                });                   
                 //$(".hero-unit > h1").html("Hello World !!!");
                 //alert("bio");
             },
@@ -129,20 +142,32 @@ var Blog = (function (blog){
               //   });
             },
 
-            displayTextsList : function () {
+            displayTextsDefault : function () {
               this.selectMenu('texts');
               this.killbackstrech();     
-              // on instancie la vue TextesMainView et on la rend si elle n'existe pas
+              // on instancie la vue TextesMainView si elle n'existe pas
               if (Blog.texteslistview === undefined) {               
                   // on instancie la vue MainWorksView
                   Blog.textesmainview = new blog.Views.TextesMainView();  
                 }
 
                 Blog.textesmainview.render(); 
+                Blog.textesmainview.slug = "";
             },           
 
-            displaytext : function (slug_post) {
+            displayText : function (slug_post) {
               this.selectMenu('texts');
+              this.killbackstrech();     
+              // on instancie la vue TextesMainView si elle n'existe pas
+              if (Blog.textesmainview === undefined) {               
+                  // on instancie la vue MainWorksView
+                  Blog.textesmainview = new blog.Views.TextesMainView();  
+                  Blog.textesmainview.render(); 
+                  //alert();
+                }
+                Blog.textesmainview.renderText(slug_post);
+                Blog.textesmainview.slug = slug_post;
+                
 
             },
 

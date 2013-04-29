@@ -153,7 +153,11 @@ function add_gallery($post) {
   $mylang = qtrans_getLanguage();
   $gallerypics = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
   $galleryvideos = get_post_meta($post->id, "_pvideosgallery_blocsvideos", TRUE);
+
+
+
   $themepath = get_bloginfo('template_url');
+
   if(isset($gallerypics)) {
     foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
@@ -183,12 +187,15 @@ function add_gallery($post) {
       $post->galleryvideos[] = $tabvideos;
     }   
   }
+  ///
+
   return;
 }
 
 
 function add_myauthors($post) {
   $mylang = qtrans_getLanguage();
+  $themepath = get_bloginfo('template_url');
   $tabauthors = get_post_meta($post->id, "_pinfostextes_blocsauteurs", TRUE);
   if(isset($tabauthors)) {
     foreach($tabauthors as $id => $author) {
@@ -196,6 +203,22 @@ function add_myauthors($post) {
       $post->auteurs[] = $allauthors;
     }
   }
+  $connectedworks = new WP_Query( array(
+    'connected_type' => 'texts_to_works',
+    'connected_items' => get_queried_object(),
+    'nopaging' => true,
+  ) );
+  if ( $connectedworks->have_posts() ) {
+  while ( $connectedworks->have_posts() ) : $connectedworks->the_post();
+    $gallerypics = get_post_meta(get_the_id(), "_pmediagallery_blocspics", TRUE);
+    $imagelarge =  wp_get_attachment_image_src($gallerypics[0]['image'], 'large'); 
+    $imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=180&h=120&zc=1';  
+    $tabworksconnected = array('title'=>get_the_title(), 'slug'=> $connectedworks->post->post_name, 'thumb'=> $imagethumb);
+    $post->worksconnected[] = $tabworksconnected;
+  endwhile;
+  wp_reset_postdata();
+  }
+
   return;  
 }
 
@@ -211,5 +234,16 @@ add_filter('json_api_mikictrl_controller_path', 'mikictrl_controller_path');
 function mikictrl_controller_path($default_path) {
   return get_stylesheet_directory() . '/mikictrl.php';
 }
+
+
+// connecte les textes aux posts //
+function my_connection_types() {
+  p2p_register_connection_type( array(
+    'name' => 'texts_to_works',
+    'from' => 'textes',
+    'to' => 'works'
+  ) );
+}
+add_action( 'p2p_init', 'my_connection_types' );
 
 ?>

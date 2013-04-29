@@ -777,8 +777,18 @@ h3, h4 {
   font-weight: normal;
   font-size: 0.7857142857142857em;
 }
-a:hover {
+a {
+  color: #1a1a1a;
+}
+a:hover,
+a:visited:hover,
+a:hover h3,
+#sidebarwrapper a:hover h3 {
   cursor: pointer;
+  color: #0d0aff;
+}
+a:visited {
+  color: #1a1a1a;
 }
 #sidebar h3 {
   color: #0d0aff;
@@ -796,6 +806,9 @@ figcaption {
   text-align: center;
 }
 .actif {
+  color: #0d0aff;
+}
+#sidebar .actif {
   color: #0d0aff;
 }
 ul {
@@ -993,6 +1006,19 @@ figure#picture img {
 }
 #displaythumb.actif, #displaylist.actif {
   background-color: #0d0aff;
+}
+#rightbar a {
+  font-size: 0.7857142857142857em;
+  text-decoration: none;
+}
+#downloadpdf {
+  background: url('img/download-pdf.png') no-repeat;
+  width: 14px;
+  height: 16px;
+  display: inline-block;
+  float: left;
+  color: #1a1a1a;
+  padding-right: 0.5714285714285714em;
 }
 #video {
   position: relative;
@@ -1594,6 +1620,39 @@ SMARTPHONES
     min-height: 1.1428571428571428em;
     height: 100%;
   }
+  .maincontent.txt {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: left;
+    width: 100%;
+    padding-left: 200px;
+    min-height: 1.1428571428571428em;
+    padding-right: 200px;
+    text-align: :center;
+    background-color: white;
+    overflow-y: hidden;
+  }
+  #txtwrapper {
+    background-color: white;
+    padding: 0 0 0.5714285714285714em 1.1428571428571428em;
+    max-width: 750px;
+    margin: 0 auto;
+    color: #4d4d4d;
+    height: 100%;
+    overflow-y: auto;
+  }
+  #txtwrapper p {
+    font-size: 0.8571428571428571em;
+    line-height: 1.6;
+  }
+  .bio #txtwrapper p {
+    font-size: 0.7857142857142857em;
+    line-height: 1.6;
+  }
   #tools {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1621,6 +1680,49 @@ SMARTPHONES
     max-width: 250px;
     height: 100%;
     overflow-y: auto;
+    background-color: #f9f9f9;
+    z-index: 5;
+  }
+  #sidebarwrapper h3 {
+    margin: 0;
+    color: #1a1a1a;
+  }
+  #sidebarwrapper h4 {
+    margin: 0;
+    color: #666666;
+  }
+  #sidebar a {
+    display: block;
+    text-decoration: none;
+    padding: 0.5714285714285714em 0;
+    border-bottom: 1px dotted #b3b3b3;
+  }
+  #sidebar a:last-child {
+    border: 0;
+  }
+  #rightbar {
+    width: 200px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5714285714285714em;
+    max-width: 250px;
+    height: 100%;
+    overflow-y: auto;
+  }
+  #rightbar a {
+    display: block;
+    padding-top: 1.1428571428571428em;
+  }
+  #rightbar a.btn-pdf {
+    border-bottom: 1px dotted #b3b3b3;
+    padding-bottom: 1.1428571428571428em;
+    padding-top: 0;
   }
   #mainbb, #main_nav {
     position: relative;

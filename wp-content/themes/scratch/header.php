@@ -285,9 +285,8 @@
 	<script type="text/template" id="maintexts_template">	
 		<section id="tools"></section>
 		<div id="wrapper">		
-			<section id="sidebar">
-			</section>
-			<section class="maincontent">
+			<section id="sidebar"></section>
+			<section class="maincontent txt">
 			</section>
 		</div>
 	</script>
@@ -296,16 +295,46 @@
 	<script type="text/template" id="sidebar_texts_template">
 		<div id="sidebarwrapper">		
 			 <% _.each(textes, function (texte, i) { %>
-			 	<h3><%= texte.get('title') %></h3>
-			 	<h4>
-			 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>
-			 		<%= auteur['prenom']+" "+auteur['nom'] %>
-			 	<% }); %>
-			 	</h4>
+			 	<a style="opacity:0" href="#texts/<%= texte.get('slug') %>">
+				 	<h3 <% if (slug === texte.get('slug')) { %> class="actif" <% } %>><%= texte.get('title') %></h3>
+				 	<h4>
+				 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>
+				 		<%= auteur['prenom']+" "+auteur['nom'] %>
+				 	<% }); %>
+				 	</h4>
+			 	</a>
 			 <% }); %>
 		 </div>
 	</script>
 
+	<!-- template  pour textes content -->
+	<script type="text/template" id="content_texts_template">
+		<div id="txtwrapper"><%= texte.get('post').content %></div>
+		<aside id="rightbar">
+
+			<% if (texte.get('post').custom_fields['_pinfostextes_pdf']) { %>
+			 	<a class="btn-pdf" data-bypass href='<%= texte.get('post').custom_fields['_pinfostextes_pdf'] %> ' target="_blank"><span id="downloadpdf"></span><% if(wp_vars.lang === "en") { %>download text as pdf <% } else { %>télécharger le texte en pdf <% } %> </a>
+			<% } %>
+
+			<% if (texte.get('post').worksconnected) { %>
+				<% _.each( texte.get('post').worksconnected, function (work, i) { %>
+			 		<a title="<%= work['title'] %>" href='#works/<%= work['slug'] %> '>
+			 			<img src="<%= work['thumb'] %>" />
+			 		</a>
+				<% }); %>
+			<% } %>
+		</aside>
+	</script>
+
+	<!-- template pour bio/biblio -->
+	<script type="text/template" id="bio_template">	
+		<section id="tools"></section>
+		<div id="wrapper">		
+			<section style="background:none" class="maincontent bio txt">
+				<div id="txtwrapper"><%= mybio.get('content') %></div>
+			</section>
+		</div>
+	</script>
 
 	<div id="php-page">
 

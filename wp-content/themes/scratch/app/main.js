@@ -25,6 +25,7 @@ yepnope({
         work               : wp_vars.themepath+'/app/models/work.js',
         picture            : wp_vars.themepath+'/app/models/picture-video.js',
         texte              : wp_vars.themepath+'/app/models/texte.js',
+        bio                : wp_vars.themepath+'/app/models/bio.js',
 
         //Controllers
         BaseView            : wp_vars.themepath+'/app/views/BaseView.js',
@@ -41,7 +42,9 @@ yepnope({
         PictureView          : wp_vars.themepath+'/app/views/PictureView.js',
         PictureSingleView    : wp_vars.themepath+'/app/views/PictureSingleView.js',
         TextesMainView       : wp_vars.themepath+'/app/views/TextesMainView.js',
-        TextesSidebarView       : wp_vars.themepath+'/app/views/TextesSidebarView.js',        
+        TextesSidebarView       : wp_vars.themepath+'/app/views/TextesSidebarView.js',
+        TextesContentView       : wp_vars.themepath+'/app/views/TextesContentView.js',
+        BioView            : wp_vars.themepath+'/app/views/BioView.js',       
 
 
         //Routes
