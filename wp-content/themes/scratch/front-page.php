@@ -18,7 +18,6 @@ add_filter('posts_fields', 'filter_fields');
 //$args = array('post_type' => 'page', 'posts_per_page' => -1);
 //$allposts = new WP_query($args);
 ?>
-front page
 <? get_header(); ?>
 		<div id="container">
 		</div><!-- #container -->

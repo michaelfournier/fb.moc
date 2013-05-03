@@ -114,13 +114,21 @@
 	              		<div class="wrapthumb" style="opacity:0">
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
+		                    		<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    	<% } else { %>
+		                    		<img width="150px" src='<%= work.get('customthumb')[0] %>' />
+		                    	<% } %>
 		                    </a>
 	                 	</div>             			
               	<% } else { %>
 	              		<div class="wrapthumb" style="opacity: 0">
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>	
+		                    		<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    	<% } else { %>
+		                    		<img width="150px" src='<%= work.get('customthumb')[0] %>' />
+		                    	<% } %>
 		                    </a>
 	                 	</div>                  		
               	<% } %>
@@ -293,9 +301,9 @@
 
 	<!-- template  pour textes sidebar -->
 	<script type="text/template" id="sidebar_texts_template">
-		<div id="sidebarwrapper">		
+		<div id="sidebarwrapper">	
 			 <% _.each(textes, function (texte, i) { %>
-			 	<a style="opacity:0" href="#texts/<%= texte.get('slug') %>">
+			 	<a style="opacity:0" href="#<%= texte.get('type') %>/<%= texte.get('slug') %>">
 				 	<h3 <% if (slug === texte.get('slug')) { %> class="actif" <% } %>><%= texte.get('title') %></h3>
 				 	<h4>
 				 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>
@@ -312,8 +320,12 @@
 		<div id="txtwrapper"><%= texte.get('post').content %></div>
 		<aside id="rightbar">
 
-			<% if (texte.get('post').custom_fields['_pinfostextes_pdf']) { %>
-			 	<a class="btn-pdf" data-bypass href='<%= texte.get('post').custom_fields['_pinfostextes_pdf'] %> ' target="_blank"><span id="downloadpdf"></span><% if(wp_vars.lang === "en") { %>download text as pdf <% } else { %>télécharger le texte en pdf <% } %> </a>
+			<% if (texte.get('post').custom_fields['_pinfostextes_fileurl']) { %>
+			 	<a class="btn-pdf" data-bypass href='<%= texte.get('post').custom_fields['_pinfostextes_fileurl'] %> ' target="_blank"><span id="downloadpdf"></span><% if(wp_vars.lang === "en") { %>download text as pdf <% } else { %>télécharger le texte en pdf <% } %> </a>
+			<% } %>
+
+			<% if (texte.get('post').custom_fields['_pinfosbio_fileurl']) { %>
+			 	<a class="btn-pdf" data-bypass href='<%= texte.get('post').custom_fields['_pinfosbio_fileurl'] %> ' target="_blank"><span id="downloadpdf"></span><% if(wp_vars.lang === "en") { %>download text as pdf <% } else { %>télécharger le texte en pdf <% } %> </a>
 			<% } %>
 
 			<% if (texte.get('post').worksconnected) { %>
@@ -330,8 +342,20 @@
 	<script type="text/template" id="bio_template">	
 		<section id="tools"></section>
 		<div id="wrapper">		
-			<section style="background:none" class="maincontent bio txt">
+			<section style="background:none" class="maincontent bio">
 				<div id="txtwrapper"><%= mybio.get('content') %></div>
+			</section>
+		</div>
+	</script>
+
+	<!-- template pour news -->
+	<script type="text/template" id="news_template">	
+		<section id="tools"></section>
+		<div id="wrapper">		
+			<section style="background:none" class="maincontent news">
+				<div id="txtwrapper"><%= mynews.get('content') %>
+					<a id="btn-close"></a>
+				</div>
 			</section>
 		</div>
 	</script>

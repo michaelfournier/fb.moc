@@ -79,11 +79,14 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
 // ajout de metaboxes //
 //if (is_admin()) {
   include_once 'metaboxes/setup.php';
+  include_once 'metaboxes/simple-image-spec.php';
   include_once 'metaboxes/repeating-mediagallery-spec.php';
   include_once 'metaboxes/repeating-videogallery-spec.php';
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
   include_once 'metaboxes/infostextes-meta-spec.php';
+  include_once 'metaboxes/infosbio-meta-spec.php';
   include_once 'metaboxes/repeating-external-links-spec.php';
+
  // include_once 'metaboxes/datepicker-meta-spec.php';
  // include_once 'metaboxes/simple-image-spec.php';
 //}
@@ -137,12 +140,16 @@ function my_encode_meta($response) {
         }
   }
 //add_myauthors($response['posts']);
-  if($mytype == 'textes' && isset($response['posts'])) {
-    foreach ($response['posts'] as $post) {
-      add_myauthors($post);
+  if(isset($response['posts'])) {
+    if($mytype == 'texts' || $mytype == 'bio') {
+      foreach ($response['posts'] as $post) {
+        add_myauthors($post);
+      }
     }
-  } else if ($mytype == 'textes' && isset($response['post'])){
-    add_myauthors($response['post']);
+  } else if ($mytype == 'texts' && isset($response['post'])){
+    if ($mytype == 'texts' || $mytype == 'bio') {
+      add_myauthors($response['post']);
+    }
   }
 
   return $response;
@@ -153,10 +160,13 @@ function add_gallery($post) {
   $mylang = qtrans_getLanguage();
   $gallerypics = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
   $galleryvideos = get_post_meta($post->id, "_pvideosgallery_blocsvideos", TRUE);
+  $customthumb = get_post_meta($post->id, "_psolopic_customthumb", TRUE);
 
 
 
   $themepath = get_bloginfo('template_url');
+
+
 
   if(isset($gallerypics)) {
     foreach($gallerypics as $idpic) {
@@ -180,6 +190,8 @@ function add_gallery($post) {
       $post->gallery[] = $tabgallery;
     }
   }
+
+
   ///
   if(isset($galleryvideos)) {
     foreach($galleryvideos as $id => $video) {
@@ -188,6 +200,14 @@ function add_gallery($post) {
     }   
   }
   ///
+
+if(!empty($customthumb)) {
+    $customthumburl = wp_get_attachment_image_src($customthumb, 'full');
+   // print_r($customthumburl);
+    $truc = array('url'=>'rrrr', 'mm'=> 'ok');
+    $post->customthumb[] = $customthumburl[0];
+  }
+  
 
   return;
 }
@@ -240,7 +260,7 @@ function mikictrl_controller_path($default_path) {
 function my_connection_types() {
   p2p_register_connection_type( array(
     'name' => 'texts_to_works',
-    'from' => 'textes',
+    'from' => 'texts',
     'to' => 'works'
   ) );
 }

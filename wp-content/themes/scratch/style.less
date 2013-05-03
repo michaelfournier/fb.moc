@@ -53,6 +53,30 @@ h3 , h4{
 	font-size:(11/@font-size)*1em;
 }
 
+#txtwrapper h3 {
+	text-transform: uppercase;
+	margin-top: @unit*3;
+}
+
+#txtwrapper h4 {
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-top: @unit;
+}
+
+.news #txtwrapper h3 {
+	border-top: 1px dotted @black30;
+	padding-top: @unit*1.5;
+	margin-top: @unit*1.5;
+}
+
+.news #txtwrapper h3:first-child {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+
 a {
 	color: @black90;
 }

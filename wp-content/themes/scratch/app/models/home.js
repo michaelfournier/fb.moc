@@ -11,7 +11,7 @@ var Blog = (function (blog) {
 
 	blog.Collections.HomePicslist = Backbone.Collection.extend({
 		model : blog.Models.HomePic,
-		url : wp_vars.blogurl+'/api/get_page/?slug=new-home&include=attachments',
+		url : wp_vars.blogurl+'/api/get_page/?slug=home&include=attachments',
         // on parse la réponse pour avoir accès aux images
         parse: function(response) {
             //console.log(response.page.attachments);

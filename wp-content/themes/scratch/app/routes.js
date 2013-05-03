@@ -16,8 +16,16 @@ var Blog = (function (blog){
                 Blog.mytexteslist = new blog.Collections.TextesList();
                 Blog.mytexte = new blog.Models.Texte();
 
+                Blog.mybiolist = new blog.Collections.BioList();
                 Blog.mybio = new blog.Models.Bio();
 
+                Blog.mynews = new blog.Models.News();
+
+                Blog.currentView = new Backbone.View();
+
+                this.bind("route",function(router, route) {
+                    console.log("Different Page: " + router + route);
+                });
                 // on calcule la hauteur de #wrapper //
                 $(window).on("resize", _.bind(this.myheight, this));
                 this.myheight();
@@ -25,9 +33,12 @@ var Blog = (function (blog){
             routes : {
                 "works/:slug_post" : "displayWork",
                 "works" : "displayWorksList",
-                "texts" : "displayTextsDefault",
+                "texts" : "displayText",
                 "texts/:slug_post" : "displayText",
-                "bio" : "bio",
+                "bio" : "displayBio",
+                "bio/:slug_post" : "displayBio",
+                "home" : "home",
+                "" : "home",
                 "*path" : "root"
             },
             // fonction pour donner une hauteur à #mainbb //
@@ -65,21 +76,21 @@ var Blog = (function (blog){
                 });
             },
 
-            bio : function () {
-              this.selectMenu('bio');
+            home : function () {
+              
+              this.root();
+              this.selectMenu('home');
               //this.killbackstrech();
-                  // on instancie la vue Bio
-                  Blog.bioview = new blog.Views.BioView(Blog.mybio);
-                  // on charge les données dans mybio
-                Blog.mybio.query().fetch({
+                  // on instancie la vue news
+                  Blog.newsview = new blog.Views.NewsView(Blog.mynews);
+                  // on charge les données dans mynews
+                Blog.mynews.query().fetch({
                   update: true,
                   success: function(results) {
                     //console.log(results.toJSON());
-                    Blog.bioview.render(results); 
+                    Blog.newsview.render(results); 
                   }
                 });                   
-                //$(".hero-unit > h1").html("Hello World !!!");
-                //alert("bio");
             },
 
             displayWorksList : function () {
@@ -140,35 +151,62 @@ var Blog = (function (blog){
               //       Blog.myworkview.render(results);
               //     }
               //   });
-            },
-
-            displayTextsDefault : function () {
-              this.selectMenu('texts');
-              this.killbackstrech();     
-              // on instancie la vue TextesMainView si elle n'existe pas
-              if (Blog.texteslistview === undefined) {               
-                  // on instancie la vue MainWorksView
-                  Blog.textesmainview = new blog.Views.TextesMainView();  
-                }
-
-                Blog.textesmainview.render(); 
-                Blog.textesmainview.slug = "";
-            },           
+            },        
 
             displayText : function (slug_post) {
               this.selectMenu('texts');
-              this.killbackstrech();     
+              //this.killbackstrech();     
               // on instancie la vue TextesMainView si elle n'existe pas
-              if (Blog.textesmainview === undefined) {               
+              if (!Blog.textesmainview) {               
                   // on instancie la vue MainWorksView
                   Blog.textesmainview = new blog.Views.TextesMainView();  
-                  Blog.textesmainview.render(); 
-                  //alert();
-                }
-                Blog.textesmainview.renderText(slug_post);
-                Blog.textesmainview.slug = slug_post;
-                
+              }
 
+              if(slug_post) {
+                Blog.mytexteslist.slug = slug_post;
+                this.switchView(Blog.textesmainview);
+                Blog.textesmainview.renderText(slug_post);
+              } else {
+                Blog.mytexteslist.slug = ""; 
+                Blog.textesmainview.render(); 
+                Blog.currentView = Blog.textesmainview;                          
+              }                   
+
+            },
+
+            displayBio : function (slug_post) {
+              this.selectMenu('bio');
+              this.killbackstrech();    
+
+              if (!Blog.biomainview) {               
+                  // on instancie la vue MainWorksView
+                  Blog.biomainview = new blog.Views.BioMainView();  
+              }
+
+              if(slug_post) {
+
+                Blog.mybiolist.slug = slug_post;
+
+                this.switchView(Blog.biomainview);
+
+                Blog.biomainview.renderText(slug_post); 
+
+              } else {
+
+                Blog.mybiolist.slug = "";
+                Blog.biomainview.render();
+                Blog.currentView = Blog.biomainview;              
+              }
+                     
+            },
+
+            switchView : function(newview) {
+              //alert(Blog.currentView.cid+newview.cid);
+              if(newview.cid != Blog.currentView.cid) {
+                //Blog.currentView.remove();
+                newview.render();  
+                Blog.currentView = newview;
+              }
             },
 
             killbackstrech : function () {

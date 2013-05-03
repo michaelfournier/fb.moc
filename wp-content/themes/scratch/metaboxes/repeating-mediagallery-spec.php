@@ -4,6 +4,7 @@ $gallery_mb = new WPAlchemy_MetaBox(array
 	'id' => '_mediagallery',
 	'title' => "Galerie d'images",
   'types' => array('works', 'page'),
+    'exclude_post_id' => 202,
   'prefix' => '_pmediagallery_',
   'mode' => WPALCHEMY_MODE_EXTRACT,
 	'template' => get_stylesheet_directory() . '/metaboxes/repeating-mediagallery.php',

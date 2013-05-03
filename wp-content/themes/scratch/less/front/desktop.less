@@ -34,15 +34,35 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	.maincontent.txt {
 		.divise(1,1, 200px, none, left);
 		padding-right: 200px;
-		text-align: :center;
 		background-color: white;
 		overflow-y: hidden;
 	}
 
+	.maincontent.news, .maincontent.bio {
+		.divise(1,1, 0, none, left);
+		padding: 0;
+		margin: 0 auto;
+		background-color: white;
+		overflow-y: hidden;
+	}
+
+	.news #txtwrapper {
+		max-width: 500px;
+		padding: @unit;
+		margin:0;
+		float:left;
+	}
+
+	.bio #txtwrapper {
+		max-width: 700px;
+		padding: @unit @unit/2 @unit @unit;
+	}
 
 	#txtwrapper {
+		.box-sizing();
+		position: relative;
 		background-color: white;
-		padding: 0 0 @unit/2 @unit;
+		padding: @unit/1.5 @unit/3 @unit/1.5 @unit;
 		max-width: 750px;
 		margin: 0 auto;
 		color: @black70;
@@ -51,12 +71,36 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		
 	}
 
+	#btn-close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 13px;
+		height: 13px;
+		border: @unit solid white;
+		background: @black60 url('img/btn-close.png') no-repeat center center;
+	}
+
+	#btn-close:hover {
+		background: @hovercolor url('img/btn-close.png') no-repeat center center;
+	}
+
+	.news #txtwrapper {
+		height: auto;
+		padding-top:@unit;
+	}
+
 	#txtwrapper p {
 		font-size:(12/@font-size)*1em;
 		line-height: @line/10;
 	}
 
-	.bio #txtwrapper p {
+	#txtwrapper *:first-child {
+		margin-top: 0;
+		padding-top: 0;
+	}
+
+	#txtwrapper p {
 		font-size:(11/@font-size)*1em;
 		line-height: @line/10;
 	}
@@ -96,11 +140,11 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	#sidebar a {
 		display: block;
 		text-decoration: none;
-		padding: @unit/2 0;
-		border-bottom: 1px dotted @black30;
+		padding: @unit/1.5 0;
+		border-top: 1px dotted @black30;
 	}
 
-	#sidebar a:last-child {
+	#sidebar a:first-child {
 		border: 0;
 	}
 
@@ -111,7 +155,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		position: absolute;
 		top: 0;
 		right:0;
-		padding: @unit/2;
+		padding: @unit/1.5;
 		max-width: 250px;
 		height: 100%;
 		overflow-y: auto;
@@ -119,13 +163,14 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#rightbar a {
 		display: block;
-		padding-top: @unit;
+		padding-bottom: @unit;
 	}
 
 	#rightbar a.btn-pdf {
 		border-bottom: 1px dotted @black30;
-		padding-bottom: @unit;
+		padding-bottom: @unit/1.5;
 		padding-top: 0;
+		margin-bottom: @unit;
 	}
 
 
