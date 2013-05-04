@@ -83,6 +83,7 @@ var Blog = (function (blog){
                   success: function(results) {
                     //console.log(results.toJSON());
                     Blog.newsview.render(results); 
+                    Blog.currentView = Blog.newsview;
                   }
                 });                   
             },
@@ -91,39 +92,28 @@ var Blog = (function (blog){
               this.selectMenu('works');
               this.killbackstrech();     
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (!Blog.mymainworksview) {               
+              if (!Blog.mymainworkslistview) {               
                   // on instancie la vue MainWorksView
-                  Blog.mymainworksview = new blog.Views.WorksMainView();  
+                  Blog.mymainworkslistview = new blog.Views.WorksListMainView();  
                 }
-                Blog.mymainworksview.render();
-                Blog.mymainworksview.renderWorksList();   
+                Blog.mymainworkslistview.render();
+                Blog.currentView = Blog.mymainworkslistview; 
             },
 
             displayWork : function (slug_post) {
               this.selectMenu('works');
               this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (Blog.mymainworksview === undefined) {               
+              if (!Blog.mymainworkview) {               
                   // on instancie la vue MainWorksView
-                  Blog.mymainworksview = new blog.Views.WorksMainView();  
-                  Blog.mymainworksview.render();
+                  Blog.mymainworkview = new blog.Views.WorkMainView();  
               }
               
-              
-              // on charge les données dans myworkslist
-              Blog.myworkslist.all().fetch({
-                update: true,
-                success: function(results) {
-                  // on stock le slug du post dans la collection pour gérer le item actif dans workslistmini //
-                  Blog.myworkslist.workslug = slug_post;                  
-                  myworkid = results.where({'slug': slug_post})[0]['id'];
-                  mywork = Blog.myworkslist.get(myworkid);
-                  Blog.myworkview = new blog.Views.WorkView(mywork);
-                  Blog.myworkview.render(mywork);
-                }
+              this.switchView(Blog.mymainworkview);
+              Blog.mymainworkview.renderWork(slug_post);
 
-              });  
-               if (Blog.myworkview) Blog.myworkview.undelegateEvents();
+  
+             // if (Blog.myworkview) Blog.myworkview.undelegateEvents();
               // Blog.myworkview = new blog.Views.WorkView(Blog.mywork);
               //   // on charge les données dans myworkslist
               //   Blog.mywork.query(slug_post).fetch({
@@ -183,7 +173,6 @@ var Blog = (function (blog){
             },
 
             switchView : function(newview) {
-              //alert(Blog.currentView.cid+newview.cid);
               if(newview.cid != Blog.currentView.cid) {
                 //Blog.currentView.remove();
                 newview.render();  

@@ -1,7 +1,6 @@
 var Blog = (function (blog) {
 
     blog.Views.WorksListView = Backbone.View.extend({
-        el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
 
@@ -19,6 +18,8 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
+            // on instancie la vue worklisttools //
+            var myworkslisttoolsview = new blog.Views.WorksListToolsView();
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             //this.$el.find("#wrapper").mCustomScrollbar("update");
             this.hideInfos();
@@ -44,6 +45,9 @@ var Blog = (function (blog) {
 
             return this;
         },
+
+
+
         events : {
             "mouseover a.workthumb"  : "showInfos",
             "mouseout a.workthumb"  : "hideInfos",
@@ -52,16 +56,6 @@ var Blog = (function (blog) {
             //"click #sortbycat"    : "sortbycat",
             //"click #displaylist"    : "displaylist",
             //"click #displaythumb"    : "displaythumb"
-        },
-        mydelete: function() {
-            // on charge les données dans workslistmini //
-            Blog.myworkslist.all().fetch({
-              update: true,
-              success: function(results) {
-                // on rend la worklistmini //
-                Blog.myworkslistminiview.render(results);
-              }
-            });           
         },
 
         showInfos : function(e) {

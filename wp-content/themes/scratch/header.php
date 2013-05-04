@@ -80,11 +80,6 @@
 		</div>
 		<div id="wrapper">			
 			<section id="sidebar">
-				<h3></h3>
-				<h4></h4>
-				<p id="description"></p>
-				<p id="cat"></p>
-				<div id="text"></div>
 			</section>
 			<section class="maincontent">
 			</section>
@@ -99,7 +94,7 @@
              tab[-1] = 0;
          %>
 	    <% _.each(works ,function(work, i){ %>
-              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+              <% if (_.isEmpty(work.get('gallery')) === false || _.isEmpty(work.get('customthumb')) === false ) { %>
               	<%  
               		if (sortkey === 'annees') {
               			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
@@ -138,6 +133,15 @@
 	   </div>
 	</script>
 
+
+	<!-- template pour la sidebar -->
+	<script type="text/template" id="sidebar_works_template">
+		<h3><%= work.get('title') %></h3>
+		<h4><%= work.get('custom_fields')['_pinfos_annee'][0] %></h4>
+		<p id="description"><%= work.get('custom_fields')['_pinfos_description'][0] %></p>
+		<div id="text"><%= work.get('content') %></div>
+	</script>
+
 	<!-- template pour la workslist list -->
 	<script type="text/template" id="works_list_template_list">
 	<div id="wraplist-list">
@@ -145,7 +149,7 @@
              tab[-1] = 0;
          %>
 	    <% _.each(works ,function(work, i){ %>
-              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+              <% if (_.isEmpty(work.get('gallery')) === false || _.isEmpty(work.get('customthumb')) === false ) { %>
               	<%  
               		if (sortkey === 'annees') {
               			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
@@ -159,13 +163,21 @@
 	              		<div class="wrapthumb">
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<img  width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
+		                    		<img width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    	<% } else { %>
+		                    		<img width="50px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
+		                    	<% } %>
 		                    </a>
 	                 	</div>             			
               	<% } else { %>
 	              		<div class="wrapthumb">
-		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<img width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>"> 
+		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
+		                    		<img width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    	<% } else { %>
+		                    		<img width="50px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
+		                    	<% } %>
 		                    </a>
 	                 	</div>                  		
               	<% } %>             	
@@ -202,21 +214,23 @@
 	</script>
 
 
-	<!-- template pour la sidebar -->
-	<script type="text/template" id="sidebar_works_template">
-		<section id="sidebar">
-			<h3></h3>
-			<h4></h4>
-			<p></p>
-		</section>
-	</script>
-
 	<!-- template pour la nav picture gallery --> 
     <script type="text/template" id="navgallery_template">
 	    <% if(_.size(gallery) > 1) { %>
 	    		<ul>
 			        <% _.each(gallery, function (picture, i) { %>       	
 			            	<li><a data-bypass="<%= i %>" class="linkpic">&bull;</a></li>
+			        <% }); %>
+	        	</ul>
+	     <% } %>
+    </script>
+
+	<!-- template pour la nav video gallery --> 
+    <script type="text/template" id="navgalleryvid_template">
+	    <% if(_.size(gallery) > 1) { %>
+	    		<ul>
+			        <% _.each(gallery, function (picture, i) { %>       	
+			            	<li><a data-bypass="<%= i %>" class="linkvid">&bull;</a></li>
 			        <% }); %>
 	        	</ul>
 	     <% } %>
@@ -266,7 +280,7 @@
 				<div class="st_wrapper st_thumbs_wrapper">	
 					<div class="st_thumbs">						
 					    <% _.each(works ,function(work, i){ %>
-				              <% if (_.isEmpty(work.get('gallery')) === false) { %>
+				              <% if (_.isEmpty(work.get('gallery')) === false || _.isEmpty(work.get('customthumb')) === false ) { %>
 						          	<%  
 						          		if (sortkey === 'annees') {
 						          			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
@@ -274,13 +288,24 @@
 						          			tab[i] = works[i].get('categories')[0]['title'];
 						          		}
 						          	%>
-									<% if ( String(tab[i-1]) !== String(tab[i])) { %>
+									<% if ( Number(tab[i-1]) !== Number(tab[i])) { %>
 										<% if(i > 0) { %></div><% } %>
 										<div class="segment">	
 											<div class="sortitem"><%= tab[i] %></div>				          	
-				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>"><img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>">
+
+				                    		<% if (_.isEmpty(work.get('customthumb')) === true) { %>
+				                    			<img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+					                    	<% } else { %>
+					                    		<img width="50px" src='<%= work.get('customthumb')[0] %>' />
+					                    	<% } %>
 				                    <% } else { %>
-				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>"  class="thumb_color" id="<%= work.get("slug") %>"><img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>"  class="thumb_color" id="<%= work.get("slug") %>">
+				                    		<% if (_.isEmpty(work.get('customthumb')) === true) { %>
+				                    			<img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+					                    	<% } else { %>
+					                    		<img width="50px" src='<%= work.get('customthumb')[0] %>' />
+					                    	<% } %>
 				                    <% } %>
 				              <% } %>    
 					    <% }); %>

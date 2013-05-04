@@ -10,6 +10,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             //this.$el.find('.maincontent').remove();
+            console.log(this.collection.models);
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;

@@ -204,7 +204,6 @@ function add_gallery($post) {
 if(!empty($customthumb)) {
     $customthumburl = wp_get_attachment_image_src($customthumb, 'full');
    // print_r($customthumburl);
-    $truc = array('url'=>'rrrr', 'mm'=> 'ok');
     $post->customthumb[] = $customthumburl[0];
   }
   

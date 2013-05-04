@@ -1,42 +1,48 @@
 var Blog = (function (blog) {
 
-    blog.Views.WorkView = Backbone.View.extend({
+    blog.Views.WorkView = blog.Views.BaseView.extend({
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            //this.template = _.template($("#work_template").html());
+            this.template = _.template($("#mainworks_template").html());
             // on remt i à 0 //
             this.i = 0;
         },
 
         renderPictures : function () {
+            // la fonction renderNested est héritée de la vue BaseView //
+            var parentview = this.$el;
+            var renderNested = this.renderNested;
             this.$el.find("#picvidswitcher a").removeClass('actif');
             this.$el.find("#picvidswitcher #images").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
-            if (Blog.picturesgalview) {
-               Blog.picturesgalview.undelegateEvents();
-            }
+            // if (Blog.picturesgalview) {
+            //     Blog.picturesgalview.undelegateEvents();
+            // }
              // on déclare un objet collection contenant les images liées au post //
             Blog.picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery')); 
             // on déclare un objet vue de notre galerie d'images //
-            Blog.picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
+            picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
+            renderNested(parentview, picturesgalview, "#tools", Blog.picturesgal); 
             // on rend la vue //
-            Blog.picturesgalview.render();             
+           // Blog.picturesgalview.render();             
         },
 
         renderVideos : function() {
+            // la fonction renderNested est héritée de la vue BaseView //
+            var parentview = this.$el;
+            var renderNested = this.renderNested;
+
+
             this.$el.find("#picvidswitcher a").removeClass('actif');
             this.$el.find("#picvidswitcher #videos").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
-            if (Blog.videosgalview) {
-               Blog.videosgalview.undelegateEvents();
-            }
+
              // on déclare un objet collection contenant les images liées au post //
             Blog.videosgal = new blog.Collections.VideosGallery(this.model.get('galleryvideos')); 
             // on déclare un objet vue de notre galerie d'images //
-            Blog.videosgalview = new blog.Views.VideosGalNavView(Blog.videosgal);
-            // on rend la vue //
-            Blog.videosgalview.render(); 
+            videosgalview = new blog.Views.VideosGalNavView(Blog.videosgal);
+            renderNested(parentview, videosgalview, "#tools", Blog.videosgal);
         },
 
         picvidswitcher : function(p, v) {
@@ -53,13 +59,23 @@ var Blog = (function (blog) {
             }
         },
 
-        render : function () {
-            
+        renderSidebar : function() {
+            // la fonction renderNested est héritée de la vue BaseView //
+            var parentview = this.$el;
+            var renderNested = this.renderNested;
+
+            // on rend la sidebar //
+            var sidebarworksview = new blog.Views.WorkSidebarView(this.model);
+            renderNested(parentview, sidebarworksview, "#sidebar", this.model); 
+        },
+
+        render : function () {           
             //var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
             // on crée une variable contenant le nombre d'image dans la galerie //
             var galleryimageslength;
             var galleryvideoslength;
+
             if (this.model.get('gallery')) { galleryimageslength = this.model.get('gallery').length; } else { galleryimageslength = 0; }
             if (this.model.get('galleryvideos')) { galleryvideoslength = this.model.get('galleryvideos').length; } else { galleryvideoslength = 0; }
             // on assigne une url à nextwork si workslist est définie//
@@ -72,59 +88,22 @@ var Blog = (function (blog) {
 
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
+                that.renderSidebar();
                 if($(this).hasClass("mCustomScrollbar")) {
                    $(this).mCustomScrollbar("destroy");
                 };  
-                var sidebar = $(this).find('#sidebar');
-
-
+                //var sidebar = $(this).find('#sidebar');
+                //that.renderSidebar();
                 // on desactive la scroll bar //
                 $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
                 $(this).find('.maincontent').empty();
-               
 
-                $(this).find('#sidebar h3').empty().html(mymodel.get('title'));
-                $(this).find('#sidebar h4').empty().html(mymodel.get('custom_fields')['_pinfos_annee'][0]);
-                $(this).find('#sidebar p#description').empty().html(mymodel.get('custom_fields')['_pinfos_description'][0]);
-                $(this).find('#sidebar #text').empty().html(mymodel.get('content'));
                 $(this).find('.maincontent').css({"text-align":"center", "overflow-y": "hidden"});
-                
-                // si la sidebar n'a pas de mCustomscrollbar alors on l'applique //
-                if(!sidebar.hasClass("mCustomScrollbar")) {
-                    sidebar.mCustomScrollbar({
-                        set_height: "100%",
-                        scrollInertia: 150,
-                        theme: "dark"
-                    });
-                }
-                // on desactive la scrollbar, on la reactivera quand l'image ou la video sera chargée et que l'on aura donné une hauteur à wrapper//
-                sidebar.mCustomScrollbar("disable"); 
+              
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
             }); 
-
-            if (Blog.myworkslistminiview  === undefined) {
-                // on instancie la vue myworkslistminiview
-                Blog.myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
-                // on charge les données dans workslistmini //
-                Blog.myworkslist.all().fetch({ 
-                  update: true,
-                  success: function(results) {
-                    Blog.myworkslistminiview.render(results);
-
-                  }
-
-                }); 
-            } else if ($("#workslistmini").length <= 0 ) {
-                // on charge les données dans workslistmini //
-                Blog.myworkslist.all().fetch({ 
-                  update: true,
-                  success: function(results) {
-                    Blog.myworkslistminiview.render(results);
-                  }
-                });
-            };
             
             return this;
         },
