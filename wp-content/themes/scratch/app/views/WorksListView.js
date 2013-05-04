@@ -9,6 +9,7 @@ var Blog = (function (blog) {
             this.templatelist = _.template($("#works_list_template_list").html());
             // par défaut le template et l'affichage par vignettes
             this.template = this.templatethumb;
+
             //_.bindAll(this, 'render');
             // on s'abonne aux tris de la collection avec la fonction this.render()
              this.collection.bind("sort", this.render, this); // remember: every function that uses 'this' as the current object should be in here
@@ -21,15 +22,15 @@ var Blog = (function (blog) {
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             //this.$el.find("#wrapper").mCustomScrollbar("update");
             this.hideInfos();
-          // this.$el.find("#sidebar").mCustomScrollbar("destroy");
+            // this.$el.find("#sidebar").mCustomScrollbar("destroy");
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
-            this.$el.find(".maincontent").removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
+            this.$el.removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
                 $(this).delay(i * 80).animate({opacity: 1});
                 i++;
             });
 
-            wrapper = this.$el.find("#wrapper");
+            wrapper = this.$el.parent().parent().find("#wrapper");
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({
                     set_height: "100%",
@@ -46,40 +47,11 @@ var Blog = (function (blog) {
         events : {
             "mouseover a.workthumb"  : "showInfos",
             "mouseout a.workthumb"  : "hideInfos",
-            "click #workslist a"  : "mydelete",
-            "click #sortbydate"    : "sortbydate",
-            "click #sortbycat"    : "sortbycat",
-            "click #displaylist"    : "displaylist",
-            "click #displaythumb"    : "displaythumb"
-        },
-// fonction pour le tri par années
-        sortbycat : function(e) {
-            $("#sorting a").removeClass("actif");
-            $(e.currentTarget).addClass("actif");
-            this.collection.sortByCat();
-        },
-// fonction  pour le tri par catégories
-        sortbydate : function(e) {
-            $("#sorting a").removeClass("actif");
-            $(e.currentTarget).addClass("actif");
-            this.collection.sortByDate();
-        },
-// fonction pour l'affichage par liste
-        displaylist : function(e) {
-            $("#displaying a").removeClass("actif");
-            $(e.currentTarget).addClass("actif");
-            this.template = this.templatelist;
-            this.collection.displaymode = 'list';
-            //console.log(this.collection.displaymode);
-            this.render();
-        },
-// fonction pour l'affichage par vignettes
-        displaythumb : function(e) {
-            $("#displaying a").removeClass("actif");
-            $(e.currentTarget).addClass("actif");
-            this.template = this.templatethumb;
-            this.collection.displaymode = 'thumbs';
-            this.render();
+            //"click #workslist a"  : "mydelete",
+            //"click #sortbydate"    : "sortbydate",
+            //"click #sortbycat"    : "sortbycat",
+            //"click #displaylist"    : "displaylist",
+            //"click #displaythumb"    : "displaythumb"
         },
         mydelete: function() {
             // on charge les données dans workslistmini //
@@ -94,13 +66,13 @@ var Blog = (function (blog) {
 
         showInfos : function(e) {
             myid = $(e.currentTarget).attr('data-id');
-            this.$el.find('#sidebar h3').html(e.currentTarget.title);
-            this.$el.find('#sidebar h4').html(this.collection.get(myid).get('custom_fields')['_pinfos_annee'][0]);
-            this.$el.find('#sidebar #description').html(this.collection.get(myid).get('custom_fields')['_pinfos_description'][0]);
+            this.$el.parent().find('#sidebar h3').html(e.currentTarget.title);
+            this.$el.parent().find('#sidebar h4').html(this.collection.get(myid).get('custom_fields')['_pinfos_annee'][0]);
+            this.$el.parent().find('#sidebar #description').html(this.collection.get(myid).get('custom_fields')['_pinfos_description'][0]);
         },
 
         hideInfos : function(e) {
-            this.$el.find('#sidebar').children().empty();
+            this.$el.parent().find('#sidebar').children().empty();
         }
      
     });

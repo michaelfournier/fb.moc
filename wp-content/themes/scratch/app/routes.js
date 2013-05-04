@@ -5,13 +5,9 @@ var Blog = (function (blog){
                 // on instancie l'objet myhomepage
                 Blog.myhomepage = new blog.Collections.HomePicslist();
                 // on instancie l'objet myworkslist
-                Blog.myworkslist = new blog.Collections.WorksList();
-                // on instancie la vue myworkslistview
-                Blog.myworkslistview = new blog.Views.WorksListView(Blog.myworkslist);                 
+                Blog.myworkslist = new blog.Collections.WorksList();              
                 // on instancie l'objet mywork
                 Blog.mywork = new blog.Models.Work();
-                // on instancie la vue worklisttools //
-                Blog.myworkslisttoolsview = new blog.Views.WorksListToolsView(); 
 
                 Blog.mytexteslist = new blog.Collections.TextesList();
                 Blog.mytexte = new blog.Models.Texte();
@@ -45,9 +41,7 @@ var Blog = (function (blog){
              myheight: function() {
                     // on calcule la hauteur de la div #content //
                     var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true) - $('#timeline').outerHeight(true);
-
                     $('#wrapper').css("height", contentheight);
-
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
@@ -97,24 +91,12 @@ var Blog = (function (blog){
               this.selectMenu('works');
               this.killbackstrech();     
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (Blog.mymainworksview === undefined) {               
+              if (!Blog.mymainworksview) {               
                   // on instancie la vue MainWorksView
-                  Blog.mymainworksview = new blog.Views.MainWorksView();  
+                  Blog.mymainworksview = new blog.Views.WorksMainView();  
                 }
                 Blog.mymainworksview.render();
-              
-              // on charge les données dans myworkslist
-              Blog.myworkslist.all().fetch({
-                update: true,
-                success: function(results) {
-                  //console.log(results.toJSON());
-                  Blog.myworkslistview.render(results); 
-                  // on rend la vue workslisttoolsview //
-                  Blog.myworkslisttoolsview.render();
-
-                }
-              });         
-              //alert(blog.myworkslist);              
+                Blog.mymainworksview.renderWorksList();   
             },
 
             displayWork : function (slug_post) {
@@ -123,7 +105,7 @@ var Blog = (function (blog){
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (Blog.mymainworksview === undefined) {               
                   // on instancie la vue MainWorksView
-                  Blog.mymainworksview = new blog.Views.MainWorksView();  
+                  Blog.mymainworksview = new blog.Views.WorksMainView();  
                   Blog.mymainworksview.render();
               }
               
@@ -155,7 +137,7 @@ var Blog = (function (blog){
 
             displayText : function (slug_post) {
               this.selectMenu('texts');
-              //this.killbackstrech();     
+              this.killbackstrech();     
               // on instancie la vue TextesMainView si elle n'existe pas
               if (!Blog.textesmainview) {               
                   // on instancie la vue MainWorksView

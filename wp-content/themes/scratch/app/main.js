@@ -12,7 +12,7 @@ yepnope({
     load: {
         jquery              : wp_vars.themepath+'/app/libs/vendors/jquery-1.9.0.min.js',
         underscore          : wp_vars.themepath+'/app/libs/vendors/underscore.js',
-        mustache            : wp_vars.themepath+'/app/libs/vendors/mustache.js',
+//        mustache            : wp_vars.themepath+'/app/libs/vendors/mustache.js',
         backbone            : wp_vars.themepath+'/app/libs/vendors/backbone.js',
         plugins	            : wp_vars.themepath+'/app/plugins.js',
 
@@ -30,8 +30,8 @@ yepnope({
 
         //Controllers
         BaseView            : wp_vars.themepath+'/app/views/BaseView.js',
-        MainWorksView       : wp_vars.themepath+'/app/views/MainWorksView.js',
         HomeView            : wp_vars.themepath+'/app/views/HomeView.js',
+        WorksMainView       : wp_vars.themepath+'/app/views/WorksMainView.js',
         WorksView           : wp_vars.themepath+'/app/views/WorkView.js',
         WorksListView       : wp_vars.themepath+'/app/views/WorksListView.js',
         WorksListMiniView   : wp_vars.themepath+'/app/views/WorksListMiniView.js',
