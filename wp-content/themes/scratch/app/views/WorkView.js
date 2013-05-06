@@ -30,9 +30,9 @@ var Blog = (function (blog) {
             //console.log("picturegal",Blog.picturesgal);
             // on déclare un objet vue de notre galerie d'images //
             Blog.picturesgalview = new blog.Views.PicturesGalNavView(picturesgal);
-            renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal); 
+            //renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal); 
             // on rend la vue //
-           // Blog.picturesgalview.render();             
+            Blog.picturesgalview.render();             
         },
 
         renderVideos : function() {
@@ -50,8 +50,8 @@ var Blog = (function (blog) {
             var videosgal = new blog.Collections.VideosGallery(Blog.mywork.get('galleryvideos')); 
             // on déclare un objet vue de notre galerie d'images //
             Blog.videosgalview = new blog.Views.VideosGalNavView(videosgal);
-            renderNested(parentview, Blog.videosgalview, "#tools", videosgal);
-            //Blog.videosgalview.render();
+            //renderNested(parentview, Blog.videosgalview, "#tools", videosgal);
+            Blog.videosgalview.render();
         },
 
         picvidswitcher : function(p, v) {
@@ -80,6 +80,9 @@ var Blog = (function (blog) {
         },
 
         render : function () { 
+            // on active la vignette active dans workslist mini //
+
+            this.showactif(this.model.get('slug'));
             //var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
             // on crée une variable contenant le nombre d'image dans la galerie //
@@ -121,14 +124,15 @@ var Blog = (function (blog) {
 
         scrolltonextprev : function(e) {
             elt = $(e.currentTarget).find('a').attr('data-slug');
-            var activeitem = this.$el.find("#"+elt);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
+            
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart' } );
             this.undelegateEvents();           
         },
 
         showactif : function(item) {
+            var activeitem = this.$el.find("#"+item);
             this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
-            item.find('img').css('opacity', 1);
+            activeitem.find('img').css('opacity', 1);
         },
 
         nextwork : function() {
