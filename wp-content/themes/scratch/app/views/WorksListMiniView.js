@@ -16,7 +16,8 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.html(renderedContent);
-
+            // on fait apparaitre le bouton unfold //
+            this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             this.$el.find('#workslistmini').imagesLoaded(function() {  
                 // $(this).find('a').each(function() {
@@ -83,7 +84,7 @@ var Blog = (function (blog) {
             return this;
         },
         events: {
-            "click #unfoldworks a"  : "toggleworks"
+            "click #unfoldworks a" : "toggleworks"
         },
   
         scrolltoactive : function () {

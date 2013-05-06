@@ -95,7 +95,7 @@ var Blog = (function (blog) {
             if (Blog.myworkslist) { this.nextwork(); }
             var that = this;
             // on fait apparaitre les fleche et le btn depliant la liste mini //
-            this.$el.find('.nextprevworks, #unfoldworks').css('display', 'block');
+            this.$el.find('.nextprevworks').css('display', 'block');
             // on créer navgal et picvidswitcher dans #tools//
             this.$el.find("#tools").html("<nav id='navgal'></nav><nav id='picvidswitcher'></nav>");
 
@@ -123,16 +123,16 @@ var Blog = (function (blog) {
 
 
         scrolltonextprev : function(e) {
-            elt = $(e.currentTarget).find('a').attr('data-slug');
-            
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart' } );
+            slug = $(e.currentTarget).find('a').attr('data-slug');
+            var activeitem = this.$el.find("#"+slug);
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();           
         },
 
-        showactif : function(item) {
-            var activeitem = this.$el.find("#"+item);
+        showactif : function(slug) {
+            item = this.$el.find("#"+slug);
             this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
-            activeitem.find('img').css('opacity', 1);
+            item.find('img').css('opacity', 1);
         },
 
         nextwork : function() {
