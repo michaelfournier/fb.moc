@@ -46,18 +46,30 @@
 	<header id="main_header">
 		<nav id="main_nav">	
 		<?
-		$args = array('post_type' => 'page', 'posts_per_page' => -1);
-		$allposts = new WP_query($args);
+		$pages = get_pages('sort_column=menu_order&exclude=357');
 		?>
 		<ul id="mainmenu">
-			<? if ( $allposts->have_posts() ):
-			 while ( $allposts->have_posts() ) : $allposts->the_post(); ?>
+		<? foreach($pages as $page) { ?>
 			<li>
-				<a href='<?= "#".$post->post_name;?>'><span><? the_title(); ?></span></a>
+				<a href='<?= "#".$page->post_name;?>'><span><?= $page->post_title; ?></span></a>
 			</li>
-			<? endwhile; else : ?> No posts <? endif; ?>
+		<? } ?>
 		</ul><!-- #container -->
-		<? wp_reset_query(); ?>		
+
+		<ul id='secondmenu'>
+			<? $page = new WP_Query( 'page_id=357' ); ?>
+		<? if ( $page->have_posts() ):
+		while ( $page->have_posts() ) : $page->the_post(); ?>
+			<li><a href='<?= "#".$post->post_name;?>'><span><?= $post->post_title; ?></span></a></li>
+			<? global $q_config; ?>
+			<li id="qtrans">
+				<a <? if ($q_config['language'] == 'fr') { echo "class='actif'"; }; ?> data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>français</span></a>	
+				<a <? if ($q_config['language'] == 'en') { echo "class='actif'"; }; ?> data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>english</span></a>
+			</li>	
+		<?php endwhile; // end of the loop. ?>		
+		<?php endif; // end of the loop. ?>	
+		</ul>
+
 		</nav>
 	</header>
 <div id="main_wrapper">
