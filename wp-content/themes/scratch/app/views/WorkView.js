@@ -3,10 +3,14 @@ var Blog = (function (blog) {
     blog.Views.WorkView = blog.Views.BaseView.extend({
         el : $("#mainbb"),
         initialize : function (data) {
-            this.model = data;
+           // this.model = data;
             this.template = _.template($("#mainworks_template").html());
             // on remt i à 0 //
             this.i = 0;
+            var caca = data;
+            this.model = caca;
+
+
         },
 
         renderPictures : function () {
@@ -16,14 +20,17 @@ var Blog = (function (blog) {
             this.$el.find("#picvidswitcher a").removeClass('actif');
             this.$el.find("#picvidswitcher #images").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
-            // if (Blog.picturesgalview) {
-            //     Blog.picturesgalview.undelegateEvents();
-            // }
+            if (Blog.picturesgalview) {
+                Blog.picturesgalview.undelegateEvents();
+            }
+
+ console.log("work picture", this.model);           
              // on déclare un objet collection contenant les images liées au post //
-            Blog.picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery')); 
+            var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery')); 
+            //console.log("picturegal",Blog.picturesgal);
             // on déclare un objet vue de notre galerie d'images //
-            picturesgalview = new blog.Views.PicturesGalNavView(Blog.picturesgal);
-            renderNested(parentview, picturesgalview, "#tools", Blog.picturesgal); 
+            Blog.picturesgalview = new blog.Views.PicturesGalNavView(picturesgal);
+            renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal); 
             // on rend la vue //
            // Blog.picturesgalview.render();             
         },
@@ -32,20 +39,23 @@ var Blog = (function (blog) {
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
-
+            if (Blog.videosgalview) {
+                Blog.videosgalview.undelegateEvents();
+            }
 
             this.$el.find("#picvidswitcher a").removeClass('actif');
             this.$el.find("#picvidswitcher #videos").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
-
              // on déclare un objet collection contenant les images liées au post //
-            Blog.videosgal = new blog.Collections.VideosGallery(this.model.get('galleryvideos')); 
+            var videosgal = new blog.Collections.VideosGallery(Blog.mywork.get('galleryvideos')); 
             // on déclare un objet vue de notre galerie d'images //
-            videosgalview = new blog.Views.VideosGalNavView(Blog.videosgal);
-            renderNested(parentview, videosgalview, "#tools", Blog.videosgal);
+            Blog.videosgalview = new blog.Views.VideosGalNavView(videosgal);
+            renderNested(parentview, Blog.videosgalview, "#tools", videosgal);
+            //Blog.videosgalview.render();
         },
 
         picvidswitcher : function(p, v) {
+
             // si il ya au moins 1 image et 1 video //
             if (p > 0 && v > 0) {
                 $("#picvidswitcher").html('<ul><li><a id="images" href="#" data-bypass>images('+p+')</a></li><li><a id="videos" href="#" data-bypass>vidéos('+v+')</a></li></ul>');
@@ -69,7 +79,7 @@ var Blog = (function (blog) {
             renderNested(parentview, sidebarworksview, "#sidebar", this.model); 
         },
 
-        render : function () {           
+        render : function () { 
             //var renderedContent = this.template({work : this.model});
             var mymodel = this.model;
             // on crée une variable contenant le nombre d'image dans la galerie //
@@ -104,15 +114,10 @@ var Blog = (function (blog) {
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
             }); 
-            
+          
             return this;
         },
 
-
-        scrolltoactive : function () {
-            var activeitem = this.$el.find("#"+this.collection.workslug);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );  
-        },
 
         scrolltonextprev : function(e) {
             elt = $(e.currentTarget).find('a').attr('data-slug');
@@ -152,20 +157,9 @@ var Blog = (function (blog) {
             this.$el.find("#prevwork a").attr({'href': prevhref, 'data-slug': slugprev});
         },
 
-        toggleworks : function(e) {
-            elt = this.$el.find("#timeline");
-            if (elt.width() <= 0) {
-                elt.animate({'width': '100%', complete: this.scrolltoactive()});
-                $(e.currentTarget).addClass('fold');
-            } else {
-                elt.animate({'width': 0});
-                $(e.currentTarget).removeClass('fold'); 
-            }
-        },
 
         events: {
             "click .nextprevworks" : "scrolltonextprev",
-            "click #unfoldworks a"  : "toggleworks",
             "click a#videos"   :  "renderVideos",
             "click a#images"   :   "renderPictures"
         }     

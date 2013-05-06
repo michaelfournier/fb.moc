@@ -9,6 +9,7 @@ var Blog = (function (blog) {
             _.bindAll(this, 'render');
         },
         render : function () {
+
             //this.$el.find('.maincontent').remove();
             console.log(this.collection.models);
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
@@ -78,9 +79,36 @@ var Blog = (function (blog) {
 
                         
             });
+
             return this;
+        },
+        events: {
+            "click #unfoldworks a"  : "toggleworks"
+        },
+  
+        scrolltoactive : function () {
+
+            var activeitem = this.$el.find("#"+this.collection.workslug);
+            console.log(activeitem);
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );  
+        },
+
+        showactif : function(item) {
+            this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
+            item.find('img').css('opacity', 1);
+        },
+
+        toggleworks : function(e) {
+            elt = this.$el;
+            if (elt.width() <= 0) {
+                elt.animate({'width': '100%', complete: this.scrolltoactive()});
+                $(e.currentTarget).addClass('fold');
+            } else {
+                elt.animate({'width': 0});
+                $(e.currentTarget).removeClass('fold'); 
+            }
         }
-     
+
      
     });
 

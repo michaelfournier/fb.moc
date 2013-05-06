@@ -108,7 +108,6 @@ var Blog = (function (blog){
                   // on instancie la vue MainWorksView
                   Blog.mymainworkview = new blog.Views.WorkMainView();  
               }
-              
               this.switchView(Blog.mymainworkview);
               Blog.mymainworkview.renderWork(slug_post);
 

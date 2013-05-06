@@ -75,9 +75,7 @@
 		<nav class="nextprevworks" id="nextwork">
 			<a href=""></a>
 		</nav>
-		<div id="unfoldworks">
-			<a data-bypass href="#"><span></span></a>
-		</div>
+
 		<div id="wrapper">			
 			<section id="sidebar">
 			</section>
@@ -273,6 +271,9 @@
 
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">
+		<div id="unfoldworks">
+			<a data-bypass href="#"><span></span></a>
+		</div>
   	<%  var tab = [];
          tab[-1] = 0;
      %>
