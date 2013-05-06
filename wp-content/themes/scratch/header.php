@@ -280,6 +280,7 @@
 				<div class="st_wrapper st_thumbs_wrapper">	
 					<div class="st_thumbs">						
 					    <% _.each(works ,function(work, i){ %>
+
 				              <% if (_.isEmpty(work.get('gallery')) === false || _.isEmpty(work.get('customthumb')) === false ) { %>
 						          	<%  
 						          		if (sortkey === 'annees') {
@@ -288,24 +289,27 @@
 						          			tab[i] = works[i].get('categories')[0]['title'];
 						          		}
 						          	%>
-									<% if ( Number(tab[i-1]) !== Number(tab[i])) { %>
+									<% if ( String(tab[i-1]) != String(tab[i])) { %>
+
 										<% if(i > 0) { %></div><% } %>
 										<div class="segment">	
-											<div class="sortitem"><%= tab[i] %></div>				          	
+											<div class="sortitem"><%= tab[i] %></div>			          	
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>">
-
-				                    		<% if (_.isEmpty(work.get('customthumb')) === true) { %>
-				                    			<img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
+				                    		
+				                    		<% if (work.get('customthumb')) { %>
+				                    			<img width="50px" src='<%= work.get('customthumb')[0] %>' />				                    			
 					                    	<% } else { %>
-					                    		<img width="50px" src='<%= work.get('customthumb')[0] %>' />
+					                    		<img width='50px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 					                    	<% } %>
+					                    	</a>
 				                    <% } else { %>
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>"  class="thumb_color" id="<%= work.get("slug") %>">
-				                    		<% if (_.isEmpty(work.get('customthumb')) === true) { %>
-				                    			<img width='50px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /></a>
-					                    	<% } else { %>
-					                    		<img width="50px" src='<%= work.get('customthumb')[0] %>' />
+				                    		<% if (work.get('customthumb')) { %>
+												<img width="50px" src='<%= work.get('customthumb')[0] %>' />
+					                    	<% } else { %>					                    		
+					                    		<img width='50px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 					                    	<% } %>
+					                    	</a>
 				                    <% } %>
 				              <% } %>    
 					    <% }); %>
