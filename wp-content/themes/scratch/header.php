@@ -61,10 +61,10 @@
 		<? if ( $page->have_posts() ):
 		while ( $page->have_posts() ) : $page->the_post(); ?>
 			<li><a href='<?= "#".$post->post_name;?>'><span><?= $post->post_title; ?></span></a></li>
-			<? global $q_config; ?>
+			<? $mylang = qtrans_getLanguage(); ?>
 			<li id="qtrans">
-				<a <? if ($q_config['language'] == 'fr') { echo "class='actif'"; }; ?> data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>français</span></a>	
-				<a <? if ($q_config['language'] == 'en') { echo "class='actif'"; }; ?> data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>english</span></a>
+				<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>" <? if ($mylang == 'fr') { echo "style='display:none'"; }; ?>><span>français</span></a>	
+				<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>" <? if ($mylang == 'en') { echo "style='display:none'"; }; ?>><span>english</span></a>
 			</li>	
 		<?php endwhile; // end of the loop. ?>		
 		<?php endif; // end of the loop. ?>	
@@ -397,6 +397,21 @@
 			<section style="background:none" class="maincontent news">
 				<div id="txtwrapper"><%= mynews.get('content') %>
 					<a id="btn-close"></a>
+				</div>
+			</section>
+		</div>
+	</script>
+
+	<!-- template pour mentions -->
+	<script type="text/template" id="notice_template">	
+		<section id="tools"></section>
+		<div id="wrapper">		
+			<section style="background:none" class="maincontent notice">
+
+				<div id="txtwrapper">
+					<div id="uberwrapper">
+						<%= mynotice.get('content') %>
+					</div>
 				</div>
 			</section>
 		</div>

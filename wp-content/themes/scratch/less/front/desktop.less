@@ -57,7 +57,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		overflow-y: hidden;
 	}
 
-	.maincontent.news, .maincontent.bio {
+	.maincontent.news, .maincontent.bio, .maincontent.notice {
 		.divise(1,1, 0, none, left);
 		padding: 0;
 		margin: 0 auto;
@@ -72,7 +72,21 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		float:left;
 	}
 
-	.bio #txtwrapper {
+	.notice #txtwrapper {
+		max-width: 500px;
+		padding: 0;
+		margin:0 auto;
+		background: none;
+	}
+
+	.notice .mCSB_container {
+		padding-right: @unit;
+		margin: 0;
+		background-color: white;
+	}
+
+
+	.bio #txtwrapper{
 		max-width: 700px;
 		padding: @unit @unit/2 @unit @unit;
 	}
@@ -87,7 +101,13 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		color: @black70;
 		height: 100%;
 		overflow-y: auto;
-		
+	}
+
+	#txtwrapper  #uberwrapper {
+		max-width: 500px;
+		padding: @unit;
+		margin:0 auto;
+		background-color: white;
 	}
 
 	#btn-close {

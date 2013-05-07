@@ -16,6 +16,7 @@ var Blog = (function (blog){
                 Blog.mybio = new blog.Models.Bio();
 
                 Blog.mynews = new blog.Models.News();
+                Blog.mynotice = new blog.Models.Notice();
 
                 Blog.currentView = new Backbone.View();
 
@@ -33,6 +34,7 @@ var Blog = (function (blog){
                 "texts/:slug_post" : "displayText",
                 "bio" : "displayBio",
                 "bio/:slug_post" : "displayBio",
+                "notice" : "notice",
                 "home" : "home",
                 "" : "home",
                 "*path" : "root"
@@ -50,8 +52,8 @@ var Blog = (function (blog){
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {
-              $('#mainmenu a').removeClass('actif');
-              $('#mainmenu a[href="#'+route+'"]').addClass('actif');
+              $('#main_nav a').removeClass('actif');
+              $('#main_nav a[href="#'+route+'"]').addClass('actif');
             },
             root : function () {
               this.selectMenu();
@@ -84,6 +86,23 @@ var Blog = (function (blog){
                     //console.log(results.toJSON());
                     Blog.newsview.render(results); 
                     Blog.currentView = Blog.newsview;
+                  }
+                });                   
+            },
+
+            notice : function () {
+            
+              this.selectMenu('notice');
+              this.killbackstrech();
+                  // on instancie la vue news
+                Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
+                  // on charge les données dans mynews
+                Blog.mynotice.query().fetch({
+                  update: true,
+                  success: function(results) {
+                    //console.log(results.toJSON());
+                    Blog.noticeview.render(results); 
+                    Blog.currentView = Blog.noticeview;
                   }
                 });                   
             },
