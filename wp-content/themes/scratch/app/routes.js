@@ -237,6 +237,8 @@ var Blog = (function (blog){
           // trigger the correct events. The Router's internal `navigate` method
           // calls this anyways.  The fragment is sliced from the root.
           Backbone.history.navigate(href.attr, true);
+          // on écrit l'adresse dans le btn switch lang //
+          $('#qtrans a').attr("href", wp_vars.blogurl+"/"+href.attr);
         }
     });
 

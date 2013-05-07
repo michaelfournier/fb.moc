@@ -843,6 +843,7 @@ ul {
 nav#picvidswitcher {
   float: right;
   letter-spacing: 1px;
+  padding-top: 0.6857142857142856em;
 }
 #main_header {
   margin: 0 0 1.1428571428571428em 0;
@@ -850,7 +851,6 @@ nav#picvidswitcher {
   background-color: white;
   width: 100%;
   float: left;
-  opacity: .8;
 }
 nav li {
   display: inline-block;
@@ -894,7 +894,7 @@ nav a {
 }
 #navgal li a {
   font-size: 1.2857142857142858em;
-  padding: 0 0.5714285714285714em 0.2857142857142857em;
+  padding: 0.6857142857142856em 0.5714285714285714em 0.2857142857142857em;
   border: 0;
   text-decoration: none;
   color: #dcdcdc;

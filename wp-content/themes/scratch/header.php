@@ -55,7 +55,7 @@
 			</li>
 		<? } ?>
 		</ul><!-- #container -->
-
+		<div id="spin"></div>
 		<ul id='secondmenu'>
 			<? $page = new WP_Query( 'page_id=357' ); ?>
 		<? if ( $page->have_posts() ):
@@ -63,8 +63,11 @@
 			<li><a href='<?= "#".$post->post_name;?>'><span><?= $post->post_title; ?></span></a></li>
 			<? $mylang = qtrans_getLanguage(); ?>
 			<li id="qtrans">
-				<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>" <? if ($mylang == 'fr') { echo "style='display:none'"; }; ?>><span>français</span></a>	
-				<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>" <? if ($mylang == 'en') { echo "style='display:none'"; }; ?>><span>english</span></a>
+				<? if ($mylang == 'en') { ?>
+					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>français</span></a>	
+				<? } else { ?>
+					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>english</span></a>
+				<? } ?>
 			</li>	
 		<?php endwhile; // end of the loop. ?>		
 		<?php endif; // end of the loop. ?>	
@@ -336,7 +339,7 @@
 		<section id="tools"></section>
 		<div id="wrapper">		
 			<section id="sidebar"></section>
-			<section class="maincontent txt">
+			<section style="opacity:0" class="maincontent txt">
 			</section>
 		</div>
 	</script>
