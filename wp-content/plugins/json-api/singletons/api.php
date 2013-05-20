@@ -51,10 +51,34 @@ class JSON_API {
         }
         
         // Run the method
-        $result = $this->controller->$method();
-        
+		$md5_file_name = md5( implode('|', $_REQUEST ) );
+		$cachefile = WP_CONTENT_DIR . '/cache/json-api_' . $md5_file_name . '-cache.html';
+		$cachetime = 18000;
+		
+		if (file_exists($cachefile) && time() - $cachetime < @filemtime($cachefile))
+		{
+		  if (!headers_sent()) {
+			header('HTTP/1.1 200 OK');
+			header('Content-Type: text/plain; charset: UTF-8', true);
+			//nocache_headers();
+		  } else {
+			echo '<pre>';
+		  }			
+		  $result = file_get_contents($cachefile);
         // Handle the result
-        $this->response->respond($result);
+			echo $result;
+		}else{
+		// if there is either no file OR the file to too old, render the page and capture the HTML.
+			$result = $this->controller->$method();
+			ob_start();
+        // Handle the result
+				$this->response->respond($result);
+				$fp = fopen($cachefile, 'w');
+				fwrite($fp, ob_get_contents());
+				fclose($fp);
+			ob_end_flush();
+		}
+        
         
         // Done!
         exit;

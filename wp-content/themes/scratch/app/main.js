@@ -14,6 +14,8 @@ yepnope({
         underscore          : wp_vars.themepath+'/app/libs/vendors/underscore.js',
 //        mustache            : wp_vars.themepath+'/app/libs/vendors/mustache.js',
         backbone            : wp_vars.themepath+'/app/libs/vendors/backbone.js',
+//        dualstorage         : wp_vars.themepath+'/app/libs/vendors/backbone.dualstorage.js',
+        
         plugins	            : wp_vars.themepath+'/app/plugins.js',
 
         //NameSpace

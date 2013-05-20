@@ -7,7 +7,7 @@ function my_theme_scripts() {
   //wp_enqueue_script( 'backbone');
   //wp_enqueue_script( 'plugins', get_template_directory_uri() . '/app/plugins.js', 'jquery', false, true );
   wp_enqueue_script( 'yepnope', get_template_directory_uri() . '/app/libs/vendors/yepnope.js', 'jquery', false, true );
-  wp_enqueue_script( 'require', get_template_directory_uri() . '/app/libs/vendors/require.js', 'jquery', false, true );  
+ // wp_enqueue_script( 'require', get_template_directory_uri() . '/app/libs/vendors/require.js', 'jquery', false, true );  
   wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/main.js', 'backbone', false, true );
   //wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/models/home.js', null, false, true );
  // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/models/post.js', 'backbone', false, true );
@@ -151,7 +151,6 @@ function my_encode_meta($response) {
       add_myauthors($response['post']);
     }
   }
-
   return $response;
 }
 
@@ -193,7 +192,7 @@ function add_gallery($post) {
 
 
   ///
-  if(isset($galleryvideos)) {
+  if(isset($galleryvideos) && !empty($galleryvideos)) {
     foreach($galleryvideos as $id => $video) {
       $tabvideos = array('videourl' => $video['media'], 'legend' => $video['legende_'.$mylang]);
       $post->galleryvideos[] = $tabvideos;
@@ -216,7 +215,7 @@ function add_myauthors($post) {
   $mylang = qtrans_getLanguage();
   $themepath = get_bloginfo('template_url');
   $tabauthors = get_post_meta($post->id, "_pinfostextes_blocsauteurs", TRUE);
-  if(isset($tabauthors)) {
+  if(isset($tabauthors) && !empty($tabauthors)) {
     foreach($tabauthors as $id => $author) {
       $allauthors = array('nom' => $author['nom'], 'prenom' => $author['prenom']);
       $post->auteurs[] = $allauthors;
@@ -226,6 +225,7 @@ function add_myauthors($post) {
     'connected_type' => 'texts_to_works',
     'connected_items' => get_queried_object(),
     'nopaging' => true,
+    'connected_direction' => 'from'
   ) );
   if ( $connectedworks->have_posts() ) {
   while ( $connectedworks->have_posts() ) : $connectedworks->the_post();
@@ -260,7 +260,9 @@ function my_connection_types() {
   p2p_register_connection_type( array(
     'name' => 'texts_to_works',
     'from' => 'texts',
-    'to' => 'works'
+    'to' => 'works',
+    'reciprocal' => false,
+    'can_create_post' => false
   ) );
 }
 add_action( 'p2p_init', 'my_connection_types' );

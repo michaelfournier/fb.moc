@@ -81,7 +81,7 @@ var Blog = (function (blog){
                   Blog.newsview = new blog.Views.NewsView(Blog.mynews);
                   // on charge les données dans mynews
                 Blog.mynews.query().fetch({
-                  update: true,
+                  //update: true,
                   success: function(results) {
                     //console.log(results.toJSON());
                     Blog.newsview.render(results); 
@@ -98,7 +98,7 @@ var Blog = (function (blog){
                 Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
                   // on charge les données dans mynews
                 Blog.mynotice.query().fetch({
-                  update: true,
+                  //update: true,
                   success: function(results) {
                     //console.log(results.toJSON());
                     Blog.noticeview.render(results); 

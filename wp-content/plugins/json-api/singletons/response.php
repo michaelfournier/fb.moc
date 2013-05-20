@@ -1,5 +1,4 @@
 <?php
-
 class JSON_API_Response {
   
   function setup() {
@@ -82,7 +81,6 @@ class JSON_API_Response {
       // Output the result
       $this->output($json);
     }
-    exit;
   }
   
   function output($result) {
@@ -180,5 +178,4 @@ class JSON_API_Response {
   }
   
 }
-
 ?>
