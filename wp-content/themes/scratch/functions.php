@@ -7,7 +7,7 @@ function my_theme_scripts() {
   //wp_enqueue_script( 'backbone');
   //wp_enqueue_script( 'plugins', get_template_directory_uri() . '/app/plugins.js', 'jquery', false, true );
   wp_enqueue_script( 'yepnope', get_template_directory_uri() . '/app/libs/vendors/yepnope.js', 'jquery', false, true );
- // wp_enqueue_script( 'require', get_template_directory_uri() . '/app/libs/vendors/require.js', 'jquery', false, true );  
+  wp_enqueue_script( 'require', get_template_directory_uri() . '/app/libs/vendors/require.js', 'jquery', false, true );  
   wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/main.js', 'backbone', false, true );
   //wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/models/home.js', null, false, true );
  // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/models/post.js', 'backbone', false, true );
@@ -85,7 +85,7 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
   include_once 'metaboxes/infostextes-meta-spec.php';
   include_once 'metaboxes/infosbio-meta-spec.php';
-  include_once 'metaboxes/repeating-external-links-spec.php';
+  //include_once 'metaboxes/repeating-external-links-spec.php';
 
  // include_once 'metaboxes/datepicker-meta-spec.php';
  // include_once 'metaboxes/simple-image-spec.php';
@@ -151,6 +151,7 @@ function my_encode_meta($response) {
       add_myauthors($response['post']);
     }
   }
+
   return $response;
 }
 
@@ -161,11 +162,7 @@ function add_gallery($post) {
   $galleryvideos = get_post_meta($post->id, "_pvideosgallery_blocsvideos", TRUE);
   $customthumb = get_post_meta($post->id, "_psolopic_customthumb", TRUE);
 
-
-
   $themepath = get_bloginfo('template_url');
-
-
 
   if(isset($gallerypics)) {
     foreach($gallerypics as $idpic) {
@@ -202,7 +199,6 @@ function add_gallery($post) {
 
 if(!empty($customthumb)) {
     $customthumburl = wp_get_attachment_image_src($customthumb, 'full');
-   // print_r($customthumburl);
     $post->customthumb[] = $customthumburl[0];
   }
   
@@ -254,7 +250,6 @@ function mikictrl_controller_path($default_path) {
   return get_stylesheet_directory() . '/mikictrl.php';
 }
 
-
 // connecte les textes aux posts //
 function my_connection_types() {
   p2p_register_connection_type( array(
@@ -262,9 +257,268 @@ function my_connection_types() {
     'from' => 'texts',
     'to' => 'works',
     'reciprocal' => false,
-    'can_create_post' => false
+    'can_create_post' => false,
+    'admin_column' => "from",
+    'admin_box' => array(
+      'show' => 'from',
+      'context' => 'side'
+    )
   ) );
 }
 add_action( 'p2p_init', 'my_connection_types' );
+
+if (is_admin()) { 
+// initialise le wysiwig //
+function custom_options( $opt ) {
+  //format drop down list
+  //bold,italic,strikethrough,|,bullist,numlist,blockquote,|,justifyleft,justifycenter,justifyright,|,link,unlink,wp_more,|,spellchecker,fullscreen,wp_adv
+  $opt['theme_advanced_buttons1'] = 'formatselect, bold, italic, link, unlink, spellchecker, underline, pastetext, pasteword, removeformat, charmap, undo, redo';
+  $opt['theme_advanced_buttons2'] = '';
+  $opt['theme_advanced_blockformats'] = 'p,h3,h4';
+  // From http://tinymce.moxiecode.com/examples/example_24.php
+  $style_formats = array(
+      array('title' => 'Bold text', 'inline' => 'b'),
+      array('title' => 'Red text', 'inline' => 'span', 'styles' => array('color' => '#ff0000')),
+      array('title' => 'Red header', 'block' => 'h1', 'styles' => array('color' => '#ff0000')),
+      array('title' => 'Example 1', 'inline' => 'span', 'classes' => 'example1'),
+      array('title' => 'Example 2', 'inline' => 'span', 'classes' => 'example2'),
+      array('title' => 'Table styles'),
+      array('title' => 'Table row 1', 'selector' => 'tr', 'classes' => 'tablerow1'),
+  );
+  // Before 3.1 you needed a special trick to send this array to the configuration.
+  // See this post history for previous versions.
+  $opt['style_formats'] = json_encode( $style_formats );
+  return $opt;
+}
+
+add_filter('tiny_mce_before_init', 'custom_options');
+// supprime des onglets dans la fenetre des media //
+add_filter('media_upload_tabs', 'wpse_76095_filterMediaUploadTabs');
+/**
+* filter out unwanted media upload tabs
+* @param array $tabs
+* @return array
+*/
+function wpse_76095_filterMediaUploadTabs($tabs) {
+  unset(
+      $tabs['type_url'],  // no linking from external sites (no local image)
+      $tabs['gallery'],   // no galleries
+      $tabs['nextgen']    // no NextGEN galleries
+  );   
+  return $tabs;
+};
+//http://iancavalier.com/spiralnotepad/2012/07/21/disable-wordpress-autosave/
+wp_deregister_script(‘autosave’);
+
+
+if(!current_user_can('administrator')) {
+// supprime la modification rapide des articles //
+ add_filter('post_row_actions','remove_quick_edit',10,1);
+  add_filter('page_row_actions','remove_quick_edit',10,1);
+
+
+  //CSS Admin qui supprime des élements du back //  
+  add_action('admin_head', 'css_editor');
+  function css_editor() {
+  $siteurl = get_bloginfo('template_url'); $url = $siteurl . '/editor-hide-style.css';
+  echo "<link rel='stylesheet' type='text/css' href='$url' />\n";
+  } 
+
+  // supprime le bouton ajouter dans Accueil // 
+  function hide_buttons()
+  {
+    global $post_type;
+   // print_r($pagenow);
+    if($post_type == 'page')
+    {
+      echo '<style>.tablenav, #edit-slug-box {display:none;}</style>';  
+    }
+  }
+  add_action('admin_head','hide_buttons');
+
+  // supprime les menus //    
+  function delete_menu_items() {
+      remove_menu_page('index.php'); // Dashboard
+      remove_menu_page('edit.php'); // Posts
+      //remove_menu_page('upload.php'); // Media
+      remove_menu_page('link-manager.php'); // Links
+      remove_menu_page('edit.php?lang=fr'); // Pages
+      remove_menu_page('edit.php?lang=en'); // Pages
+      remove_menu_page('edit-comments.php'); // Comments      
+      remove_menu_page('themes.php'); // Appearance
+      remove_menu_page('plugins.php'); // Plugins
+      remove_menu_page('users.php'); // Users
+      remove_menu_page('tools.php'); // Tools
+      remove_menu_page('options-general.php'); // Settings
+  }
+  add_action( 'admin_menu', 'delete_menu_items' );
+
+  // supprime les sous-menus //
+  function remove_submenu() {
+      global $submenu;
+      unset($submenu['edit.php?post_type=page']);      
+  }
+  add_action('admin_head', 'remove_submenu');
+
+  // exclu des pages de l'admin //
+  add_filter( 'parse_query', 'exclude_pages_from_admin' );
+  function exclude_pages_from_admin($query) {
+      global $pagenow,$post_type;
+        if ($pagenow=='edit.php' && $post_type =='page') {
+            $query->query_vars['post__not_in'] = array('204','200','202');
+        }
+  }
+}
+
+// permet le trie par meta date de début //
+add_filter( 'manage_edit-works_sortable_columns', 'my_works_sortable_columns' );
+function my_works_sortable_columns( $columns ) {
+  $columns['years'] = '_pinfos_annee';
+  return $columns;
+}
+
+
+
+// tri par défaut par date de début descandant //
+add_action( 'pre_get_posts', 'meta_filter_works' );
+function meta_filter_works( $query ) {
+  global $post_type, $pagenow, $infosoeuvres_mb;
+  if( $post_type == "works" && $pagenow == 'edit.php') {
+    // $query is the WP_Query object, set is simply a method of the WP_Query class that sets a query var parameter
+    $query->set( 'meta_key', $infosoeuvres_mb->get_the_name('_pinfos_annee') );
+    $query->set( 'order', 'DESC' );
+    $query->set( 'orderby', 'meta_value' );
+    //$query->set( 'type', 'DATE' );
+  } 
+  return $query;
+}
+
+/* Only run our customization on the 'edit.php' page in the admin. */
+add_action( 'load-edit.php', 'devpress_edit_works_load');
+
+function devpress_edit_works_load() {
+  add_filter( 'request', 'devpress_sort_works');
+}
+/* Sorts the projects. */
+function devpress_sort_works( $vars ) {
+//remove_filter( 'pre_get_posts', 'meta_filter_projets' );
+  /* Check if we're viewing the 'movie' post type. */
+  if ( isset( $vars['post_type'] ) && 'works' == $vars['post_type'] ) {
+
+    /* Check if 'orderby' is set to 'duration'. */
+    if ( isset( $vars['orderby'] ) && '_pinfos_annee' == $vars['orderby'] ) {
+      // on desactive le tri par defaut //
+      remove_filter( 'pre_get_posts', 'meta_filter_works' );
+      /* Merge the query vars with our custom variables. */
+      $vars = array_merge(
+        $vars,
+        array(
+          'meta_key' => '_pinfos_annee',
+          'orderby' => 'meta_value'
+        )
+      );
+    } else if (isset( $vars['orderby'] ) && 'menu_order' == $vars['orderby']){
+      /* Merge the query vars with our custom variables. */
+      $vars = array_merge(
+        $vars,
+        array(
+          'orderby' => 'menu_order'
+        )
+      );      
+    }
+  }
+  return $vars;
+}
+//http://justintadlock.com/archives/2011/06/27/custom-columns-for-custom-post-types
+
+add_filter( 'manage_edit-texts_columns', 'my_edit_texts_columns' ) ;
+function my_edit_texts_columns( $columns ) {
+  $columns = array(
+    'cb' => '<input type="checkbox" />',
+    'title' => __( 'Title' ),
+    'auteur' => __( 'Author' ),
+  );
+  return $columns;
+}
+
+add_action( 'manage_texts_posts_custom_column', 'my_manage_texts_columns', 10, 2 );
+function my_manage_texts_columns( $column, $post_id ) {
+global $post;
+  switch( $column ) {
+    case 'auteur' :
+      $tabauthors = get_post_meta($post_id, "_pinfostextes_blocsauteurs", TRUE);
+      if(isset($tabauthors) && !empty($tabauthors)) {
+        foreach($tabauthors as $id => $author) {
+          echo $author['prenom']." ".$author['nom']."  ";
+        }
+      }
+      /* If no terms were found, output a default message. */
+      break;
+    /* Just break out of the switch statement for everything else. */
+    default :
+      break;
+  } 
+}
+
+// gestion des colonnes d'index pour oeuvres //
+add_filter( 'manage_edit-works_columns', 'my_edit_works_columns' ) ;
+function my_edit_works_columns( $columns ) {
+  $columns = array(
+    'cb' => '<input type="checkbox" />',
+    'title' => __( 'Title' ),
+    'category' => __( 'Category' ),
+    'years' => __( 'Année' ),
+  );
+  return $columns;
+}
+
+add_action( 'manage_works_posts_custom_column', 'my_manage_works_columns', 10, 2 );
+function my_manage_works_columns( $column, $post_id ) {
+global $post;
+  switch( $column ) {
+    /* If displaying the 'genre' column. */
+    case 'category' :
+      /* Get the genres for the post. */
+      $terms = get_the_terms( $post_id, 'category' );
+      /* If terms were found. */
+      if ( !empty( $terms ) ) {
+        $out = array();
+        /* Loop through each term, linking to the 'edit posts' page for the specific term. */
+        foreach ( $terms as $term ) {
+          $out[] = sprintf( '<a href="%s">%s</a>',
+            esc_url( add_query_arg( array( 'post_type' => $post->post_type, 'category_name' => $term->slug ), 'edit.php' ) ),
+            esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, 'category', 'display' ) )
+          );
+        }
+        /* Join the terms, separating them with a comma. */
+        echo join( ', ', $out );
+      }
+      /* If no terms were found, output a default message. */
+      break;
+    case 'years' :
+      $meta = get_post_meta($post_id, "_pinfos_annee", true);
+      echo $meta;
+      /* If no terms were found, output a default message. */
+      break;
+    /* Just break out of the switch statement for everything else. */
+    default :
+      break;
+  } 
+}
+
+function custom_menu_order($menu_ord) {
+  if (!$menu_ord) return true;
+  return array(
+    'index.php',
+    'edit.php?post_type=works', // works
+    'edit.php?post_type=texts', // textes
+    'edit.php?post_type=bio', // bio
+    'edit.php?post_type=page' // page    
+  );
+}
+add_filter('custom_menu_order', 'custom_menu_order');
+add_filter('menu_order', 'custom_menu_order');  
+
+} // fin if admin
 
 ?>

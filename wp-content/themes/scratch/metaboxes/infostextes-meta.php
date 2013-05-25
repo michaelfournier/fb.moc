@@ -93,21 +93,6 @@ function my_action_javascript() { ?>
 
 
 
-	<div class="inside">
-		<div class="oneblock" style="width:100%">
-			<h4>Sous-titre</h4>
-			<?php $mb->the_field('sous-titre'); ?>
-			<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
-		</div>
-	</div>
-
-	<div class="inside">  
-		<div class="oneblock">
-			<h4>Année</h4>
-			<?php $mb->the_field('annee'); ?>
-			<input class="dp" type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
-		</div>
-	</div>
 
 	<div class="inside file">
 		<div class="oneblock" style="width:100%">	

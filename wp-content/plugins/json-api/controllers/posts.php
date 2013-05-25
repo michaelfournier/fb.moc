@@ -18,7 +18,7 @@ class JSON_API_Posts_Controller {
     if (!wp_verify_nonce($json_api->query->nonce, $nonce_id)) {
       $json_api->error("Your 'nonce' value was incorrect. Use the 'get_nonce' API method.");
     }
-    //nocache_headers();
+    nocache_headers();
     $post = new JSON_API_Post();
     $id = $post->create($_REQUEST);
     if (empty($id)) {

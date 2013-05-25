@@ -29,8 +29,6 @@ remove_filter('comment_text', 'wptexturize');
 // Allow HTML in user profiles
 remove_filter('pre_user_description', 'wp_filter_kses');
 
-
-
 // SEO
 // add tags as keywords
 function tags_to_keywords(){

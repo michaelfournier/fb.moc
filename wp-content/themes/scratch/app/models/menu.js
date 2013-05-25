@@ -10,7 +10,7 @@ var Blog = (function (blog) {
 
     blog.Collections.MenuList = Backbone.Collection.extend({
         model: blog.Models.MenuElt,
-        url: wp_vars.blogurl+'/api/get_page_index/?include=id,url,slug',
+        url: wp_vars.blogurl+'/api/get_page_index?include=id,url,slug',
         // on parse la réponse pour avoir accès aux pages
         parse: function(response) {
             //console.log(response.pages);

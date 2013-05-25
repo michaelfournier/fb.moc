@@ -2,7 +2,7 @@ var Blog = (function (blog) {
 
 	blog.Models.News = Backbone.Model.extend({
         query : function () {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post/?post_type=page&include=id,content,title,slug&slug=home';
+            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=home';
             return this;
         },
          parse: function (response) {

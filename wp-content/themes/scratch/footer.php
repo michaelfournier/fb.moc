@@ -25,6 +25,7 @@ $blogurl =  qtrans_convertURL(home_url());
 	 wp_localize_script (  "my-app" , 'wp_vars' , $tab_vars);
 	//};
 ?>
+<script id="mic" type="text/javascript"></script>
 <?php wp_footer(); ?>
 </body>
 </html>

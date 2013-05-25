@@ -2,7 +2,7 @@ var Blog = (function (blog) {
 
     blog.Models.Bio = Backbone.Model.extend({
         query : function (slug) {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post/?post_type=bio&custom_fields=_pinfosbio_fileurl&include=id,content,title,slug,custom_fields&slug='+slug;
+            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=bio&custom_fields=_pinfosbio_fileurl&include=id,content,title,slug,custom_fields&slug='+slug;
             return this;
         },
         //  parse: function (response) {

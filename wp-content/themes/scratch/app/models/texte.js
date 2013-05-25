@@ -2,7 +2,7 @@ var Blog = (function (blog) {
 
 	blog.Models.Texte = Backbone.Model.extend({
         query : function (slug) {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post/?post_type=texts&custom_fields=_pinfostextes_fileurl&include=id,content,title,slug,custom_fields&slug='+slug;
+            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=texts&custom_fields=_pinfostextes_fileurl&include=id,content,title,slug,custom_fields&slug='+slug;
             return this;
         },
         //  parse: function (response) {
@@ -23,7 +23,7 @@ var Blog = (function (blog) {
 	blog.Collections.TextesList = Backbone.Collection.extend({
 		model : blog.Models.Texte,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts/?post_type=texts&custom_fields=_pinfostextes_sortname&include=custom_fields,id,auteurs,title,slug,type&key=_pinfostextes_sortname&order=asc';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=texts&custom_fields=_pinfostextes_sortname&include=custom_fields,id,auteurs,title,slug,type&key=_pinfostextes_sortname&order=asc';
             return this;
         },
         // on parse la réponse pour avoir accès aux posts

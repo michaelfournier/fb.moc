@@ -60,7 +60,7 @@ class JSON_API {
 		  if (!headers_sent()) {
 			header('HTTP/1.1 200 OK');
 			header('Content-Type: text/plain; charset: UTF-8', true);
-			//nocache_headers();
+			nocache_headers();
 		  } else {
 			echo '<pre>';
 		  }			
