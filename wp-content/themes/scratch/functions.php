@@ -313,8 +313,16 @@ wp_deregister_script(‘autosave’);
 
 if(!current_user_can('administrator')) {
 // supprime la modification rapide des articles //
- add_filter('post_row_actions','remove_quick_edit',10,1);
-  add_filter('page_row_actions','remove_quick_edit',10,1);
+add_filter( 'post_row_actions', 'remove_row_actions', 10, 1 );
+add_filter( 'page_row_actions', 'remove_row_actions', 10, 1 );
+function remove_row_actions( $actions )
+{
+        unset( $actions['edit'] );
+        unset( $actions['view'] );
+        unset( $actions['trash'] );
+        unset( $actions['inline hide-if-no-js'] );
+    return $actions;
+}
 
 
   //CSS Admin qui supprime des élements du back //  
