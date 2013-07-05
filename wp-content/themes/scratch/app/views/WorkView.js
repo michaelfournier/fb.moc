@@ -104,7 +104,7 @@ var Blog = (function (blog) {
                 that.renderSidebar();
                 if($(this).hasClass("mCustomScrollbar")) {
                    $(this).mCustomScrollbar("destroy");
-                };  
+                } 
                 //var sidebar = $(this).find('#sidebar');
                 //that.renderSidebar();
                 // on desactive la scroll bar //

@@ -19,7 +19,7 @@ var Blog = (function (blog) {
                     scrollInertia: 150,
                     theme: "dark"
                 });
-            };           
+            }          
             this.$el.find(".bio").animate({'opacity': 1},{duration: 500, complete: function() {}});
 
             return this;

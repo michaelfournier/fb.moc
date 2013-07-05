@@ -40,7 +40,7 @@ var Blog = (function (blog) {
         },
 
         events: {
-            "click #sidebarwrapper a" : "showactif",            
+            "click #sidebarwrapper a" : "showactif"            
         }
    
     });

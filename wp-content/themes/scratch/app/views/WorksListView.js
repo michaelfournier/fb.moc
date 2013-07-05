@@ -50,7 +50,7 @@ var Blog = (function (blog) {
 
         events : {
             "mouseover a.workthumb"  : "showInfos",
-            "mouseout a.workthumb"  : "hideInfos",
+            "mouseout a.workthumb"  : "hideInfos"
             //"click #workslist a"  : "mydelete",
             //"click #sortbydate"    : "sortbydate",
             //"click #sortbycat"    : "sortbycat",

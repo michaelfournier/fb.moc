@@ -31,7 +31,7 @@ var Blog = (function (blog) {
                                 scrollInertia: 150,
                                 theme: "dark"
                             });
-                        };
+                        }
 
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }

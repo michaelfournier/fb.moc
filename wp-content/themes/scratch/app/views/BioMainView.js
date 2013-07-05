@@ -58,7 +58,7 @@ var Blog = (function (blog) {
                // console.log(slug);
             } else {      
                 slug = myslug;
-            };
+            }
             //alert(slug);
              // si mybiosidebarview n'est pas définie, on instancie la vue, et charge les données, puis on l'imbrique dans la vue principale //
             //if (this.mybiocontentview  === undefined) {

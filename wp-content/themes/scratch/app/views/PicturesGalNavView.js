@@ -71,7 +71,7 @@ var Blog = (function (blog) {
             if (i > this.gallerylength - 1) { 
                 this.idpic = 0;
                 i = 0;
-            };
+            }
             var showpicture = this.showpicture;
             this.showpicture(i);
                         //$(e.currentTarget).find('img').fadeOut(70, function() { showpicture(i); });           

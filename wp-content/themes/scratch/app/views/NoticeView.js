@@ -19,7 +19,7 @@ var Blog = (function (blog) {
                     scrollInertia: 150,
                     theme: "dark"
                 });
-            };           
+            }         
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
             
         }
