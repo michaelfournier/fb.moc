@@ -1,4 +1,19 @@
 <?php
+
+// on désenregistre la version par défaut de jquery , backbone , underscore pour des raisons comptabilité //
+
+function deregister_default_lib() {
+  if(!is_admin()) { 
+       wp_deregister_script('jquery');
+       wp_register_script('jquery', get_template_directory_uri() . '/app/libs/vendors/jquery-1.9.0.min.js');
+       wp_deregister_script('underscore');
+       wp_register_script('underscore', get_template_directory_uri() . '/app/libs/vendors/underscore.js');
+       wp_deregister_script('backbone');
+       wp_register_script('backbone', get_template_directory_uri() . '/app/libs/vendors/backbone.js');
+  } 
+}
+add_action('init', 'deregister_default_lib');
+
 // charge les scripts //
 //http://shailan.com/2161/adding-javascript-to-your-theme-using-wp_enqueue_script/
 function my_theme_scripts() {
@@ -16,6 +31,16 @@ function my_theme_scripts() {
   // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/views/WorkView.js', 'backbone', false, true );
   // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/views/WorksList.js', 'backbone', false, true );
 } 
+
+function my_scripts() {
+  wp_enqueue_script( 'jquery');
+  wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/app/libs/vendors/modernizr-2.6.2.min.js', 'jquery', false, false );
+  wp_enqueue_script( 'plugins', get_template_directory_uri() . '/app/plugins.js', 'jquery', false, false );
+
+  wp_enqueue_script( 'underscore', get_template_directory_uri() . '/app/libs/vendors/underscore.js', null, false, false);
+  wp_enqueue_script( 'backbone', get_template_directory_uri() . '/app/libs/vendors/backbone.js', 'underscore', false, false);
+  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js', 'backbone', false, true );
+};
 
 // permet l'appel ajax des vignettes dans les metabox ///
 add_action('wp_ajax_my_action_callback', 'my_action_callback', 99); 
@@ -41,7 +66,7 @@ function is_login_page() {
 }
 // on charge les scripts sauf pour l'admin et le login de l'admin//
 if (!is_admin() && !is_login_page()) {    
-	add_action('init', 'my_theme_scripts'); 
+	add_action('wp_enqueue_scripts', 'my_scripts'); 
 };
 
 function modify_post_mime_types( $post_mime_types ) {

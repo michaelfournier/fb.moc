@@ -60,13 +60,13 @@ var Blog = (function (blog){
                 // on efface le contenu de #mainbb
                 $("#mainbb").html("");
                 blog.myhomepage.fetch({
-                    success:function(result){                    	
-                    	attachments = result.toJSON();                   
-                    	var picsArray = []
+                    success:function(result){
+                      attachments = result.toJSON();
+                      var picsArray = [];
                       _.each(attachments, function(data) {
                           picsArray.push(data.url);
                       });
-						          $.backstretch(_.shuffle(picsArray), {duration: 4000, fade: 2050});
+                      $.backstretch(_.shuffle(picsArray), {duration: 4000, fade: 2050});
                         //ça marche !!!
                     }
                 });
@@ -209,7 +209,7 @@ var Blog = (function (blog){
 	//Backbone.history.start({pushState: true});
 
     // on instantie le routeur
-      Blog.myapprouter = new blog.Router.RoutesManager;
+      Blog.myapprouter = new blog.Router.RoutesManager();
       //Backbone.history.start({pushState: true, hasChange: true, root: "/"});
 
   // Trigger the initial route and enable HTML5 History API support, set the
@@ -245,5 +245,5 @@ var Blog = (function (blog){
 
   //Backbone.history.start();
 
-	return blog
+	return blog;
 }(Blog));
