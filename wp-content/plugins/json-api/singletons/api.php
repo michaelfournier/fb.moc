@@ -11,6 +11,7 @@ class JSON_API {
     add_action('update_option_json_api_base', array(&$this, 'flush_rewrite_rules'));
     add_action('pre_update_option_json_api_controllers', array(&$this, 'update_controllers'));
   }
+
   
   function template_redirect() {
     // Check to see if there's an appropriate API controller + method    
@@ -50,9 +51,10 @@ class JSON_API {
           $this->error('Not found');
         }
         
-        // Run the method
+    // Run the method
 		$md5_file_name = md5( implode('|', $_REQUEST ) );
-		$cachefile = WP_CONTENT_DIR . '/cache/json-api_' . $md5_file_name . '-cache.html';
+    /* on nomme les fichiers cache de la même manière que dans le plugin quick-cache */
+		$cachefile = WP_CONTENT_DIR . '/cache/qc-c-json-api_' . $md5_file_name . '-cache.html';
 		$cachetime = 18000;
 		
 		if (file_exists($cachefile) && time() - $cachetime < @filemtime($cachefile))
@@ -60,14 +62,21 @@ class JSON_API {
 		  if (!headers_sent()) {
 			header('HTTP/1.1 200 OK');
 			header('Content-Type: text/plain; charset: UTF-8', true);
-			nocache_headers();
+      header("Pragma: cache");
+      header("Cache-Control: max-age=$cachetime");
+      // header ("Content-Type: text/javascript; charset=utf-8");
+      // header ("Expires: " . gmdate ("D, d M Y H:i:s", strtotime ("-1 week")) . " GMT");
+      // header ("Last-Modified: " . gmdate ("D, d M Y H:i:s") . " GMT");
+      // header ("Cache-Control: no-cache, must-revalidate, max-age=0");
+      // header ("Pragma: no-cache");
+			//nocache_headers();
 		  } else {
 			echo '<pre>';
 		  }			
 		  $result = file_get_contents($cachefile);
         // Handle the result
 			echo $result;
-		}else{
+		} else {
 		// if there is either no file OR the file to too old, render the page and capture the HTML.
 			$result = $this->controller->$method();
 			ob_start();
@@ -76,10 +85,8 @@ class JSON_API {
 				$fp = fopen($cachefile, 'w');
 				fwrite($fp, ob_get_contents());
 				fclose($fp);
-			ob_end_flush();
-		}
-        
-        
+			  ob_end_flush();
+		}       
         // Done!
         exit;
       }
