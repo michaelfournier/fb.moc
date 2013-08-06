@@ -63,13 +63,13 @@ class JSON_API {
 			header('HTTP/1.1 200 OK');
 			header('Content-Type: text/plain; charset: UTF-8', true);
       header("Pragma: cache");
-      header("Cache-Control: max-age=$cachetime");
+      header("Cache-Control: cache, max-age=$cachetime");
       // header ("Content-Type: text/javascript; charset=utf-8");
       // header ("Expires: " . gmdate ("D, d M Y H:i:s", strtotime ("-1 week")) . " GMT");
       // header ("Last-Modified: " . gmdate ("D, d M Y H:i:s") . " GMT");
       // header ("Cache-Control: no-cache, must-revalidate, max-age=0");
       // header ("Pragma: no-cache");
-			//nocache_headers();
+			// nocache_headers();
 		  } else {
 			echo '<pre>';
 		  }			

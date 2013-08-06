@@ -54,9 +54,8 @@ function my_action_javascript() { ?>
 					<span id="file_name"><em><? if(!empty($file_id)) echo get_the_title($mb->get_the_value());?></em></span>
 				</p>
 		</div>
-				<? $mb->the_field('fileurl'); ?>	
-				<input type='hidden' name="<?= $mb->get_the_name(); ?>" id="<?= $mb->get_the_name(); ?>" value="<?= wp_get_attachment_url($file_id); ?>" />
-
+		<? $mb->the_field('fileurl'); ?>	
+		<input type='hidden' name="<?= $mb->get_the_name(); ?>" id="<?= $mb->get_the_name(); ?>" value="<?= wp_get_attachment_url($file_id); ?>" />
 	</div>
 
  
