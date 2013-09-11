@@ -104,7 +104,7 @@ var Blog = (function (blog) {
                 that.renderSidebar();
                 if($(this).hasClass("mCustomScrollbar")) {
                    $(this).mCustomScrollbar("destroy");
-                } 
+                }
                 //var sidebar = $(this).find('#sidebar');
                 //that.renderSidebar();
                 // on desactive la scroll bar //
@@ -116,7 +116,7 @@ var Blog = (function (blog) {
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
-            }); 
+            });
           
             return this;
         },
@@ -126,7 +126,7 @@ var Blog = (function (blog) {
             slug = $(e.currentTarget).find('a').attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
-            this.undelegateEvents();           
+            this.undelegateEvents();
         },
 
         showactif : function(slug) {
@@ -166,7 +166,7 @@ var Blog = (function (blog) {
             "click .nextprevworks" : "scrolltonextprev",
             "click a#videos"   :  "renderVideos",
             "click a#images"   :   "renderPictures"
-        }     
+        }
 
     });
 

@@ -13,6 +13,7 @@ var Blog = (function (blog) {
             var renderedContent = this.template();
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
+            Blog.myapprouter.myheight();
             this.renderWorksListMini();
 
             return this;

@@ -109,7 +109,7 @@ var Blog = (function (blog){
 
             displayWorksList : function () {
               this.selectMenu('works');
-              this.killbackstrech();     
+              this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {               
                   // on instancie la vue MainWorksView

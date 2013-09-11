@@ -1001,6 +1001,7 @@ var Blog = (function (blog) {
             var renderedContent = this.template();
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
+            Blog.myapprouter.myheight();
             this.renderWorksListMini();
 
             return this;
@@ -1186,7 +1187,7 @@ var Blog = (function (blog) {
                 that.renderSidebar();
                 if($(this).hasClass("mCustomScrollbar")) {
                    $(this).mCustomScrollbar("destroy");
-                } 
+                }
                 //var sidebar = $(this).find('#sidebar');
                 //that.renderSidebar();
                 // on desactive la scroll bar //
@@ -1198,7 +1199,7 @@ var Blog = (function (blog) {
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
-            }); 
+            });
           
             return this;
         },
@@ -1208,7 +1209,7 @@ var Blog = (function (blog) {
             slug = $(e.currentTarget).find('a').attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
-            this.undelegateEvents();           
+            this.undelegateEvents();
         },
 
         showactif : function(slug) {
@@ -1248,7 +1249,7 @@ var Blog = (function (blog) {
             "click .nextprevworks" : "scrolltonextprev",
             "click a#videos"   :  "renderVideos",
             "click a#images"   :   "renderPictures"
-        }     
+        }
 
     });
 
@@ -1364,7 +1365,7 @@ var Blog = (function (blog) {
         render : function () {
 
             //this.$el.find('.maincontent').remove();
-            console.log(this.collection.models);
+            var that = this;
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
@@ -1372,12 +1373,7 @@ var Blog = (function (blog) {
             // on fait apparaitre le bouton unfold //
             this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
-            this.$el.find('#workslistmini').imagesLoaded(function() {  
-                // $(this).find('a').each(function() {
-                //     $(this).delay(i * 50).animate({'opacity': .4}, 400);
-                //     i++;
-                //     //console.log($(this).attr('href'));
-                // });       
+            this.$el.find('#workslistmini').imagesLoaded(function() {     
                    // fonction auto scroll vignettes // 
                     function makeScrollable(thumbs, wrapper) {
                         var width = wrapper.innerWidth();           
@@ -1428,12 +1424,12 @@ var Blog = (function (blog) {
                                 });
                                             
                         }
-                        
+                    
                         $(this).on('mouseover', buildThumbs());
-
+                        that.$el.find("#unfoldworks a").click();
                         
             });
-
+            
             return this;
         },
         events: {
@@ -1459,7 +1455,7 @@ var Blog = (function (blog) {
                 $(e.currentTarget).addClass('fold');
             } else {
                 elt.animate({'width': 0});
-                $(e.currentTarget).removeClass('fold'); 
+                $(e.currentTarget).removeClass('fold');
             }
         }
 
@@ -1671,7 +1667,7 @@ var Blog = (function (blog){
 
             displayWorksList : function () {
               this.selectMenu('works');
-              this.killbackstrech();     
+              this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {               
                   // on instancie la vue MainWorksView

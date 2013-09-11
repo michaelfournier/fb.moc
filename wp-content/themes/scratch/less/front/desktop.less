@@ -289,23 +289,19 @@ position: relative;
 
 	#timeline {
 		width: 0%;
-		float:left;
 		margin-top : @unit;
 		position: absolute;
 		bottom:0;
 	}
 
-	#wraplist .segment:hover .sortitem {
-		color: @black60;
+	.segment:hover .sortitem {
+		color: @black90;
 	}
 
-	#wraplist .segment:hover * a {
-		border-top: 1px solid @black60;
-	}
 
 	#workslistmini {
 	    position:relative;
-	    background-color: @bgcolor;
+	    background-color: white;
 	    bottom: 0;
 	    width: 100%;
 	    display:block;
@@ -344,6 +340,10 @@ position: relative;
 		float: none;
 		padding: @unit/4 0 0 0;
 		margin-top: @unit/2;
+	}
+
+	#workslistmini .segment:hover {
+		border-top: 1px solid @black90;
 	}
 
 	#workslistmini .sortitem {

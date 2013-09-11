@@ -11,7 +11,7 @@ var Blog = (function (blog) {
         render : function () {
 
             //this.$el.find('.maincontent').remove();
-            console.log(this.collection.models);
+            var that = this;
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
@@ -19,12 +19,7 @@ var Blog = (function (blog) {
             // on fait apparaitre le bouton unfold //
             this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
-            this.$el.find('#workslistmini').imagesLoaded(function() {  
-                // $(this).find('a').each(function() {
-                //     $(this).delay(i * 50).animate({'opacity': .4}, 400);
-                //     i++;
-                //     //console.log($(this).attr('href'));
-                // });       
+            this.$el.find('#workslistmini').imagesLoaded(function() {     
                    // fonction auto scroll vignettes // 
                     function makeScrollable(thumbs, wrapper) {
                         var width = wrapper.innerWidth();           
@@ -75,12 +70,12 @@ var Blog = (function (blog) {
                                 });
                                             
                         }
-                        
+                    
                         $(this).on('mouseover', buildThumbs());
-
+                        that.$el.find("#unfoldworks a").click();
                         
             });
-
+            
             return this;
         },
         events: {
@@ -106,7 +101,7 @@ var Blog = (function (blog) {
                 $(e.currentTarget).addClass('fold');
             } else {
                 elt.animate({'width': 0});
-                $(e.currentTarget).removeClass('fold'); 
+                $(e.currentTarget).removeClass('fold');
             }
         }
 
