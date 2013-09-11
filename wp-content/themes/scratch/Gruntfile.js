@@ -19,6 +19,26 @@ module.exports = function (grunt) {
       }
     },
 
+    less: {
+      development: {
+        options: {
+          paths: ["cssreset/*.less", "less/front/*.less"]
+        },
+        files: {
+          "style.css": "style.less"
+        }
+      }
+    },
+
+    cssmin: {
+      minify: {
+        expand: true,
+        src: ['style.css', '!*.min.css'],
+        dest: '',
+        ext: '.min.css'
+      }
+    },
+
     // Files to be concatenated … (source and destination files)
     concat: {
       js: {
@@ -37,13 +57,29 @@ module.exports = function (grunt) {
 
    // Tasks being executed with 'grunt watch'
     watch: {
-      scripts: {
-        files: '<%= jshint.files %>',
-        tasks: 'default',
+      options: {
+        livereload: true
+      },
+      php : {
+        files: '*.php',
         options: {
-          nospawn: true,
-          livereload : 80
+          nospawn: true
         }
+      },
+      scripts: {
+        files: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
+        tasks: ['concat', 'uglify'],
+        options: {
+          nospawn: true
+        }
+      },
+      less : {
+        files : ['style.less', 'cssreset/*.less', 'less/front/*.less'],
+        tasks: 'less'
+      },
+      cssmin : {
+        files : 'style.css',
+        tasks: 'cssmin'
       }
     }
 
@@ -59,6 +95,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
 
