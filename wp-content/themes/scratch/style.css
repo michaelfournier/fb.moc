@@ -1,4 +1,3 @@
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
 /*
 Theme Name: scratch
 Theme URI: 
@@ -34,7 +33,9 @@ summary {
 /**
  * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
  */
-audio, canvas, video {
+audio,
+canvas,
+video {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -103,7 +104,8 @@ a:focus {
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-a:active, a:hover {
+a:active,
+a:hover {
   outline: 0;
 }
 /* ==========================================================================
@@ -147,7 +149,8 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
  */
-b, strong {
+b,
+strong {
   font-weight: bold;
 }
 blockquote {
@@ -178,7 +181,8 @@ mark {
 /**
  * Address margins set differently in IE 6/7.
  */
-p, pre {
+p,
+pre {
   margin: 1em 0;
 }
 /**
@@ -209,7 +213,8 @@ q {
 /**
  * Address `quotes` property not supported in Safari 4.
  */
-q:before, q:after {
+q:before,
+q:after {
   content: '';
   content: none;
 }
@@ -222,7 +227,8 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-sub, sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -252,13 +258,16 @@ dd {
 /**
  * Address paddings set differently in IE 6/7.
  */
-menu, ol, ul {
+menu,
+ol,
+ul {
   padding: 0 0 0 40px;
 }
 /**
  * Correct list images handled incorrectly in IE 7.
  */
-nav ul, nav ol {
+nav ul,
+nav ol {
   list-style: none;
   list-style-image: none;
 }
@@ -353,7 +362,8 @@ textarea {
  * Address Firefox 3+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-button, input {
+button,
+input {
   line-height: normal;
 }
 /**
@@ -362,7 +372,8 @@ button, input {
  * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
  * Correct `select` style inheritance in Firefox 4+ and Opera.
  */
-button, select {
+button,
+select {
   text-transform: none;
 }
 /**
@@ -391,7 +402,8 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 /**
@@ -400,7 +412,8 @@ button[disabled], html input[disabled] {
  * 3. Remove excess padding in IE 7.
  *    Known issue: excess padding remains in IE 6.
  */
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
 
@@ -433,13 +446,15 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 /**
  * Remove inner padding and border in Firefox 3+.
  */
-button::-moz-focus-inner, input::-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -748,7 +763,8 @@ Author: vacuumRandom
 ========================================================================== *//*------------------*/
 /*		general		*/
 /*------------------*/
-html, body {
+html,
+body {
   height: 100%;
 }
 #smartphone,
@@ -764,13 +780,14 @@ html, body {
   font-size: 0.7142857142857143em;
 }
 body {
-  background-color: #f9f9f9;
+  background-color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8571428571428571em;
   line-height: 1.3333333333333333;
   color: #666666;
 }
-h3, h4 {
+h3,
+h4 {
   color: #1a1a1a;
   margin: 0 0 1.1428571428571428em 0;
   letter-spacing: 1px;
@@ -837,7 +854,8 @@ ul {
 #php-page {
   display: none;
 }
-#navgal li a.actif, nav li a.actif {
+#navgal li a.actif,
+nav li a.actif {
   color: #0d0aff;
 }
 nav#picvidswitcher {
@@ -856,14 +874,16 @@ nav li {
   display: inline-block;
   float: left;
 }
-#main_nav li:first-child a span, #tools nav li:first-child a {
+#main_nav li:first-child a span,
+#tools nav li:first-child a {
   padding-left: 0px;
   border: 0px;
 }
 #tools nav li:last-child a {
   padding-right: 0;
 }
-#main_nav a span, #tools li a {
+#main_nav a span,
+#tools li a {
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
 }
@@ -908,7 +928,7 @@ nav a {
 figure#picture {
   position: relative;
   height: 100%;
-  width: 100;
+  width: 100%;
 }
 figure#picture img {
   max-width: 100%;
@@ -927,13 +947,14 @@ figure#picture img {
   position: absolute;
   padding: 0 0.5714285714285714em 0 1.3714285714285712em;
   top: -0.5714285714285714em;
-  background-color: #f9f9f9;
+  background-color: white;
   color: #b3b3b3;
 }
 #wraplist {
   float: left;
   overflow: hidden;
   padding-top: 0.5714285714285714em;
+  padding-left: 0.5714285714285714em;
 }
 .workthumb {
   display: block;
@@ -941,7 +962,10 @@ figure#picture img {
   border-top: 1px solid #dcdcdc;
   padding-top: 0.7619047619047619em;
   padding-left: 0.7619047619047619em;
-  padding-bottom: 0.7619047619047619em;
+  margin-bottom: 0.7619047619047619em;
+  width: 150px;
+  height: 90px;
+  overflow: hidden;
 }
 .segment {
   display: inline;
@@ -1021,10 +1045,12 @@ figure#picture img {
   padding: 0;
   margin: 0 1.1428571428571428em;
 }
-#displaythumb, #displaylist {
+#displaythumb,
+#displaylist {
   background-color: #b3b3b3;
 }
-#displaythumb.actif, #displaylist.actif {
+#displaythumb.actif,
+#displaylist.actif {
   background-color: #0d0aff;
 }
 #rightbar a {
@@ -1045,7 +1071,9 @@ figure#picture img {
   height: 100%;
   overflow: hidden;
 }
-#video iframe, #video object, #video embed {
+#video iframe,
+#video object,
+#video embed {
   position: absolute;
   top: 0;
   left: 0;
@@ -1065,7 +1093,8 @@ figure#picture img {
 .mCSB_container.mCS_no_scrollbar {
   margin-right: 0;
 }
-.mCS_disabled > .mCustomScrollBox > .mCSB_container.mCS_no_scrollbar, .mCS_destroyed > .mCustomScrollBox > .mCSB_container.mCS_no_scrollbar {
+.mCS_disabled > .mCustomScrollBox > .mCSB_container.mCS_no_scrollbar,
+.mCS_destroyed > .mCustomScrollBox > .mCSB_container.mCS_no_scrollbar {
   margin-right: 30px;
 }
 .mCustomScrollBox > .mCSB_scrollTools {
@@ -1107,7 +1136,8 @@ figure#picture img {
   border-radius: 10px;
   text-align: center;
 }
-.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown {
+.mCSB_scrollTools .mCSB_buttonUp,
+.mCSB_scrollTools .mCSB_buttonDown {
   display: block;
   position: relative;
   height: 20px;
@@ -1129,7 +1159,8 @@ figure#picture img {
 .mCSB_horizontal > .mCSB_container.mCS_no_scrollbar {
   margin-bottom: 0;
 }
-.mCS_disabled > .mCSB_horizontal > .mCSB_container.mCS_no_scrollbar, .mCS_destroyed > .mCSB_horizontal > .mCSB_container.mCS_no_scrollbar {
+.mCS_disabled > .mCSB_horizontal > .mCSB_container.mCS_no_scrollbar,
+.mCS_destroyed > .mCSB_horizontal > .mCSB_container.mCS_no_scrollbar {
   margin-right: 0;
   margin-bottom: 30px;
 }
@@ -1165,7 +1196,8 @@ figure#picture img {
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
-.mCSB_horizontal > .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_horizontal > .mCSB_scrollTools .mCSB_buttonRight {
+.mCSB_horizontal > .mCSB_scrollTools .mCSB_buttonLeft,
+.mCSB_horizontal > .mCSB_scrollTools .mCSB_buttonRight {
   display: block;
   position: relative;
   width: 20px;
@@ -1226,7 +1258,8 @@ figure#picture img {
   /* old ie */
 
 }
-.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(255, 255, 255, 0.9);
   filter: "alpha(opacity=90)";
   -ms-filter: "alpha(opacity=90)";
@@ -1309,7 +1342,8 @@ figure#picture img {
 .mCS-dark > .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
   background: #666666;
 }
-.mCS-dark > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-dark > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCS-dark > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-dark > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.9);
 }
 .mCS-dark > .mCSB_scrollTools .mCSB_buttonUp {
@@ -1358,7 +1392,8 @@ figure#picture img {
 .mCS-light-2 > .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
   background: rgba(255, 255, 255, 0.85);
 }
-.mCS-light-2 > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-light-2 > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCS-light-2 > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-light-2 > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(255, 255, 255, 0.9);
 }
 .mCS-light-2 > .mCSB_scrollTools .mCSB_buttonUp {
@@ -1407,7 +1442,8 @@ figure#picture img {
 .mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.85);
 }
-.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-dark-2 > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.9);
 }
 .mCS-dark-2 > .mCSB_scrollTools .mCSB_buttonUp {
@@ -1456,7 +1492,8 @@ figure#picture img {
 .mCS-light-thick > .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
   background: rgba(255, 255, 255, 0.85);
 }
-.mCS-light-thick > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-light-thick > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCS-light-thick > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-light-thick > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(255, 255, 255, 0.9);
 }
 .mCS-light-thick > .mCSB_scrollTools .mCSB_buttonUp {
@@ -1505,7 +1542,8 @@ figure#picture img {
 .mCS-dark-thick > .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.85);
 }
-.mCS-dark-thick > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-dark-thick > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCS-dark-thick > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-dark-thick > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.9);
 }
 .mCS-dark-thick > .mCSB_scrollTools .mCSB_buttonUp {
@@ -1563,7 +1601,8 @@ figure#picture img {
 .mCS-dark-thin > .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.85);
 }
-.mCS-dark-thin > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-dark-thin > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+.mCS-dark-thin > .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-dark-thin > .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
   background: rgba(0, 0, 0, 0.9);
 }
 .mCS-dark-thin > .mCSB_scrollTools .mCSB_buttonUp {
@@ -1588,7 +1627,9 @@ SMARTPHONES
   #smartphone {
     display: block;
   }
-  #tablette, #intermediaire, #bureau {
+  #tablette,
+  #intermediaire,
+  #bureau {
     display: none;
   }
 }
@@ -1600,7 +1641,9 @@ SMARTPHONES
   #tablette {
     display: block;
   }
-  #smartphone, #intermediaire, #bureau {
+  #smartphone,
+  #intermediaire,
+  #bureau {
     display: none;
   }
 }
@@ -1612,10 +1655,13 @@ SMARTPHONES
   #bureau {
     display: block;
   }
-  #smartphone, #tablette, #intermediaire {
+  #smartphone,
+  #tablette,
+  #intermediaire {
     display: none;
   }
-  html, body {
+  html,
+  body {
     overflow-y: hidden;
   }
   #main_wrapper {
@@ -1673,7 +1719,9 @@ SMARTPHONES
     background-color: white;
     overflow-y: hidden;
   }
-  .maincontent.news, .maincontent.bio, .maincontent.notice {
+  .maincontent.news,
+  .maincontent.bio,
+  .maincontent.notice {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -1786,7 +1834,6 @@ SMARTPHONES
     max-width: 250px;
     height: 100%;
     overflow-y: auto;
-    background-color: #f9f9f9;
     z-index: 5;
   }
   #sidebarwrapper h3 {
@@ -1831,7 +1878,8 @@ SMARTPHONES
     padding-top: 0;
     margin-bottom: 1.1428571428571428em;
   }
-  #mainbb, #main_nav {
+  #mainbb,
+  #main_nav {
     position: relative;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1876,7 +1924,6 @@ SMARTPHONES
     width: 5.555555555555555%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
-    left: 0;
     display: none;
     height: 32px;
     bottom: 0.38095238095238093em;
@@ -1904,7 +1951,8 @@ SMARTPHONES
   #unfoldworks a:hover span {
     background-color: #1a1a1a;
   }
-  #nextwork:hover, #prevwork:hover {
+  #nextwork:hover,
+  #prevwork:hover {
     opacity: 1;
   }
   #nextwork {
@@ -1969,13 +2017,13 @@ SMARTPHONES
     top: -0.7619047619047619em;
     left: 0;
     padding: 0 0 0 0;
-    background-color: #f9f9f9;
     z-index: 9;
   }
   .thumb_color:hover img {
     opacity: 1;
   }
-  .thumb_color img, .thumb_nb img {
+  .thumb_color img,
+  .thumb_nb img {
     opacity: 0.4;
   }
 }
@@ -2034,7 +2082,8 @@ IE OLDIES
  * Extends the .visuallyhidden class to allow the element to be focusable
  * when navigated to via the keyboard: h5bp.com/p
  */
-.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
   clip: auto;
   height: auto;
   margin: 0;
@@ -2059,7 +2108,8 @@ IE OLDIES
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   content: " ";
   /* 1 */
 
@@ -2084,10 +2134,7 @@ IE OLDIES
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
-@media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
+@media print, (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 /* ==========================================================================
@@ -2103,7 +2150,8 @@ IE OLDIES
     box-shadow: none !important;
     text-shadow: none !important;
   }
-  a, a:visited {
+  a,
+  a:visited {
     text-decoration: underline;
   }
   a[href]:after {
@@ -2115,10 +2163,13 @@ IE OLDIES
   /*
        * Don't show links for images, or javascript/internal links
        */
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
     content: "";
   }
-  pre, blockquote {
+  pre,
+  blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -2127,7 +2178,8 @@ IE OLDIES
     /* h5bp.com/t */
   
   }
-  tr, img {
+  tr,
+  img {
     page-break-inside: avoid;
   }
   img {
@@ -2136,11 +2188,14 @@ IE OLDIES
   @page  {
     margin: 0.5cm;
   }
-  p, h2, h3 {
+  p,
+  h2,
+  h3 {
     orphans: 3;
     widows: 3;
   }
-  h2, h3 {
+  h2,
+  h3 {
     page-break-after: avoid;
   }
 }

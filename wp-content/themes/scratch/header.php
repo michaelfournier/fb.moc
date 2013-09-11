@@ -93,6 +93,9 @@
 
 		<div id="wrapper">			
 			<section id="sidebar">
+				<h3></h3>
+				<h4></h4>
+				<p id='description'></p>
 			</section>
 			<section class="maincontent">
 			</section>
