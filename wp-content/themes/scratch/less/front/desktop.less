@@ -298,6 +298,10 @@ position: relative;
 		color: @black90;
 	}
 
+	#wraplist-list .segment:hover .sortitem {
+		border-bottom: 1px solid @black90;
+	}
+
 
 	#workslistmini {
 	    position:relative;
@@ -342,9 +346,10 @@ position: relative;
 		margin-top: @unit/2;
 	}
 
-	#workslistmini .segment:hover {
+	#workslistmini .segment:hover, #wraplist .segment:hover * a {
 		border-top: 1px solid @black90;
 	}
+
 
 	#workslistmini .sortitem {
 		top: -@unit/1.5;

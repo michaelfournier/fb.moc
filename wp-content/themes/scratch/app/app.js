@@ -605,15 +605,30 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
-            this.$el.find('.maincontent').html(renderedContent).find('img').css('display', 'none');
+            var content = this.$el.find('.maincontent');
+            var that = this;
+            if ( this.$el.find('.maincontent img').length > 0 ) {
+              this.$el.find('.maincontent img').fadeOut(300, function() {
+                 content.html(renderedContent).find('img').css('display', 'none');
+                 that.showOnLoaded();
+              });
+            } else {
+               content.html(renderedContent).find('img').css('display', 'none');
+               this.showOnLoaded();
+            }
+           
+
+        },
+        showOnLoaded : function() {
            $(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
-              $(this).find('img').fadeIn(500);
+              $(this).find('img').fadeIn(400);
             });
         }
+
     });
 
     return blog;
@@ -1513,16 +1528,24 @@ var Blog = (function (blog) {
                 $(this).delay(i * 80).animate({opacity: 1});
                 i++;
             });
-
-            wrapper = this.$el.parent().parent().find("#wrapper");
+            Blog.myapprouter.myheight();
+            wrapper = this.$el;
+            console.log(this.$el);
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
                     theme: "dark"
                 });
+            } else {
+                wrapper.mCustomScrollbar("destroy");
+                wrapper.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    theme: "dark"
+                });
             }
-            Blog.myapprouter.myheight();
+           
             wrapper.mCustomScrollbar("update");
 
 
@@ -1770,6 +1793,7 @@ var Blog = (function (blog){
       Blog.myapprouter = new blog.Router.RoutesManager();
       //Backbone.history.start({pushState: true, hasChange: true, root: "/"});
 
+
   // Trigger the initial route and enable HTML5 History API support, set the
   // root folder to '/' by default.  Change in app.js.
   if (wp_vars.lang != 'fr') { myroot = wp_vars.lang; } else { myroot = "";}
@@ -1787,6 +1811,8 @@ var Blog = (function (blog){
 
         // Ensure the root is part of the anchor href, meaning it's relative.
         if (href.prop.slice(0, root.length) === root) {
+           // on écrit l'adresse dans le btn switch lang //
+          $('#qtrans a').attr("href", wp_vars.blogurl+"/"+$(this).attr("href"));
           // Stop the default event to ensure the link will not cause a page
           // refresh.
           evt.preventDefault();
@@ -1795,8 +1821,8 @@ var Blog = (function (blog){
           // trigger the correct events. The Router's internal `navigate` method
           // calls this anyways.  The fragment is sliced from the root.
           Backbone.history.navigate(href.attr, true);
-          // on écrit l'adresse dans le btn switch lang //
-          $('#qtrans a').attr("href", wp_vars.blogurl+"/"+href.attr);
+
+
         }
     });
 

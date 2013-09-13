@@ -200,15 +200,17 @@ nav a {
 
 .btn-picture {
 	background-color: @black05;
-	display: inline-block;
-	float: left;
+	display: table-cell;
+	height: 100%;
 	width: 100%;
+	vertical-align: middle;
 }
 
 figure#picture {
 	position: relative;
 	height: 100%;
 	width: 100%;
+	display: table;
 }
 
 
@@ -300,6 +302,7 @@ figure#picture img {
 	clear: both;
 	float: left;
 	border-top: 0px;
+	height: 35px;
 	padding: @unit 0 0 0;
 }
 

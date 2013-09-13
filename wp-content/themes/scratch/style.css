@@ -921,14 +921,16 @@ nav a {
 }
 .btn-picture {
   background-color: #f1f1f1;
-  display: inline-block;
-  float: left;
+  display: table-cell;
+  height: 100%;
   width: 100%;
+  vertical-align: middle;
 }
 figure#picture {
   position: relative;
   height: 100%;
   width: 100%;
+  display: table;
 }
 figure#picture img {
   max-width: 100%;
@@ -993,6 +995,7 @@ figure#picture img {
   clear: both;
   float: left;
   border-top: 0px;
+  height: 35px;
   padding: 1.1428571428571428em 0 0 0;
 }
 #wraplist-list a h3 {
@@ -1974,6 +1977,9 @@ SMARTPHONES
   .segment:hover .sortitem {
     color: #1a1a1a;
   }
+  #wraplist-list .segment:hover .sortitem {
+    border-bottom: 1px solid #1a1a1a;
+  }
   #workslistmini {
     position: relative;
     background-color: white;
@@ -2009,7 +2015,8 @@ SMARTPHONES
     padding: 0.2857142857142857em 0 0 0;
     margin-top: 0.5714285714285714em;
   }
-  #workslistmini .segment:hover {
+  #workslistmini .segment:hover,
+  #wraplist .segment:hover * a {
     border-top: 1px solid #1a1a1a;
   }
   #workslistmini .sortitem {

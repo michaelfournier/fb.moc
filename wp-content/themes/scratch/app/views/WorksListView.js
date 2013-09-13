@@ -30,16 +30,24 @@ var Blog = (function (blog) {
                 $(this).delay(i * 80).animate({opacity: 1});
                 i++;
             });
-
-            wrapper = this.$el.parent().parent().find("#wrapper");
+            Blog.myapprouter.myheight();
+            wrapper = this.$el;
+            console.log(this.$el);
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
                     theme: "dark"
                 });
+            } else {
+                wrapper.mCustomScrollbar("destroy");
+                wrapper.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    theme: "dark"
+                });
             }
-            Blog.myapprouter.myheight();
+           
             wrapper.mCustomScrollbar("update");
 
 

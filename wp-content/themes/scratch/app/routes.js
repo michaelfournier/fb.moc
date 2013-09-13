@@ -212,6 +212,7 @@ var Blog = (function (blog){
       Blog.myapprouter = new blog.Router.RoutesManager();
       //Backbone.history.start({pushState: true, hasChange: true, root: "/"});
 
+
   // Trigger the initial route and enable HTML5 History API support, set the
   // root folder to '/' by default.  Change in app.js.
   if (wp_vars.lang != 'fr') { myroot = wp_vars.lang; } else { myroot = "";}
@@ -229,6 +230,8 @@ var Blog = (function (blog){
 
         // Ensure the root is part of the anchor href, meaning it's relative.
         if (href.prop.slice(0, root.length) === root) {
+           // on écrit l'adresse dans le btn switch lang //
+          $('#qtrans a').attr("href", wp_vars.blogurl+"/"+$(this).attr("href"));
           // Stop the default event to ensure the link will not cause a page
           // refresh.
           evt.preventDefault();
@@ -237,8 +240,8 @@ var Blog = (function (blog){
           // trigger the correct events. The Router's internal `navigate` method
           // calls this anyways.  The fragment is sliced from the root.
           Backbone.history.navigate(href.attr, true);
-          // on écrit l'adresse dans le btn switch lang //
-          $('#qtrans a').attr("href", wp_vars.blogurl+"/"+href.attr);
+
+
         }
     });
 
