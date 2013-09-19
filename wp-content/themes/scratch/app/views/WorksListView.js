@@ -19,7 +19,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             // on instancie la vue worklisttools //
-            var myworkslisttoolsview = new blog.Views.WorksListToolsView();
+            //var myworkslisttoolsview = new blog.Views.WorksListToolsView();
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             //this.$el.find("#wrapper").mCustomScrollbar("update");
             this.hideInfos();

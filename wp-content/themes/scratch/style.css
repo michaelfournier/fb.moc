@@ -961,7 +961,8 @@ figure#picture img {
 .workthumb {
   display: block;
   float: left;
-  border-top: 1px solid #dcdcdc;
+  /*border-top: 1px solid @black10;*/
+
   padding-top: 0.7619047619047619em;
   padding-left: 0.7619047619047619em;
   margin-bottom: 0.7619047619047619em;
@@ -1018,6 +1019,9 @@ figure#picture img {
   clear: both;
   display: block;
   top: inherit;
+}
+#wraplist .sortitem {
+  display: none;
 }
 /*-----------*/
 #tools #displaying a {
@@ -2014,10 +2018,6 @@ SMARTPHONES
     float: none;
     padding: 0.2857142857142857em 0 0 0;
     margin-top: 0.5714285714285714em;
-  }
-  #workslistmini .segment:hover,
-  #wraplist .segment:hover * a {
-    border-top: 1px solid #1a1a1a;
   }
   #workslistmini .sortitem {
     top: -0.7619047619047619em;

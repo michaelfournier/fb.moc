@@ -19,10 +19,10 @@ var Blog = (function (blog) {
             // on fait apparaitre le bouton unfold //
             this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
-            this.$el.find('#workslistmini').imagesLoaded(function() {     
+            this.$el.find('#workslistmini').imagesLoaded(function() {
                    // fonction auto scroll vignettes // 
                     function makeScrollable(thumbs, wrapper) {
-                        var width = wrapper.innerWidth();           
+                        var width = wrapper.innerWidth();     
                         //wrapper.scrollLeft(0);            
                         var leftBuffer = 100;
                         var rightBuffer = 100;
@@ -59,8 +59,8 @@ var Blog = (function (blog) {
                             
                         function buildThumbs() {            
                                 $('#workslistmini').each(function() {
-                                    var width = 0;           
-                                    var wrapper = $(this).find('.st_thumbs_wrapper'); 
+                                    var width = 0;
+                                    var wrapper = $(this).find('.st_thumbs_wrapper');
                                     wrapper.find('.st_thumbs a').each( function() {
                                         width += $(this).outerWidth(true);
                                     });                 
