@@ -70,6 +70,8 @@ var Blog = (function (blog) {
             Blog.myworkslist.displaymode = 'list';
             //console.log(this.collection.displaymode);
             Blog.myworkslistview.render();
+            // on affiche #sorting en mode list //
+            this.$el.find("#sorting").css('display', 'block');
         },
 // fonction pour l'affichage par vignettes
         displaythumb : function(e) {
@@ -78,6 +80,13 @@ var Blog = (function (blog) {
             Blog.myworkslistview.template = Blog.myworkslistview.templatethumb;
             Blog.myworkslist.displaymode = 'thumbs';
             Blog.myworkslistview.render();
+            // on classe par date en vue thumb //
+            Blog.myworkslist.sortByDate();
+            // le bouton date est actif //
+            this.$el.find("#sorting a").removeClass("actif");
+            this.$el.find("#sortbydate").addClass("actif");
+            // on cache #sorting en mode thumb //
+            this.$el.find("#sorting").css('display', 'none');
         },
 
         // fonction pour donner une hauteur à #mainbb //

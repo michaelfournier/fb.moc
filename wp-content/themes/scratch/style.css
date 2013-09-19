@@ -887,6 +887,10 @@ nav li {
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
 }
+nav#sorting {
+  display: none;
+  float: right;
+}
 nav#sorting li:first-child a {
   border: 0px;
 }
@@ -1827,7 +1831,7 @@ SMARTPHONES
     min-height: 1.1428571428571428em;
   }
   #displaying {
-    float: right;
+    float: left;
   }
   #sidebar {
     width: 200px;

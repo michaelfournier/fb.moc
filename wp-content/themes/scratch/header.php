@@ -207,8 +207,7 @@
 
 	<!-- template pour les outils de trie et d'affichage de workslist -->
 	<script type="text/template" id="workslisttools_template">
-			<nav id="sorting">
-				<span style="float:left; display:none">trie par :</span>
+			<nav id="sorting" <% if (displaymode === "list") { %> style="display:block" <% } %>>
 				<ul>
 					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate'>date</a></li>
 					<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass  id='sortbycat'>categories</a></li>

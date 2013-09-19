@@ -19,11 +19,8 @@ var Blog = (function (blog) {
         },
         render : function () {
             // on instancie la vue worklisttools //
-            //var myworkslisttoolsview = new blog.Views.WorksListToolsView();
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
-            //this.$el.find("#wrapper").mCustomScrollbar("update");
             this.hideInfos();
-            // this.$el.find("#sidebar").mCustomScrollbar("destroy");
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
@@ -32,7 +29,6 @@ var Blog = (function (blog) {
             });
             Blog.myapprouter.myheight();
             wrapper = this.$el;
-            console.log(this.$el);
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({
                     set_height: "100%",
