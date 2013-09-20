@@ -101,11 +101,11 @@ p {
 
 figcaption {
 	font-size:(11/@font-size)*1em;	
-	color: @black60;
+	color: @black90;
 	float: left;
 
 	width: 100%;
-	text-align:center;
+	text-align:left;
 }
 
 .actif {
@@ -187,34 +187,31 @@ nav a {
 	overflow-y: auto;
 	overflow-x: hidden;
 	position: relative;
-	margin-bottom: 54px;
 }
 
 #tools {
-	height: @unit*2;
+	margin-bottom: @unit/2;
 }
-
+#navgal { float: left; width: 100%; .box-sizing(); padding-left: 250px; height: @unit*1.5;}
 #navgal li a {
-	font-size:(18/@font-size)*1em;
-	padding: @unit*0.6 @unit/2 @unit/4;
+	font-size:(14/@font-size)*1em;
+	padding: 0 @unit/2 0 0;
 	border: 0;
 	text-decoration: none;
 	color: @black10;
 }
 
 .btn-picture {
-	background-color: @black05;
-	display: table-cell;
+	/*background-color: @black05;*/
+	display: block;
 	height: 100%;
 	width: 100%;
-	vertical-align: middle;
 }
 
 figure#picture {
 	position: relative;
-	height: 100%;
 	width: 100%;
-	display: table;
+	display: block;
 }
 
 

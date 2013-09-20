@@ -44,14 +44,17 @@ var Blog = (function (blog) {
             var renderNested = this.renderNested;
             // on instancie la vue myworkslistminiview
             var myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
+              //on replie l'elt #tools
+                this.$el.find("#tools").css("width", 0);
             // on charge les données dans workslistmini //
             Blog.myworkslist.all().fetch({ 
               update: true,
               success: function(results) {
                 console.log(results);
                 //myworkslistminiview.render(results);
+
                 // on rend myworkslistview dans .maincontent comme enfant de parentview
-               renderNested(parentview, myworkslistminiview, "#timeline", results); 
+               renderNested(parentview, myworkslistminiview, "#tools", results); 
               }
             });
 

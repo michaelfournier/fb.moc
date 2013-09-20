@@ -24,15 +24,15 @@ var Blog = (function (blog) {
                 Blog.picturesgalview.undelegateEvents();
             }
 
- console.log("work picture", this.model);           
+ //console.log("work picture", this.model);           
              // on déclare un objet collection contenant les images liées au post //
-            var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery')); 
+            var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery'));
             //console.log("picturegal",Blog.picturesgal);
             // on déclare un objet vue de notre galerie d'images //
             Blog.picturesgalview = new blog.Views.PicturesGalNavView(picturesgal);
-            //renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal); 
+            //renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal);
             // on rend la vue //
-            Blog.picturesgalview.render();             
+            Blog.picturesgalview.render();
         },
 
         renderVideos : function() {
@@ -79,7 +79,7 @@ var Blog = (function (blog) {
             renderNested(parentview, sidebarworksview, "#sidebar", this.model); 
         },
 
-        render : function () { 
+        render : function () {
             // on active la vignette active dans workslist mini //
 
             this.showactif(this.model.get('slug'));
@@ -95,9 +95,9 @@ var Blog = (function (blog) {
             if (Blog.myworkslist) { this.nextwork(); }
             var that = this;
             // on fait apparaitre les fleche et le btn depliant la liste mini //
-            this.$el.find('.nextprevworks').css('display', 'block');
+           // this.$el.find('.nextprevworks').css('display', 'block');
             // on créer navgal et picvidswitcher dans #tools//
-            this.$el.find("#tools").html("<nav id='navgal'></nav><nav id='picvidswitcher'></nav>");
+            //this.$el.find("#tools").html("<nav id='navgal'></nav><nav id='picvidswitcher'></nav>");
 
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
@@ -112,7 +112,7 @@ var Blog = (function (blog) {
                 // on écrit les infos dans la side bar//
                 $(this).find('.maincontent').empty();
 
-                $(this).find('.maincontent').css({"text-align":"center", "overflow-y": "hidden"});
+                $(this).find('.maincontent').css({"overflow-y": "hidden"});
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
@@ -131,8 +131,8 @@ var Blog = (function (blog) {
 
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
-            this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
-            item.find('img').css('opacity', 1);
+            this.$el.find('.st_thumbs_wrapper img').removeClass('colorize');
+            item.find('img').addClass('colorize');
         },
 
         nextwork : function() {

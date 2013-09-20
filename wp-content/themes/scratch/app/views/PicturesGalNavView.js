@@ -22,7 +22,7 @@ var Blog = (function (blog) {
 
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
-            console.log(this.collection.models.length);
+            //console.log(this.collection.models.length);
             this.$el.find("#navgal").empty();
             if (this.collection.models.length > 1) {
                 this.$el.find("#navgal").html(renderedContent).find('a').each(function() {
@@ -68,7 +68,7 @@ var Blog = (function (blog) {
         nextpicture: function(e) {
             console.log(e);
             i = this.idpic;
-            if (i > this.gallerylength - 1) { 
+            if (i > this.gallerylength - 1) {
                 this.idpic = 0;
                 i = 0;
             }

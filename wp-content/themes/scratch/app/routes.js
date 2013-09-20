@@ -42,7 +42,7 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true) - $('#timeline').outerHeight(true);
+                    var contentheight = $(window).height() - $('#tools').outerHeight(true) - $('#main_header').outerHeight(true) - $('#navgal').outerHeight(true)*2;
                     $('#wrapper').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();

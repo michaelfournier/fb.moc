@@ -657,7 +657,7 @@ var Blog = (function (blog) {
 
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
-            console.log(this.collection.models.length);
+            //console.log(this.collection.models.length);
             this.$el.find("#navgal").empty();
             if (this.collection.models.length > 1) {
                 this.$el.find("#navgal").html(renderedContent).find('a').each(function() {
@@ -703,7 +703,7 @@ var Blog = (function (blog) {
         nextpicture: function(e) {
             console.log(e);
             i = this.idpic;
-            if (i > this.gallerylength - 1) { 
+            if (i > this.gallerylength - 1) {
                 this.idpic = 0;
                 i = 0;
             }
@@ -1047,14 +1047,17 @@ var Blog = (function (blog) {
             var renderNested = this.renderNested;
             // on instancie la vue myworkslistminiview
             var myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
+              //on replie l'elt #tools
+                this.$el.find("#tools").css("width", 0);
             // on charge les données dans workslistmini //
             Blog.myworkslist.all().fetch({ 
               update: true,
               success: function(results) {
                 console.log(results);
                 //myworkslistminiview.render(results);
+
                 // on rend myworkslistview dans .maincontent comme enfant de parentview
-               renderNested(parentview, myworkslistminiview, "#timeline", results); 
+               renderNested(parentview, myworkslistminiview, "#tools", results); 
               }
             });
 
@@ -1122,15 +1125,15 @@ var Blog = (function (blog) {
                 Blog.picturesgalview.undelegateEvents();
             }
 
- console.log("work picture", this.model);           
+ //console.log("work picture", this.model);           
              // on déclare un objet collection contenant les images liées au post //
-            var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery')); 
+            var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery'));
             //console.log("picturegal",Blog.picturesgal);
             // on déclare un objet vue de notre galerie d'images //
             Blog.picturesgalview = new blog.Views.PicturesGalNavView(picturesgal);
-            //renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal); 
+            //renderNested(parentview, Blog.picturesgalview, "#tools", picturesgal);
             // on rend la vue //
-            Blog.picturesgalview.render();             
+            Blog.picturesgalview.render();
         },
 
         renderVideos : function() {
@@ -1177,7 +1180,7 @@ var Blog = (function (blog) {
             renderNested(parentview, sidebarworksview, "#sidebar", this.model); 
         },
 
-        render : function () { 
+        render : function () {
             // on active la vignette active dans workslist mini //
 
             this.showactif(this.model.get('slug'));
@@ -1193,9 +1196,9 @@ var Blog = (function (blog) {
             if (Blog.myworkslist) { this.nextwork(); }
             var that = this;
             // on fait apparaitre les fleche et le btn depliant la liste mini //
-            this.$el.find('.nextprevworks').css('display', 'block');
+           // this.$el.find('.nextprevworks').css('display', 'block');
             // on créer navgal et picvidswitcher dans #tools//
-            this.$el.find("#tools").html("<nav id='navgal'></nav><nav id='picvidswitcher'></nav>");
+            //this.$el.find("#tools").html("<nav id='navgal'></nav><nav id='picvidswitcher'></nav>");
 
             // on fait apparaitre dans #mainbb .maincontent le media //
             this.$el.find("#wrapper").fadeOut('fast', function () {
@@ -1210,7 +1213,7 @@ var Blog = (function (blog) {
                 // on écrit les infos dans la side bar//
                 $(this).find('.maincontent').empty();
 
-                $(this).find('.maincontent').css({"text-align":"center", "overflow-y": "hidden"});
+                $(this).find('.maincontent').css({"overflow-y": "hidden"});
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
@@ -1229,8 +1232,8 @@ var Blog = (function (blog) {
 
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
-            this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
-            item.find('img').css('opacity', 1);
+            this.$el.find('.st_thumbs_wrapper img').removeClass('colorize');
+            item.find('img').addClass('colorize');
         },
 
         nextwork : function() {
@@ -1362,7 +1365,7 @@ var Blog = (function (blog) {
         },
 
         // fonction pour donner une hauteur à #mainbb //
-         myheight: function() {         
+         myheight: function() {        
             var offset = $('#mainbb').offset();
             // topOffset = distance entre le bloc #content et le haut de la fenetre //  
             var topOffset = offset.top; 
@@ -1464,12 +1467,12 @@ var Blog = (function (blog) {
 
             var activeitem = this.$el.find("#"+this.collection.workslug);
             console.log(activeitem);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );  
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } ); 
         },
 
         showactif : function(item) {
-            this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
-            item.find('img').css('opacity', 1);
+            this.$el.find('.st_thumbs_wrapper img').removeClass('colorize');
+            item.find('img').addClass('colorize');
         },
 
         toggleworks : function(e) {
@@ -1628,7 +1631,7 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#tools').height() - $('#main_header').outerHeight(true) - $('#timeline').outerHeight(true);
+                    var contentheight = $(window).height() - $('#tools').outerHeight(true) - $('#main_header').outerHeight(true) - $('#navgal').outerHeight(true)*2;
                     $('#wrapper').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();

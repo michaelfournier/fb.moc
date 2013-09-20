@@ -90,7 +90,7 @@
 		<nav class="nextprevworks" id="nextwork">
 			<a href=""></a>
 		</nav>
-
+		<nav id="navgal"></nav>
 		<div id="wrapper">			
 			<section id="sidebar">
 				<h3></h3>
@@ -100,7 +100,8 @@
 			<section class="maincontent">
 			</section>
 		</div>
-		<section id="timeline"></section>
+		
+		
 	</script>
 
 	<!-- template pour la workslist thumb -->
@@ -126,9 +127,9 @@
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
-		                    		<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    		<img width="160px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    	<% } else { %>
-		                    		<img width="150px" src='<%= work.get('customthumb')[0] %>' />
+		                    		<img width="160px" src='<%= work.get('customthumb')[0] %>' />
 		                    	<% } %>
 		                    </a>
 	                 	</div>             			
@@ -136,9 +137,9 @@
 	              		<div class="wrapthumb" style="opacity: 0">
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>	
-		                    		<img width="150px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    		<img width="160px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    	<% } else { %>
-		                    		<img width="150px" src='<%= work.get('customthumb')[0] %>' />
+		                    		<img width="160px" src='<%= work.get('customthumb')[0] %>' />
 		                    	<% } %>
 		                    </a>
 	                 	</div>                  		
@@ -180,9 +181,9 @@
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
-		                    		<img width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
 		                    	<% } else { %>
-		                    		<img width="50px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
 		                    	<% } %>
 		                    </a>
 	                 	</div>             			
@@ -190,9 +191,9 @@
 	              		<div class="wrapthumb">
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>"> 
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
-		                    		<img width="50px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
 		                    	<% } else { %>
-		                    		<img width="50px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
 		                    	<% } %>
 		                    </a>
 	                 	</div>                  		
@@ -207,6 +208,7 @@
 
 	<!-- template pour les outils de trie et d'affichage de workslist -->
 	<script type="text/template" id="workslisttools_template">
+		<div id="indextools">
 			<nav id="sorting" <% if (displaymode === "list") { %> style="display:block" <% } %>>
 				<ul>
 					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate'>date</a></li>
@@ -226,6 +228,7 @@
 					
 				</ul>
 			</nav>
+		</div>
 	</script>
 
 
@@ -234,7 +237,7 @@
 	    <% if(_.size(gallery) > 1) { %>
 	    		<ul>
 			        <% _.each(gallery, function (picture, i) { %>       	
-			            	<li><a data-bypass="<%= i %>" class="linkpic">&bull;</a></li>
+			            	<li><a data-bypass="<%= i %>" class="linkpic"><%= i+1 %></a></li>
 			        <% }); %>
 	        	</ul>
 	     <% } %>
@@ -315,17 +318,17 @@
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>">
 				                    		
 				                    		<% if (work.get('customthumb')) { %>
-				                    			<img width="50px" src='<%= work.get('customthumb')[0] %>' />				                    			
+				                    			<img width="60px" src='<%= work.get('customthumb')[0] %>' />				                    			
 					                    	<% } else { %>
-					                    		<img width='50px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+					                    		<img width='60px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 					                    	<% } %>
 					                    	</a>
 				                    <% } else { %>
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>"  class="thumb_color" id="<%= work.get("slug") %>">
 				                    		<% if (work.get('customthumb')) { %>
-												<img width="50px" src='<%= work.get('customthumb')[0] %>' />
+												<img width="60px" src='<%= work.get('customthumb')[0] %>' />
 					                    	<% } else { %>					                    		
-					                    		<img width='50px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+					                    		<img width='60px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 					                    	<% } %>
 					                    	</a>
 				                    <% } %>

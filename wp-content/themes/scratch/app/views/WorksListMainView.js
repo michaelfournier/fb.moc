@@ -90,7 +90,7 @@ var Blog = (function (blog) {
         },
 
         // fonction pour donner une hauteur à #mainbb //
-         myheight: function() {         
+         myheight: function() {        
             var offset = $('#mainbb').offset();
             // topOffset = distance entre le bloc #content et le haut de la fenetre //  
             var topOffset = offset.top; 

@@ -86,12 +86,12 @@ var Blog = (function (blog) {
 
             var activeitem = this.$el.find("#"+this.collection.workslug);
             console.log(activeitem);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );  
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } ); 
         },
 
         showactif : function(item) {
-            this.$el.find('.st_thumbs_wrapper img').removeAttr('style');
-            item.find('img').css('opacity', 1);
+            this.$el.find('.st_thumbs_wrapper img').removeClass('colorize');
+            item.find('img').addClass('colorize');
         },
 
         toggleworks : function(e) {
