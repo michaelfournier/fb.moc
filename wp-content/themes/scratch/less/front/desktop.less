@@ -145,6 +145,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 	#tools {
+		position: relative;
 		.divise(1,1, 0, none, left);
 	}
 
@@ -223,17 +224,35 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		margin: 0 (0.5/20)*100%;
 	}
 
-	.nextprevworks {
-		height : 80%;
-		position:fixed;
-		.divise(1,18, 0, none, left);
-		display: none;
+
+	.nextprevworks  {
+		display: block;
+		height : 36px;
+		width: 36px;
+		position: absolute;
+		z-index: 1;
+		bottom: 0;
 	}
 
-	.nextprevworks a {
-		display: block;
-		height: 100%;
-		width: 100%;
+	#nextwork:hover, #prevwork:hover{
+		background-color: @hovercolor;
+	}	
+
+	#nextwork {
+		right:0;
+	}
+
+	#prevwork {
+		right: 36px;
+	}
+
+	#nextwork {
+		background: url('img/forward.png') @black30 no-repeat center center;
+	}
+
+
+	#prevwork {
+		background: url('img/backward.png') @black30 no-repeat center center;
 	}
 
 	#unfoldworks {
@@ -274,21 +293,7 @@ position: relative;
 
 
 
-	#nextwork:hover, #prevwork:hover{
-		opacity: 1;
-	}	
 
-	#nextwork {
-		right:0;
-		opacity: .15;
-		background: url('img/chevron_droite.png') no-repeat center center;
-	}
-
-	#prevwork {
-		left: 0;
-		opacity: .15;
-		background: url('img/chevron_gauche.png') no-repeat center center;
-	}
 
 	#timeline {
 		width: 0%;
@@ -315,28 +320,29 @@ position: relative;
 	    margin:0 0 0 0;
 	    white-space: nowrap;
 	    overflow:hidden;
+	    .box-sizing();
+	    padding: 0 72px 0 36px;
 	}
 
 	.st_wrapper {
 	    width:100%;
+
 	    overflow: hidden;
 	}
 
 	.st_thumbs{
 	    margin: 0;
 	    float: left;
-
 	}
 
-	#workslistmini a {
+	.st_wrapper a {
 		position: relative;
 		float: none;
 		display: inline-block;  
-
 		padding: @unit/4 0 0 0;
 	}
 
-	#workslistmini a:last-child {
+	.st_wrapper a:last-child {
 		padding-right: 0;
 	}
 

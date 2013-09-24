@@ -84,12 +84,6 @@
 	<!-- template pour mainwork -->
 	<script type="text/template" id="mainworks_template">	
 		<section id="tools"></section>
-		<nav class="nextprevworks" id="prevwork">
-			<a href=""></a>
-		</nav>	
-		<nav class="nextprevworks" id="nextwork">
-			<a href=""></a>
-		</nav>
 		<nav id="navgal"></nav>
 		<div id="wrapper">			
 			<section id="sidebar">
@@ -100,7 +94,7 @@
 			<section class="maincontent">
 			</section>
 		</div>
-		
+
 		
 	</script>
 
@@ -297,6 +291,8 @@
   	<%  var tab = [];
          tab[-1] = 0;
      %>
+     		<a class="nextprevworks" id="prevwork" href=""></a>	
+			<a class="nextprevworks" id="nextwork" href=""></a>
 			<nav id="workslistmini">
 				<div class="st_wrapper st_thumbs_wrapper">	
 					<div class="st_thumbs">						

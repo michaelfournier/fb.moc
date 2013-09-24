@@ -123,7 +123,7 @@ var Blog = (function (blog) {
 
 
         scrolltonextprev : function(e) {
-            slug = $(e.currentTarget).find('a').attr('data-slug');
+            slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
@@ -157,8 +157,8 @@ var Blog = (function (blog) {
             }
             nexthref = "#works/"+slugnext;
 
-            this.$el.find("#nextwork a").attr({'href': nexthref, 'data-slug': slugnext});
-            this.$el.find("#prevwork a").attr({'href': prevhref, 'data-slug': slugprev});
+            this.$el.find("#nextwork").attr({'href': nexthref, 'data-slug': slugnext});
+            this.$el.find("#prevwork").attr({'href': prevhref, 'data-slug': slugprev});
         },
 
 
