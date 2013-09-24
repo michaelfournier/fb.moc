@@ -121,9 +121,9 @@
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
-		                    		<img width="160px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    		<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    	<% } else { %>
-		                    		<img width="160px" src='<%= work.get('customthumb')[0] %>' />
+		                    		<img src='<%= work.get('customthumb')[0] %>' />
 		                    	<% } %>
 		                    </a>
 	                 	</div>             			
@@ -131,9 +131,9 @@
 	              		<div class="wrapthumb" style="opacity: 0">
 		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>	
-		                    		<img width="160px" src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+		                    		<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
 		                    	<% } else { %>
-		                    		<img width="160px" src='<%= work.get('customthumb')[0] %>' />
+		                    		<img src='<%= work.get('customthumb')[0] %>' />
 		                    	<% } %>
 		                    </a>
 	                 	</div>                  		
