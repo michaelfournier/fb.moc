@@ -268,7 +268,7 @@
 	<!-- template pour image seule -->
 	<script type="text/template" id="picturesingle_template">
 		<figure id="picture">
-			<div class="btn-picture"><img src="<%= mypicture.get('full') %>" /></div>
+			<a data-bypass class="btn-picture"><img src="<%= mypicture.get('full') %>" /></a>
 			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
 		</figure>
 		

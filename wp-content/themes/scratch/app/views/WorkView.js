@@ -76,7 +76,7 @@ var Blog = (function (blog) {
 
             // on rend la sidebar //
             var sidebarworksview = new blog.Views.WorkSidebarView(this.model);
-            renderNested(parentview, sidebarworksview, "#sidebar", this.model); 
+            renderNested(parentview, sidebarworksview, "#sidebar", this.model);
         },
 
         render : function () {

@@ -659,16 +659,14 @@ var Blog = (function (blog) {
             i = 1;
             //console.log(this.collection.models.length);
             this.$el.find("#navgal").empty();
-            if (this.collection.models.length > 1) {
+            //if (this.collection.models.length > 1) {
                 this.$el.find("#navgal").html(renderedContent).find('a').each(function() {
                     $(this).delay(i * 150).fadeIn();
                     i++;
                 });
                 // on charge la première image par défaut //
                 this.showpicture(0);
-            } else {
-                this.showsinglepicture();
-            }
+            //}
 
             return this;
         },
@@ -704,11 +702,13 @@ var Blog = (function (blog) {
             console.log(e);
             i = this.idpic;
             if (i > this.gallerylength - 1) {
-                this.idpic = 0;
-                i = 0;
+                // this.idpic = 0;
+                // i = 0;
+                this.$el.find("#nextwork").click();
+            } else {
+                var showpicture = this.showpicture;
+                this.showpicture(i);
             }
-            var showpicture = this.showpicture;
-            this.showpicture(i);
                         //$(e.currentTarget).find('img').fadeOut(70, function() { showpicture(i); });           
         }
      
@@ -1177,7 +1177,7 @@ var Blog = (function (blog) {
 
             // on rend la sidebar //
             var sidebarworksview = new blog.Views.WorkSidebarView(this.model);
-            renderNested(parentview, sidebarworksview, "#sidebar", this.model); 
+            renderNested(parentview, sidebarworksview, "#sidebar", this.model);
         },
 
         render : function () {
