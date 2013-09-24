@@ -306,28 +306,19 @@
 						          			tab[i] = works[i].get('categories')[0]['title'];
 						          		}
 						          	%>
-									<% if ( String(tab[i-1]) != String(tab[i])) { %>
 
-										<% if(i > 0) { %></div><% } %>
-										<div class="segment">	
-											<div class="sortitem"><%= tab[i] %></div>			          	
+
+					
+
+		          	
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>">
 				                    		
 				                    		<% if (work.get('customthumb')) { %>
 				                    			<img width="60px" src='<%= work.get('customthumb')[0] %>' />				                    			
 					                    	<% } else { %>
-					                    		<img width='60px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+					                    		<img width='60px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' />
 					                    	<% } %>
 					                    	</a>
-				                    <% } else { %>
-				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>"  class="thumb_color" id="<%= work.get("slug") %>">
-				                    		<% if (work.get('customthumb')) { %>
-												<img width="60px" src='<%= work.get('customthumb')[0] %>' />
-					                    	<% } else { %>					                    		
-					                    		<img width='60px' src='<%= work.get('gallery')[0]['thumbnail'] %>' />
-					                    	<% } %>
-					                    	</a>
-				                    <% } %>
 				              <% } %>    
 					    <% }); %>
 					</div>
