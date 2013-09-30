@@ -35,9 +35,9 @@ var Blog = (function (blog) {
                 success: function(result) {
                   console.log(result);
                   // on rend myworkslistview dans .maincontent comme enfant de parentview
-                  renderNested(parentview, myworkslistview, ".maincontent", result); 
+                  renderNested(parentview, myworkslistview, ".maincontent", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
-                  renderNested(parentview, myworkslisttoolsview, "#tools"); 
+                  renderNested(parentview, myworkslisttoolsview, "#tools");
                 }
               });
             return this;

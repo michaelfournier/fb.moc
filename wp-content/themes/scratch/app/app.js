@@ -1310,9 +1310,9 @@ var Blog = (function (blog) {
                 success: function(result) {
                   console.log(result);
                   // on rend myworkslistview dans .maincontent comme enfant de parentview
-                  renderNested(parentview, myworkslistview, ".maincontent", result); 
+                  renderNested(parentview, myworkslistview, ".maincontent", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
-                  renderNested(parentview, myworkslisttoolsview, "#tools"); 
+                  renderNested(parentview, myworkslisttoolsview, "#tools");
                 }
               });
             return this;
@@ -1631,7 +1631,7 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#tools').outerHeight(true) - $('#main_header').outerHeight(true) - $('#navgal').outerHeight(true)*2;
+                    var contentheight = $(window).height() - $('#main_header').outerHeight(true) - $('#navgal').outerHeight(true)*2;
                     $('#wrapper').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();

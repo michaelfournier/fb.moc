@@ -981,9 +981,14 @@ figure#picture img {
 	padding-left: @unit/1.5;
 	margin-bottom: @unit/1.5;*/
 
-  padding: 0 0.7619047619047619em 1.7142857142857142em 0.7619047619047619em;
+  margin: 0 0.7619047619047619em 1.7142857142857142em 0.7619047619047619em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   width: 154px;
-  height: 125px;
+  height: 120px;
   overflow: hidden;
 }
 .segment {

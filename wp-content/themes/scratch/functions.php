@@ -68,7 +68,7 @@ add_filter( 'post_mime_types', 'modify_post_mime_types' );
 /* http://sumtips.com/2011/12/custom-image-sizes-in-wordpress.html */
 function remove_wmp_image_sizes( $sizes) {
         unset( $sizes['medium']);
-        unset( $sizes['large']);
+        //unset( $sizes['large']);
         return $sizes;
 }
 //add_filter('intermediate_image_sizes_advanced', 'remove_wmp_image_sizes');
@@ -175,10 +175,10 @@ function add_gallery($post) {
   if(isset($gallerypics)) {
     foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
-      $imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=154&h=125&zc=1&q=100';
-      $imagethumb2 = wp_get_attachment_image_src($idpic['image'], 'thumbnail'); 
-      $imagethumbmini = $themepath.'/timthumb.php?src='.$imagethumb2[0].'&w=60&h=36&zc=1&q=100';    
-      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');   
+      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');  
+      $imagethumb = $themepath.'/timthumb.php?src='.$imagefull[0].'&w=154&h=120&zc=1&q=100';
+      $imagethumb2 = wp_get_attachment_image_src($idpic['image'], 'full'); 
+      $imagethumbmini = $themepath.'/timthumb.php?src='.$imagethumb2[0].'&w=60&h=36&zc=1&q=100';     
       $imagemetas = get_post($idpic['image']);
       $tabgallery = array(
       'thumbnail' => $imagethumb,
