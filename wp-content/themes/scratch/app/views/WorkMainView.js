@@ -25,7 +25,7 @@ var Blog = (function (blog) {
             update: true,
             success: function(results) {
               // on stock le slug du post dans la collection pour gérer le item actif dans workslistmini //
-              Blog.myworkslist.workslug = slug_post;                  
+              Blog.myworkslist.workslug = slug_post;
               myworkid = results.where({'slug': slug_post})[0]['id'];
               Blog.mywork = Blog.myworkslist.get(myworkid);
               var myworkview = new blog.Views.WorkView(Blog.mywork);
@@ -46,14 +46,14 @@ var Blog = (function (blog) {
             var myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
 
             // on charge les données dans workslistmini //
-            Blog.myworkslist.all().fetch({ 
+            Blog.myworkslist.all().fetch({
               update: true,
               success: function(results) {
                 console.log(results);
                 //myworkslistminiview.render(results);
 
                 // on rend myworkslistview dans .maincontent comme enfant de parentview
-               renderNested(parentview, myworkslistminiview, "#tools", results); 
+               renderNested(parentview, myworkslistminiview, "#tools", results);
               }
             });
 

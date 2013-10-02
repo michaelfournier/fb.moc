@@ -19,19 +19,30 @@ var Blog = (function (blog) {
             // on fait apparaitre le bouton unfold //
             this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
-            this.$el.find('#workslistmini').imagesLoaded(function() {
+            var myworksminielt = this.$el.find('#workslistmini');
+            myworksminielt.imagesLoaded(function() {
                    // fonction auto scroll vignettes // 
-                    $('#workslistmini').imagesLoaded(function(){
+                    myworksminielt.imagesLoaded(function(){
                         $(this).thumbnailScroller({
                                 scrollerType:'hoverPrecise',
                                         scrollerOrientation:'vertical',
-                                        scrollSpeed:1,
                                         acceleration:4,
-                                        scrollSpeed:800,
-                                        noScrollCenterSpace:100,
+                                        scrollSpeed: 800,
+                                        noScrollCenterSpace:1
                             });
                     });
-                   // that.$el.find("#unfoldworks a").click();
+
+            if(!myworksminielt.hasClass("mCustomScrollbar")) {
+                myworksminielt.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    autoDraggerLength:false,
+                    theme: "dark"
+                });
+            }
+            
+            myworksminielt.mCustomScrollbar("update");
+            //that.$el.find("#unfoldworks a").click();
                         
             });
             
@@ -42,24 +53,28 @@ var Blog = (function (blog) {
         },
   
         scrolltoactive : function () {
-
             var activeitem = this.$el.find("#"+this.collection.workslug);
             console.log(activeitem);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
+            this.$el.find("#workslistmini").mCustomScrollbar("update");
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
+            //this.$el.find('.jTscroller').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
         },
 
         showactif : function(item) {
-            this.$el.find('.st_thumbs_wrapper img').removeClass('colorize');
-            item.find('img').addClass('colorize');
+            this.$el.find('.jTscroller img').removeClass('colorize');
+            //console.log(this.$el.find('.jTscroller img'));
+            //item.find('img').addClass('colorize');
         },
 
         toggleworks : function(e) {
             elt = this.$el.find("#workslistmini");
             if (elt.width() <= 0) {
-                elt.animate({'width': '100%', complete: this.scrolltoactive()});
+                elt.animate({'width': '250px', complete: this.scrolltoactive()}, 150);
                 $(e.currentTarget).addClass('fold');
+                
             } else {
-                elt.animate({'width': 0});
+                this.$el.find("#sidebar").css("display", "none");
+                elt.animate({'width': 0}, 150);
                 $(e.currentTarget).removeClass('fold');
             }
         }

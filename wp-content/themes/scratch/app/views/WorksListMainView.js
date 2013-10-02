@@ -90,14 +90,14 @@ var Blog = (function (blog) {
         },
 
         // fonction pour donner une hauteur à #mainbb //
-         myheight: function() {        
+         myheight: function() {
             var offset = $('#mainbb').offset();
             // topOffset = distance entre le bloc #content et le haut de la fenetre //  
-            var topOffset = offset.top; 
+            var topOffset = offset.top;
             // on calcul la hauteur de la div #content //
             var contentheight = $(window).height()-(topOffset + $("#main_header").height()+ 40);
-            $('#wrapper').css("height", contentheight);            
-            console.log(contentheight);   
+            $('#wrapper').css("height", contentheight);
+            console.log(contentheight);
         }
      
     });

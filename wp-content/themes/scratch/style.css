@@ -1988,21 +1988,20 @@ SMARTPHONES
   }
   #workslistmini {
     background-color: white;
-    display: none;
+    width: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     z-index: 20;
+    top: 4.571428571428571em;
+    padding-bottom: 5.7142857142857135em;
     overflow: hidden;
     position: absolute;
     left: 0px;
-    top: 0;
-    width: 120px;
-    margin: 0;
   }
-  .jThumbnailScroller .jTscrollerContainer {
+  .jThumbnailScroller {
     position: absolute;
   }
   .jThumbnailScroller .jTscroller {

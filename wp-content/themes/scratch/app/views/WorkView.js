@@ -125,13 +125,15 @@ var Blog = (function (blog) {
         scrolltonextprev : function(e) {
             slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
+            //this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug);
+            //this.$el.find("#workslistmini").scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
         },
 
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
-            this.$el.find('.st_thumbs_wrapper img').removeClass('colorize');
+            this.$el.find('.jTscroller img').removeClass('colorize');
             item.find('img').addClass('colorize');
         },
 
@@ -163,7 +165,7 @@ var Blog = (function (blog) {
 
 
         events: {
-            "click .nextprevworks" : "scrolltonextprev",
+            "click .nextprevworks a" : "scrolltonextprev",
             "click a#videos"   :  "renderVideos",
             "click a#images"   :   "renderPictures"
         }

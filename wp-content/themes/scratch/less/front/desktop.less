@@ -295,15 +295,17 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#workslistmini {
 	    background-color: white;
-	    display:none;
+	    width: 0;
 	    .box-sizing();
 	    z-index: 20;
+	    top: @unit*4;
+	    padding-bottom: @unit*5;
 	    overflow: hidden;
-		position:absolute; left:0px; top:0; width:120px; margin:0;
+		position:absolute; left:0px;
 	}
 
 
-	.jThumbnailScroller .jTscrollerContainer {
+	.jThumbnailScroller {
 		position: absolute;
 	}
 
