@@ -47,7 +47,7 @@ var Blog = (function (blog) {
             this.$el.find("#picvidswitcher #videos").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
              // on déclare un objet collection contenant les images liées au post //
-            var videosgal = new blog.Collections.VideosGallery(Blog.mywork.get('galleryvideos')); 
+            var videosgal = new blog.Collections.VideosGallery(Blog.mywork.get('galleryvideos'));
             // on déclare un objet vue de notre galerie d'images //
             Blog.videosgalview = new blog.Views.VideosGalNavView(videosgal);
             //renderNested(parentview, Blog.videosgalview, "#tools", videosgal);
@@ -157,8 +157,8 @@ var Blog = (function (blog) {
             }
             nexthref = "#works/"+slugnext;
 
-            this.$el.find("#nextwork").attr({'href': nexthref, 'data-slug': slugnext});
-            this.$el.find("#prevwork").attr({'href': prevhref, 'data-slug': slugprev});
+            this.$el.find("#nextwork > a").attr({'href': nexthref, 'data-slug': slugnext});
+            this.$el.find("#prevwork > a").attr({'href': prevhref, 'data-slug': slugprev});
         },
 
 

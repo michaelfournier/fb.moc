@@ -44,8 +44,7 @@ var Blog = (function (blog) {
             var renderNested = this.renderNested;
             // on instancie la vue myworkslistminiview
             var myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
-              //on replie l'elt #tools
-                this.$el.find("#tools").css("width", 0);
+
             // on charge les données dans workslistmini //
             Blog.myworkslist.all().fetch({ 
               update: true,

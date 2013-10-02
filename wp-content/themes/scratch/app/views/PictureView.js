@@ -8,7 +8,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
-            var content = this.$el.find('.maincontent');
+            var content = this.$el.find('#picture');
             var that = this;
             if ( this.$el.find('.maincontent img').length > 0 ) {
               this.$el.find('.maincontent img').fadeOut(300, function() {

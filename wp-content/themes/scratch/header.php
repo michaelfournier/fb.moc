@@ -84,7 +84,6 @@
 	<!-- template pour mainwork -->
 	<script type="text/template" id="mainworks_template">	
 		<section id="tools"></section>
-		<nav id="navgal"></nav>
 		<div id="wrapper">			
 			<section id="sidebar">
 				<h3></h3>
@@ -93,9 +92,7 @@
 			</section>
 			<section class="maincontent">
 			</section>
-		</div>
-
-		
+		</div>	
 	</script>
 
 	<!-- template pour la workslist thumb -->
@@ -228,13 +225,16 @@
 
 	<!-- template pour la nav picture gallery --> 
     <script type="text/template" id="navgallery_template">
-	    <% if(_.size(gallery) > 1) { %>
-	    		<ul>
-			        <% _.each(gallery, function (picture, i) { %>       	
-			            	<li><a data-bypass="<%= i %>" class="linkpic"><%= i+1 %></a></li>
-			        <% }); %>
-	        	</ul>
-	     <% } %>
+	    <nav id='navgal'>
+		    <% if(_.size(gallery) > 1) { %>
+		    		<ul>
+				        <% _.each(gallery, function (picture, i) { %>       	
+				            	<li><a data-bypass="<%= i %>" class="linkpic"><%= i+1 %></a></li>
+				        <% }); %>
+		        	</ul>
+		     <% } %>
+		</nav>
+		<figure id="picture"></figure>
     </script>
 
 	<!-- template pour la nav video gallery --> 
@@ -255,14 +255,10 @@
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
-
-		<figure id="picture">
 			<a data-bypass class="btn-picture">
 				<img src="<%= mypicture.get('full') %>" />
 			</a>
 			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
-		</figure>
-		
 	</script>
 
 	<!-- template pour image seule -->
@@ -285,17 +281,17 @@
 
 	<!-- template pour worklistmini -->
 	<script type="text/template" id="works_listmini_template">
-		<div id="unfoldworks">
-			<a data-bypass href="#"><span></span></a>
-		</div>
   	<%  var tab = [];
          tab[-1] = 0;
      %>
-     		<a class="nextprevworks" id="prevwork" href=""></a>	
-			<a class="nextprevworks" id="nextwork" href=""></a>
-			<nav id="workslistmini">
-				<div class="st_wrapper st_thumbs_wrapper">	
-					<div class="st_thumbs">						
+     		<nav id="navworks">
+	     		<div id="unfoldworks"><a data-bypass href="#"></a></div>
+	     		<div class="nextprevworks" id="prevwork"><a  href=""></a></div>	
+				<div class="nextprevworks" id="nextwork"><a href=""></a></div>
+			</nav>
+			<nav class="jThumbnailScroller" id="workslistmini">
+				<div class="jTscrollerContainer">	
+					<div class="jTscroller">						
 					    <% _.each(works ,function(work, i){ %>
 
 				              <% if (_.isEmpty(work.get('gallery')) === false || _.isEmpty(work.get('customthumb')) === false ) { %>
@@ -306,17 +302,12 @@
 						          			tab[i] = works[i].get('categories')[0]['title'];
 						          		}
 						          	%>
-
-
-					
-
-		          	
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>">
 				                    		
 				                    		<% if (work.get('customthumb')) { %>
-				                    			<img width="60px" src='<%= work.get('customthumb')[0] %>' />				                    			
+				                    			<img width="120px" src='<%= work.get('customthumb')[0] %>' />				                    			
 					                    	<% } else { %>
-					                    		<img width='60px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' />
+					                    		<img width='120px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' />
 					                    	<% } %>
 					                    	</a>
 				              <% } %>    

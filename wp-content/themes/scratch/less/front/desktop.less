@@ -46,7 +46,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 	.maincontent {
-		.divise(1,1, 250px, none, left);
+		.divise(1,1, @tranche, none, left);
 		/*height: 100%;*/
 	}
 
@@ -147,6 +147,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	#tools {
 		position: relative;
 		.divise(1,1, 0, none, left);
+		min-height: 0;
 	}
 
 	#indextools {
@@ -159,11 +160,12 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#sidebar {
 		//.divise(1,5, 0, none, left);
-		width: 250px;
+		width: @tranche;
 		.box-sizing();
 		position: absolute;
-		padding-right: @unit;
-		max-width: 250px;
+		margin-top: @unit*2;
+		padding: 0 @unit*1.5 @unit*2 0;
+		max-width: @tranche;
 		height: 100%;
 		overflow-y: auto;
 		z-index: 5;
@@ -199,7 +201,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		top: 0;
 		right:0;
 		padding: @unit/1.5;
-		max-width: 250px;
+		max-width: @tranche;
 		height: 100%;
 		overflow-y: auto;
 	}
@@ -225,75 +227,55 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 
-	.nextprevworks  {
-		display: block;
-		height : 36px;
-		width: 36px;
+	nav#navworks {
 		position: absolute;
-		z-index: 1;
-		bottom: 0;
-	}
-
-	#nextwork:hover, #prevwork:hover{
-		background-color: @hovercolor;
-	}	
-
-	#nextwork {
-		left:36px;
-	}
-
-	#prevwork {
+		top: 0;
 		left: 0;
+		z-index: 1;
 	}
 
-	#nextwork {
-		background: url('img/forward.png') @black30 no-repeat center center;
+	.nextprevworks, #unfoldworks {
+		display: block;
+		height : 15px;
+		width: 15px;
+		float: left;
+	}
+
+	.nextprevworks a, #unfoldworks a {
+		display: block;
+		height : 15px;
+		width: 15px;
+	}
+
+	#nextwork, #prevwork {
+		padding-left: @unit/2;
 	}
 
 
-	#prevwork {
-		background: url('img/backward.png') @black30 no-repeat center center;
+	#nextwork a:hover, #prevwork a:hover, #unfoldworks a:hover {
+		background-color: @hovercolor;
+	}
+
+	#nextwork a {
+		background: url('img/forward02.png') @black30 no-repeat center center;
+	}
+
+	#prevwork a {
+		background: url('img/backward02.png') @black30 no-repeat center center;
 	}
 
 	#unfoldworks {
-		.divise(1,18, 0, none, left);
-		left: 0;
-		display: none;
-		height: 32px;
-		bottom: @unit/3;
-		left: 0;
-		border-right: 1px solid @black10;
-		position: fixed;
-
+		padding-right: @unit/2;
+		border-right: 1px solid @black30;
 	}
 
 	#unfoldworks a {
-position: relative;
-		display: block;
-		width: 100%;
-		height: 100%;
-		text-align: center;
+		background: @black30 url('img/foldunfold.png') no-repeat -15px center;
 	}
 
-	#unfoldworks a span {
-		width: 19px;
-		height: 16px;
-		margin: 6px auto 0;
-		display: block;
-		background: @black30 url('img/btn-unfold.png') no-repeat center center;
-	}
-
-	#unfoldworks a.fold span {
-		background: @black30 url('img/btn-fold.png') no-repeat center center;
-	}
-
-	#unfoldworks a:hover span {
-		background-color: @black90;
-	}
-
-
-
-
+	#unfoldworks a.fold {
+		background-position: 0px center;
+	}	
 
 	#timeline {
 		width: 0%;
@@ -312,33 +294,30 @@ position: relative;
 
 
 	#workslistmini {
-	    position:relative;
 	    background-color: white;
-	    bottom: 0;
-	    width: 100%;
-	    display:block;
-	    margin:0 0 0 0;
-	    white-space: nowrap;
-	    overflow:hidden;
+	    display:none;
 	    .box-sizing();
-	    padding: 0 0 0 72px;
-	}
-
-	.st_wrapper {
-	    width:100%;
-
+	    z-index: 20;
 	    overflow: hidden;
+		position:absolute; left:0px; top:0; width:120px; margin:0;
 	}
 
-	.st_thumbs{
-	    margin: 0;
-	    float: left;
+
+	.jThumbnailScroller .jTscrollerContainer {
+		position: absolute;
 	}
 
-	.st_wrapper a {
+	.jThumbnailScroller .jTscroller {
 		position: relative;
-		float: none;
-		display: inline-block;  
+		margin: 0;
+		height: auto;
+		display: inline-block;
+		top: 0;
+		left : 0;
+	}
+
+	.jTscroller a {
+		display: block;  
 		padding: @unit/4 0 0 0;
 	}
 

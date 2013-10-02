@@ -605,7 +605,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
-            var content = this.$el.find('.maincontent');
+            var content = this.$el.find('#picture');
             var that = this;
             if ( this.$el.find('.maincontent img').length > 0 ) {
               this.$el.find('.maincontent img').fadeOut(300, function() {
@@ -658,9 +658,9 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
             //console.log(this.collection.models.length);
-            this.$el.find("#navgal").empty();
+            this.$el.find("#navgal").remove();
             //if (this.collection.models.length > 1) {
-                this.$el.find("#navgal").html(renderedContent).find('a').each(function() {
+                this.$el.find(".maincontent").append(renderedContent).find('a').each(function() {
                     $(this).delay(i * 150).fadeIn();
                     i++;
                 });
@@ -704,7 +704,7 @@ var Blog = (function (blog) {
             if (i > this.gallerylength - 1) {
                 // this.idpic = 0;
                 // i = 0;
-                this.$el.find("#nextwork").click();
+                this.$el.find("#nextwork a").click();
             } else {
                 var showpicture = this.showpicture;
                 this.showpicture(i);
@@ -1047,8 +1047,7 @@ var Blog = (function (blog) {
             var renderNested = this.renderNested;
             // on instancie la vue myworkslistminiview
             var myworkslistminiview = new blog.Views.WorksListMiniView(Blog.myworkslist);
-              //on replie l'elt #tools
-                this.$el.find("#tools").css("width", 0);
+
             // on charge les données dans workslistmini //
             Blog.myworkslist.all().fetch({ 
               update: true,
@@ -1148,7 +1147,7 @@ var Blog = (function (blog) {
             this.$el.find("#picvidswitcher #videos").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
              // on déclare un objet collection contenant les images liées au post //
-            var videosgal = new blog.Collections.VideosGallery(Blog.mywork.get('galleryvideos')); 
+            var videosgal = new blog.Collections.VideosGallery(Blog.mywork.get('galleryvideos'));
             // on déclare un objet vue de notre galerie d'images //
             Blog.videosgalview = new blog.Views.VideosGalNavView(videosgal);
             //renderNested(parentview, Blog.videosgalview, "#tools", videosgal);
@@ -1258,8 +1257,8 @@ var Blog = (function (blog) {
             }
             nexthref = "#works/"+slugnext;
 
-            this.$el.find("#nextwork").attr({'href': nexthref, 'data-slug': slugnext});
-            this.$el.find("#prevwork").attr({'href': prevhref, 'data-slug': slugprev});
+            this.$el.find("#nextwork > a").attr({'href': nexthref, 'data-slug': slugnext});
+            this.$el.find("#prevwork > a").attr({'href': prevhref, 'data-slug': slugprev});
         },
 
 
@@ -1402,58 +1401,17 @@ var Blog = (function (blog) {
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             this.$el.find('#workslistmini').imagesLoaded(function() {
                    // fonction auto scroll vignettes // 
-                    function makeScrollable(thumbs, wrapper) {
-                        var width = wrapper.innerWidth();     
-                        //wrapper.scrollLeft(0);            
-                        var leftBuffer = 100;
-                        var rightBuffer = 100;
-                        function scrollMe(imx) {
-                                console.log(imx);
-                                var xPos = imx.pageX - wrapper.offset().left - leftBuffer;
-                                var xMax = wrapper.innerWidth() - rightBuffer;             
-                                var perc = xPos / (xMax - leftBuffer);
-                                var scrollAmt = thumbs.outerWidth(true) - wrapper.innerWidth();
-                                //wrapper.scrollLeft(perc * scrollAmt);
-                                //wrapper.stop(true,false).animate({"scrollLeft": (perc * scrollAmt)}, "slow");                     
-                            wrapper.on('mousemove', function(e) {
-                                var xPos = e.pageX - wrapper.offset().left - leftBuffer;
-                                var xMax = wrapper.innerWidth() - rightBuffer;             
-                                var perc = xPos / (xMax - leftBuffer);
-                                var scrollAmt = thumbs.outerWidth(true) - wrapper.innerWidth();
-                                 //wrapper.scrollLeft(perc * scrollAmt);
-                                wrapper.stop(true,false).animate({"scrollLeft": (perc * scrollAmt)}, { duration: 800, easing: "easeOutQuart"});               
+                    $('#workslistmini').imagesLoaded(function(){
+                        $(this).thumbnailScroller({
+                                scrollerType:'hoverPrecise',
+                                        scrollerOrientation:'vertical',
+                                        scrollSpeed:1,
+                                        acceleration:4,
+                                        scrollSpeed:800,
+                                        noScrollCenterSpace:100,
                             });
-                       }
-                                
-                        function scrollStop() {
-                                wrapper.unbind('mouseover');
-                                wrapper.stop(true);
-                            }
-                            // imx = initial mouse x position //
-                            $('.st_wrapper').hover(function(imx) {
-                                mytimeout = setTimeout( scrollMe, 150, imx);
-                            }, function() {
-                                clearTimeout(mytimeout);
-                                wrapper.off('mousemove');
-                            });    
-                        }
-                            
-                        function buildThumbs() {            
-                                $('#workslistmini').each(function() {
-                                    var width = 0;
-                                    var wrapper = $(this).find('.st_thumbs_wrapper');
-                                    wrapper.find('.st_thumbs a').each( function() {
-                                        width += $(this).outerWidth(true);
-                                    });                 
-                                    var thumbs = $(this).find('.st_thumbs');
-                                    //thumbs.css('width', width + 'px');                    
-                                    makeScrollable(thumbs, wrapper);
-                                });
-                                            
-                        }
-                    
-                        $(this).on('mouseover', buildThumbs());
-                        that.$el.find("#unfoldworks a").click();
+                    });
+                   // that.$el.find("#unfoldworks a").click();
                         
             });
             
@@ -1467,7 +1425,7 @@ var Blog = (function (blog) {
 
             var activeitem = this.$el.find("#"+this.collection.workslug);
             console.log(activeitem);
-            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } ); 
+            this.$el.find('.st_thumbs_wrapper').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
         },
 
         showactif : function(item) {
@@ -1476,7 +1434,7 @@ var Blog = (function (blog) {
         },
 
         toggleworks : function(e) {
-            elt = this.$el;
+            elt = this.$el.find("#workslistmini");
             if (elt.width() <= 0) {
                 elt.animate({'width': '100%', complete: this.scrolltoactive()});
                 $(e.currentTarget).addClass('fold');
@@ -1631,8 +1589,8 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#main_header').outerHeight(true) - $('#navgal').outerHeight(true)*2;
-                    $('#wrapper').css("height", contentheight);
+                    var contentheight = $(window).height() - $('#main_header').outerHeight(true);
+                    $('#wrapper, #workslistmini').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);

@@ -23,9 +23,9 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
             //console.log(this.collection.models.length);
-            this.$el.find("#navgal").empty();
+            this.$el.find("#navgal").remove();
             //if (this.collection.models.length > 1) {
-                this.$el.find("#navgal").html(renderedContent).find('a').each(function() {
+                this.$el.find(".maincontent").append(renderedContent).find('a').each(function() {
                     $(this).delay(i * 150).fadeIn();
                     i++;
                 });
@@ -69,7 +69,7 @@ var Blog = (function (blog) {
             if (i > this.gallerylength - 1) {
                 // this.idpic = 0;
                 // i = 0;
-                this.$el.find("#nextwork").click();
+                this.$el.find("#nextwork a").click();
             } else {
                 var showpicture = this.showpicture;
                 this.showpicture(i);

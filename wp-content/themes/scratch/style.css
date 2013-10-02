@@ -838,6 +838,7 @@ figcaption {
   font-size: 0.7857142857142857em;
   color: #1a1a1a;
   float: left;
+  min-height: 1.1428571428571428em;
   width: 100%;
   text-align: left;
 }
@@ -912,19 +913,14 @@ nav a {
   overflow-x: hidden;
   position: relative;
 }
-#tools {
-  margin-bottom: 0.5714285714285714em;
-}
 #navgal {
-  float: left;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-left: 250px;
-  height: 1.7142857142857142em;
+  position: absolute;
+  left: 260px;
+  z-index: 6;
+}
+#navgal li {
+  display: block;
+  float: none;
 }
 #navgal li a {
   font-size: 1em;
@@ -1728,7 +1724,7 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 250px;
+    padding-left: 270px;
     min-height: 1.1428571428571428em;
     /*height: 100%;*/
   
@@ -1848,6 +1844,7 @@ SMARTPHONES
     width: 100%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
+    min-height: 0;
   }
   #indextools {
     -webkit-box-sizing: border-box;
@@ -1865,15 +1862,16 @@ SMARTPHONES
     float: left;
   }
   #sidebar {
-    width: 250px;
+    width: 270px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     position: absolute;
-    padding-right: 1.1428571428571428em;
-    max-width: 250px;
+    margin-top: 2.2857142857142856em;
+    padding: 0 1.7142857142857142em 2.2857142857142856em 0;
+    max-width: 270px;
     height: 100%;
     overflow-y: auto;
     z-index: 5;
@@ -1906,7 +1904,7 @@ SMARTPHONES
     top: 0;
     right: 0;
     padding: 0.7619047619047619em;
-    max-width: 250px;
+    max-width: 270px;
     height: 100%;
     overflow-y: auto;
   }
@@ -1935,67 +1933,49 @@ SMARTPHONES
     min-height: 1.1428571428571428em;
     margin: 0 2.5%;
   }
-  .nextprevworks {
-    display: block;
-    height: 36px;
-    width: 36px;
+  nav#navworks {
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
-    bottom: 0;
   }
-  #nextwork:hover,
-  #prevwork:hover {
+  .nextprevworks,
+  #unfoldworks {
+    display: block;
+    height: 15px;
+    width: 15px;
+    float: left;
+  }
+  .nextprevworks a,
+  #unfoldworks a {
+    display: block;
+    height: 15px;
+    width: 15px;
+  }
+  #nextwork,
+  #prevwork {
+    padding-left: 0.5714285714285714em;
+  }
+  #nextwork a:hover,
+  #prevwork a:hover,
+  #unfoldworks a:hover {
     background-color: #0d0aff;
   }
-  #nextwork {
-    left: 36px;
+  #nextwork a {
+    background: url('img/forward02.png') #b3b3b3 no-repeat center center;
   }
-  #prevwork {
-    left: 0;
-  }
-  #nextwork {
-    background: url('img/forward.png') #b3b3b3 no-repeat center center;
-  }
-  #prevwork {
-    background: url('img/backward.png') #b3b3b3 no-repeat center center;
+  #prevwork a {
+    background: url('img/backward02.png') #b3b3b3 no-repeat center center;
   }
   #unfoldworks {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    clear: none;
-    float: left;
-    width: 5.555555555555555%;
-    padding-left: 0;
-    min-height: 1.1428571428571428em;
-    display: none;
-    height: 32px;
-    bottom: 0.38095238095238093em;
-    left: 0;
-    border-right: 1px solid #dcdcdc;
-    position: fixed;
+    padding-right: 0.5714285714285714em;
+    border-right: 1px solid #b3b3b3;
   }
   #unfoldworks a {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+    background: #b3b3b3 url('img/foldunfold.png') no-repeat -15px center;
   }
-  #unfoldworks a span {
-    width: 19px;
-    height: 16px;
-    margin: 6px auto 0;
-    display: block;
-    background: #b3b3b3 url('img/btn-unfold.png') no-repeat center center;
-  }
-  #unfoldworks a.fold span {
-    background: #b3b3b3 url('img/btn-fold.png') no-repeat center center;
-  }
-  #unfoldworks a:hover span {
-    background-color: #1a1a1a;
+  #unfoldworks a.fold {
+    background-position: 0px center;
   }
   #timeline {
     width: 0%;
@@ -2007,33 +1987,34 @@ SMARTPHONES
     border-bottom: 1px solid #1a1a1a;
   }
   #workslistmini {
-    position: relative;
     background-color: white;
-    bottom: 0;
-    width: 100%;
-    display: block;
-    margin: 0 0 0 0;
-    white-space: nowrap;
-    overflow: hidden;
+    display: none;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 0 0 0 72px;
-  }
-  .st_wrapper {
-    width: 100%;
+    z-index: 20;
     overflow: hidden;
-  }
-  .st_thumbs {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 120px;
     margin: 0;
-    float: left;
   }
-  .st_wrapper a {
+  .jThumbnailScroller .jTscrollerContainer {
+    position: absolute;
+  }
+  .jThumbnailScroller .jTscroller {
     position: relative;
-    float: none;
+    margin: 0;
+    height: auto;
     display: inline-block;
+    top: 0;
+    left: 0;
+  }
+  .jTscroller a {
+    display: block;
     padding: 0.2857142857142857em 0 0 0;
   }
   .st_wrapper a:last-child {

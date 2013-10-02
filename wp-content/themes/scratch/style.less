@@ -103,7 +103,7 @@ figcaption {
 	font-size:(11/@font-size)*1em;	
 	color: @black90;
 	float: left;
-
+    min-height: @unit;
 	width: 100%;
 	text-align:left;
 }
@@ -189,10 +189,8 @@ nav a {
 	position: relative;
 }
 
-#tools {
-	margin-bottom: @unit/2;
-}
-#navgal { float: left; width: 100%; .box-sizing(); padding-left: 250px; height: @unit*1.5;}
+#navgal { position: absolute; left: 260px; z-index: 6;}
+#navgal li { display: block; float: none;}
 #navgal li a {
 	font-size:(14/@font-size)*1em;
 	padding: 0 @unit/2 0 0;
