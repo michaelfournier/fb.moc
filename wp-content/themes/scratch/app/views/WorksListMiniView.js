@@ -15,7 +15,7 @@ var Blog = (function (blog) {
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
-            this.$el.html(renderedContent);
+            this.$el.append(renderedContent);
             // on fait apparaitre le bouton unfold //
             this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//

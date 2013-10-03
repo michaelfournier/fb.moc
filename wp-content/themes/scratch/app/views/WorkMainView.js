@@ -9,12 +9,13 @@ var Blog = (function (blog) {
 
         },
         render : function () {
-                    //this.undelegateEvents();  
+           this.renderWorksListMini();
+            //this.undelegateEvents();  
             var renderedContent = this.template();
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
-            Blog.myapprouter.myheight();
-            this.renderWorksListMini();
+            
+           // Blog.myapprouter.myheight();
 
             return this;
         },
@@ -49,11 +50,11 @@ var Blog = (function (blog) {
             Blog.myworkslist.all().fetch({
               update: true,
               success: function(results) {
-                console.log(results);
+                //console.log(results);
                 //myworkslistminiview.render(results);
-
                 // on rend myworkslistview dans .maincontent comme enfant de parentview
                renderNested(parentview, myworkslistminiview, "#tools", results);
+               console.log("list done");
               }
             });
 

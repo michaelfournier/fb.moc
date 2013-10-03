@@ -83,7 +83,13 @@
 
 	<!-- template pour mainwork -->
 	<script type="text/template" id="mainworks_template">	
-		<section id="tools"></section>
+		<section id="tools">
+     		<nav id="navworks">
+	     		<div id="unfoldworks"><a data-bypass href="#"></a></div>
+	     		<div class="nextprevworks" id="prevwork"><a  href=""></a></div>	
+				<div class="nextprevworks" id="nextwork"><a href=""></a></div>
+			</nav>
+		</section>
 		<div id="wrapper">			
 			<section id="sidebar">
 				<h3></h3>
@@ -284,11 +290,7 @@
   	<%  var tab = [];
          tab[-1] = 0;
      %>
-     		<nav id="navworks">
-	     		<div id="unfoldworks"><a data-bypass href="#"></a></div>
-	     		<div class="nextprevworks" id="prevwork"><a  href=""></a></div>	
-				<div class="nextprevworks" id="nextwork"><a href=""></a></div>
-			</nav>
+
 			<nav class="jThumbnailScroller" id="workslistmini">
 				<div class="jTscrollerContainer">	
 					<div class="jTscroller">						

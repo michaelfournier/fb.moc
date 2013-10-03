@@ -1012,12 +1012,13 @@ var Blog = (function (blog) {
 
         },
         render : function () {
-                    //this.undelegateEvents();  
+           this.renderWorksListMini();
+            //this.undelegateEvents();  
             var renderedContent = this.template();
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
-            Blog.myapprouter.myheight();
-            this.renderWorksListMini();
+            
+           // Blog.myapprouter.myheight();
 
             return this;
         },
@@ -1052,11 +1053,11 @@ var Blog = (function (blog) {
             Blog.myworkslist.all().fetch({
               update: true,
               success: function(results) {
-                console.log(results);
+                //console.log(results);
                 //myworkslistminiview.render(results);
-
                 // on rend myworkslistview dans .maincontent comme enfant de parentview
                renderNested(parentview, myworkslistminiview, "#tools", results);
+               console.log("list done");
               }
             });
 
@@ -1239,7 +1240,9 @@ var Blog = (function (blog) {
 
         nextwork : function() {
             //on cherche le numéro d'index du model dans lacollection //
+
             var index = this.collection.indexOf(this.model);
+
             var lastindex = this.collection.length - 1;
             // on détermine le slug du prochain model dans la collection //
             nextmodel = this.collection.at(index+1);
@@ -1259,8 +1262,10 @@ var Blog = (function (blog) {
             }
             nexthref = "#works/"+slugnext;
 
-            this.$el.find("#nextwork > a").attr({'href': nexthref, 'data-slug': slugnext});
-            this.$el.find("#prevwork > a").attr({'href': prevhref, 'data-slug': slugprev});
+            console.log(this.$el.find("#nextwork").find('a'));
+
+            this.$el.find("#nextwork").find('a').attr({'href': nexthref, 'data-slug': slugnext});
+            this.$el.find("#prevwork").find('a').attr({'href': prevhref, 'data-slug': slugprev});
         },
 
 
@@ -1397,7 +1402,7 @@ var Blog = (function (blog) {
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
-            this.$el.html(renderedContent);
+            this.$el.append(renderedContent);
             // on fait apparaitre le bouton unfold //
             this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
@@ -1675,7 +1680,7 @@ var Blog = (function (blog){
               this.selectMenu('works');
               this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (!Blog.mymainworkslistview) {               
+              if (!Blog.mymainworkslistview) {
                   // on instancie la vue MainWorksView
                   Blog.mymainworkslistview = new blog.Views.WorksListMainView();  
                 }
@@ -1689,7 +1694,7 @@ var Blog = (function (blog){
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkview) {               
                   // on instancie la vue MainWorksView
-                  Blog.mymainworkview = new blog.Views.WorkMainView();  
+                  Blog.mymainworkview = new blog.Views.WorkMainView();
               }
               this.switchView(Blog.mymainworkview);
               Blog.mymainworkview.renderWork(slug_post);

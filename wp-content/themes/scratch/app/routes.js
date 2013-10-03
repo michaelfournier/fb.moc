@@ -111,7 +111,7 @@ var Blog = (function (blog){
               this.selectMenu('works');
               this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (!Blog.mymainworkslistview) {               
+              if (!Blog.mymainworkslistview) {
                   // on instancie la vue MainWorksView
                   Blog.mymainworkslistview = new blog.Views.WorksListMainView();  
                 }
@@ -125,7 +125,7 @@ var Blog = (function (blog){
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkview) {               
                   // on instancie la vue MainWorksView
-                  Blog.mymainworkview = new blog.Views.WorkMainView();  
+                  Blog.mymainworkview = new blog.Views.WorkMainView();
               }
               this.switchView(Blog.mymainworkview);
               Blog.mymainworkview.renderWork(slug_post);

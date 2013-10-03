@@ -139,7 +139,9 @@ var Blog = (function (blog) {
 
         nextwork : function() {
             //on cherche le numéro d'index du model dans lacollection //
+
             var index = this.collection.indexOf(this.model);
+
             var lastindex = this.collection.length - 1;
             // on détermine le slug du prochain model dans la collection //
             nextmodel = this.collection.at(index+1);
@@ -159,8 +161,10 @@ var Blog = (function (blog) {
             }
             nexthref = "#works/"+slugnext;
 
-            this.$el.find("#nextwork > a").attr({'href': nexthref, 'data-slug': slugnext});
-            this.$el.find("#prevwork > a").attr({'href': prevhref, 'data-slug': slugprev});
+            console.log(this.$el.find("#nextwork").find('a'));
+
+            this.$el.find("#nextwork").find('a').attr({'href': nexthref, 'data-slug': slugnext});
+            this.$el.find("#prevwork").find('a').attr({'href': prevhref, 'data-slug': slugprev});
         },
 
 
