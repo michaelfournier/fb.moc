@@ -50,6 +50,11 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		/*height: 100%;*/
 	}
 
+	.maincontent_index {
+		.divise(1,1, 0, none, left);
+		/*height: 100%;*/
+	}
+
 	.maincontent.txt {
 		.divise(1,1, 200px, none, left);
 		padding-right: 200px;
@@ -151,11 +156,13 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	}
 
 	#indextools {
-		.divise(1,1, 200px, none, left);
+		.divise(1,1, 0, none, left);
+		margin-bottom: @unit;
 	}
 
 	#displaying {
 		float: left;
+		margin-right: @unit;
 	}
 
 	#sidebar {
@@ -172,6 +179,8 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		//border-bottom: @unit solid @bgcolor;
 	}
 
+	#sidebar.text { margin-top:0;}
+
 	#sidebarwrapper h3 {
 		margin: 0;
 		color: @black90;
@@ -185,7 +194,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	#sidebar a {
 		display: block;
 		text-decoration: none;
-		padding: @unit/1.5 0;
+		padding: @unit/2 0;
 		border-top: 1px dotted @black30;
 	}
 
@@ -222,8 +231,8 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 
 	#mainbb, #main_nav {
 		position:relative;
-		.divise(19,20, 0, none, left);
-		margin: 0 (0.5/20)*100%;
+		.divise(21,22, 0, none, left);
+		margin: 0 (0.5/22)*100%;
 	}
 
 
@@ -296,11 +305,11 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	#workslistmini {
 	    background-color: white;
 	    width: 0;
-	    .box-sizing();
 	    z-index: 20;
 	    top: @unit*4.5;
-	    padding-bottom: @unit*5.5;
+	    padding: 0 0 @unit*5.5 0;
 	    overflow: hidden;
+	    .box-sizing();
 		position:absolute; left:0px;
 	}
 

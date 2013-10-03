@@ -69,7 +69,7 @@ var Blog = (function (blog) {
         toggleworks : function(e) {
             elt = this.$el.find("#workslistmini");
             if (elt.width() <= 0) {
-                elt.animate({'width': '250px', complete: this.scrolltoactive()}, 150);
+                elt.animate({'width': '260px', complete: this.scrolltoactive()}, 150);
                 $(e.currentTarget).addClass('fold');
                 
             } else {

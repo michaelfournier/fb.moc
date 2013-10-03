@@ -20,14 +20,14 @@ var Blog = (function (blog) {
         render : function () {
             // on instancie la vue worklisttools //
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
-            this.hideInfos();
+            //this.hideInfos();
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
                 $(this).delay(i * 80).animate({opacity: 1});
                 i++;
             });
-            Blog.myapprouter.myheight();
+            
             wrapper = this.$el;
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({
@@ -43,23 +43,11 @@ var Blog = (function (blog) {
                     theme: "dark"
                 });
             }
-           
+            Blog.myapprouter.myheight();
             wrapper.mCustomScrollbar("update");
-
+            //Blog.myapprouter.myheight();
 
             return this;
-        },
-
-
-
-        events : {
-            "mouseover a.workthumb"  : "showInfos",
-            "mouseout a.workthumb"  : "hideInfos"
-            //"click #workslist a"  : "mydelete",
-            //"click #sortbydate"    : "sortbydate",
-            //"click #sortbycat"    : "sortbycat",
-            //"click #displaylist"    : "displaylist",
-            //"click #displaythumb"    : "displaythumb"
         },
 
         showInfos : function(e) {

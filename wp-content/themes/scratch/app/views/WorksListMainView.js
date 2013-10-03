@@ -4,7 +4,7 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#mainworks_template").html());
+            this.template = _.template($("#workslistmain_template").html());
             _.bindAll(this, 'render');
 
         },
@@ -35,10 +35,12 @@ var Blog = (function (blog) {
                 success: function(result) {
                   console.log(result);
                   // on rend myworkslistview dans .maincontent comme enfant de parentview
-                  renderNested(parentview, myworkslistview, ".maincontent", result);
+                  renderNested(parentview, myworkslistview, ".maincontent_index", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
                   renderNested(parentview, myworkslisttoolsview, "#tools");
+                  Blog.myapprouter.myheight();
                 }
+                
               });
             return this;
         },

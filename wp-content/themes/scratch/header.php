@@ -81,6 +81,17 @@
 
 	</div>
 
+
+	<!-- template pour mainworklist -->
+	<script type="text/template" id="workslistmain_template">	
+		<section id="tools">
+		</section>
+		<div id="wrapper">			
+			<section class="maincontent_index">
+			</section>
+		</div>	
+	</script>
+
 	<!-- template pour mainwork -->
 	<script type="text/template" id="mainworks_template">	
 		<section id="tools">
@@ -116,32 +127,17 @@
               			tab[i] = works[i].get('categories')[0]['title'];
               		}
               	%>
-              	
-              	<% if ( String(tab[i-1]) !== String(tab[i])) { %>
-              		<% if(i > 0) { %></div><% } %>
-              		<div class="segment">
-	              		<div class="wrapthumb" style="opacity:0">
-	              			<div class="sortitem"><%= tab[i] %></div>
-		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
-		                    		<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
-		                    	<% } else { %>
-		                    		<img src='<%= work.get('customthumb')[0] %>' />
-		                    	<% } %>
-		                    </a>
-	                 	</div>             			
-              	<% } else { %>
-	              		<div class="wrapthumb" style="opacity: 0">
-		                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
-		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>	
-		                    		<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
-		                    	<% } else { %>
-		                    		<img src='<%= work.get('customthumb')[0] %>' />
-		                    	<% } %>
-		                    </a>
-	                 	</div>                  		
-              	<% } %>
+          		<div class="wrapthumb" style="opacity:0">
+                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
+                    		<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+                    	<% } else { %>
+                    		<img src='<%= work.get('customthumb')[0] %>' />
+                    	<% } %>
+                    </a>
+                    <h3 class="worktitle"><%= work.get("title") %></h3>
 
+             	</div>             			
               <% } %>    
 	    <% }); %>
 	   </div>
@@ -206,12 +202,7 @@
 	<!-- template pour les outils de trie et d'affichage de workslist -->
 	<script type="text/template" id="workslisttools_template">
 		<div id="indextools">
-			<nav id="sorting" <% if (displaymode === "list") { %> style="display:block" <% } %>>
-				<ul>
-					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate'>date</a></li>
-					<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass  id='sortbycat'>categories</a></li>
-				</ul>
-			</nav>
+
 			<nav id="displaying">
 				<ul>
 					<li>
@@ -223,6 +214,13 @@
 						</a>
 					</li>
 					
+				</ul>
+			</nav>
+
+			<nav id="sorting" <% if (displaymode === "list") { %> style="display:block" <% } %>>
+				<ul>
+					<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate'>date</a></li>
+					<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass  id='sortbycat'>categories</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -323,7 +321,7 @@
 	<script type="text/template" id="maintexts_template">	
 		<section id="tools"></section>
 		<div id="wrapper">		
-			<section id="sidebar"></section>
+			<section id="sidebar" class="text"></section>
 			<section style="opacity:0" class="maincontent txt">
 			</section>
 		</div>

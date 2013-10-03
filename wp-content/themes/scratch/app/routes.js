@@ -42,12 +42,12 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#main_header').outerHeight(true);
+                    var contentheight = $(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10;
                     $('#wrapper, #workslistmini').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                    $('#wrapper').find('img').css("max-height", contentheight - legendheight);
+                    $('#wrapper').find('#picture img').css("max-height", contentheight - legendheight);
                     console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
@@ -113,7 +113,7 @@ var Blog = (function (blog){
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {
                   // on instancie la vue MainWorksView
-                  Blog.mymainworkslistview = new blog.Views.WorksListMainView();  
+                  Blog.mymainworkslistview = new blog.Views.WorksListMainView();
                 }
                 Blog.mymainworkslistview.render();
                 Blog.currentView = Blog.mymainworkslistview; 

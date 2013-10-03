@@ -13,7 +13,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             
-            var mycontent = this.$el; 
+            var mycontent = this.$el;
 
             var renderedContent = this.template({texte: this.model});
 
@@ -24,7 +24,7 @@ var Blog = (function (blog) {
                 complete: function() {
                         $(mycontent).html(renderedContent);
                         var mycontenttxt = $(mycontent).find('#txtwrapper');
-                        mycontenttxt.mCustomScrollbar("destroy"); 
+                        mycontenttxt.mCustomScrollbar("destroy");
                         if(!mycontenttxt.hasClass("mCustomScrollbar")) {
                             mycontenttxt.mCustomScrollbar({
                                 set_height: "100%",
@@ -32,7 +32,7 @@ var Blog = (function (blog) {
                                 theme: "dark"
                             });
                         }
-
+                        mycontenttxt.mCustomScrollbar("update");
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }
               });

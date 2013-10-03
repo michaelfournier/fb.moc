@@ -753,7 +753,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             
-            var mycontent = this.$el; 
+            var mycontent = this.$el;
 
             var renderedContent = this.template({texte: this.model});
 
@@ -764,7 +764,7 @@ var Blog = (function (blog) {
                 complete: function() {
                         $(mycontent).html(renderedContent);
                         var mycontenttxt = $(mycontent).find('#txtwrapper');
-                        mycontenttxt.mCustomScrollbar("destroy"); 
+                        mycontenttxt.mCustomScrollbar("destroy");
                         if(!mycontenttxt.hasClass("mCustomScrollbar")) {
                             mycontenttxt.mCustomScrollbar({
                                 set_height: "100%",
@@ -772,7 +772,7 @@ var Blog = (function (blog) {
                                 theme: "dark"
                             });
                         }
-
+                        mycontenttxt.mCustomScrollbar("update");
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }
               });
@@ -816,7 +816,7 @@ var Blog = (function (blog) {
                     //that.renderText();
                   }
 
-                }); 
+                });
             }
 
             Blog.myapprouter.myheight();
@@ -1285,7 +1285,7 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#mainworks_template").html());
+            this.template = _.template($("#workslistmain_template").html());
             _.bindAll(this, 'render');
 
         },
@@ -1316,10 +1316,12 @@ var Blog = (function (blog) {
                 success: function(result) {
                   console.log(result);
                   // on rend myworkslistview dans .maincontent comme enfant de parentview
-                  renderNested(parentview, myworkslistview, ".maincontent", result);
+                  renderNested(parentview, myworkslistview, ".maincontent_index", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
                   renderNested(parentview, myworkslisttoolsview, "#tools");
+                  Blog.myapprouter.myheight();
                 }
+                
               });
             return this;
         },
@@ -1456,7 +1458,7 @@ var Blog = (function (blog) {
         toggleworks : function(e) {
             elt = this.$el.find("#workslistmini");
             if (elt.width() <= 0) {
-                elt.animate({'width': '250px', complete: this.scrolltoactive()}, 150);
+                elt.animate({'width': '260px', complete: this.scrolltoactive()}, 150);
                 $(e.currentTarget).addClass('fold');
                 
             } else {
@@ -1510,14 +1512,14 @@ var Blog = (function (blog) {
         render : function () {
             // on instancie la vue worklisttools //
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
-            this.hideInfos();
+            //this.hideInfos();
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
                 $(this).delay(i * 80).animate({opacity: 1});
                 i++;
             });
-            Blog.myapprouter.myheight();
+            
             wrapper = this.$el;
             if(!wrapper.hasClass("mCustomScrollbar")) {
                 wrapper.mCustomScrollbar({
@@ -1533,23 +1535,11 @@ var Blog = (function (blog) {
                     theme: "dark"
                 });
             }
-           
+            Blog.myapprouter.myheight();
             wrapper.mCustomScrollbar("update");
-
+            //Blog.myapprouter.myheight();
 
             return this;
-        },
-
-
-
-        events : {
-            "mouseover a.workthumb"  : "showInfos",
-            "mouseout a.workthumb"  : "hideInfos"
-            //"click #workslist a"  : "mydelete",
-            //"click #sortbydate"    : "sortbydate",
-            //"click #sortbycat"    : "sortbycat",
-            //"click #displaylist"    : "displaylist",
-            //"click #displaythumb"    : "displaythumb"
         },
 
         showInfos : function(e) {
@@ -1611,12 +1601,12 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#main_header').outerHeight(true);
+                    var contentheight = $(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10;
                     $('#wrapper, #workslistmini').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                    $('#wrapper').find('img').css("max-height", contentheight - legendheight);
+                    $('#wrapper').find('#picture img').css("max-height", contentheight - legendheight);
                     console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
@@ -1682,7 +1672,7 @@ var Blog = (function (blog){
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {
                   // on instancie la vue MainWorksView
-                  Blog.mymainworkslistview = new blog.Views.WorksListMainView();  
+                  Blog.mymainworkslistview = new blog.Views.WorksListMainView();
                 }
                 Blog.mymainworkslistview.render();
                 Blog.currentView = Blog.mymainworkslistview; 

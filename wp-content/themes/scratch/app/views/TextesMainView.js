@@ -28,7 +28,7 @@ var Blog = (function (blog) {
                     //that.renderText();
                   }
 
-                }); 
+                });
             }
 
             Blog.myapprouter.myheight();

@@ -790,9 +790,8 @@ h3,
 h4 {
   color: #1a1a1a;
   margin: 0 0 1.1428571428571428em 0;
-  letter-spacing: 1px;
   font-weight: normal;
-  font-size: 0.7857142857142857em;
+  font-size: 0.8571428571428571em;
 }
 #txtwrapper h3 {
   text-transform: uppercase;
@@ -842,7 +841,9 @@ figcaption {
   width: 100%;
   text-align: left;
 }
-.actif {
+.actif,
+a.actif,
+#sorting a.actif {
   color: #0d0aff;
 }
 #sidebar .actif {
@@ -890,7 +891,10 @@ nav li {
 }
 nav#sorting {
   display: none;
-  float: right;
+  float: left;
+}
+#sorting a {
+  color: #b3b3b3;
 }
 nav#sorting li:first-child a {
   border: 0px;
@@ -915,7 +919,8 @@ nav a {
 }
 #navgal {
   position: absolute;
-  left: 260px;
+  left: 255px;
+  width: 2em;
   z-index: 6;
 }
 #navgal li {
@@ -924,10 +929,12 @@ nav a {
 }
 #navgal li a {
   font-size: 1em;
-  padding: 0 0.5714285714285714em 0 0;
+  padding: 0 0 0 0.5714285714285714em;
   border: 0;
   text-decoration: none;
   color: #dcdcdc;
+  float: right;
+  letter-spacing: 0px;
 }
 .btn-picture {
   /*background-color: @black05;*/
@@ -950,13 +957,18 @@ figure#picture img {
 .wrapthumb {
   position: relative;
   float: left;
+  margin: 0 0.7619047619047619em 1.7142857142857142em 0;
   /*margin-left: -@unit;
 	margin-right: @unit;*/
 
 }
+.wrapthumb:hover h3.worktitle {
+  color: #0d0aff;
+}
 .sortitem {
-  font-size: 0.7142857142857143em;
+  font-size: 0.7857142857142857em;
   position: absolute;
+  letter-spacing: 1px;
   padding: 0 0.5714285714285714em 0 1.3714285714285712em;
   top: -0.5714285714285714em;
   background-color: white;
@@ -965,8 +977,15 @@ figure#picture img {
 #wraplist {
   float: left;
   overflow: hidden;
-  padding-top: 0.5714285714285714em;
-  padding-left: 0.5714285714285714em;
+  padding-top: 0;
+  padding-left: 0;
+}
+.worktitle {
+  color: #666666;
+  display: block;
+  clear: both;
+  float: left;
+  margin: 0;
 }
 .workthumb {
   display: block;
@@ -977,15 +996,17 @@ figure#picture img {
 	padding-left: @unit/1.5;
 	margin-bottom: @unit/1.5;*/
 
-  margin: 0 0.7619047619047619em 1.7142857142857142em 0.7619047619047619em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  width: 154px;
-  height: 120px;
+  width: 250px;
+  height: 160px;
   overflow: hidden;
+}
+.workthumb img {
+  width: 250px;
 }
 .segment {
   display: inline;
@@ -1724,7 +1745,21 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 270px;
+    padding-left: 280px;
+    min-height: 1.1428571428571428em;
+    /*height: 100%;*/
+  
+  }
+  .maincontent_index {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: none;
+    float: left;
+    width: 100%;
+    padding-left: 0;
     min-height: 1.1428571428571428em;
     /*height: 100%;*/
   
@@ -1855,14 +1890,16 @@ SMARTPHONES
     clear: none;
     float: left;
     width: 100%;
-    padding-left: 200px;
+    padding-left: 0;
     min-height: 1.1428571428571428em;
+    margin-bottom: 1.1428571428571428em;
   }
   #displaying {
     float: left;
+    margin-right: 1.1428571428571428em;
   }
   #sidebar {
-    width: 270px;
+    width: 280px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -1871,10 +1908,13 @@ SMARTPHONES
     position: absolute;
     margin-top: 2.2857142857142856em;
     padding: 0 1.7142857142857142em 2.2857142857142856em 0;
-    max-width: 270px;
+    max-width: 280px;
     height: 100%;
     overflow-y: auto;
     z-index: 5;
+  }
+  #sidebar.text {
+    margin-top: 0;
   }
   #sidebarwrapper h3 {
     margin: 0;
@@ -1887,7 +1927,7 @@ SMARTPHONES
   #sidebar a {
     display: block;
     text-decoration: none;
-    padding: 0.7619047619047619em 0;
+    padding: 0.5714285714285714em 0;
     border-top: 1px dotted #b3b3b3;
   }
   #sidebar a:first-child {
@@ -1904,7 +1944,7 @@ SMARTPHONES
     top: 0;
     right: 0;
     padding: 0.7619047619047619em;
-    max-width: 270px;
+    max-width: 280px;
     height: 100%;
     overflow-y: auto;
   }
@@ -1928,10 +1968,10 @@ SMARTPHONES
     box-sizing: border-box;
     clear: none;
     float: left;
-    width: 95%;
+    width: 95.45454545454545%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
-    margin: 0 2.5%;
+    margin: 0 2.272727272727273%;
   }
   nav#navworks {
     position: absolute;
@@ -1989,15 +2029,15 @@ SMARTPHONES
   #workslistmini {
     background-color: white;
     width: 0;
+    z-index: 20;
+    top: 5.142857142857142em;
+    padding: 0 0 6.285714285714286em 0;
+    overflow: hidden;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    z-index: 20;
-    top: 5.142857142857142em;
-    padding-bottom: 6.285714285714286em;
-    overflow: hidden;
     position: absolute;
     left: 0px;
   }
