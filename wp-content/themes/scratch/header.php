@@ -30,7 +30,7 @@
 	<link rel="image_src" href="" />
 	<meta property="og:local" content="<?= get_bloginfo("language"); ?>">
 
-	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
+	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131004-1713" />
     <link type="text/plain" rel="author" href="/humans.txt" />
    <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
     <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
@@ -386,7 +386,6 @@
 
 	<!-- template pour news -->
 	<script type="text/template" id="news_template">	
-		<section id="tools"></section>
 		<div id="wrapper">		
 			<section style="background:none" class="maincontent news">
 				<div id="txtwrapper"><%= mynews.get('content') %>

@@ -8,6 +8,8 @@ var Blog = (function (blog) {
         },
         render : function () {
             console.log(this.model);
+            // on efface le contenu de #mainbb
+            this.$el.html("");
             var renderedContent = this.template({mynews: this.model});
             this.$el.html(renderedContent).find("#txtwrapper").css('opacity', 0);
             // Blog.myapprouter.myheight();

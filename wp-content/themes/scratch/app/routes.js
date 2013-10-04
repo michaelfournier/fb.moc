@@ -3,9 +3,9 @@ var Blog = (function (blog){
         blog.Router.RoutesManager = Backbone.Router.extend({
             initialize : function(args) {
                 // on instancie l'objet myhomepage
-                Blog.myhomepage = new blog.Collections.HomePicslist();
+                Blog.myhomepics = new blog.Collections.HomePicslist();
                 // on instancie l'objet myworkslist
-                Blog.myworkslist = new blog.Collections.WorksList();              
+                Blog.myworkslist = new blog.Collections.WorksList();
                 // on instancie l'objet mywork
                 Blog.mywork = new blog.Models.Work();
 
@@ -37,7 +37,7 @@ var Blog = (function (blog){
                 "notice" : "notice",
                 "home" : "home",
                 "" : "home",
-                "*path" : "root"
+                "*path" : "home"
             },
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
@@ -73,21 +73,39 @@ var Blog = (function (blog){
             },
 
             home : function () {
-              
-              this.root();
               this.selectMenu('home');
               //this.killbackstrech();
-                  // on instancie la vue news
-                  Blog.newsview = new blog.Views.NewsView(Blog.mynews);
-                  // on charge les données dans mynews
+              // on instancie la vue home
+
+                // on instancie la vue MainWorksView et on la rend si elle n'existe pas
+                if (!Blog.homeview) {
+                    // on instancie la vue MainWorksView
+                    Blog.homeview = new blog.Views.HomeView(Blog.myhomepics);
+                }
+
+                // on instancie la vue MainWorksView et on la rend si elle n'existe pas
+                if (!Blog.newsview) {
+                    // on instancie la vue MainWorksView
+                    Blog.newsview = new blog.Views.NewsView(Blog.mynews);
+                }
+
+                // on charge les données dans myhomepics
+                Blog.myhomepics.fetch({
+                  //update: true,
+                  success: function(results) {
+                    //console.log(results.toJSON());
+                    Blog.homeview.render(results);
+                    Blog.currentView = Blog.homeview;
+                  }
+                });
+
                 Blog.mynews.query().fetch({
                   //update: true,
                   success: function(results) {
                     //console.log(results.toJSON());
-                    Blog.newsview.render(results); 
-                    Blog.currentView = Blog.newsview;
+                    Blog.newsview.render(results);
                   }
-                });                   
+                });
             },
 
             notice : function () {
@@ -101,10 +119,10 @@ var Blog = (function (blog){
                   //update: true,
                   success: function(results) {
                     //console.log(results.toJSON());
-                    Blog.noticeview.render(results); 
+                    Blog.noticeview.render(results);
                     Blog.currentView = Blog.noticeview;
                   }
-                });                   
+                });
             },
 
             displayWorksList : function () {
