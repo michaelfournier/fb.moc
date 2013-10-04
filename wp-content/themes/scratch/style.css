@@ -789,7 +789,7 @@ body {
 h3,
 h4 {
   color: #1a1a1a;
-  margin: 0 0 1.1428571428571428em 0;
+  margin: 0 0 0.5714285714285714em 0;
   font-weight: normal;
   font-size: 0.8571428571428571em;
 }
@@ -820,13 +820,14 @@ a:visited:hover,
 a:hover h3,
 #sidebarwrapper a:hover h3 {
   cursor: pointer;
-  color: #0d0aff;
+  color: #1a1a1a;
+  text-decoration: underline;
 }
 a:visited {
   color: #1a1a1a;
 }
 #sidebar h3 {
-  color: #0d0aff;
+  color: #1a1a1a;
   letter-spacing: 1px;
 }
 p {
@@ -844,10 +845,12 @@ figcaption {
 .actif,
 a.actif,
 #sorting a.actif {
-  color: #0d0aff;
+  color: #1a1a1a;
+  text-decoration: underline;
 }
 #sidebar .actif {
-  color: #0d0aff;
+  color: #1a1a1a;
+  text-decoration: underline;
 }
 ul {
   padding: 0;
@@ -858,7 +861,8 @@ ul {
 }
 #navgal li a.actif,
 nav li a.actif {
-  color: #0d0aff;
+  color: #1a1a1a;
+  text-decoration: underline;
 }
 nav#picvidswitcher {
   float: right;
@@ -913,7 +917,7 @@ nav a {
 #wrapper {
   float: left;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   position: relative;
 }
@@ -963,7 +967,7 @@ figure#picture img {
 
 }
 .wrapthumb:hover h3.worktitle {
-  color: #0d0aff;
+  color: #1a1a1a;
 }
 .sortitem {
   font-size: 0.7857142857142857em;
@@ -1043,14 +1047,14 @@ figure#picture img {
   color: #666666;
 }
 #wraplist-list a:hover h3 {
-  color: #0d0aff;
+  color: #1a1a1a;
 }
 #wraplist-list a {
   text-decoration: none;
 }
 #wraplist-list .sortitem {
   border-bottom: 1px solid #dcdcdc;
-  padding: 0 0 0.38095238095238093em 0;
+  padding: 0;
   width: 100%;
   float: left;
   position: relative;
@@ -1096,7 +1100,7 @@ figure#picture img {
 }
 #displaythumb.actif,
 #displaylist.actif {
-  background-color: #0d0aff;
+  background-color: #1a1a1a;
 }
 #rightbar a {
   font-size: 0.7857142857142857em;
@@ -1764,7 +1768,8 @@ SMARTPHONES
     /*height: 100%;*/
   
   }
-  .maincontent.txt {
+  .maincontent.txt,
+  .maincontent.bio {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
@@ -1778,6 +1783,7 @@ SMARTPHONES
     padding-right: 200px;
     background-color: white;
     overflow-y: hidden;
+    height: 100%;
   }
   .maincontent.news,
   .maincontent.bio,
@@ -1827,7 +1833,7 @@ SMARTPHONES
     position: relative;
     background-color: white;
     padding: 0.7619047619047619em 0.38095238095238093em 0.7619047619047619em 1.1428571428571428em;
-    max-width: 750px;
+    max-width: 700px;
     margin: 0 auto;
     color: #4d4d4d;
     height: 100%;
@@ -1849,22 +1855,18 @@ SMARTPHONES
     background: #666666 url('img/btn-close.png') no-repeat center center;
   }
   #btn-close:hover {
-    background: #0d0aff url('img/btn-close.png') no-repeat center center;
+    background: #1a1a1a url('img/btn-close.png') no-repeat center center;
   }
   .news #txtwrapper {
     height: auto;
     padding-top: 1.1428571428571428em;
   }
-  #txtwrapper p {
-    font-size: 0.8571428571428571em;
-    line-height: 1.6;
-  }
   #txtwrapper *:first-child {
     margin-top: 0;
     padding-top: 0;
   }
-  #txtwrapper p {
-    font-size: 0.7857142857142857em;
+  .txt #txtwrapper p {
+    font-size: 0.9285714285714286em;
     line-height: 1.6;
   }
   #tools {
@@ -1914,11 +1916,14 @@ SMARTPHONES
     z-index: 5;
   }
   #sidebar.text {
+    width: 200px;
     margin-top: 0;
+    padding: 0;
   }
   #sidebarwrapper h3 {
     margin: 0;
     color: #1a1a1a;
+    letter-spacing: 0px;
   }
   #sidebarwrapper h4 {
     margin: 0;
@@ -1999,7 +2004,7 @@ SMARTPHONES
   #nextwork a:hover,
   #prevwork a:hover,
   #unfoldworks a:hover {
-    background-color: #0d0aff;
+    background-color: #1a1a1a;
   }
   #nextwork a {
     background: url('img/forward02.png') #b3b3b3 no-repeat center center;
@@ -2030,8 +2035,8 @@ SMARTPHONES
     background-color: white;
     width: 0;
     z-index: 20;
-    top: 5.142857142857142em;
-    padding: 0 0 6.285714285714286em 0;
+    top: 2.8571428571428568em;
+    padding: 0 0 4em 0;
     overflow: hidden;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2051,10 +2056,39 @@ SMARTPHONES
     display: inline-block;
     top: 0;
     left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
   }
   .jTscroller a {
     display: block;
+    width: 100%;
+    white-space: nowrap;
     padding: 0.2857142857142857em 0 0 0;
+  }
+  .jTscroller a img {
+    float: left;
+  }
+  .thumbinfos {
+    font-size: 1.1428571428571428em;
+    letter-spacing: 0px;
+    float: left;
+    width: 110px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 0.38095238095238093em;
+    white-space: normal;
+  }
+  .thumbinfos * {
+    color: #b3b3b3;
+  }
+  .actif .thumbinfos h3 {
+    color: #1a1a1a;
   }
   .st_wrapper a:last-child {
     padding-right: 0;
@@ -2074,11 +2108,13 @@ SMARTPHONES
     z-index: 9;
   }
   .thumb_color:hover img,
-  .thumb_color img.colorize {
+  .thumb_color.actif img,
+  .workthumb:hover img {
     opacity: 1;
     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
     -webkit-filter: grayscale(0%);
   }
+  .workthumb img,
   .thumb_color img {
     opacity: 0.15;
     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
@@ -2090,6 +2126,9 @@ SMARTPHONES
     -webkit-filter: grayscale(100%);
     /* Chrome 19+, Safari 6+, Safari 6+ iOS */
   
+  }
+  .workthumb img {
+    opacity: .35;
   }
 }
 /* only screen and (min-width: 810px) */

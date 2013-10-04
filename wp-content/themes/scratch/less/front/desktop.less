@@ -55,11 +55,12 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		/*height: 100%;*/
 	}
 
-	.maincontent.txt {
+	.maincontent.txt, .maincontent.bio {
 		.divise(1,1, 200px, none, left);
 		padding-right: 200px;
 		background-color: white;
 		overflow-y: hidden;
+		height: 100%;
 	}
 
 	.maincontent.news, .maincontent.bio, .maincontent.notice {
@@ -101,7 +102,7 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		position: relative;
 		background-color: white;
 		padding: @unit/1.5 @unit/3 @unit/1.5 @unit;
-		max-width: 750px;
+		max-width: 700px;
 		margin: 0 auto;
 		color: @black70;
 		height: 100%;
@@ -134,18 +135,14 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		padding-top:@unit;
 	}
 
-	#txtwrapper p {
-		font-size:(12/@font-size)*1em;
-		line-height: @line/10;
-	}
 
 	#txtwrapper *:first-child {
 		margin-top: 0;
 		padding-top: 0;
 	}
 
-	#txtwrapper p {
-		font-size:(11/@font-size)*1em;
+	.txt #txtwrapper p {
+		font-size:(13/@font-size)*1em;
 		line-height: @line/10;
 	}
 
@@ -179,11 +176,12 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		//border-bottom: @unit solid @bgcolor;
 	}
 
-	#sidebar.text { margin-top:0;}
+	#sidebar.text { width: 200px; margin-top:0; padding:0;}
 
 	#sidebarwrapper h3 {
 		margin: 0;
 		color: @black90;
+		letter-spacing: 0px;
 	}
 
 	#sidebarwrapper h4 {
@@ -306,8 +304,8 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 	    background-color: white;
 	    width: 0;
 	    z-index: 20;
-	    top: @unit*4.5;
-	    padding: 0 0 @unit*5.5 0;
+	    top: @unit*2.5;
+	    padding: 0 0 @unit*3.5 0;
 	    overflow: hidden;
 	    .box-sizing();
 		position:absolute; left:0px;
@@ -325,12 +323,39 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		display: inline-block;
 		top: 0;
 		left : 0;
+		.box-sizing();
 	}
+
 
 	.jTscroller a {
 		display: block;  
+		width: 100%;
+		white-space: nowrap;
 		padding: @unit/4 0 0 0;
 	}
+
+	.jTscroller a img {
+		float: left;
+	}
+
+	.thumbinfos {
+		font-size:(16/@font-size)*1em;
+		letter-spacing: 0px;
+		float: left;
+		width: 110px;
+		.box-sizing();
+		padding-left: @unit/3;
+		white-space: normal;
+	}
+
+	.thumbinfos * {
+		color: @black30;
+	}
+
+	.actif .thumbinfos h3 {
+		color: @black90;
+	}
+
 
 	.st_wrapper a:last-child {
 		padding-right: 0;
@@ -354,17 +379,19 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		z-index: 9;
 	}
 
-	.thumb_color:hover img, .thumb_color img.colorize {
+	.thumb_color:hover img, .thumb_color.actif img, .workthumb:hover img {
 		opacity: 1;
 	    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
     -webkit-filter: grayscale(0%);
 	}
 
-	.thumb_color img {
+	.workthumb img, .thumb_color img {
 		opacity: 0.15;
     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
     filter: gray; /* IE6-9 */
     -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
 	}
+
+	.workthumb img { opacity: .35;}
 
 }

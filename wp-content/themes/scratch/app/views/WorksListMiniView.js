@@ -56,14 +56,14 @@ var Blog = (function (blog) {
             var activeitem = this.$el.find("#"+this.collection.workslug);
             console.log(activeitem);
             this.$el.find("#workslistmini").mCustomScrollbar("update");
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug, {callbacks: this.showactif(activeitem)});
             //this.$el.find('.jTscroller').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
         },
 
         showactif : function(item) {
-            this.$el.find('.jTscroller img').removeClass('colorize');
+            this.$el.find('.jTscroller a').removeClass('actif');
             //console.log(this.$el.find('.jTscroller img'));
-            //item.find('img').addClass('colorize');
+            item.addClass('actif');
         },
 
         toggleworks : function(e) {

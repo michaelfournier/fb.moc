@@ -126,15 +126,15 @@ var Blog = (function (blog) {
             slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             //this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug);
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug, {callbacks: this.showactif(slug)});
             //this.$el.find("#workslistmini").scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
         },
 
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
-            this.$el.find('.jTscroller img').removeClass('colorize');
-            item.find('img').addClass('colorize');
+            this.$el.find('.jTscroller a').removeClass('actif');
+            item.addClass('actif');
         },
 
         nextwork : function() {

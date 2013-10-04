@@ -305,9 +305,17 @@
 				                    		<a data-id="<%= work.get("id") %>" href="#works/<%= work.get('slug') %>" class="thumb_color" id="<%= work.get("slug") %>">
 				                    		
 				                    		<% if (work.get('customthumb')) { %>
-				                    			<img width="120px" src='<%= work.get('customthumb')[0] %>' />				                    			
+				                    			<img width="120px" src='<%= work.get('customthumb')[0] %>' />
+				                    			<div class="thumbinfos">
+					                    			<h3><%= works[i].get('title') %></h3>
+					                    			<h4><%= tab[i] %></h4>	
+				                    			</div>			                    			
 					                    	<% } else { %>
 					                    		<img width='120px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' />
+					                    		<div class="thumbinfos">
+					                    			<h3><%= works[i].get('title') %></h3>
+					                    			<h4><%= tab[i] %></h4>	
+				                    			</div>				      
 					                    	<% } %>
 					                    	</a>
 				              <% } %>    
@@ -370,8 +378,8 @@
 	<script type="text/template" id="bio_template">	
 		<section id="tools"></section>
 		<div id="wrapper">		
-			<section style="background:none" class="maincontent bio">
-				<div id="txtwrapper"><%= mybio.get('content') %></div>
+			<section id="sidebar" class="text"></section>
+			<section style="opacity:0" class="maincontent bio">
 			</section>
 		</div>
 	</script>

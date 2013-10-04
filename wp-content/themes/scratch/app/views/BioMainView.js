@@ -4,7 +4,7 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
 
-            this.template = _.template($("#maintexts_template").html());
+            this.template = _.template($("#bio_template").html());
 
             _.bindAll(this, 'render');
              //this.collection.bind('sort', 'render');
@@ -36,9 +36,7 @@ var Blog = (function (blog) {
                     //console.log(Blog.mybiolist.at(0));
                     that.renderText();
                   }
-                }); 
-
-           // }
+                });
 
             Blog.myapprouter.myheight();
 
@@ -54,9 +52,9 @@ var Blog = (function (blog) {
             if (!myslug) {
                 // definition du texte à charger par défaut: on prend le premier de la liste de la colllection //                   
                 slug = Blog.mybiolist.at(0).get('slug');
-                Blog.mybiolist.slug = slug;  
+                Blog.mybiolist.slug = slug;
                // console.log(slug);
-            } else {      
+            } else {
                 slug = myslug;
             }
             //alert(slug);
@@ -74,9 +72,9 @@ var Blog = (function (blog) {
                 renderNested( parentview, mybiocontentview, ".maincontent", result);
                 
               }
-            }); 
+            });
               
-            return this;         
+            return this;
         }
 
     });

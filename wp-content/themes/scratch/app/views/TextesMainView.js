@@ -57,16 +57,15 @@ var Blog = (function (blog) {
             this.mytextscontentview = new blog.Views.TextesContentView(Blog.mytexte);
             var mytextscontentview =  this.mytextscontentview;
             //};
-            console.log(slug);
             // on charge les données et on rend la vue imbriquée //
             Blog.mytexte.query(slug).fetch({
               //update: true,
               success: function(result) {
                 renderNested( parentview, mytextscontentview, ".maincontent", result);
               }
-            }); 
+            });
               
-            return this;         
+            return this;
         }
 
     });

@@ -349,7 +349,7 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
 
-            this.template = _.template($("#maintexts_template").html());
+            this.template = _.template($("#bio_template").html());
 
             _.bindAll(this, 'render');
              //this.collection.bind('sort', 'render');
@@ -381,9 +381,7 @@ var Blog = (function (blog) {
                     //console.log(Blog.mybiolist.at(0));
                     that.renderText();
                   }
-                }); 
-
-           // }
+                });
 
             Blog.myapprouter.myheight();
 
@@ -399,9 +397,9 @@ var Blog = (function (blog) {
             if (!myslug) {
                 // definition du texte à charger par défaut: on prend le premier de la liste de la colllection //                   
                 slug = Blog.mybiolist.at(0).get('slug');
-                Blog.mybiolist.slug = slug;  
+                Blog.mybiolist.slug = slug;
                // console.log(slug);
-            } else {      
+            } else {
                 slug = myslug;
             }
             //alert(slug);
@@ -419,9 +417,9 @@ var Blog = (function (blog) {
                 renderNested( parentview, mybiocontentview, ".maincontent", result);
                 
               }
-            }); 
+            });
               
-            return this;         
+            return this;
         }
 
     });
@@ -772,7 +770,9 @@ var Blog = (function (blog) {
                                 theme: "dark"
                             });
                         }
+                         Blog.myapprouter.myheight();
                         mycontenttxt.mCustomScrollbar("update");
+
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }
               });
@@ -845,16 +845,15 @@ var Blog = (function (blog) {
             this.mytextscontentview = new blog.Views.TextesContentView(Blog.mytexte);
             var mytextscontentview =  this.mytextscontentview;
             //};
-            console.log(slug);
             // on charge les données et on rend la vue imbriquée //
             Blog.mytexte.query(slug).fetch({
               //update: true,
               success: function(result) {
                 renderNested( parentview, mytextscontentview, ".maincontent", result);
               }
-            }); 
+            });
               
-            return this;         
+            return this;
         }
 
     });
@@ -1227,15 +1226,15 @@ var Blog = (function (blog) {
             slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             //this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug);
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug, {callbacks: this.showactif(slug)});
             //this.$el.find("#workslistmini").scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
         },
 
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
-            this.$el.find('.jTscroller img').removeClass('colorize');
-            item.find('img').addClass('colorize');
+            this.$el.find('.jTscroller a').removeClass('actif');
+            item.addClass('actif');
         },
 
         nextwork : function() {
@@ -1445,14 +1444,14 @@ var Blog = (function (blog) {
             var activeitem = this.$el.find("#"+this.collection.workslug);
             console.log(activeitem);
             this.$el.find("#workslistmini").mCustomScrollbar("update");
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug, {callbacks: this.showactif(activeitem)});
             //this.$el.find('.jTscroller').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
         },
 
         showactif : function(item) {
-            this.$el.find('.jTscroller img').removeClass('colorize');
+            this.$el.find('.jTscroller a').removeClass('actif');
             //console.log(this.$el.find('.jTscroller img'));
-            //item.find('img').addClass('colorize');
+            item.addClass('actif');
         },
 
         toggleworks : function(e) {

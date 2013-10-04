@@ -32,7 +32,9 @@ var Blog = (function (blog) {
                                 theme: "dark"
                             });
                         }
+                         Blog.myapprouter.myheight();
                         mycontenttxt.mCustomScrollbar("update");
+
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }
               });

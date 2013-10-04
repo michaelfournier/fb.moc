@@ -47,7 +47,7 @@ body {
 
 h3 , h4{
 	color: @black90;
-	margin: 0 0 @unit 0;
+	margin: 0 0 @unit/2 0;
 	font-weight: normal;
 	font-size:(12/@font-size)*1em;
 }
@@ -109,6 +109,7 @@ figcaption {
 
 .actif, a.actif, #sorting a.actif {
 	color: @hovercolor;
+	text-decoration: underline;
 }
 
 #sidebar .actif {
@@ -187,7 +188,7 @@ nav a {
 #wrapper {
 	float: left;
 	width:	100%;
-	overflow-y: auto;
+	overflow-y: hidden;
 	overflow-x: hidden;
 	position: relative;
 }
@@ -342,7 +343,7 @@ figure#picture img {
 
 #wraplist-list .sortitem {
 	border-bottom: 1px solid @black10;
-	padding: 0 0 @unit/3 0;
+	padding: 0;
 	width: 100%;
 	float: left;
 	position: relative;
