@@ -22,7 +22,7 @@ function my_scripts() {
 
   wp_enqueue_script( 'underscore', get_template_directory_uri() . '/app/libs/vendors/underscore.js', null, false, false);
   wp_enqueue_script( 'backbone', get_template_directory_uri() . '/app/libs/vendors/backbone.js', 'underscore', false, false);
-  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131004-1713', 'backbone', false, true );
+  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131004-1850', 'backbone', false, true );
 };
 
 // permet l'appel ajax des vignettes dans les metabox ///
@@ -130,7 +130,7 @@ function my_encode_meta($response) {
         };
       //}
     };
-  } else if ($mytype == 'works' && $json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
+  } else if ( ($mytype == 'works' || $mytype =='page') && $json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['post'])) {
     add_gallery($response['post']);
     // on écrit qq chose dans pinfos_description pour éviter les erreurs lors de l'appel sur le front //
     $response['post']->custom_fields->_pinfos_description = "";
@@ -146,6 +146,8 @@ function my_encode_meta($response) {
             $response['post']->custom_fields->_pinfos_description = $wp_custom_fields["_pinfos_description_fr"];
           }
         }
+  } else if ( $mytype =='page' && $json_api->include_value('custom_fields') && $json_api->query->custom_fields && isset($response['page']) ) {
+    add_gallery($response['page']);
   }
 //add_myauthors($response['posts']);
   if(isset($response['posts'])) {

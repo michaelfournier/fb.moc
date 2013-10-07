@@ -134,14 +134,14 @@ var Blog = (function (blog){
                   Blog.mymainworkslistview = new blog.Views.WorksListMainView();
                 }
                 Blog.mymainworkslistview.render();
-                Blog.currentView = Blog.mymainworkslistview; 
+                Blog.currentView = Blog.mymainworkslistview;
             },
 
             displayWork : function (slug_post) {
               this.selectMenu('works');
               this.killbackstrech();
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-              if (!Blog.mymainworkview) {               
+              if (!Blog.mymainworkview) {
                   // on instancie la vue MainWorksView
                   Blog.mymainworkview = new blog.Views.WorkMainView();
               }
@@ -159,15 +159,15 @@ var Blog = (function (blog){
               //       Blog.myworkview.render(results);
               //     }
               //   });
-            },        
+            },
 
             displayText : function (slug_post) {
               this.selectMenu('texts');
-              this.killbackstrech();     
+              this.killbackstrech();
               // on instancie la vue TextesMainView si elle n'existe pas
-              if (!Blog.textesmainview) {               
+              if (!Blog.textesmainview) {
                   // on instancie la vue MainWorksView
-                  Blog.textesmainview = new blog.Views.TextesMainView();  
+                  Blog.textesmainview = new blog.Views.TextesMainView();
               }
 
               if(slug_post) {
@@ -175,20 +175,20 @@ var Blog = (function (blog){
                 this.switchView(Blog.textesmainview);
                 Blog.textesmainview.renderText(slug_post);
               } else {
-                Blog.mytexteslist.slug = ""; 
-                Blog.textesmainview.render(); 
-                Blog.currentView = Blog.textesmainview;                          
-              }                   
+                Blog.mytexteslist.slug = "";
+                Blog.textesmainview.render();
+                Blog.currentView = Blog.textesmainview;
+              }
 
             },
 
             displayBio : function (slug_post) {
               this.selectMenu('bio');
-              this.killbackstrech();    
+              this.killbackstrech();
 
-              if (!Blog.biomainview) {               
+              if (!Blog.biomainview) {
                   // on instancie la vue MainWorksView
-                  Blog.biomainview = new blog.Views.BioMainView();  
+                  Blog.biomainview = new blog.Views.BioMainView();
               }
 
               if(slug_post) {
@@ -197,13 +197,13 @@ var Blog = (function (blog){
 
                 this.switchView(Blog.biomainview);
 
-                Blog.biomainview.renderText(slug_post); 
+                Blog.biomainview.renderText(slug_post);
 
               } else {
 
                 Blog.mybiolist.slug = "";
                 Blog.biomainview.render();
-                Blog.currentView = Blog.biomainview;              
+                Blog.currentView = Blog.biomainview;
               }
                      
             },
@@ -211,7 +211,7 @@ var Blog = (function (blog){
             switchView : function(newview) {
               if(newview.cid != Blog.currentView.cid) {
                 //Blog.currentView.remove();
-                newview.render();  
+                newview.render();
                 Blog.currentView = newview;
               }
             },
