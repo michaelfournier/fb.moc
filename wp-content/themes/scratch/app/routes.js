@@ -36,6 +36,7 @@ var Blog = (function (blog){
                 "bio/:slug_post" : "displayBio",
                 "notice" : "notice",
                 "home" : "home",
+                "news" : "news",
                 "" : "home",
                 "*path" : "home"
             },
@@ -55,22 +56,6 @@ var Blog = (function (blog){
               $('#main_nav a').removeClass('actif');
               $('#main_nav a[href="#'+route+'"]').addClass('actif');
             },
-            root : function () {
-              this.selectMenu();
-                // on efface le contenu de #mainbb
-                $("#mainbb").html("");
-                blog.myhomepage.fetch({
-                    success:function(result){
-                      attachments = result.toJSON();
-                      var picsArray = [];
-                      _.each(attachments, function(data) {
-                          picsArray.push(data.url);
-                      });
-                      $.backstretch(_.shuffle(picsArray), {duration: 4000, fade: 2050});
-                        //ça marche !!!
-                    }
-                });
-            },
 
             home : function () {
               this.selectMenu('home');
@@ -83,12 +68,6 @@ var Blog = (function (blog){
                     Blog.homeview = new blog.Views.HomeView(Blog.myhomepics);
                 }
 
-                // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-                if (!Blog.newsview) {
-                    // on instancie la vue MainWorksView
-                    Blog.newsview = new blog.Views.NewsView(Blog.mynews);
-                }
-
                 // on charge les données dans myhomepics
                 Blog.myhomepics.fetch({
                   //update: true,
@@ -98,14 +77,26 @@ var Blog = (function (blog){
                     Blog.currentView = Blog.homeview;
                   }
                 });
+            },
 
-                Blog.mynews.query().fetch({
-                  //update: true,
-                  success: function(results) {
-                    //console.log(results.toJSON());
-                    Blog.newsview.render(results);
-                  }
-                });
+            news : function () {
+              this.killbackstrech();
+              this.selectMenu('news');
+
+              // on instancie la vue MainWorksView et on la rend si elle n'existe pas
+              if (!Blog.newsview) {
+                  // on instancie la vue MainWorksView
+                  Blog.newsview = new blog.Views.NewsView(Blog.mynews);
+              }
+
+              Blog.mynews.query().fetch({
+                //update: true,
+                success: function(results) {
+                  Blog.newsview.render(results);
+                  Blog.currentView = Blog.newsview;
+                }
+              });
+
             },
 
             notice : function () {

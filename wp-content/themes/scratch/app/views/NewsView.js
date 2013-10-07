@@ -23,6 +23,7 @@ var Blog = (function (blog) {
             //     });
             // };           
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
+            Blog.myapprouter.myheight();
             
         },
 

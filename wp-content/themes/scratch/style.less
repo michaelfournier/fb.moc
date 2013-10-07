@@ -42,14 +42,18 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size:(12/@font-size)*1em;
 	line-height: @line/12;
-	color: @black60;
+	color: @black90;
 }
 
 h3 , h4{
 	color: @black90;
-	margin: 0 0 @unit/2 0;
+	margin: 0 0 @unit/3 0;
+	font-size:(13/@font-size)*1em;
 	font-weight: normal;
-	font-size:(12/@font-size)*1em;
+}
+
+h4 {
+	color: @black60;
 }
 
 #txtwrapper h3 {
@@ -58,15 +62,20 @@ h3 , h4{
 }
 
 #txtwrapper h4 {
-	text-transform: uppercase;
-	font-weight: bold;
-	margin-top: @unit;
+	margin: @unit 0 0 0;
+	color: @black90;
 }
 
 .news #txtwrapper h3 {
+	font-weight: bold;
 	border-top: 1px dotted @black30;
-	padding-top: @unit*1.5;
-	margin-top: @unit*1.5;
+	padding-top: @unit;
+	margin-top: @unit;
+}
+
+.news #txtwrapper p {
+	color: @black60;
+	margin-top: 0;
 }
 
 .news #txtwrapper h3:first-child {
@@ -91,10 +100,11 @@ a:visited {
 #sidebar h3 {
 	color: @hovercolor;
 	letter-spacing: 1px;
+	font-weight: bold;
 }
 
 p {
-	font-size:(11/@font-size)*1em;
+	font-size:(12/@font-size)*1em;
 	text-align: justify;
 }
 
@@ -131,6 +141,7 @@ nav#picvidswitcher {
 }
 
 #main_header { 
+	position: relative;
 	margin: 0 0 @unit 0;
 	padding: @unit/2 0;
 	background-color: white;

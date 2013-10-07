@@ -463,17 +463,38 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
+            this.template = _.template($("#home_template").html());
         },
         render : function() {
+            // on insère un gros bouton pour le roll over du menu sur la home
+
             console.log(this.collection);
+            var renderedContent = this.template();
+            this.$el.html(renderedContent);
             var picsArray = [];
             _.each(this.collection.models, function(data) {
               picsArray.push(data.get('full'));
             });
             $.backstretch(_.shuffle(picsArray), {duration: 4000, fade: 2050});
             //ça marche !!!
-                    
-            //this.renderNews();
+            // on replie le menu principal //
+           // this.$el.find("#main_header").animate({'top':"-30px"});
+        },
+        events : {
+            "mouseenter #big-btn-home-up"  : "mouseOver",
+            "mouseenter #big-btn-home-down"  : "mouseOut"
+        },
+
+        mouseOver : function(e) {
+
+                var elt = this.$el.find("#big-btn-home-up");
+                this.$el.parent().parent().find("#main_header").stop(true, true).animate({'top':"0px"}, { complete: function() {elt.css("z-index", -1);}});
+                //
+        },
+        mouseOut : function(e) {
+                var elt = this.$el.find("#big-btn-home-up");
+                this.$el.parent().parent().find("#main_header").stop(true, true).animate({'top':"-30px"}, { complete: function() {elt.css("z-index", 1);}});
+    
         }
     });
 
@@ -550,6 +571,7 @@ var Blog = (function (blog) {
             //     });
             // };           
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
+            Blog.myapprouter.myheight();
             
         },
 
@@ -1618,6 +1640,7 @@ var Blog = (function (blog){
                 "bio/:slug_post" : "displayBio",
                 "notice" : "notice",
                 "home" : "home",
+                "news" : "news",
                 "" : "home",
                 "*path" : "home"
             },
@@ -1637,22 +1660,6 @@ var Blog = (function (blog){
               $('#main_nav a').removeClass('actif');
               $('#main_nav a[href="#'+route+'"]').addClass('actif');
             },
-            root : function () {
-              this.selectMenu();
-                // on efface le contenu de #mainbb
-                $("#mainbb").html("");
-                blog.myhomepage.fetch({
-                    success:function(result){
-                      attachments = result.toJSON();
-                      var picsArray = [];
-                      _.each(attachments, function(data) {
-                          picsArray.push(data.url);
-                      });
-                      $.backstretch(_.shuffle(picsArray), {duration: 4000, fade: 2050});
-                        //ça marche !!!
-                    }
-                });
-            },
 
             home : function () {
               this.selectMenu('home');
@@ -1665,12 +1672,6 @@ var Blog = (function (blog){
                     Blog.homeview = new blog.Views.HomeView(Blog.myhomepics);
                 }
 
-                // on instancie la vue MainWorksView et on la rend si elle n'existe pas
-                if (!Blog.newsview) {
-                    // on instancie la vue MainWorksView
-                    Blog.newsview = new blog.Views.NewsView(Blog.mynews);
-                }
-
                 // on charge les données dans myhomepics
                 Blog.myhomepics.fetch({
                   //update: true,
@@ -1680,14 +1681,26 @@ var Blog = (function (blog){
                     Blog.currentView = Blog.homeview;
                   }
                 });
+            },
 
-                Blog.mynews.query().fetch({
-                  //update: true,
-                  success: function(results) {
-                    //console.log(results.toJSON());
-                    Blog.newsview.render(results);
-                  }
-                });
+            news : function () {
+              this.killbackstrech();
+              this.selectMenu('news');
+
+              // on instancie la vue MainWorksView et on la rend si elle n'existe pas
+              if (!Blog.newsview) {
+                  // on instancie la vue MainWorksView
+                  Blog.newsview = new blog.Views.NewsView(Blog.mynews);
+              }
+
+              Blog.mynews.query().fetch({
+                //update: true,
+                success: function(results) {
+                  Blog.newsview.render(results);
+                  Blog.currentView = Blog.newsview;
+                }
+              });
+
             },
 
             notice : function () {

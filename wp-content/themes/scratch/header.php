@@ -64,9 +64,9 @@
 			<? $mylang = qtrans_getLanguage(); ?>
 			<li id="qtrans">
 				<? if ($mylang == 'en') { ?>
-					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>français</span></a>	
+					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>fr</span></a>	
 				<? } else { ?>
-					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>english</span></a>
+					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>en</span></a>
 				<? } ?>
 			</li>	
 		<?php endwhile; // end of the loop. ?>		
@@ -374,6 +374,12 @@
 		</aside>
 	</script>
 
+	<!-- template pour home -->
+	<script type="text/template" id="home_template">
+		<div id='big-btn-home-up'></div>
+		<div id='big-btn-home-down'></div>
+	</script>
+
 	<!-- template pour bio/biblio -->
 	<script type="text/template" id="bio_template">	
 		<section id="tools"></section>
@@ -385,11 +391,10 @@
 	</script>
 
 	<!-- template pour news -->
-	<script type="text/template" id="news_template">	
+	<script type="text/template" id="news_template">
 		<div id="wrapper">		
 			<section style="background:none" class="maincontent news">
 				<div id="txtwrapper"><%= mynews.get('content') %>
-					<a id="btn-close"></a>
 				</div>
 			</section>
 		</div>

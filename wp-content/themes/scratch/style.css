@@ -784,28 +784,35 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8571428571428571em;
   line-height: 1.3333333333333333;
-  color: #666666;
+  color: #1a1a1a;
 }
 h3,
 h4 {
   color: #1a1a1a;
-  margin: 0 0 0.5714285714285714em 0;
+  margin: 0 0 0.38095238095238093em 0;
+  font-size: 0.9285714285714286em;
   font-weight: normal;
-  font-size: 0.8571428571428571em;
+}
+h4 {
+  color: #666666;
 }
 #txtwrapper h3 {
   text-transform: uppercase;
   margin-top: 3.4285714285714284em;
 }
 #txtwrapper h4 {
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-top: 1.1428571428571428em;
+  margin: 1.1428571428571428em 0 0 0;
+  color: #1a1a1a;
 }
 .news #txtwrapper h3 {
+  font-weight: bold;
   border-top: 1px dotted #b3b3b3;
-  padding-top: 1.7142857142857142em;
-  margin-top: 1.7142857142857142em;
+  padding-top: 1.1428571428571428em;
+  margin-top: 1.1428571428571428em;
+}
+.news #txtwrapper p {
+  color: #666666;
+  margin-top: 0;
 }
 .news #txtwrapper h3:first-child {
   border: 0;
@@ -829,9 +836,10 @@ a:visited {
 #sidebar h3 {
   color: #1a1a1a;
   letter-spacing: 1px;
+  font-weight: bold;
 }
 p {
-  font-size: 0.7857142857142857em;
+  font-size: 0.8571428571428571em;
   text-align: justify;
 }
 figcaption {
@@ -870,6 +878,7 @@ nav#picvidswitcher {
   padding-top: 0.6857142857142856em;
 }
 #main_header {
+  position: relative;
   margin: 0 0 1.1428571428571428em 0;
   padding: 0.5714285714285714em 0;
   background-color: white;
@@ -1740,6 +1749,21 @@ SMARTPHONES
   li#qtrans .actif {
     display: none;
   }
+  #big-btn-home-up {
+    position: fixed;
+    width: 100%;
+    height: 15%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+  #big-btn-home-down {
+    position: fixed;
+    width: 100%;
+    height: 85%;
+    bottom: 0;
+    z-index: 3;
+  }
   .maincontent {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1804,8 +1828,8 @@ SMARTPHONES
     overflow-y: hidden;
   }
   .news #txtwrapper {
-    max-width: 500px;
-    padding: 1.1428571428571428em;
+    max-width: 650px;
+    padding: 0;
     margin: 0;
     float: left;
   }
@@ -1835,7 +1859,6 @@ SMARTPHONES
     padding: 0.7619047619047619em 0.38095238095238093em 0.7619047619047619em 1.1428571428571428em;
     max-width: 700px;
     margin: 0 auto;
-    color: #4d4d4d;
     height: 100%;
     overflow-y: auto;
   }
