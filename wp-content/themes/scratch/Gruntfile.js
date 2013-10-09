@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     less: {
       development: {
         options: {
-          paths: ["cssreset/*.less", "less/front/*.less"]
+          paths: ["cssreset/*.less", "less/front/*.less", "webfonts/*.less"]
         },
         files: {
           "style.css": "style.less"

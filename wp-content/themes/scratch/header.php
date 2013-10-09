@@ -135,7 +135,7 @@
                     		<img src='<%= work.get('customthumb')[0] %>' />
                     	<% } %>
                     </a>
-                    <h3 class="worktitle"><%= work.get("title") %></h3>
+                    <h4 class="worktitle"><%= work.get("title") %></h4>
 
              	</div>             			
               <% } %>    
@@ -174,9 +174,9 @@
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
-		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h4><%= work.get("title") %></h4>
 		                    	<% } else { %>
-		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h4><%= work.get("title") %></h4>
 		                    	<% } %>
 		                    </a>
 	                 	</div>             			
@@ -184,9 +184,9 @@
 	              		<div class="wrapthumb">
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>"> 
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
-		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h4><%= work.get("title") %></h4>
 		                    	<% } else { %>
-		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h3><%= work.get("title") %></h3>
+		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h4><%= work.get("title") %></h4>
 		                    	<% } %>
 		                    </a>
 	                 	</div>                  		

@@ -15,6 +15,7 @@ Tags: html5, boilerplate, responsive
 @import "less/front/my_variables.less";
 @import "less/front/mixins.less";
 @import "less/front/my_scaffold.less";
+@import "webfonts/stylesheet.less";
 /* ===== Primary Styles ========================================================
 Author: vacuumRandom
 ========================================================================== */  
@@ -39,7 +40,7 @@ html, body {
 
 body {
 	background-color: white;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'istok', Arial, Helvetica, sans-serif;
 	font-size:(12/@font-size)*1em;
 	line-height: @line/12;
 	color: @black90;
@@ -48,13 +49,24 @@ body {
 h3 , h4{
 	color: @black90;
 	margin: 0 0 @unit/3 0;
-	font-size:(13/@font-size)*1em;
 	font-weight: normal;
+}
+
+h3 {
+	font-size:(14/@font-size)*1em;
 }
 
 h4 {
 	color: @black60;
+	font-size:(13/@font-size)*1em;
 }
+
+h5 {
+	color: @black60;
+	font-size:(11/@font-size)*1em;
+}
+
+
 
 #txtwrapper h3 {
 	text-transform: uppercase;
@@ -73,7 +85,7 @@ h4 {
 	margin-top: @unit;
 }
 
-.news #txtwrapper p {
+.news p, #sidebar #text {
 	color: @black60;
 	margin-top: 0;
 }
@@ -88,8 +100,9 @@ h4 {
 a {
 	color: @black90;
 }
-a:hover, a:visited:hover, a:hover h3, #sidebarwrapper a:hover h3 {
+a:hover, a:visited:hover, a:hover h3 {
 	cursor: pointer;
+	color: @black90;
 	.actif();
 }
 
@@ -104,8 +117,8 @@ a:visited {
 }
 
 p {
-	font-size:(12/@font-size)*1em;
-	text-align: justify;
+	font-size:(13/@font-size)*1em;
+	text-align: left;
 }
 
 figcaption {
@@ -117,7 +130,7 @@ figcaption {
 	text-align:left;
 }
 
-.actif, a.actif, #sorting a.actif {
+.actif, a.actif, #sorting a.actif, .actif h3 {
 	color: @hovercolor;
 	text-decoration: underline;
 }
@@ -184,8 +197,8 @@ nav#sorting li:first-child a {
 
 nav {
 
-	font-size:(11/@font-size)*1em;	
-	letter-spacing: 2px;
+	font-size:(12/@font-size)*1em;	
+	letter-spacing: 0px;
 }
 
 nav a {
@@ -245,8 +258,8 @@ figure#picture img {
 	margin-right: @unit;*/
 }
 
-.wrapthumb:hover h3.worktitle {
-	color: @hovercolor;
+.wrapthumb:hover .worktitle {
+	.actif();
 }
 
 .sortitem {
@@ -337,11 +350,9 @@ figure#picture img {
 	padding: @unit 0 0 0;
 }
 
-#wraplist-list a h3 {
+#wraplist-list a h4 {
 	display: inline;
 	margin-left: @unit/3;
-	color: @black60;
-
 }
 
 #wraplist-list a:hover h3 {
