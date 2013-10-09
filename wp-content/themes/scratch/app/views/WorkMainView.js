@@ -29,10 +29,11 @@ var Blog = (function (blog) {
               Blog.myworkslist.workslug = slug_post;
               myworkid = results.where({'slug': slug_post})[0]['id'];
               Blog.mywork = Blog.myworkslist.get(myworkid);
+             // myworkview.remove();
               var myworkview = new blog.Views.WorkView(Blog.mywork);
-              myworkview.undelegateEvents();
+             // myworkview.undelegateEvents();
               myworkview.render(Blog.mywork);
-              myworkview.delegateEvents();
+             // myworkview.delegateEvents();
             }
 
             });

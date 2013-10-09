@@ -895,6 +895,18 @@ h5 {
   color: #666666;
   margin-top: 0;
 }
+#sidebar a#toogletext {
+  padding-top: 0;
+}
+#toogletext #up {
+  display: none;
+}
+#sidebar #text {
+  display: none;
+}
+#sidebar #text p:first-child {
+  margin-top: 0;
+}
 .news #txtwrapper h3:first-child {
   border: 0;
   padding: 0;
@@ -1226,7 +1238,7 @@ figure#picture img {
 /* vertical scrollbar */
 .mCSB_container {
   width: auto;
-  margin-right: 30px;
+  margin-right: 10px;
   overflow: hidden;
 }
 .mCSB_container.mCS_no_scrollbar {
@@ -1237,7 +1249,7 @@ figure#picture img {
   margin-right: 30px;
 }
 .mCustomScrollBox > .mCSB_scrollTools {
-  width: 16px;
+  width: 5px;
   height: 100%;
   top: 0;
   right: 0;
@@ -2013,7 +2025,7 @@ SMARTPHONES
     box-sizing: border-box;
     position: absolute;
     margin-top: 2.2857142857142856em;
-    padding: 0 1.7142857142857142em 2.2857142857142856em 0;
+    padding: 0 1.1428571428571428em 2.2857142857142856em 0;
     max-width: 280px;
     height: 100%;
     overflow-y: auto;

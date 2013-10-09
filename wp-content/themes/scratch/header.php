@@ -149,6 +149,9 @@
 		<h3><%= work.get('title') %></h3>
 		<h4><%= work.get('custom_fields')['_pinfos_annee'][0] %></h4>
 		<p id="description"><%= work.get('custom_fields')['_pinfos_description'][0] %></p>
+		<% if ( work.get('content').length > 10 )  { %>
+			<h5><a id="toogletext"><span id="down">&darr; lire le texte</span><span id="up">&uarr; replier le texte</span></a></h5>
+		<% } %>
 		<div id="text"><%= work.get('content') %></div>
 	</script>
 

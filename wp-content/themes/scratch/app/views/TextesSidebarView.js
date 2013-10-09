@@ -22,7 +22,7 @@ var Blog = (function (blog) {
                 i++;
             });
 
-            sidebar = this.$el;  
+            sidebar = this.$el;
             if(!sidebar.hasClass("mCustomScrollbar")) {
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
@@ -31,7 +31,7 @@ var Blog = (function (blog) {
                 });
             }
             
-            sidebar.mCustomScrollbar("update"); 
+            sidebar.mCustomScrollbar("update");
             return this;
         },
         showactif : function(item) {

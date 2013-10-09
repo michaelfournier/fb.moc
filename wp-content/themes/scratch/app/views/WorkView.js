@@ -74,9 +74,13 @@ var Blog = (function (blog) {
             var parentview = this.$el;
             var renderNested = this.renderNested;
 
+            if (Blog.sidebarworksview) {
+                Blog.sidebarworksview.undelegateEvents();
+            }
             // on rend la sidebar //
-            var sidebarworksview = new blog.Views.WorkSidebarView(this.model);
-            renderNested(parentview, sidebarworksview, "#sidebar", this.model);
+            Blog.sidebarworksview = new blog.Views.WorkSidebarView(this.model);
+
+            renderNested(parentview, Blog.sidebarworksview, "#sidebar", this.model);
         },
 
         render : function () {
@@ -166,6 +170,7 @@ var Blog = (function (blog) {
             this.$el.find("#nextwork").find('a').attr({'href': nexthref, 'data-slug': slugnext});
             this.$el.find("#prevwork").find('a').attr({'href': prevhref, 'data-slug': slugprev});
         },
+
 
 
         events: {

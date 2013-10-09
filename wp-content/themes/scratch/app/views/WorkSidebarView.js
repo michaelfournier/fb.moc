@@ -11,9 +11,9 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            var renderedContent = this.template({work: this.model});   
-            this.$el.html(renderedContent); 
-            sidebar = this.$el;  
+            var renderedContent = this.template({work: this.model});
+            this.$el.html(renderedContent);
+            sidebar = this.$el;
 
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
@@ -23,8 +23,35 @@ var Blog = (function (blog) {
                  
             //sidebar.mCustomScrollbar("disable");       
             return this;
-        }
-   
+        },
+
+        events: {
+            "click a#toogletext": "toogleText"           
+        },
+
+        toogleText : function(e) {
+            console.log(e);
+            e.preventDefault();
+            var btn = $(e.currentTarget);
+            var elt = this.$el.find("#text");
+            var sidebar = this.$el;
+            if ( elt.is( ":hidden" ) ) {
+                elt.slideDown( "fast" , function() {
+                    btn.find("#up").show();
+                    btn.find("#down").hide();
+                    // on ajoute la scrolbar
+                    sidebar.mCustomScrollbar("update");
+                });
+            } else {
+                elt.slideUp("fast", function() {
+                    btn.find("#up").hide();
+                    btn.find("#down").show();
+                    sidebar.mCustomScrollbar("update");
+                });
+            }
+        },
+
+
     });
 
     return blog;

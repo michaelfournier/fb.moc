@@ -573,15 +573,8 @@ var Blog = (function (blog) {
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
             Blog.myapprouter.myheight();
             
-        },
-
-        events: {
-            "click #btn-close" : "closeWindow"
-        },
-
-        closeWindow : function(e) {
-            $(e.currentTarget).parent().remove();
         }
+
     });
 
     return blog;
@@ -668,7 +661,7 @@ var Blog = (function (blog) {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
                // on actualise la scrollbar
-              $(this).parent().find("#sidebar").mCustomScrollbar("update");
+              //$(this).parent().find("#sidebar").mCustomScrollbar("update");
               $(this).find('img').fadeIn(400);
             });
         }
@@ -930,7 +923,7 @@ var Blog = (function (blog) {
                 i++;
             });
 
-            sidebar = this.$el;  
+            sidebar = this.$el;
             if(!sidebar.hasClass("mCustomScrollbar")) {
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
@@ -939,7 +932,7 @@ var Blog = (function (blog) {
                 });
             }
             
-            sidebar.mCustomScrollbar("update"); 
+            sidebar.mCustomScrollbar("update");
             return this;
         },
         showactif : function(item) {
@@ -1077,10 +1070,11 @@ var Blog = (function (blog) {
               Blog.myworkslist.workslug = slug_post;
               myworkid = results.where({'slug': slug_post})[0]['id'];
               Blog.mywork = Blog.myworkslist.get(myworkid);
+             // myworkview.remove();
               var myworkview = new blog.Views.WorkView(Blog.mywork);
-              myworkview.undelegateEvents();
+             // myworkview.undelegateEvents();
               myworkview.render(Blog.mywork);
-              myworkview.delegateEvents();
+             // myworkview.delegateEvents();
             }
 
             });
@@ -1126,9 +1120,9 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            var renderedContent = this.template({work: this.model});   
-            this.$el.html(renderedContent); 
-            sidebar = this.$el;  
+            var renderedContent = this.template({work: this.model});
+            this.$el.html(renderedContent);
+            sidebar = this.$el;
 
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
@@ -1138,8 +1132,35 @@ var Blog = (function (blog) {
                  
             //sidebar.mCustomScrollbar("disable");       
             return this;
-        }
-   
+        },
+
+        events: {
+            "click a#toogletext": "toogleText"           
+        },
+
+        toogleText : function(e) {
+            console.log(e);
+            e.preventDefault();
+            var btn = $(e.currentTarget);
+            var elt = this.$el.find("#text");
+            var sidebar = this.$el;
+            if ( elt.is( ":hidden" ) ) {
+                elt.slideDown( "fast" , function() {
+                    btn.find("#up").show();
+                    btn.find("#down").hide();
+                    // on ajoute la scrolbar
+                    sidebar.mCustomScrollbar("update");
+                });
+            } else {
+                elt.slideUp("fast", function() {
+                    btn.find("#up").hide();
+                    btn.find("#down").show();
+                    sidebar.mCustomScrollbar("update");
+                });
+            }
+        },
+
+
     });
 
     return blog;
@@ -1220,9 +1241,13 @@ var Blog = (function (blog) {
             var parentview = this.$el;
             var renderNested = this.renderNested;
 
+            if (Blog.sidebarworksview) {
+                Blog.sidebarworksview.undelegateEvents();
+            }
             // on rend la sidebar //
-            var sidebarworksview = new blog.Views.WorkSidebarView(this.model);
-            renderNested(parentview, sidebarworksview, "#sidebar", this.model);
+            Blog.sidebarworksview = new blog.Views.WorkSidebarView(this.model);
+
+            renderNested(parentview, Blog.sidebarworksview, "#sidebar", this.model);
         },
 
         render : function () {
@@ -1312,6 +1337,7 @@ var Blog = (function (blog) {
             this.$el.find("#nextwork").find('a').attr({'href': nexthref, 'data-slug': slugnext});
             this.$el.find("#prevwork").find('a').attr({'href': prevhref, 'data-slug': slugprev});
         },
+
 
 
         events: {

@@ -25,15 +25,8 @@ var Blog = (function (blog) {
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
             Blog.myapprouter.myheight();
             
-        },
-
-        events: {
-            "click #btn-close" : "closeWindow"
-        },
-
-        closeWindow : function(e) {
-            $(e.currentTarget).parent().remove();
         }
+
     });
 
     return blog;
