@@ -135,7 +135,7 @@
                     		<img src='<%= work.get('customthumb')[0] %>' />
                     	<% } %>
                     </a>
-                    <h4 class="worktitle"><%= work.get("title") %></h4>
+                    <h5 class="worktitle"><%= work.get("title") %></h5>
 
              	</div>             			
               <% } %>    
@@ -307,14 +307,14 @@
 				                    		<% if (work.get('customthumb')) { %>
 				                    			<img width="120px" src='<%= work.get('customthumb')[0] %>' />
 				                    			<div class="thumbinfos">
-					                    			<h3><%= works[i].get('title') %></h3>
-					                    			<h4><%= tab[i] %></h4>	
+					                    			<h4><%= works[i].get('title') %></h4>
+					                    			<h5><%= tab[i] %></h5>	
 				                    			</div>			                    			
 					                    	<% } else { %>
 					                    		<img width='120px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' />
 					                    		<div class="thumbinfos">
-					                    			<h3><%= works[i].get('title') %></h3>
-					                    			<h4><%= tab[i] %></h4>	
+					                    			<h4><%= works[i].get('title') %></h4>
+					                    			<h5><%= tab[i] %></h5>	
 				                    			</div>				      
 					                    	<% } %>
 					                    	</a>
@@ -340,12 +340,12 @@
 		<div id="sidebarwrapper">	
 			 <% _.each(textes, function (texte, i) { %>
 			 	<a style="opacity:0" href="#<%= texte.get('type') %>/<%= texte.get('slug') %>">
-				 	<h3 <% if (slug === texte.get('slug')) { %> class="actif" <% } %>><%= texte.get('title') %></h3>
-				 	<h4>
+				 	<h4 <% if (slug === texte.get('slug')) { %> class="actif" <% } %>><%= texte.get('title') %></h4>
+				 	<h5>
 				 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>
 				 		<%= auteur['prenom']+" "+auteur['nom'] %>
 				 	<% }); %>
-				 	</h4>
+				 	</h5>
 			 	</a>
 			 <% }); %>
 		 </div>

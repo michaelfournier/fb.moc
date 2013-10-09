@@ -35,12 +35,12 @@ var Blog = (function (blog) {
             return this;
         },
         showactif : function(item) {
-            this.$el.find('h3').removeClass('actif');
-            $(item.currentTarget).find("h3").addClass('actif');
+            this.$el.find('h4').removeClass('actif');
+            $(item.currentTarget).find("h4").addClass('actif');
         },
 
         events: {
-            "click #sidebarwrapper a" : "showactif"            
+            "click #sidebarwrapper a" : "showactif"
         }
    
     });

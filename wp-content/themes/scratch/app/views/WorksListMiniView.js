@@ -49,12 +49,13 @@ var Blog = (function (blog) {
             return this;
         },
         events: {
-            "click #unfoldworks a" : "toggleworks"
+            "click #unfoldworks a" : "toggleworks",
+            "mouseleave #workslistmini":"toggleworks"
         },
   
         scrolltoactive : function () {
             var activeitem = this.$el.find("#"+this.collection.workslug);
-            console.log(activeitem);
+            //console.log(activeitem);
             this.$el.find("#workslistmini").mCustomScrollbar("update");
             this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug, {callbacks: this.showactif(activeitem)});
             //this.$el.find('.jTscroller').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
@@ -69,13 +70,13 @@ var Blog = (function (blog) {
         toggleworks : function(e) {
             elt = this.$el.find("#workslistmini");
             if (elt.width() <= 0) {
-                elt.animate({'width': '260px', complete: this.scrolltoactive()}, 150);
-                $(e.currentTarget).addClass('fold');
+                elt.stop(true, true).animate({'width': '260px', complete: this.scrolltoactive()}, 150);
+                this.$el.find("#unfoldworks a").addClass('fold');
                 
             } else {
                 this.$el.find("#sidebar").css("display", "none");
-                elt.animate({'width': 0}, 150);
-                $(e.currentTarget).removeClass('fold');
+                elt.stop(true, true).animate({'width': 0}, 150);
+                this.$el.find("#unfoldworks a").removeClass('fold');
             }
         }
 

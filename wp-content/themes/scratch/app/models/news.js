@@ -2,7 +2,7 @@ var Blog = (function (blog) {
 
 	blog.Models.News = Backbone.Model.extend({
         query : function () {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=home';
+            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=news';
             return this;
         },
          parse: function (response) {
@@ -11,7 +11,7 @@ var Blog = (function (blog) {
                 return response.post;
             }
             return response;
-        },       
+        },
         initialize : function Doc() {
             console.log('news Model Constructor');
             this.bind("error", function(model, error){

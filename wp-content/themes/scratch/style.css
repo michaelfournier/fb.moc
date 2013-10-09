@@ -759,21 +759,21 @@ textarea {
   width: 83.33333333333333%;
 }
 @font-face {
-  font-family: 'SourceSansPro';
+  font-family: 'sourcesanspro';
   src: url('webfonts/sourcesanspro-regular.eot');
   src: url('webfonts/sourcesanspro-regular.eot?#iefix') format('embedded-opentype'), url('webfonts/sourcesanspro-regular.woff') format('woff'), url('webfonts/sourcesanspro-regular.ttf') format('truetype'), url('webfonts/sourcesanspro-regular.svg#SourceSansProRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'SourceSansPro';
+  font-family: 'sourcesanspro';
   src: url('webfonts/sourcesanspro-italic.eot');
   src: url('webfonts/sourcesanspro-italic.eot?#iefix') format('embedded-opentype'), url('webfonts/sourcesanspro-italic.woff') format('woff'), url('webfonts/sourcesanspro-italic.ttf') format('truetype'), url('webfonts/sourcesanspro-italic.svg#SourceSansProItalic') format('svg');
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
-  font-family: 'SourceSansPro';
+  font-family: 'sourcesanspro';
   src: url('webfonts/sourcesanspro-semibold.eot');
   src: url('webfonts/sourcesanspro-semibold.eot?#iefix') format('embedded-opentype'), url('webfonts/sourcesanspro-semibold.woff') format('woff'), url('webfonts/sourcesanspro-semibold.ttf') format('truetype'), url('webfonts/sourcesanspro-semibold.svg#SourceSansProSemiBold') format('svg');
   font-weight: bold;
@@ -858,7 +858,8 @@ body {
   color: #1a1a1a;
 }
 h3,
-h4 {
+h4,
+h5 {
   color: #1a1a1a;
   margin: 0 0 0.38095238095238093em 0;
   font-weight: normal;
@@ -872,7 +873,8 @@ h4 {
 }
 h5 {
   color: #666666;
-  font-size: 0.7857142857142857em;
+  margin: 0;
+  font-size: 0.8571428571428571em;
 }
 #txtwrapper h3 {
   text-transform: uppercase;
@@ -903,7 +905,7 @@ a {
 }
 a:hover,
 a:visited:hover,
-a:hover h3 {
+a:hover h4 {
   cursor: pointer;
   color: #1a1a1a;
   text-decoration: underline;
@@ -913,7 +915,6 @@ a:visited {
 }
 #sidebar h3 {
   color: #1a1a1a;
-  letter-spacing: 1px;
   font-weight: bold;
 }
 p {
@@ -931,7 +932,8 @@ figcaption {
 .actif,
 a.actif,
 #sorting a.actif,
-.actif h3 {
+.actif h3,
+.actif h4 {
   color: #1a1a1a;
   text-decoration: underline;
 }
@@ -1969,7 +1971,7 @@ SMARTPHONES
   }
   .txt #txtwrapper p {
     font-size: 1.0714285714285714em;
-    line-height: 1.6;
+    line-height: 1.4545454545454546;
   }
   #tools {
     position: relative;
@@ -2029,7 +2031,7 @@ SMARTPHONES
   }
   #sidebarwrapper h4 {
     margin: 0;
-    color: #666666;
+    color: #1a1a1a;
   }
   #sidebar a {
     display: block;
@@ -2189,7 +2191,7 @@ SMARTPHONES
   .thumbinfos * {
     color: #b3b3b3;
   }
-  .actif .thumbinfos h3 {
+  .actif .thumbinfos h4 {
     color: #1a1a1a;
   }
   .st_wrapper a:last-child {
@@ -2210,13 +2212,11 @@ SMARTPHONES
     z-index: 9;
   }
   .thumb_color:hover img,
-  .thumb_color.actif img,
-  .workthumb:hover img {
+  .thumb_color.actif img {
     opacity: 1;
     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
     -webkit-filter: grayscale(0%);
   }
-  .workthumb img,
   .thumb_color img {
     opacity: 0.15;
     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
@@ -2228,9 +2228,6 @@ SMARTPHONES
     -webkit-filter: grayscale(100%);
     /* Chrome 19+, Safari 6+, Safari 6+ iOS */
   
-  }
-  .workthumb img {
-    opacity: .35;
   }
 }
 /* only screen and (min-width: 810px) */
