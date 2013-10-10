@@ -929,6 +929,12 @@ a:visited {
   color: #1a1a1a;
   font-weight: bold;
 }
+#sidebar h4 {
+  margin: 0;
+}
+#description {
+  margin: 0.5714285714285714em 0;
+}
 p {
   font-size: 0.9285714285714286em;
   text-align: left;
@@ -1042,12 +1048,32 @@ nav a {
   float: right;
   letter-spacing: 0px;
 }
-.btn-picture {
+#ctn-picture {
+  display: block;
+  height: 100%;
+  float: left;
+  position: relative;
+}
+#btn-picture-next,
+#btn-picture-prev {
   /*background-color: @black05;*/
 
   display: block;
-  height: 100%;
-  width: 100%;
+  height: 90%;
+  width: 50%;
+  position: absolute;
+}
+#btn-picture-next {
+  right: 0;
+}
+#btn-picture-next:hover {
+  cursor: e-resize;
+}
+#btn-picture-prev:hover {
+  cursor: w-resize;
+}
+#btn-picture-prev {
+  left: 0;
 }
 figure#picture {
   position: relative;

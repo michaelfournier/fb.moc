@@ -13,9 +13,9 @@ var Blog = (function (blog) {
         },
         render : function () {
                         if(!this.collection.slug){
-              this.collection.slug = this.collection.at(0).get('slug');  
+              this.collection.slug = this.collection.at(0).get('slug');
             }
-            var renderedContent = this.template({textes: this.collection.models, slug: this.collection.slug});   
+            var renderedContent = this.template({textes: this.collection.models, slug: this.collection.slug});
             i = 1;
             this.$el.html(renderedContent).find('a').each(function() {
                 $(this).delay(i * 50).animate({opacity: 1});

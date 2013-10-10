@@ -27,7 +27,7 @@ var Blog = (function (blog) {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
                // on actualise la scrollbar
-              //$(this).parent().find("#sidebar").mCustomScrollbar("update");
+              $(this).parent().find("#sidebar").mCustomScrollbar("update");
               $(this).find('img').fadeIn(400);
             });
         }

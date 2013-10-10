@@ -30,7 +30,7 @@
 	<link rel="image_src" href="" />
 	<meta property="og:local" content="<?= get_bloginfo("language"); ?>">
 
-	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131004-1850" />
+	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131009-1823" />
     <link type="text/plain" rel="author" href="/humans.txt" />
    <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
     <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
@@ -255,26 +255,15 @@
 	     <% } %>
     </script>
 
-	<!-- template pour image avec lien (gallery) -->
-	<script type="text/template" id="work_template">
-			<a data-bypass id="picture"></a>
-	</script>
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
-			<a data-bypass class="btn-picture">
+			<div data-bypass id="ctn-picture">
+				<a data-bypass id="btn-picture-next"></a>
+				<a data-bypass id="btn-picture-prev"></a>
 				<img src="<%= mypicture.get('full') %>" />
-			</a>
+			</div>
 			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
-	</script>
-
-	<!-- template pour image seule -->
-	<script type="text/template" id="picturesingle_template">
-		<figure id="picture">
-			<a data-bypass class="btn-picture"><img src="<%= mypicture.get('full') %>" /></a>
-			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
-		</figure>
-		
 	</script>
 
 	<!-- template pour video -->

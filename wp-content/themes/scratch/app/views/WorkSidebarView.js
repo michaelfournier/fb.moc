@@ -26,7 +26,7 @@ var Blog = (function (blog) {
         },
 
         events: {
-            "click a#toogletext": "toogleText"           
+            "click a#toogletext": "toogleText"
         },
 
         toogleText : function(e) {

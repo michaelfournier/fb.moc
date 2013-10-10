@@ -10,8 +10,7 @@ var Blog = (function (blog) {
             this.idpic = 0;
             // on déclare notre objet picture //
             Blog.mypicture = new blog.Models.Picture();
-            // on déclare la vue picture single et picture //
-            Blog.mypicturesingleview = new blog.Views.PictureSingleView(Blog.mypicture);
+            // on déclare la vue picture //
             Blog.mypictureview = new blog.Views.PictureView(Blog.mypicture);
 
         },
@@ -36,18 +35,16 @@ var Blog = (function (blog) {
             return this;
         },
         events : {
-            "click a.btn-picture"  : "nextpicture",
+            "click a#btn-picture-next"  : "nextpicture",
+            "click a#btn-picture-prev"  : "prevpicture",
             "click a.linkpic"   : "linktopic"
         },
         showpicture: function(i) {
             Blog.mypicture.set(this.collection.models[i].toJSON());
             Blog.mypictureview.render();
+            this.idpic = i;
             this.activelink();
-            this.idpic++;
-        },
-        showsinglepicture: function() {
-            Blog.mypicture.set(this.collection.models[0].toJSON());
-            Blog.mypicturesingleview.render();
+            
         },
         activelink : function () {
             this.$el.find("#navgal a").removeClass('actif');
@@ -66,17 +63,28 @@ var Blog = (function (blog) {
         nextpicture: function(e) {
             console.log(e);
             i = this.idpic;
-            if (i > this.gallerylength - 1) {
+            if (i >= this.gallerylength - 1) {
                 // this.idpic = 0;
                 // i = 0;
                 this.$el.find("#nextwork a").click();
             } else {
-                var showpicture = this.showpicture;
+                i++;
                 this.showpicture(i);
             }
-                        //$(e.currentTarget).find('img').fadeOut(70, function() { showpicture(i); });           
+        },
+
+        prevpicture: function(e) {
+            console.log(e);
+            i = this.idpic;
+            if ( i <= 0 ) {
+                // this.idpic = 0;
+                // i = 0;
+                this.$el.find("#prevwork a").click();
+            } else {
+                i--;
+                this.showpicture(i);
+            }
         }
-     
     });
 
     return blog;
