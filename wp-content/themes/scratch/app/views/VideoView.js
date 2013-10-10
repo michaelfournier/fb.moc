@@ -7,11 +7,16 @@ var Blog = (function (blog) {
             this.template = _.template($("#video_template").html());
         },
         render : function () {
-            console.log(this.model);
             var renderedContent = this.template({myvideo: this.model});
-            Blog.myapprouter.myheight();
-            this.$el.find("#sidebar").mCustomScrollbar("update");
-            this.$el.find('.maincontent').html(renderedContent);
+
+            var content = this.$el.find('#media');
+            var that = this;
+            this.$el.find('.maincontent #media').animate({'opacity': 0}, 300, function() {
+               content.html(renderedContent);
+                Blog.myapprouter.myheight();
+                that.$el.find("#sidebar").mCustomScrollbar("update");
+                $(this).animate({'opacity': 1});
+            });
         }
     });
 

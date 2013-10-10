@@ -174,17 +174,22 @@ function add_gallery($post) {
 
   $themepath = get_bloginfo('template_url');
 
+  /// on ajoute les video en premiers si il y en a //
+  if(isset($galleryvideos) && !empty($galleryvideos)) {
+    foreach($galleryvideos as $id => $video) {
+      $tabvideos = array('type'=> 'video', 'videourl' => $video['media'], 'legend' => $video['legende_'.$mylang]);
+      $post->gallery[] = $tabvideos;
+    }   
+  }
+  ///
+
   if(isset($gallerypics)) {
     foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
-      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');  
-      $imagethumb = $themepath.'/timthumb.php?src='.$imagefull[0].'&w=250&h=160&zc=1&q=100';
-      $imagethumb2 = wp_get_attachment_image_src($idpic['image'], 'full'); 
-      $imagethumbmini = $themepath.'/timthumb.php?src='.$imagethumb2[0].'&w=120&h=77q=100';     
+      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');      
       $imagemetas = get_post($idpic['image']);
       $tabgallery = array(
-      'thumbnail' => $imagethumb,
-      'thumbnailmini' => $imagethumbmini,
+      'type' => 'image',
       'large' =>   $imagelarge[0],   
       'full' =>  $imagefull[0],        
       'title' =>  $imagemetas->post_title,
@@ -192,25 +197,25 @@ function add_gallery($post) {
       'alt' =>  get_post_meta($idpic['image'], '_wp_attachment_image_alt', true),
       'legend' => $idpic['legende_'.$mylang]
       );
-
       $post->gallery[] = $tabgallery;
     }
   }
 
 
-  ///
-  if(isset($galleryvideos) && !empty($galleryvideos)) {
-    foreach($galleryvideos as $id => $video) {
-      $tabvideos = array('videourl' => $video['media'], 'legend' => $video['legende_'.$mylang]);
-      $post->galleryvideos[] = $tabvideos;
-    }   
-  }
-  ///
-
 if(!empty($customthumb)) {
     $customthumburl = wp_get_attachment_image_src($customthumb, 'full');
+    $customthumbmini = $themepath.'/timthumb.php?src='.$customthumburl[0].'&w=120&h=77q=100'; 
     $post->customthumb[] = $customthumburl[0];
-  }
+    $post->customthumbmini[] = $customthumbmini;
+}
+
+if(!empty($gallerypics)) {
+    $imagefull = wp_get_attachment_image_src($gallerypics[0]['image'], 'full');
+    $imagethumb = $themepath.'/timthumb.php?src='.$imagefull[0].'&w=250&h=160&zc=1&q=100';
+    $imagethumbmini = $themepath.'/timthumb.php?src='.$imagefull[0].'&w=120&h=77q=100';  
+    $post->thumbnormal[] = $imagethumb;
+    $post->thumbmini[] = $imagethumbmini;
+}
   
 
   return;

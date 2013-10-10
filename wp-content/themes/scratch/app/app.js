@@ -187,7 +187,7 @@ var Blog = (function (blog) {
 		model : blog.Models.Picture,
 		initialize : function() {
 			console.log('PicturesGallery collection construite');
-		}      
+		}
 	});
 
     blog.Models.Video = Backbone.Model.extend({
@@ -207,7 +207,7 @@ var Blog = (function (blog) {
         model : blog.Models.Video,
         initialize : function() {
             console.log('VideosGallery collection construite');
-        }      
+        }
     });
 
 	return blog;
@@ -619,27 +619,24 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
-            var content = this.$el.find('#picture');
+            var content = this.$el.find('#media');
             var that = this;
-            if ( this.$el.find('.maincontent img').length > 0 ) {
-              this.$el.find('.maincontent img').fadeOut(300, function() {
-                 content.html(renderedContent).find('img').css('display', 'none');
-                 that.showOnLoaded();
-              });
-            } else {
-               content.html(renderedContent).find('img').css('display', 'none');
-               this.showOnLoaded();
-            }
+            this.$el.find('.maincontent #media').animate({'opacity': 0}, 300, function() {
+               content.html(renderedContent);
+               that.showOnLoaded();
+            });
+            
            
 
         },
         showOnLoaded : function() {
-           $(".maincontent").imagesLoaded(function() {
+           this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
+
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
-              $(this).find('img').fadeIn(400);
+              $(this).find('#media').animate({'opacity': 1}, 400);
             });
         }
 
@@ -662,6 +659,11 @@ var Blog = (function (blog) {
             // on déclare la vue picture //
             Blog.mypictureview = new blog.Views.PictureView(Blog.mypicture);
 
+            // on déclare notre objet video //
+            Blog.myvideo = new blog.Models.Video();
+            // on déclare la vue vidéo //
+            Blog.myvideoview = new blog.Views.VideoView(Blog.myvideo);
+
         },
         render : function () {
             var renderedContent = this.template({gallery : this.collection.models});
@@ -671,9 +673,9 @@ var Blog = (function (blog) {
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
             //console.log(this.collection.models.length);
-            this.$el.find("#navgal").remove();
+            this.$el.find("#navgal").empty();
             //if (this.collection.models.length > 1) {
-                this.$el.find(".maincontent").append(renderedContent).find('a').each(function() {
+                this.$el.find("#navgal").append(renderedContent).find('a').each(function() {
                     $(this).delay(i * 150).fadeIn();
                     i++;
                 });
@@ -684,13 +686,27 @@ var Blog = (function (blog) {
             return this;
         },
         events : {
-            "click a#btn-picture-next"  : "nextpicture",
-            "click a#btn-picture-prev"  : "prevpicture",
+            "click a#btn-media-next"  : "nextpicture",
+            "click a#btn-media-prev"  : "prevpicture",
             "click a.linkpic"   : "linktopic"
         },
         showpicture: function(i) {
-            Blog.mypicture.set(this.collection.models[i].toJSON());
-            Blog.mypictureview.render();
+            console.log(this.collection.models[i].get('type'));
+            if (this.collection.models[i].get('type') == 'image') {
+                Blog.mypicture.set(this.collection.models[i].toJSON());
+                Blog.mypictureview.render();
+            } else {
+                videourl = this.collection.models[i].get('videourl');
+                // on charge l'objet contenant les infos video depuis vimeo //
+                var idpic = this.idpic;
+                Blog.myvideo.query(videourl).fetch({
+                    update: true,
+                    success: function(results) {
+                        console.log(results);
+                        Blog.myvideoview.render(results);
+                    }
+                });
+            }
             this.idpic = i;
             this.activelink();
             
@@ -701,7 +717,6 @@ var Blog = (function (blog) {
         },
 
         linktopic : function(e) {
-
             // on récupère le num d'index contenu dans le lien
             index = e.currentTarget.attributes['data-bypass'].value;
             this.idpic = index;
@@ -942,11 +957,16 @@ var Blog = (function (blog) {
             this.template = _.template($("#video_template").html());
         },
         render : function () {
-            console.log(this.model);
             var renderedContent = this.template({myvideo: this.model});
-            Blog.myapprouter.myheight();
-            this.$el.find("#sidebar").mCustomScrollbar("update");
-            this.$el.find('.maincontent').html(renderedContent);
+
+            var content = this.$el.find('#media');
+            var that = this;
+            this.$el.find('.maincontent #media').animate({'opacity': 0}, 300, function() {
+               content.html(renderedContent);
+                Blog.myapprouter.myheight();
+                that.$el.find("#sidebar").mCustomScrollbar("update");
+                $(this).animate({'opacity': 1});
+            });
         }
     });
 
@@ -971,7 +991,7 @@ var Blog = (function (blog) {
         render : function () {
             var renderedContent = this.template({gallery : this.collection.models});
             // nb d'images //
-            this.gallerylength = this.collection.models.length;           
+            this.gallerylength = this.collection.models.length;
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
             //console.log(this.collection.models.length);
@@ -1169,15 +1189,13 @@ var Blog = (function (blog) {
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
-            this.$el.find("#picvidswitcher a").removeClass('actif');
-            this.$el.find("#picvidswitcher #images").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
             if (Blog.picturesgalview) {
                 Blog.picturesgalview.undelegateEvents();
             }
 
- //console.log("work picture", this.model);           
-             // on déclare un objet collection contenant les images liées au post //
+            //console.log("work picture", this.model);           
+            // on déclare un objet collection contenant les images liées au post //
             var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery'));
             //console.log("picturegal",Blog.picturesgal);
             // on déclare un objet vue de notre galerie d'images //
@@ -1266,9 +1284,9 @@ var Blog = (function (blog) {
                 // on desactive la scroll bar //
                 $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
-                $(this).find('.maincontent').empty();
+                $(this).find('#navgal, #media').empty();
 
-                $(this).find('.maincontent').css({"overflow-y": "hidden"});
+                $(this).find('.maincontent').css({"overflow-y": "hidden", "height": "100%"});
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
@@ -1664,7 +1682,7 @@ var Blog = (function (blog){
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                    $('#wrapper').find('#picture img').css("max-height", contentheight - legendheight);
+                    $('#wrapper').find('#media img').css("max-height", contentheight - legendheight);
                     console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe

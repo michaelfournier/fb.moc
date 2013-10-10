@@ -17,7 +17,7 @@ var Blog = (function (blog) {
         render : function () {
             var renderedContent = this.template({gallery : this.collection.models});
             // nb d'images //
-            this.gallerylength = this.collection.models.length;           
+            this.gallerylength = this.collection.models.length;
             // on fait apparaitre dans #tools la nav en fondu //
             i = 1;
             //console.log(this.collection.models.length);

@@ -8,27 +8,24 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
-            var content = this.$el.find('#picture');
+            var content = this.$el.find('#media');
             var that = this;
-            if ( this.$el.find('.maincontent img').length > 0 ) {
-              this.$el.find('.maincontent img').fadeOut(300, function() {
-                 content.html(renderedContent).find('img').css('display', 'none');
-                 that.showOnLoaded();
-              });
-            } else {
-               content.html(renderedContent).find('img').css('display', 'none');
-               this.showOnLoaded();
-            }
+            this.$el.find('.maincontent #media').animate({'opacity': 0}, 300, function() {
+               content.html(renderedContent);
+               that.showOnLoaded();
+            });
+            
            
 
         },
         showOnLoaded : function() {
-           $(".maincontent").imagesLoaded(function() {
+           this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
+
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
-              $(this).find('img').fadeIn(400);
+              $(this).find('#media').animate({'opacity': 1}, 400);
             });
         }
 

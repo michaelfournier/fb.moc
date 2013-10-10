@@ -943,7 +943,6 @@ figcaption {
   font-size: 0.7857142857142857em;
   color: #1a1a1a;
   float: left;
-  min-height: 1.1428571428571428em;
   width: 100%;
   text-align: left;
 }
@@ -1048,39 +1047,38 @@ nav a {
   float: right;
   letter-spacing: 0px;
 }
-#ctn-picture {
+#ctn-media {
   display: block;
   height: 100%;
-  float: left;
   position: relative;
 }
-#btn-picture-next,
-#btn-picture-prev {
+#btn-media-next,
+#btn-media-prev {
   /*background-color: @black05;*/
 
   display: block;
   height: 90%;
   width: 50%;
   position: absolute;
+  z-index: 99999;
 }
-#btn-picture-next {
+#btn-media-next {
   right: 0;
 }
-#btn-picture-next:hover {
+#btn-media-next:hover {
   cursor: e-resize;
 }
-#btn-picture-prev:hover {
+#btn-media-prev:hover {
   cursor: w-resize;
 }
-#btn-picture-prev {
+#btn-media-prev {
   left: 0;
 }
-figure#picture {
-  position: relative;
-  width: 100%;
+figure#media {
+  height: 100%;
   display: block;
 }
-figure#picture img {
+figure#media img {
   max-width: 100%;
   max-height: 100%;
   min-height: inherit;
@@ -1094,14 +1092,14 @@ figure#picture img {
 	margin-right: @unit;*/
 
 }
-.wrapthumb:hover .worktitle {
+.wrapthumb:hover h5 {
   color: #1a1a1a;
   text-decoration: underline;
 }
 .sortitem {
   font-size: 0.7857142857142857em;
+  font-weight: bold;
   position: absolute;
-  letter-spacing: 1px;
   padding: 0 0.5714285714285714em 0 1.3714285714285712em;
   top: -0.5714285714285714em;
   background-color: white;
@@ -1170,7 +1168,7 @@ figure#picture img {
   height: 35px;
   padding: 1.1428571428571428em 0 0 0;
 }
-#wraplist-list a h4 {
+#wraplist-list a h5 {
   display: inline;
   margin-left: 0.38095238095238093em;
 }

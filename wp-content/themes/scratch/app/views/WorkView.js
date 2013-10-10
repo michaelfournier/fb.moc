@@ -17,15 +17,13 @@ var Blog = (function (blog) {
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
-            this.$el.find("#picvidswitcher a").removeClass('actif');
-            this.$el.find("#picvidswitcher #images").addClass('actif');
             // si une vue Blog.picturegal existe on supprime ses abonnement aux évenements
             if (Blog.picturesgalview) {
                 Blog.picturesgalview.undelegateEvents();
             }
 
- //console.log("work picture", this.model);           
-             // on déclare un objet collection contenant les images liées au post //
+            //console.log("work picture", this.model);           
+            // on déclare un objet collection contenant les images liées au post //
             var picturesgal = new blog.Collections.PicturesGallery(this.model.get('gallery'));
             //console.log("picturegal",Blog.picturesgal);
             // on déclare un objet vue de notre galerie d'images //
@@ -114,9 +112,9 @@ var Blog = (function (blog) {
                 // on desactive la scroll bar //
                 $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
-                $(this).find('.maincontent').empty();
+                $(this).find('#navgal, #media').empty();
 
-                $(this).find('.maincontent').css({"overflow-y": "hidden"});
+                $(this).find('.maincontent').css({"overflow-y": "hidden", "height": "100%"});
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 

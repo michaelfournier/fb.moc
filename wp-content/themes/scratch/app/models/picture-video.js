@@ -19,7 +19,7 @@ var Blog = (function (blog) {
 		model : blog.Models.Picture,
 		initialize : function() {
 			console.log('PicturesGallery collection construite');
-		}      
+		}
 	});
 
     blog.Models.Video = Backbone.Model.extend({
@@ -39,7 +39,7 @@ var Blog = (function (blog) {
         model : blog.Models.Video,
         initialize : function() {
             console.log('VideosGallery collection construite');
-        }      
+        }
     });
 
 	return blog;

@@ -48,7 +48,7 @@ var Blog = (function (blog){
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                    $('#wrapper').find('#picture img').css("max-height", contentheight - legendheight);
+                    $('#wrapper').find('#media img').css("max-height", contentheight - legendheight);
                     console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe

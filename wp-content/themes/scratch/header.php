@@ -108,6 +108,13 @@
 				<p id='description'></p>
 			</section>
 			<section class="maincontent">
+				<nav id="navgal"></nav>
+				<div data-bypass id="ctn-media">
+					<a data-bypass id="btn-media-next"></a>
+					<a data-bypass id="btn-media-prev"></a>
+					<figure id="media"></figure>
+				</div>
+				
 			</section>
 		</div>	
 	</script>
@@ -130,9 +137,9 @@
           		<div class="wrapthumb" style="opacity:0">
                     <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
                     	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
-                    		<img src='<%= work.get('gallery')[0]['thumbnail'] %>' />
+                    		<img src='<%= work.get('thumbnormal') %>' />
                     	<% } else { %>
-                    		<img src='<%= work.get('customthumb')[0] %>' />
+                    		<img src='<%= work.get('customthumb') %>' />
                     	<% } %>
                     </a>
                     <h5 class="worktitle"><%= work.get("title") %></h5>
@@ -177,9 +184,9 @@
 	              			<div class="sortitem"><%= tab[i] %></div>
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
-		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h4><%= work.get("title") %></h4>
+		                    		<img width="60px" src='<%= work.get('thumbmini') %>' /><h5><%= work.get("title") %></h5>
 		                    	<% } else { %>
-		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h4><%= work.get("title") %></h4>
+		                    		<img width="60px" src='<%= work.get('customthumbmini') %>' /><h5><%= work.get("title") %></h5>
 		                    	<% } %>
 		                    </a>
 	                 	</div>             			
@@ -187,9 +194,9 @@
 	              		<div class="wrapthumb">
 		                    <a class="workthumb2" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>"> 
 		                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>      	
-		                    		<img width="60px" src='<%= work.get('gallery')[0]['thumbnailmini'] %>' /><h4><%= work.get("title") %></h4>
+		                    		<img width="60px" src='<%= work.get('thumbmini') %>' /><h5><%= work.get("title") %></h5>
 		                    	<% } else { %>
-		                    		<img width="60px" src='<%= work.get('customthumb') %>' /><h4><%= work.get("title") %></h4>
+		                    		<img width="60px" src='<%= work.get('customthumbmini') %>' /><h5><%= work.get("title") %></h5>
 		                    	<% } %>
 		                    </a>
 	                 	</div>                  		
@@ -232,7 +239,6 @@
 
 	<!-- template pour la nav picture gallery --> 
     <script type="text/template" id="navgallery_template">
-	    <nav id='navgal'>
 		    <% if(_.size(gallery) > 1) { %>
 		    		<ul>
 				        <% _.each(gallery, function (picture, i) { %>       	
@@ -240,8 +246,6 @@
 				        <% }); %>
 		        	</ul>
 		     <% } %>
-		</nav>
-		<figure id="picture"></figure>
     </script>
 
 	<!-- template pour la nav video gallery --> 
@@ -258,12 +262,8 @@
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
-			<div data-bypass id="ctn-picture">
-				<a data-bypass id="btn-picture-next"></a>
-				<a data-bypass id="btn-picture-prev"></a>
-				<img src="<%= mypicture.get('full') %>" />
-			</div>
-			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
+		<img src="<%= mypicture.get('full') %>" />
+		<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
 	</script>
 
 	<!-- template pour video -->
@@ -272,6 +272,7 @@
 		<div id="video">
 			<%= myvideo.get('html') %>
 		</div>
+		<figcaption id="legend"><%= myvideo.get('legend') %></figcaption>
 
 	</script>
 
@@ -303,7 +304,7 @@
 					                    			<h5><%= tab[i] %></h5>	
 				                    			</div>			                    			
 					                    	<% } else { %>
-					                    		<img width='120px' src='<%= work.get('gallery')[0]['thumbnailmini'] %>' />
+					                    		<img width='120px' src='<%= work.get('thumbmini') %>' />
 					                    		<div class="thumbinfos">
 					                    			<h4><%= works[i].get('title') %></h4>
 					                    			<h5><%= tab[i] %></h5>	
