@@ -30,7 +30,7 @@
 	<link rel="image_src" href="" />
 	<meta property="og:local" content="<?= get_bloginfo("language"); ?>">
 
-	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131009-1823" />
+	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131010-1513" />
     <link type="text/plain" rel="author" href="/humans.txt" />
    <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
     <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
@@ -157,7 +157,12 @@
 		<h4><%= work.get('custom_fields')['_pinfos_annee'][0] %></h4>
 		<p id="description"><%= work.get('custom_fields')['_pinfos_description'][0] %></p>
 		<% if ( work.get('content').length > 10 )  { %>
-			<h5><a id="toogletext"><span id="down">&darr; lire le texte</span><span id="up">&uarr; replier le texte</span></a></h5>
+			<h5><a id="toogletext">
+			<% if(wp_vars.lang === "en") { %>
+			<span id="down">&darr; read text</span><span id="up">&uarr; fold text</span></a></h5>
+			<% } else { %>
+			<span id="down">&darr; lire le texte</span><span id="up">&uarr; replier le texte</span></a></h5>
+			<% } %>
 		<% } %>
 		<div id="text"><%= work.get('content') %></div>
 	</script>
@@ -328,6 +333,16 @@
 		</div>
 	</script>
 
+	<!-- template pour bio/biblio -->
+	<script type="text/template" id="bio_template">	
+		<section id="tools"></section>
+		<div id="wrapper">		
+			<section id="sidebar" class="text"></section>
+			<section style="opacity:0" class="maincontent bio">
+			</section>
+		</div>
+	</script>
+
 	<!-- template  pour textes sidebar -->
 	<script type="text/template" id="sidebar_texts_template">
 		<div id="sidebarwrapper">	
@@ -371,16 +386,6 @@
 	<script type="text/template" id="home_template">
 		<div id='big-btn-home-up'></div>
 		<div id='big-btn-home-down'></div>
-	</script>
-
-	<!-- template pour bio/biblio -->
-	<script type="text/template" id="bio_template">	
-		<section id="tools"></section>
-		<div id="wrapper">		
-			<section id="sidebar" class="text"></section>
-			<section style="opacity:0" class="maincontent bio">
-			</section>
-		</div>
 	</script>
 
 	<!-- template pour news -->

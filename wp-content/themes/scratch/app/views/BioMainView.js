@@ -24,7 +24,7 @@ var Blog = (function (blog) {
             //if (!this.mybiosidebarview) {
                 
                 // on instancie la vue mybiosidebarview
-                var mybiosidebarview = new blog.Views.TextesSidebarView(Blog.mybiolist);
+                var mybiosidebarview = new blog.Views.BioSidebarView(Blog.mybiolist);
                 this.mybiosidebarview =  mybiosidebarview;
                 console.log("to", mybiosidebarview.el);
                 // on charge les données dans la sidebar //

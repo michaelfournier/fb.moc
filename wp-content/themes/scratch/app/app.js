@@ -119,11 +119,8 @@ var Blog = (function (blog) {
 var Blog = (function (blog) {
 
 	blog.Models.News = Backbone.Model.extend({
-        query : function () {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=news';
-            return this;
-        },
-         parse: function (response) {
+        url : wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=news',
+        parse: function (response) {
             //http://stackoverflow.com/questions/14372151/backbone-js-model-overwriting-parse-for-custom-api
             if (response.post) {
                 return response.post;
@@ -137,7 +134,6 @@ var Blog = (function (blog) {
             });
         }
 	});
-
 
 	return blog;
 }(Blog));
@@ -369,7 +365,7 @@ var Blog = (function (blog) {
             //if (!this.mybiosidebarview) {
                 
                 // on instancie la vue mybiosidebarview
-                var mybiosidebarview = new blog.Views.TextesSidebarView(Blog.mybiolist);
+                var mybiosidebarview = new blog.Views.BioSidebarView(Blog.mybiolist);
                 this.mybiosidebarview =  mybiosidebarview;
                 console.log("to", mybiosidebarview.el);
                 // on charge les données dans la sidebar //
@@ -422,6 +418,55 @@ var Blog = (function (blog) {
             return this;
         }
 
+    });
+
+    return blog;
+}(Blog));
+var Blog = (function (blog) {
+
+    blog.Views.BioSidebarView = Backbone.View.extend({
+        initialize : function (data) {
+            this.template = _.template($("#sidebar_texts_template").html());
+            _.bindAll(this, 'render');
+            this.collection = data;
+            // this.collection.bind('reset', this.render);
+            // this.collection.bind('change', this.render);
+            // this.collection.bind('add', this.render);
+            // this.collection.bind('remove', this.render);
+
+        },
+        render : function () {
+            if(!this.collection.slug){
+              this.collection.slug = this.collection.at(0).get('slug');
+            }
+            var renderedContent = this.template({textes: this.collection.models, slug: this.collection.slug});
+            i = 1;
+            this.$el.html(renderedContent).find('a').each(function() {
+                $(this).delay(i * 50).animate({opacity: 1});
+                i++;
+            });
+
+            sidebar = this.$el;
+            if(!sidebar.hasClass("mCustomScrollbar")) {
+                sidebar.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    theme: "dark"
+                });
+            }
+            
+            sidebar.mCustomScrollbar("update");
+            return this;
+        },
+        showactif : function(item) {
+            this.$el.find('h4').removeClass('actif');
+            $(item.currentTarget).find("h4").addClass('actif');
+        },
+
+        events: {
+            "click #sidebarwrapper a" : "showactif"
+        }
+   
     });
 
     return blog;
@@ -493,7 +538,7 @@ var Blog = (function (blog) {
         },
         mouseOut : function(e) {
                 var elt = this.$el.find("#big-btn-home-up");
-                this.$el.parent().parent().find("#main_header").stop(true, true).animate({'top':"-30px"}, { complete: function() {elt.css("z-index", 1);}});
+                this.$el.parent().parent().find("#main_header").stop(true, true).animate({'top':"-40px"}, { complete: function() {elt.css("z-index", 1);}});
     
         }
     });
@@ -913,9 +958,6 @@ var Blog = (function (blog) {
 
         },
         render : function () {
-                        if(!this.collection.slug){
-              this.collection.slug = this.collection.at(0).get('slug');
-            }
             var renderedContent = this.template({textes: this.collection.models, slug: this.collection.slug});
             i = 1;
             this.$el.html(renderedContent).find('a').each(function() {
@@ -968,78 +1010,6 @@ var Blog = (function (blog) {
                 $(this).animate({'opacity': 1});
             });
         }
-    });
-
-    return blog;
-}(Blog));
-var Blog = (function (blog) {
-
-    blog.Views.VideosGalNavView = Backbone.View.extend({
-        el : $("#mainbb"),
-        initialize : function (data) {
-            this.collection = data;
-            this.template = _.template($("#navgalleryvid_template").html());
-            this.template_video = _.template($("#video_template").html());
-            // on déclare notre objet video //
-            Blog.myvideo = new blog.Models.Video();
-            // on déclare la vue vidéo //
-            Blog.myvideoview = new blog.Views.VideoView(Blog.myvideo);
-            // compteur //
-            this.idpic = 0;
-
-        },
-        render : function () {
-            var renderedContent = this.template({gallery : this.collection.models});
-            // nb d'images //
-            this.gallerylength = this.collection.models.length;
-            // on fait apparaitre dans #tools la nav en fondu //
-            i = 1;
-            //console.log(this.collection.models.length);
-            this.$el.find("#navgal").empty();
-            if (this.collection.models.length > 1) {
-                this.$el.find("#navgal").html(renderedContent).find('a').each(function() {
-                    $(this).delay(i * 150).fadeIn();
-                    i++;
-                });
-                // on charge la première image par défaut //
-                this.showvideo(0);
-            } else {
-                this.showvideo(0);
-            }
-            return this;
-        },
-        events : {
-            "click a.linkvid"   : "linktovid"
-        },
-        showvideo: function(i) {
-            //this.$el.find("#video").remove();
-            videourl = this.collection.models[i].get('videourl');
-            // on charge l'objet contenant les infos video depuis vimeo //
-            var idpic = this.idpic;
-            Blog.myvideo.query(videourl).fetch({
-                update: true,
-                success: function(results) {
-                    console.log(results);
-                    Blog.myvideoview.render(results);
-                }
-            });
-            this.activelink();
-
-        },
-        activelink : function () {
-            this.$el.find("#navgal a").removeClass('actif');
-            this.$el.find("#navgal a[data-bypass|="+this.idpic+"]").addClass('actif');
-        },
-
-        linktovid : function(e) {
-            // on récupère le num d'index contenu dans le lien
-            index = e.currentTarget.attributes['data-bypass'].value;
-            this.idpic = index;
-            // on affiche la vidéo //
-            this.showvideo(index);
-            //this.$el.find('#videos').fadeOut(70, function() { showvideo(index)});           
-        }
-     
     });
 
     return blog;
@@ -1683,7 +1653,7 @@ var Blog = (function (blog){
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
                     $('#wrapper').find('#media img').css("max-height", contentheight - legendheight);
-                    console.log(legendheight);
+                    //console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {
@@ -1723,7 +1693,9 @@ var Blog = (function (blog){
                   Blog.newsview = new blog.Views.NewsView(Blog.mynews);
               }
 
-              Blog.mynews.query().fetch({
+              $("#mainbb").empty();
+
+              Blog.mynews.fetch({
                 //update: true,
                 success: function(results) {
                   Blog.newsview.render(results);

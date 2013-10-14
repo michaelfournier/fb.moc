@@ -22,7 +22,7 @@ function my_scripts() {
 
   wp_enqueue_script( 'underscore', get_template_directory_uri() . '/app/libs/vendors/underscore.js', null, false, false);
   wp_enqueue_script( 'backbone', get_template_directory_uri() . '/app/libs/vendors/backbone.js', 'underscore', false, false);
-  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131009-1823', 'backbone', false, true );
+  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131010-1303', 'backbone', false, true );
 };
 
 // permet l'appel ajax des vignettes dans les metabox ///

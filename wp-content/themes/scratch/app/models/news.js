@@ -1,11 +1,8 @@
 var Blog = (function (blog) {
 
 	blog.Models.News = Backbone.Model.extend({
-        query : function () {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=news';
-            return this;
-        },
-         parse: function (response) {
+        url : wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=news',
+        parse: function (response) {
             //http://stackoverflow.com/questions/14372151/backbone-js-model-overwriting-parse-for-custom-api
             if (response.post) {
                 return response.post;
@@ -19,7 +16,6 @@ var Blog = (function (blog) {
             });
         }
 	});
-
 
 	return blog;
 }(Blog));

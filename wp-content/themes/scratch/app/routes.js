@@ -49,7 +49,7 @@ var Blog = (function (blog){
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
                     $('#wrapper').find('#media img').css("max-height", contentheight - legendheight);
-                    console.log(legendheight);
+                    //console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {
@@ -89,7 +89,9 @@ var Blog = (function (blog){
                   Blog.newsview = new blog.Views.NewsView(Blog.mynews);
               }
 
-              Blog.mynews.query().fetch({
+              $("#mainbb").empty();
+
+              Blog.mynews.fetch({
                 //update: true,
                 success: function(results) {
                   Blog.newsview.render(results);

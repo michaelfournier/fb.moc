@@ -70,21 +70,27 @@ h5 {
 
 
 
-#txtwrapper h3 {
-	text-transform: uppercase;
-	margin-top: @unit*3;
-}
+
 
 #txtwrapper h4 {
 	margin: @unit 0 0 0;
 	color: @black90;
+	font-weight: bold;
+}
+
+.news #txtwrapper h4 {
+	font-weight: normal;
+}
+
+#txtwrapper h3 {
+	font-weight: bold;
+	padding-top: @unit;
+	text-transform: uppercase;
+	margin-top: @unit;
 }
 
 .news #txtwrapper h3 {
-	font-weight: bold;
 	border-top: 1px dotted @black30;
-	padding-top: @unit;
-	margin-top: @unit;
 }
 
 .news p, #sidebar #text {
@@ -100,13 +106,17 @@ h5 {
 
 #sidebar #text {
 	display: none;
+	text-align: justify;
 }
 
+#sidebar #text p{
+	text-align: justify;
+}
 #sidebar #text p:first-child {
 	margin-top: 0;
 }
 
-.news #txtwrapper h3:first-child {
+#txtwrapper h3:first-child {
 	border: 0;
 	padding: 0;
 	margin: 0;
@@ -154,10 +164,20 @@ figcaption {
 
 .actif, a.actif, #sorting a.actif, .actif h3, .actif h4 {
 	color: @hovercolor;
+}
+
+#mainmenu .actif {
 	text-decoration: underline;
+
+}
+
+#mainmenu a:hover {
+	text-decoration: underline;
+
 }
 
 #sidebar .actif {
+		font-weight: bold;
 	.actif();
 }
 
