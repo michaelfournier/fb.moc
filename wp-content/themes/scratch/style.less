@@ -139,10 +139,12 @@ a:visited {
 #sidebar h3 {
 	color: @hovercolor;
 	font-weight: bold;
+	float: left;
 }
 
 #sidebar h4 {
 	margin: 0;
+	line-height: 1.6;
 }
 
 #description {
@@ -259,7 +261,7 @@ nav a {
 	position: relative;
 }
 
-#navgal { position: absolute; left: 255px; width: 2em; z-index: 6;}
+#navgal { position: absolute; left: 262px; width: @unit; z-index: 6;}
 #navgal li { display: block; float: none;}
 #navgal li a {
 	font-size:(14/@font-size)*1em;
@@ -281,27 +283,30 @@ nav a {
 	/*background-color: @black05;*/
 	display: block;
 	height: 90%;
-	width: 50%;
+	width: 46%;
 	position: absolute;
 	z-index: 99999;
 }
 
 #btn-media-next {
 	right: 0;
+	background: url('img/chevron_droite.png') no-repeat;
+    background-position: 200% center;
 }
 
 #btn-media-next:hover {
-	cursor: e-resize;
+	background-position: 95% center;
 }
 
 #btn-media-prev:hover {
-	cursor: w-resize;
+	background-position: 5% center;
 }
-
-
 
 #btn-media-prev {
 	left:0;
+	background: url('img/chevron_gauche.png') no-repeat;
+	background-position: 200% center;
+    
 }
 
 figure#media {

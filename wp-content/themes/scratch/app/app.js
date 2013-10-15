@@ -1830,7 +1830,7 @@ var Blog = (function (blog){
 
   // Trigger the initial route and enable HTML5 History API support, set the
   // root folder to '/' by default.  Change in app.js.
-  if (wp_vars.lang != 'fr') { myroot = wp_vars.lang; } else { myroot = "";}
+  if (wp_vars.lang != 'en') { myroot = wp_vars.lang; } else { myroot = "";}
   Backbone.history.start({ pushState: true, root: myroot });
 
   // All navigation that is relative should be passed through the navigate
@@ -1845,8 +1845,6 @@ var Blog = (function (blog){
 
         // Ensure the root is part of the anchor href, meaning it's relative.
         if (href.prop.slice(0, root.length) === root) {
-           // on écrit l'adresse dans le btn switch lang //
-          $('#qtrans a').attr("href", wp_vars.blogurl+"/"+$(this).attr("href"));
           // Stop the default event to ensure the link will not cause a page
           // refresh.
           evt.preventDefault();
@@ -1855,7 +1853,13 @@ var Blog = (function (blog){
           // trigger the correct events. The Router's internal `navigate` method
           // calls this anyways.  The fragment is sliced from the root.
           Backbone.history.navigate(href.attr, true);
-
+          // on écrit l'adresse dans le btn switch lang //
+          if ( root === "fr" ) {
+            langprefix = "/";
+          } else {
+            langprefix = "/fr/";
+          }
+          $('#qtrans a').attr("href", langprefix+Backbone.history.fragment);
 
         }
     });

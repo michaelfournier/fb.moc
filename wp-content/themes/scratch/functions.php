@@ -119,13 +119,13 @@ function my_encode_meta($response) {
       //foreach ($keys as $key) {
        if ($mylang == "fr") {
           if(isset($wp_custom_fields['_pinfos_description_fr'])) { 
-            $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];
+            $post->custom_fields->_pinfos_description = nl2br($wp_custom_fields['_pinfos_description_fr'][0], true);
           };
         } else {
             if(isset($wp_custom_fields['_pinfos_description_en'])) {
-              $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_en'];
+              $post->custom_fields->_pinfos_description = nl2br($wp_custom_fields['_pinfos_description_en'][0], true);
             } else if(isset($wp_custom_fields['_pinfos_description_fr'])) {
-              $post->custom_fields->_pinfos_description = $wp_custom_fields['_pinfos_description_fr'];
+              $post->custom_fields->_pinfos_description = nl2br($wp_custom_fields['_pinfos_description_fr'][0], true);
             };
         };
       //}

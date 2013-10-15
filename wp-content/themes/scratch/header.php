@@ -64,9 +64,9 @@
 			<? $mylang = qtrans_getLanguage(); ?>
 			<li id="qtrans">
 				<? if ($mylang == 'en') { ?>
-					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>fr</span></a>	
+					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>fra</span></a>	
 				<? } else { ?>
-					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>en</span></a>
+					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>eng</span></a>
 				<? } ?>
 			</li>	
 		<?php endwhile; // end of the loop. ?>		
@@ -153,9 +153,9 @@
 
 	<!-- template pour la sidebar -->
 	<script type="text/template" id="sidebar_works_template">
-		<h3><%= work.get('title') %></h3>
-		<h4><%= work.get('custom_fields')['_pinfos_annee'][0] %></h4>
-		<p id="description"><%= work.get('custom_fields')['_pinfos_description'][0] %></p>
+		<h3><%= work.get('title') %>&nbsp;</h3>
+		<h4>&mdash; <%= work.get('custom_fields')['_pinfos_annee'][0] %></h4>
+		<p id="description"><%= work.get('custom_fields')['_pinfos_description'] %></p>
 		<% if ( work.get('content').length > 10 )  { %>
 			<h5><a id="toogletext">
 			<% if(wp_vars.lang === "en") { %>
