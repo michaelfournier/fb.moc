@@ -22,7 +22,7 @@ function my_scripts() {
 
   wp_enqueue_script( 'underscore', get_template_directory_uri() . '/app/libs/vendors/underscore.js', null, false, false);
   wp_enqueue_script( 'backbone', get_template_directory_uri() . '/app/libs/vendors/backbone.js', 'underscore', false, false);
-  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131010-1303', 'backbone', false, true );
+  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131015-1145', 'backbone', false, true );
 };
 
 // permet l'appel ajax des vignettes dans les metabox ///
@@ -191,7 +191,8 @@ function add_gallery($post) {
       $tabgallery = array(
       'type' => 'image',
       'large' =>   $imagelarge[0],   
-      'full' =>  $imagefull[0],        
+      'full' =>  $imagefull[0],
+      'ratio' =>  $imagefull[1]/$imagefull[2],   
       'title' =>  $imagemetas->post_title,
       'description' =>  $imagemetas->post_content,
       'alt' =>  get_post_meta($idpic['image'], '_wp_attachment_image_alt', true),

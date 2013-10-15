@@ -43,12 +43,31 @@ var Blog = (function (blog){
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
                     // on calcule la hauteur de la div #content //
-                    var contentheight = $(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10;
+                    var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
+                    var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
                     $('#wrapper, #workslistmini').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                    $('#wrapper').find('#media img').css("max-height", contentheight - legendheight);
+                   var mypic = $('#wrapper').find('#media img');
+                   var myctnr = $('#wrapper').find('#media');
+                   ratioctnr = myctnr.width() / myctnr.height();
+                   ratiopic = mypic.attr("data-ratio");
+
+                   console.log(ratioctnr+"  "+ratiopic);
+                    mypic.css("max-height", contentheight - legendheight);
+                   if (ratioctnr > ratiopic ) {
+                       mypic.addClass("horizontale");
+                       $("#ctn-media").addClass("horizontale");
+                       $("#ctn-media").css('width', mypic.width());
+                   } else if (ratioctnr < ratiopic ) {
+                       mypic.removeClass("horizontale");
+                       $("#ctn-media").removeClass("horizontale");
+                       $("#ctn-media").removeAttr("style");
+                   }
+
+
+
                     //console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
@@ -59,6 +78,7 @@ var Blog = (function (blog){
 
             home : function () {
               this.selectMenu('home');
+              $("#mainbb").empty();
               //this.killbackstrech();
               // on instancie la vue home
 

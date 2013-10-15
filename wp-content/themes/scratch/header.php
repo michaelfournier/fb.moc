@@ -30,7 +30,7 @@
 	<link rel="image_src" href="" />
 	<meta property="og:local" content="<?= get_bloginfo("language"); ?>">
 
-	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131010-1513" />
+	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131015-1145" />
     <link type="text/plain" rel="author" href="/humans.txt" />
    <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
     <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
@@ -109,11 +109,9 @@
 			</section>
 			<section class="maincontent">
 				<nav id="navgal"></nav>
-				<div data-bypass id="ctn-media">
-					<a data-bypass id="btn-media-next"></a>
-					<a data-bypass id="btn-media-prev"></a>
+
 					<figure id="media"></figure>
-				</div>
+		
 				
 			</section>
 		</div>	
@@ -267,17 +265,30 @@
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
-		<img src="<%= mypicture.get('full') %>" />
-		<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
+		<div data-bypass id="ctn-media">
+			<a data-bypass id="btn-media-next"></a>
+			<a data-bypass id="btn-media-prev"></a>
+			<img data-ratio="<%= mypicture.get('ratio') %>" src="<%= mypicture.get('full') %>" />
+			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
+		</div>
 	</script>
 
 	<!-- template pour video -->
 	<script type="text/template" id="video_template">
-
+	<% 
+	vwidth = myvideo.get('width');
+	vheight = myvideo.get('height');
+	vratio = (vwidth/vheight);
+	%>
+		<div data-bypass id="ctn-media">
+			<a data-bypass id="btn-media-next"></a>
+			<a data-bypass id="btn-media-prev"></a>
 		<div id="video">
 			<%= myvideo.get('html') %>
 		</div>
+		<img data-ratio="<%= vratio %>" src="<%= myvideo.get('thumbnail_url') %>" />
 		<figcaption id="legend"><%= myvideo.get('legend') %></figcaption>
+		</div>
 
 	</script>
 
