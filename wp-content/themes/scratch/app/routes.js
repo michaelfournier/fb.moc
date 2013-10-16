@@ -65,8 +65,7 @@ var Blog = (function (blog){
                        $("#ctn-media").removeClass("horizontale");
                        $("#ctn-media").removeAttr("style");
                    }
-
-
+                  $(document).find("body").removeClass('spinner');
 
                     //console.log(legendheight);
             },
@@ -78,6 +77,7 @@ var Blog = (function (blog){
 
             home : function () {
               this.selectMenu('home');
+              $(document).find("body").addClass('spinner');
               $("#mainbb").empty();
               //this.killbackstrech();
               // on instancie la vue home
@@ -102,7 +102,7 @@ var Blog = (function (blog){
             news : function () {
               this.killbackstrech();
               this.selectMenu('news');
-
+              $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.newsview) {
                   // on instancie la vue MainWorksView
@@ -141,6 +141,7 @@ var Blog = (function (blog){
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();
+              $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {
                   // on instancie la vue MainWorksView
@@ -177,6 +178,7 @@ var Blog = (function (blog){
             displayText : function (slug_post) {
               this.selectMenu('texts');
               this.killbackstrech();
+              $(document).find("body").addClass('spinner');
               // on instancie la vue TextesMainView si elle n'existe pas
               if (!Blog.textesmainview) {
                   // on instancie la vue MainWorksView
@@ -198,7 +200,7 @@ var Blog = (function (blog){
             displayBio : function (slug_post) {
               this.selectMenu('bio');
               this.killbackstrech();
-
+              $(document).find("body").addClass('spinner');
               if (!Blog.biomainview) {
                   // on instancie la vue MainWorksView
                   Blog.biomainview = new blog.Views.BioMainView();

@@ -26,7 +26,6 @@ var Blog = (function (blog) {
                 // on instancie la vue mybiosidebarview
                 var mybiosidebarview = new blog.Views.BioSidebarView(Blog.mybiolist);
                 this.mybiosidebarview =  mybiosidebarview;
-                console.log("to", mybiosidebarview.el);
                 // on charge les données dans la sidebar //
                 Blog.mybiolist.all().fetch({
                   update: true,
@@ -39,12 +38,13 @@ var Blog = (function (blog) {
                 });
 
             Blog.myapprouter.myheight();
+            $(document).find("body").addClass('spinner');
 
             return this;
         },
 
         renderText : function(myslug) {
-
+            this.$el.find(".maincontent").empty();
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;

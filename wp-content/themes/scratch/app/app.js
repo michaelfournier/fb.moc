@@ -367,7 +367,6 @@ var Blog = (function (blog) {
                 // on instancie la vue mybiosidebarview
                 var mybiosidebarview = new blog.Views.BioSidebarView(Blog.mybiolist);
                 this.mybiosidebarview =  mybiosidebarview;
-                console.log("to", mybiosidebarview.el);
                 // on charge les données dans la sidebar //
                 Blog.mybiolist.all().fetch({
                   update: true,
@@ -380,12 +379,13 @@ var Blog = (function (blog) {
                 });
 
             Blog.myapprouter.myheight();
+            $(document).find("body").addClass('spinner');
 
             return this;
         },
 
         renderText : function(myslug) {
-
+            this.$el.find(".maincontent").empty();
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
@@ -454,7 +454,7 @@ var Blog = (function (blog) {
                     theme: "dark"
                 });
             }
-            
+            $(document).find("body").removeClass('spinner');
             sidebar.mCustomScrollbar("update");
             return this;
         },
@@ -521,6 +521,7 @@ var Blog = (function (blog) {
               picsArray.push(data.get('full'));
             });
             $.backstretch(_.shuffle(picsArray), {duration: 4000, fade: 2050});
+            $(document).find("body").removeClass('spinner');
             //ça marche !!!
             // on replie le menu principal //
            // this.$el.find("#main_header").animate({'top':"-30px"});
@@ -664,24 +665,23 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
-            var content = this.$el.find('#media');
+            var content = this.$el.find('#visuel');
             var that = this;
-            this.$el.find('.maincontent #media').animate({'opacity': 0}, 300, function() {
-               content.html(renderedContent);
-               that.showOnLoaded();
-            });
             
-           
-
+            this.$el.find('.maincontent #visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 0}, 300, function() {
+              content.html(renderedContent);
+              that.showOnLoaded();
+              that.$el.find("#media").addClass('spinner2');
+            });
         },
         showOnLoaded : function() {
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
-
+               $(this).find("#media").removeClass('spinner2');
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
-              $(this).find('#media').animate({'opacity': 1}, 400);
+              $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
             });
         }
 
@@ -827,18 +827,14 @@ var Blog = (function (blog) {
             this.template = _.template($("#content_texts_template").html());
             _.bindAll(this, 'render');
             this.model = data;
-            console.log(this.model);
             // this.collection.bind('reset', this.render);
             // this.collection.bind('change', this.render);
             // this.collection.bind('add', this.render);
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            
             var mycontent = this.$el;
-
             var renderedContent = this.template({texte: this.model});
-
               this.$el.animate({
                 opacity: 0
               }, {
@@ -856,7 +852,6 @@ var Blog = (function (blog) {
                         }
                          Blog.myapprouter.myheight();
                         mycontenttxt.mCustomScrollbar("update");
-
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }
               });
@@ -902,14 +897,14 @@ var Blog = (function (blog) {
 
                 });
             }
-
             Blog.myapprouter.myheight();
+            $(document).find("body").addClass('spinner');
 
             return this;
         },
 
         renderText : function(myslug) {
-
+            this.$el.find(".maincontent").empty();
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
@@ -973,7 +968,7 @@ var Blog = (function (blog) {
                     theme: "dark"
                 });
             }
-            
+            $(document).find("body").removeClass('spinner');
             sidebar.mCustomScrollbar("update");
             return this;
         },
@@ -1000,13 +995,14 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({myvideo: this.model});
-
-            var content = this.$el.find('#media');
+            this.$el.find("#media").addClass('spinner2');
+            var content = this.$el.find('#visuel');
             var that = this;
-            this.$el.find('.maincontent #media').animate({'opacity': 0}, 300, function() {
+            this.$el.find('.maincontent #visuel').animate({'opacity': 0}, 300, function() {
                content.html(renderedContent);
                 Blog.myapprouter.myheight();
                 that.$el.find("#sidebar").mCustomScrollbar("update");
+                that.$el.find("#media").removeClass('spinner2');
                 $(this).animate({'opacity': 1});
             });
         }
@@ -1254,7 +1250,7 @@ var Blog = (function (blog) {
                 // on desactive la scroll bar //
                 $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
-                $(this).find('#navgal, #media').empty();
+                $(this).find('#navgal, #visuel').empty();
 
                 $(this).find('.maincontent').css({"overflow-y": "hidden", "height": "100%"});
               
@@ -1669,8 +1665,7 @@ var Blog = (function (blog){
                        $("#ctn-media").removeClass("horizontale");
                        $("#ctn-media").removeAttr("style");
                    }
-
-
+                  $(document).find("body").removeClass('spinner');
 
                     //console.log(legendheight);
             },
@@ -1682,6 +1677,7 @@ var Blog = (function (blog){
 
             home : function () {
               this.selectMenu('home');
+              $(document).find("body").addClass('spinner');
               $("#mainbb").empty();
               //this.killbackstrech();
               // on instancie la vue home
@@ -1706,7 +1702,7 @@ var Blog = (function (blog){
             news : function () {
               this.killbackstrech();
               this.selectMenu('news');
-
+              $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.newsview) {
                   // on instancie la vue MainWorksView
@@ -1745,6 +1741,7 @@ var Blog = (function (blog){
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();
+              $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {
                   // on instancie la vue MainWorksView
@@ -1781,6 +1778,7 @@ var Blog = (function (blog){
             displayText : function (slug_post) {
               this.selectMenu('texts');
               this.killbackstrech();
+              $(document).find("body").addClass('spinner');
               // on instancie la vue TextesMainView si elle n'existe pas
               if (!Blog.textesmainview) {
                   // on instancie la vue MainWorksView
@@ -1802,7 +1800,7 @@ var Blog = (function (blog){
             displayBio : function (slug_post) {
               this.selectMenu('bio');
               this.killbackstrech();
-
+              $(document).find("body").addClass('spinner');
               if (!Blog.biomainview) {
                   // on instancie la vue MainWorksView
                   Blog.biomainview = new blog.Views.BioMainView();

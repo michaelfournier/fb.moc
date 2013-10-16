@@ -112,7 +112,7 @@ var Blog = (function (blog) {
                 // on desactive la scroll bar //
                 $(this).css({"overflow-y": "hidden"});
                 // on écrit les infos dans la side bar//
-                $(this).find('#navgal, #media').empty();
+                $(this).find('#navgal, #visuel').empty();
 
                 $(this).find('.maincontent').css({"overflow-y": "hidden", "height": "100%"});
               

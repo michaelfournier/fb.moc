@@ -27,7 +27,7 @@ var Blog = (function (blog) {
                     theme: "dark"
                 });
             }
-            
+            $(document).find("body").removeClass('spinner');
             sidebar.mCustomScrollbar("update");
             return this;
         },

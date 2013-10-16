@@ -109,10 +109,13 @@
 			</section>
 			<section class="maincontent">
 				<nav id="navgal"></nav>
-
-					<figure id="media"></figure>
-		
-				
+					<div id="media">
+						<div data-bypass id="ctn-media">
+							<a data-bypass id="btn-media-next"></a>
+							<a data-bypass id="btn-media-prev"></a>
+							<figure id="visuel"></figure>
+						</div>
+					</div>
 			</section>
 		</div>	
 	</script>
@@ -265,12 +268,8 @@
 
 	<!-- template pour image avec lien (gallery) -->
 	<script type="text/template" id="picture_template">
-		<div data-bypass id="ctn-media">
-			<a data-bypass id="btn-media-next"></a>
-			<a data-bypass id="btn-media-prev"></a>
 			<img data-ratio="<%= mypicture.get('ratio') %>" src="<%= mypicture.get('full') %>" />
 			<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
-		</div>
 	</script>
 
 	<!-- template pour video -->
@@ -280,15 +279,12 @@
 	vheight = myvideo.get('height');
 	vratio = (vwidth/vheight);
 	%>
-		<div data-bypass id="ctn-media">
-			<a data-bypass id="btn-media-next"></a>
-			<a data-bypass id="btn-media-prev"></a>
+
 		<div id="video">
 			<%= myvideo.get('html') %>
 		</div>
 		<img data-ratio="<%= vratio %>" src="<%= myvideo.get('thumbnail_url') %>" />
 		<figcaption id="legend"><%= myvideo.get('legend') %></figcaption>
-		</div>
 
 	</script>
 
@@ -414,7 +410,6 @@
 		<section id="tools"></section>
 		<div id="wrapper">		
 			<section style="background:none" class="maincontent notice">
-
 				<div id="txtwrapper">
 					<div id="uberwrapper">
 						<%= mynotice.get('content') %>
