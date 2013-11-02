@@ -939,12 +939,14 @@ a:hover h4 {
 a:visited {
   color: #1a1a1a;
 }
-#sidebar h3 {
+#sidebar h3,
+#hiddentitle h3 {
   color: #1a1a1a;
   font-weight: bold;
   float: left;
 }
-#sidebar h4 {
+#sidebar h4,
+#hiddentitle h4 {
   margin: 0;
   line-height: 1.6;
 }
@@ -1067,6 +1069,10 @@ nav a {
   float: right;
   letter-spacing: 0px;
 }
+#visuel {
+  width: inherit;
+  height: inherit;
+}
 #ctn-media {
   display: block;
   position: relative;
@@ -1082,7 +1088,7 @@ nav a {
   height: 100%;
   width: 46%;
   position: absolute;
-  z-index: 99999;
+  z-index: 999;
 }
 #btn-media-next {
   right: 0;
@@ -1090,15 +1096,26 @@ nav a {
   background-position: 200% center;
 }
 #btn-media-next:hover {
-  background-position: 95% center;
+  background-position: right center;
 }
 #btn-media-prev:hover {
-  background-position: 5% center;
+  background-position: left center;
 }
 #btn-media-prev {
   left: 0;
   background: url('img/chevron_gauche.png') no-repeat;
   background-position: 200% center;
+}
+#closefull {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  z-index: 1000;
+  background: url('img/closefull.png') no-repeat;
+  background-position: center center;
 }
 #media {
   width: 100%;
@@ -1278,6 +1295,8 @@ nav a {
   padding-right: 0.5714285714285714em;
 }
 #video {
+  position: absolute;
+  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -1292,6 +1311,79 @@ nav a {
 }
 .mCSB_draggerRail {
   display: none;
+}
+#hiddentitle {
+  display: none;
+  height: 36px;
+  line-height: 2.5;
+}
+/* fullwindow */
+.fullwindow #btn-media-next,
+#btn-media-prev {
+  top: 0;
+}
+.fullwindow #mainbb {
+  margin: 0;
+  width: 100%;
+}
+.fullwindow #closefull {
+  display: block;
+}
+.fullwindow .maincontent {
+  display: table;
+}
+.fullwindow #media {
+  display: table-cell;
+  vertical-align: middle;
+}
+.fullwindow #media {
+  padding: 0 45px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.fullwindow #sidebar,
+.fullwindow #main_nav,
+.fullwindow #navgal,
+.fullwindow #navworks {
+  display: none;
+}
+.fullwindow #tools {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.fullwindow #hiddentitle {
+  display: block;
+}
+.fullwindow #hiddentitle h3 {
+  float: none;
+  color: white;
+  display: inline-block;
+}
+.fullwindow #hiddentitle h4 {
+  display: inline-block;
+}
+.fullwindow #main_header {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+.fullwindow .maincontent {
+  padding: 0;
+}
+.fullwindow #ctn-media {
+  margin: 0 auto;
+  float: none;
+}
+.fullwindow #btn-media-next,
+.fullwindow #btn-media-prev {
+  position: fixed;
+}
+.fullwindow body {
+  background-color: rgba(0, 0, 0, 0.96);
 }
 /* basic scrollbar styling */
 /* vertical scrollbar */
@@ -2150,25 +2242,29 @@ SMARTPHONES
     z-index: 1;
   }
   .nextprevworks,
-  #unfoldworks {
+  #unfoldworks,
+  #btnfull {
     display: block;
     height: 15px;
     width: 15px;
     float: left;
   }
   .nextprevworks a,
-  #unfoldworks a {
+  #unfoldworks a,
+  #btnfull a {
     display: block;
     height: 15px;
     width: 15px;
   }
   #nextwork,
-  #prevwork {
+  #prevwork,
+  #btnfull {
     padding-left: 0.5714285714285714em;
   }
   #nextwork a:hover,
   #prevwork a:hover,
-  #unfoldworks a:hover {
+  #unfoldworks a:hover,
+  #btnfull a:hover {
     background-color: #1a1a1a;
   }
   #nextwork a {
@@ -2177,12 +2273,16 @@ SMARTPHONES
   #prevwork a {
     background: url('img/backward02.png') #b3b3b3 no-repeat center center;
   }
-  #unfoldworks {
+  #unfoldworks,
+  #nextwork {
     padding-right: 0.5714285714285714em;
     border-right: 1px solid #b3b3b3;
   }
   #unfoldworks a {
     background: #b3b3b3 url('img/foldunfold.png') no-repeat -15px center;
+  }
+  #btnfull a {
+    background: #b3b3b3 url('img/fullwindow3.png') no-repeat center center;
   }
   #unfoldworks a.fold {
     background-position: 0px center;

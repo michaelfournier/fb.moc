@@ -82,6 +82,9 @@ var Blog = (function (blog) {
         },
 
         render : function () {
+
+            // on ecrit le titre dans hiddentitle //
+            this.$el.find("#tools #hiddentitle").html("<h3>"+this.model.get('title')+"&nbsp;</h3>"+"<h4>&mdash; "+this.model.get('custom_fields')['_pinfos_annee'][0]+"</h4>");
             // on active la vignette active dans workslist mini //
 
             this.showactif(this.model.get('slug'));

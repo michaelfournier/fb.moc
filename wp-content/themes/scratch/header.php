@@ -19,16 +19,6 @@
     <meta name="viewport" content="width=device-width" />
 
 <!-- meta facebook -->
-	<meta property="fb:app_id" content="">
-	<meta property="fb:admins" content="">
-	<meta property="og:title" content="<?= $title; ?>"/>
-	<meta property="og:site_name" content="<?php bloginfo('name'); ?>"/>
-	<meta property="og:type" content="article"/>
-	<meta property="og:url" content="<?= get_permalink(); ?>">
-	<meta property="og:description" content="<?= get_the_excerpt(); ?>">
-	<meta property="og:image" content=""/>
-	<link rel="image_src" href="" />
-	<meta property="og:local" content="<?= get_bloginfo("language"); ?>">
 
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131015-1145" />
     <link type="text/plain" rel="author" href="/humans.txt" />
@@ -95,10 +85,14 @@
 	<!-- template pour mainwork -->
 	<script type="text/template" id="mainworks_template">	
 		<section id="tools">
+		<div id="hiddentitle"></div>
+		<a id="closefull" title="close" data-bypass href="#"></a>
      		<nav id="navworks">
 	     		<div id="unfoldworks"><a data-bypass href="#"></a></div>
 	     		<div class="nextprevworks" id="prevwork"><a  href=""></a></div>	
 				<div class="nextprevworks" id="nextwork"><a href=""></a></div>
+				<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>
+
 			</nav>
 		</section>
 		<div id="wrapper">			
@@ -283,7 +277,7 @@
 		<div id="video">
 			<%= myvideo.get('html') %>
 		</div>
-		<img data-ratio="<%= vratio %>" src="<%= myvideo.get('thumbnail_url') %>" />
+		<img style="visibility:hidden" data-ratio="<%= vratio %>" src="<%= myvideo.get('thumbnail_url') %>" />
 		<figcaption id="legend"><%= myvideo.get('legend') %></figcaption>
 
 	</script>

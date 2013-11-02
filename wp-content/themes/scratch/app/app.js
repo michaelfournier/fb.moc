@@ -666,19 +666,20 @@ var Blog = (function (blog) {
         render : function () {
             var renderedContent = this.template({mypicture: this.model});
             var content = this.$el.find('#visuel');
+            content.addClass('spinner2');
             var that = this;
             
             this.$el.find('.maincontent #visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 0}, 300, function() {
               content.html(renderedContent);
               that.showOnLoaded();
-              that.$el.find("#media").addClass('spinner2');
+              
             });
         },
         showOnLoaded : function() {
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
-               $(this).find("#media").removeClass('spinner2');
+               $(this).find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
               $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
@@ -995,15 +996,23 @@ var Blog = (function (blog) {
         },
         render : function () {
             var renderedContent = this.template({myvideo: this.model});
-            this.$el.find("#media").addClass('spinner2');
             var content = this.$el.find('#visuel');
+            content.addClass('spinner2');
             var that = this;
             this.$el.find('.maincontent #visuel').animate({'opacity': 0}, 300, function() {
                content.html(renderedContent);
-                Blog.myapprouter.myheight();
-                that.$el.find("#sidebar").mCustomScrollbar("update");
-                that.$el.find("#media").removeClass('spinner2');
-                $(this).animate({'opacity': 1});
+                that.showOnLoaded();
+            });
+        },
+        showOnLoaded : function() {
+           this.$el.find(".maincontent").imagesLoaded(function() {
+               //actions to perform when the image is loaded
+               Blog.myapprouter.myheight();
+               $(this).find("#visuel").removeClass('spinner2');
+               $(this).animate({'opacity': 1});
+               // on actualise la scrollbar
+              $(this).parent().find("#sidebar").mCustomScrollbar("update");
+              $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
             });
         }
     });
@@ -1220,6 +1229,9 @@ var Blog = (function (blog) {
         },
 
         render : function () {
+
+            // on ecrit le titre dans hiddentitle //
+            this.$el.find("#tools #hiddentitle").html("<h3>"+this.model.get('title')+"&nbsp;</h3>"+"<h4>&mdash; "+this.model.get('custom_fields')['_pinfos_annee'][0]+"</h4>");
             // on active la vignette active dans workslist mini //
 
             this.showactif(this.model.get('slug'));
@@ -1479,7 +1491,19 @@ var Blog = (function (blog) {
         },
         events: {
             "click #unfoldworks a" : "toggleworks",
+            "click #btnfull a" : "gofullwindow",
+            "click #closefull" : "closefullwindow",
             "mouseleave #workslistmini":"toggleworks"
+        },
+
+        gofullwindow : function() {
+            $(document).find('html').addClass('fullwindow');
+            Blog.myapprouter.myheight();
+        },
+
+        closefullwindow : function() {
+            $(document).find('html').removeClass('fullwindow');
+            Blog.myapprouter.myheight();
         },
   
         scrolltoactive : function () {
@@ -1644,15 +1668,16 @@ var Blog = (function (blog){
              myheight: function() {
                     // on calcule la hauteur de la div #content //
                     var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
+                    //alert($('#main_header').height());
                     var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
                     $('#wrapper, #workslistmini').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                   var mypic = $('#wrapper').find('#media img');
+                   var mypic = $('#wrapper').find('#visuel img');
                    var myctnr = $('#wrapper').find('#media');
-                   ratioctnr = myctnr.width() / myctnr.height();
-                   ratiopic = mypic.attr("data-ratio");
+                   ratioctnr = Math.round(myctnr.width() / myctnr.height() * 100) /100 ;
+                   ratiopic = Math.round(mypic.attr("data-ratio") *100 ) / 100;
 
                    console.log(ratioctnr+"  "+ratiopic);
                     mypic.css("max-height", contentheight - legendheight);
@@ -1660,7 +1685,8 @@ var Blog = (function (blog){
                        mypic.addClass("horizontale");
                        $("#ctn-media").addClass("horizontale");
                        $("#ctn-media").css('width', mypic.width());
-                   } else if (ratioctnr < ratiopic ) {
+                       //alert(mypic.width());
+                   } else if (ratioctnr <= ratiopic ) {
                        mypic.removeClass("horizontale");
                        $("#ctn-media").removeClass("horizontale");
                        $("#ctn-media").removeAttr("style");

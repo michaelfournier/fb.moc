@@ -248,25 +248,26 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		z-index: 1;
 	}
 
-	.nextprevworks, #unfoldworks {
+	.nextprevworks, #unfoldworks, #btnfull {
 		display: block;
 		height : 15px;
 		width: 15px;
 		float: left;
 	}
 
-	.nextprevworks a, #unfoldworks a {
+	.nextprevworks a, #unfoldworks a, #btnfull a {
 		display: block;
 		height : 15px;
 		width: 15px;
 	}
 
-	#nextwork, #prevwork {
+	#nextwork, #prevwork, #btnfull {
 		padding-left: @unit/2;
 	}
 
 
-	#nextwork a:hover, #prevwork a:hover, #unfoldworks a:hover {
+
+	#nextwork a:hover, #prevwork a:hover, #unfoldworks a:hover, #btnfull a:hover  {
 		background-color: @hovercolor;
 	}
 
@@ -278,13 +279,17 @@ only screen and (min-width: 500px) and (min-device-width: 768px)
 		background: url('img/backward02.png') @black30 no-repeat center center;
 	}
 
-	#unfoldworks {
+	#unfoldworks, #nextwork {
 		padding-right: @unit/2;
 		border-right: 1px solid @black30;
 	}
 
 	#unfoldworks a {
 		background: @black30 url('img/foldunfold.png') no-repeat -15px center;
+	}
+
+	#btnfull a {
+		background: @black30 url('img/fullwindow3.png') no-repeat center center;
 	}
 
 	#unfoldworks a.fold {

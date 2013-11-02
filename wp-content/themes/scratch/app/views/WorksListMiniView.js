@@ -50,7 +50,19 @@ var Blog = (function (blog) {
         },
         events: {
             "click #unfoldworks a" : "toggleworks",
+            "click #btnfull a" : "gofullwindow",
+            "click #closefull" : "closefullwindow",
             "mouseleave #workslistmini":"toggleworks"
+        },
+
+        gofullwindow : function() {
+            $(document).find('html').addClass('fullwindow');
+            Blog.myapprouter.myheight();
+        },
+
+        closefullwindow : function() {
+            $(document).find('html').removeClass('fullwindow');
+            Blog.myapprouter.myheight();
         },
   
         scrolltoactive : function () {

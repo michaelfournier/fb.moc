@@ -44,15 +44,16 @@ var Blog = (function (blog){
              myheight: function() {
                     // on calcule la hauteur de la div #content //
                     var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
+                    //alert($('#main_header').height());
                     var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
                     $('#wrapper, #workslistmini').css("height", contentheight);
                     imageheight = $("#wrapper figure img").height();
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                   var mypic = $('#wrapper').find('#media img');
+                   var mypic = $('#wrapper').find('#visuel img');
                    var myctnr = $('#wrapper').find('#media');
-                   ratioctnr = myctnr.width() / myctnr.height();
-                   ratiopic = mypic.attr("data-ratio");
+                   ratioctnr = Math.round(myctnr.width() / myctnr.height() * 100) /100 ;
+                   ratiopic = Math.round(mypic.attr("data-ratio") *100 ) / 100;
 
                    console.log(ratioctnr+"  "+ratiopic);
                     mypic.css("max-height", contentheight - legendheight);
@@ -60,7 +61,8 @@ var Blog = (function (blog){
                        mypic.addClass("horizontale");
                        $("#ctn-media").addClass("horizontale");
                        $("#ctn-media").css('width', mypic.width());
-                   } else if (ratioctnr < ratiopic ) {
+                       //alert(mypic.width());
+                   } else if (ratioctnr <= ratiopic ) {
                        mypic.removeClass("horizontale");
                        $("#ctn-media").removeClass("horizontale");
                        $("#ctn-media").removeAttr("style");

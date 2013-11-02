@@ -143,13 +143,13 @@ a:visited {
 	color: @black90;
 }
 
-#sidebar h3 {
+#sidebar h3, #hiddentitle h3 {
 	color: @hovercolor;
 	font-weight: bold;
 	float: left;
 }
 
-#sidebar h4 {
+#sidebar h4, #hiddentitle h4 {
 	margin: 0;
 	line-height: 1.6;
 }
@@ -280,6 +280,11 @@ nav a {
 	letter-spacing: 0px;
 }
 
+#visuel {
+	width: inherit;
+	height: inherit;
+}
+
 #ctn-media {
 	display: block;
 	position: relative;
@@ -294,7 +299,7 @@ nav a {
 	height: 100%;
 	width: 46%;
 	position: absolute;
-	z-index: 99999;
+	z-index: 999;
 }
 
 #btn-media-next {
@@ -304,17 +309,29 @@ nav a {
 }
 
 #btn-media-next:hover {
-	background-position: 95% center;
+	background-position: right center;
 }
 
 #btn-media-prev:hover {
-	background-position: 5% center;
+	background-position: left center;
 }
 
 #btn-media-prev {
 	left:0;
 	background: url('img/chevron_gauche.png') no-repeat;
 	background-position: 200% center;
+}
+
+#closefull {
+	position: fixed;
+	display: none;
+	top: 0;
+	left:0;
+	width: 36px;
+	height: 36px;
+    z-index: 1000;
+	background: url('img/closefull.png') no-repeat;
+	background-position: center center;
 }
 
 #media {
@@ -532,6 +549,8 @@ nav a {
 }
 
 #video {
+	position: absolute;
+	width: 100%;
 	height: 100%;
 	overflow: hidden;
 }
@@ -549,6 +568,28 @@ nav a {
 .mCSB_draggerRail {
 	display: none;
 }
+
+
+#hiddentitle { display: none; height: 36px; line-height: 2.5; }
+/* fullwindow */
+.fullwindow #btn-media-next, #btn-media-prev { top: 0;}
+.fullwindow #mainbb { margin: 0; width: 100%;}
+.fullwindow #closefull { display: block; }
+.fullwindow .maincontent { display: table;}
+.fullwindow #media { display: table-cell; vertical-align: middle;}
+.fullwindow #media { padding: 0 45px; .box-sizing(); }
+.fullwindow #sidebar, .fullwindow #main_nav, .fullwindow #navgal, .fullwindow #navworks {display: none;}
+.fullwindow #tools { text-align: center; margin: 0; padding: 0; }
+.fullwindow #hiddentitle  { display: block;}
+.fullwindow #hiddentitle h3 { float: none; color: white; display: inline-block; }
+.fullwindow #hiddentitle h4 { display: inline-block; }
+.fullwindow #main_header { display: none; margin: 0; padding: 0;}
+.fullwindow .maincontent { padding: 0; }
+.fullwindow #ctn-media { margin: 0 auto; float: none;}
+.fullwindow #btn-media-next, .fullwindow #btn-media-prev { position: fixed; }
+.fullwindow body { background-color: rgba(0, 0, 0, 0.96);}
+
+
 
 @import "less/front/customscrollbar.less";
 /* =============================================================================
