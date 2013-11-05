@@ -11,8 +11,8 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            var renderedContent = this.template();   
-            this.$el.append(renderedContent);       
+            var renderedContent = this.template();
+            this.$el.append(renderedContent);
             return this;
         }
    

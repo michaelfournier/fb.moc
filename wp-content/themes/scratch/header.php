@@ -16,11 +16,11 @@
 	<title><?= $title; ?></title>
     <meta name="description" content="<?php bloginfo( 'description' ); ?>">
     <meta name="author" content="vacuumRandom"> 
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- meta facebook -->
 
-	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131015-1145" />
+	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131102-1647" />
     <link type="text/plain" rel="author" href="/humans.txt" />
    <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
     <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
@@ -273,7 +273,6 @@
 	vheight = myvideo.get('height');
 	vratio = (vwidth/vheight);
 	%>
-
 		<div id="video">
 			<%= myvideo.get('html') %>
 		</div>

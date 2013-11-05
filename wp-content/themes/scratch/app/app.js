@@ -678,11 +678,12 @@ var Blog = (function (blog) {
         showOnLoaded : function() {
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
-               Blog.myapprouter.myheight();
+               
                $(this).find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
               $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
+              Blog.myapprouter.myheight();
             });
         }
 
@@ -812,8 +813,8 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            var renderedContent = this.template();   
-            this.$el.append(renderedContent);       
+            var renderedContent = this.template();
+            this.$el.append(renderedContent);
             return this;
         }
    
@@ -1648,7 +1649,8 @@ var Blog = (function (blog){
                     console.log("Different Page: " + router + route);
                 });
                 // on calcule la hauteur de #wrapper //
-                $(window).on("resize", _.bind(this.myheight, this));
+                //$(window).on("resize", _.bind(this.myheight, this));
+                $(window).on( 'resize', _.bind($.throttle( 50, false, this.myheight), this));
                 this.myheight();
             },
             routes : {
@@ -1666,32 +1668,41 @@ var Blog = (function (blog){
             },
             // fonction pour donner une hauteur à #mainbb //
              myheight: function() {
+                  $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
                     // on calcule la hauteur de la div #content //
                     var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
                     //alert($('#main_header').height());
                     var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
-                    $('#wrapper, #workslistmini').css("height", contentheight);
-                    imageheight = $("#wrapper figure img").height();
+                    
                     legendheight = $("#wrapper #legend").height();
                    // $("#wrapper").find("#sidebar").css("height", imageheight);
-                   var mypic = $('#wrapper').find('#visuel img');
-                   var myctnr = $('#wrapper').find('#media');
-                   ratioctnr = Math.round(myctnr.width() / myctnr.height() * 100) /100 ;
+                   var mypic = $(document).find('#visuel img');
+                   var myctnr = $(document).find('#media');
+                   ratioctnr = Math.round(myctnr.width() / contentheight * 100) / 100;
                    ratiopic = Math.round(mypic.attr("data-ratio") *100 ) / 100;
 
                    console.log(ratioctnr+"  "+ratiopic);
+                // on test si la largeur fait au moins 600px //
+                if (Modernizr.mq('screen and (min-width: 768px)')) {
+                   $(document).find('#wrapper, #workslistmini').css("height", contentheight);
                     mypic.css("max-height", contentheight - legendheight);
-                   if (ratioctnr > ratiopic ) {
+                   if (ratioctnr >= ratiopic ) {
                        mypic.addClass("horizontale");
-                       $("#ctn-media").addClass("horizontale");
-                       $("#ctn-media").css('width', mypic.width());
+                       $(document).find("#ctn-media").addClass("horizontale");
                        //alert(mypic.width());
-                   } else if (ratioctnr <= ratiopic ) {
+                   } else if (ratioctnr < ratiopic ) {
                        mypic.removeClass("horizontale");
-                       $("#ctn-media").removeClass("horizontale");
-                       $("#ctn-media").removeAttr("style");
+                       $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
                    }
-                  $(document).find("body").removeClass('spinner');
+                   $(document).find("#ctn-media").css('width', mypic.width());
+                   //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
+                 } else {
+                    $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
+                    $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
+                    $(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
+                 }
+
+                $(document).find("body").removeClass('spinner');
 
                     //console.log(legendheight);
             },
