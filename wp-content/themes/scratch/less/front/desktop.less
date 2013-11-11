@@ -1,6 +1,8 @@
 /* =============================================================================
   BUREAU INTERMÉDIAIRE
    ========================================================================== */
+ 
+
 @media screen and (min-width: 769px) {
 
 	#bureau{ display: block;}
@@ -10,11 +12,15 @@
 		overflow-y:	hidden;
 	}
 
+	.wrapthumb { width: (1/3)*100%; }
 	#main_wrapper {
-		//max-width: 1600px;
+		//max-width: 1600px;w
 		.divise(1,1, 0, none, none);
 		//padding: 0 50px;
 		//margin: 0 auto;
+	}
+	#main_header {
+		margin: 0 0 @unit 0;
 	}
 
 	#mainbb, #main_nav {
@@ -56,12 +62,6 @@
 
 	#indextools {
 		.divise(1,1, 0, none, left);
-		margin-bottom: @unit;
-	}
-
-	#displaying {
-		float: left;
-		margin-right: @unit;
 	}
 
 	nav#navworks {
@@ -320,6 +320,10 @@
 	.segment:hover .sortitem {
 		color: @black90;
 	}
+	#wraplist-list {
+		-webkit-column-count: 3;
+		-webkit-column-width: (1/3)*100%;
+	}
 
 	#wraplist-list .segment:hover .sortitem {
 		border-bottom: 1px solid @black90;
@@ -340,3 +344,20 @@
 	}
 
 }
+	
+@media screen and (min-width: 1000px) {
+	.wrapthumb { width: (1/4)*100%; }
+
+}
+
+@media screen and (min-width: 1200px) {
+	.wrapthumb { width: (1/5)*100%; }
+	#wraplist-list {
+		-webkit-column-count: 4;
+		-webkit-column-width: (1/4)*100%;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	.wrapthumb { width: (1/6)*100%; }
+}  

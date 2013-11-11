@@ -129,7 +129,7 @@
               			tab[i] = works[i].get('categories')[0]['title'];
               		}
               	%>
-          		<div class="wrapthumb" style="opacity:0">
+          		<div class="wrapthumb">
                     <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
                     	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
                     		<img src='<%= work.get('thumbnormal') %>' />

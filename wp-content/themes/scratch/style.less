@@ -159,7 +159,6 @@ figcaption {
 
 #main_header { 
 	position: relative;
-	margin: 0 0 @unit 0;
 	padding: @unit/2 0;
 	background-color: white;
 	width: 100%;
@@ -189,8 +188,8 @@ figcaption {
 }
 
 #wraplist-list {
-	-webkit-column-count: 3;
-	-webkit-column-width: (1/3)*100%;
+	-webkit-column-count: 1;
+	-webkit-column-width: 100%;
 	-webkit-column-gap: @unit*2;
 	width: 100%;
 }
@@ -207,6 +206,7 @@ figcaption {
 #wraplist-list .wrapthumb {
 	clear: both;
 	margin: 0;
+	padding: 0;
 	width: 100%;
 }
 #wraplist-list .workthumb2 {
@@ -248,20 +248,26 @@ figcaption {
 .wrapthumb {
 	position: relative;
 	float: left;
-	margin: 0 @unit/1.5 @unit*1.5 0;
+	.box-sizing();
+	padding : 0 @unit/2 @unit*1.5 0;
+	margin: 0;
 	/*margin-left: -@unit;
 	margin-right: @unit;*/
 }
+
+.wrapthumb img { opacity: 0;}
 .wrapthumb:hover h5 {
 	.actif();
 }
 
 #wraplist {
 	float: left;
+	width: 100%;
 	overflow: hidden;
 	padding-top: 0;
 	padding-left: 0;
 }
+
 .worktitle {
 	color: @black60;
 	display: block;
@@ -278,16 +284,21 @@ figcaption {
 	padding-left: @unit/1.5;
 	margin-bottom: @unit/1.5;*/
 	.box-sizing();
-	width: 250px;
-	height: 160px;
+	width: 100%;
+	/*height: 160px;*/
 	overflow: hidden;
 }
 
 .workthumb img {
-	width: 250px;
+	width: 100%;
+	max-width: 250px;
 }
 
 /* TOOLS */
+#indextools {
+	margin-bottom: @unit;
+	float: left;
+}
 
 nav#sorting { 
 	display: none; float: left;
@@ -308,6 +319,11 @@ nav#sorting li:first-child a {
 
 #tools nav li:last-child a {
 	padding-right: 0;
+}
+
+#displaying {
+	float: left;
+	margin-right: @unit;
 }
 
 #tools #displaying a {

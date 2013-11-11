@@ -17,7 +17,7 @@ var Blog = (function (blog) {
             i = 1;
             this.$el.append(renderedContent);
             // on fait apparaitre le bouton unfold //
-            this.$el.find('#unfoldworks').css('display', 'block');
+            //this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             var myworksminielt = this.$el.find('#workslistmini');
             myworksminielt.imagesLoaded(function() {
@@ -41,7 +41,7 @@ var Blog = (function (blog) {
                 });
             }
             
-            myworksminielt.mCustomScrollbar("update");
+            //myworksminielt.mCustomScrollbar("update");
             //that.$el.find("#unfoldworks a").click();
                         
             });

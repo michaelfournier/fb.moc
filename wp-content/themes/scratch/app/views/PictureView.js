@@ -21,12 +21,11 @@ var Blog = (function (blog) {
         showOnLoaded : function() {
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
-               
+               Blog.myapprouter.myheight();
                $(this).find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
               $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
-              Blog.myapprouter.myheight();
             });
         }
 

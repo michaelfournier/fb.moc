@@ -117,7 +117,7 @@ var Blog = (function (blog) {
                 // on écrit les infos dans la side bar//
                 $(this).find('#navgal, #visuel').empty();
 
-                $(this).find('.maincontent').css({"overflow-y": "hidden", "height": "100%"});
+                $(this).find('.maincontent').css({"overflow": "hidden", "height": "100%"});
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 

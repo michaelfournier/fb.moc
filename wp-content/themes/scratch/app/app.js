@@ -678,12 +678,11 @@ var Blog = (function (blog) {
         showOnLoaded : function() {
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
-               
+               Blog.myapprouter.myheight();
                $(this).find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
               $(this).parent().find("#sidebar").mCustomScrollbar("update");
               $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
-              Blog.myapprouter.myheight();
             });
         }
 
@@ -1265,7 +1264,7 @@ var Blog = (function (blog) {
                 // on écrit les infos dans la side bar//
                 $(this).find('#navgal, #visuel').empty();
 
-                $(this).find('.maincontent').css({"overflow-y": "hidden", "height": "100%"});
+                $(this).find('.maincontent').css({"overflow": "hidden", "height": "100%"});
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
@@ -1341,6 +1340,7 @@ var Blog = (function (blog) {
             this.template = _.template($("#workslistmain_template").html());
             _.bindAll(this, 'render');
 
+
         },
         render : function () {
             var renderedContent = this.template();
@@ -1348,6 +1348,7 @@ var Blog = (function (blog) {
             this.$el.html(renderedContent);
             this.renderWorksList();
             return this;
+
         },
 
         // fonction pour rendre la vue workslist & worklisttools
@@ -1372,7 +1373,7 @@ var Blog = (function (blog) {
                   renderNested(parentview, myworkslistview, ".maincontent_index", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
                   renderNested(parentview, myworkslisttoolsview, "#tools");
-                  Blog.myapprouter.myheight();
+                 // Blog.myapprouter.myheight();
                 }
                 
               });
@@ -1415,7 +1416,7 @@ var Blog = (function (blog) {
             $(e.currentTarget).addClass("actif");
             Blog.myworkslistview.template = Blog.myworkslistview.templatethumb;
             Blog.myworkslist.displaymode = 'thumbs';
-            Blog.myworkslistview.render();
+            //Blog.myworkslistview.render();
             // on classe par date en vue thumb //
             Blog.myworkslist.sortByDate();
             // le bouton date est actif //
@@ -1423,6 +1424,7 @@ var Blog = (function (blog) {
             this.$el.find("#sortbydate").addClass("actif");
             // on cache #sorting en mode thumb //
             this.$el.find("#sorting").css('display', 'none');
+
         },
 
         // fonction pour donner une hauteur à #mainbb //
@@ -1459,7 +1461,7 @@ var Blog = (function (blog) {
             i = 1;
             this.$el.append(renderedContent);
             // on fait apparaitre le bouton unfold //
-            this.$el.find('#unfoldworks').css('display', 'block');
+            //this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             var myworksminielt = this.$el.find('#workslistmini');
             myworksminielt.imagesLoaded(function() {
@@ -1483,7 +1485,7 @@ var Blog = (function (blog) {
                 });
             }
             
-            myworksminielt.mCustomScrollbar("update");
+            //myworksminielt.mCustomScrollbar("update");
             //that.$el.find("#unfoldworks a").click();
                         
             });
@@ -1571,52 +1573,56 @@ var Blog = (function (blog) {
             // on s'abonne aux tris de la collection avec la fonction this.render()
              this.collection.bind("sort", this.render, this); // remember: every function that uses 'this' as the current object should be in here
              //this.collection.bind('sort', 'render');
-            // this.collection.bind('change', this.render);
+            // this.collection.bind('change', this.render, this);
             // this.collection.bind('add', this.render);
             // this.collection.bind('remove', this.render);
+           
+
         },
         render : function () {
             // on instancie la vue worklisttools //
             var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
             //this.hideInfos();
+
             // on fait apparaitre dans #mainbb la liste des works en fondu //
-            i = 1;
-            this.$el.removeAttr('style').html(renderedContent).find('.wrapthumb').each(function() {
-                $(this).delay(i * 80).animate({opacity: 1});
-                i++;
+            this.$el.removeAttr('style').html(renderedContent);
+
+            var parentcontainer = this.$el;
+
+            var mycontainer = this.$el.find('#wraplist');
+
+            this.$el.imagesLoaded()
+            .done( function( instance, image ) {
+                /* */
+                mycontainer.masonry({
+                    itemSelector : '.wrapthumb',
+                    isAnimated: true,
+                    columnWidth: ".wrapthumb",
+                    animationOptions: {
+                        duration: 'fast',
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
+                parentcontainer.mCustomScrollbar({
+                        set_height: "100%",
+                        scrollInertia: 150,
+                        autoDraggerLength:false,
+                        theme: "dark"
+                });
+
+                Blog.myapprouter.myheight();
+                
+            })
+            .fail( function() {
+                console.log('all images loaded, at least one is broken');
+            })
+            .progress( function( instance, image ) {
+                //console.log(image);
+                $(image).animate({opacity: 1});
             });
-            
-            wrapper = this.$el;
-            if(!wrapper.hasClass("mCustomScrollbar")) {
-                wrapper.mCustomScrollbar({
-                    set_height: "100%",
-                    scrollInertia: 150,
-                    theme: "dark"
-                });
-            } else {
-                wrapper.mCustomScrollbar("destroy");
-                wrapper.mCustomScrollbar({
-                    set_height: "100%",
-                    scrollInertia: 150,
-                    theme: "dark"
-                });
-            }
-            Blog.myapprouter.myheight();
-            wrapper.mCustomScrollbar("update");
-            //Blog.myapprouter.myheight();
-
+            //-----------------------------------///            
             return this;
-        },
-
-        showInfos : function(e) {
-            myid = $(e.currentTarget).attr('data-id');
-            this.$el.parent().find('#sidebar h3').html(e.currentTarget.title);
-            this.$el.parent().find('#sidebar h4').html(this.collection.get(myid).get('custom_fields')['_pinfos_annee'][0]);
-            this.$el.parent().find('#sidebar #description').html(this.collection.get(myid).get('custom_fields')['_pinfos_description'][0]);
-        },
-
-        hideInfos : function(e) {
-            this.$el.parent().find('#sidebar').children().empty();
         }
      
     });
@@ -1695,7 +1701,7 @@ var Blog = (function (blog){
                        $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
                    }
                    $(document).find("#ctn-media").css('width', mypic.width());
-                   //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
+                   $(document).find(".mCustomScrollbar").mCustomScrollbar("update");
                  } else {
                     $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
                     $(document).find("#ctn-media, #visuel img").removeClass("horizontale");

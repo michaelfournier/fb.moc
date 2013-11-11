@@ -7,6 +7,7 @@ var Blog = (function (blog) {
             this.template = _.template($("#workslistmain_template").html());
             _.bindAll(this, 'render');
 
+
         },
         render : function () {
             var renderedContent = this.template();
@@ -14,6 +15,7 @@ var Blog = (function (blog) {
             this.$el.html(renderedContent);
             this.renderWorksList();
             return this;
+
         },
 
         // fonction pour rendre la vue workslist & worklisttools
@@ -38,7 +40,7 @@ var Blog = (function (blog) {
                   renderNested(parentview, myworkslistview, ".maincontent_index", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
                   renderNested(parentview, myworkslisttoolsview, "#tools");
-                  Blog.myapprouter.myheight();
+                 // Blog.myapprouter.myheight();
                 }
                 
               });
@@ -81,7 +83,7 @@ var Blog = (function (blog) {
             $(e.currentTarget).addClass("actif");
             Blog.myworkslistview.template = Blog.myworkslistview.templatethumb;
             Blog.myworkslist.displaymode = 'thumbs';
-            Blog.myworkslistview.render();
+            //Blog.myworkslistview.render();
             // on classe par date en vue thumb //
             Blog.myworkslist.sortByDate();
             // le bouton date est actif //
@@ -89,6 +91,7 @@ var Blog = (function (blog) {
             this.$el.find("#sortbydate").addClass("actif");
             // on cache #sorting en mode thumb //
             this.$el.find("#sorting").css('display', 'none');
+
         },
 
         // fonction pour donner une hauteur à #mainbb //
