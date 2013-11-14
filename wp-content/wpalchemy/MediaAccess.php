@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @author   	Dimas Begunoff
  * @copyright	Copyright (c) 2011, Dimas Begunoff, http://farinspace.com/
@@ -31,8 +32,7 @@
 	 * @var		string required
 	 */
 	public $field_class_name = 'mediafield';
-
-/**
+	/**
 	 * User defined identifier for the css class name of the HTML hidden field element,
 	 * used when pairing the field and button elements
 	 *
@@ -160,7 +160,7 @@
 	public function getField(array $attr)
 	{
 		$groupname = isset($attr['groupname']) ? $attr['groupname'] : $this->groupname ;
-
+		
 		$attr_default = array
 		(
 			'type' => 'text',
@@ -188,7 +188,7 @@
 		###
 
 		return '<input ' . implode(' ', $elem_attr) . '/>';
-		}
+	}
 	/**
 		 * Used to insert a form field of type "hidden", this should be paired with a
 		 * button element. The name and value attributes are required.
@@ -231,6 +231,7 @@
 
 			return '<input ' . implode(' ', $elem_attr) . '/>';
 		}
+
 	/**
 	 * Used to get the link used for the button element. If creating custom
 	 * buttons, this method should be used to get the link needed for proper
@@ -250,7 +251,7 @@
 		$tab = ! empty($tab) ? $tab : $this->tab ;
 
 		$tab = ! empty($tab) ? $tab : 'library' ;
-
+		
 		return 'media-upload.php?post_id=' . $post_ID . '&tab=' . $tab . '&TB_iframe=1';
 	}
 
@@ -268,7 +269,7 @@
 	public function getButtonClass($groupname = null)
 	{
 		$groupname = isset($groupname) ? $groupname : $this->groupname ;
-
+		
 		return $this->button_class_name . '-' . $groupname . ' thickbox';
 	}
 
@@ -279,7 +280,7 @@
 	 *
 	 * @since	0.2
 	 * @access	public
-	 * @param	string $groupname name used when pairing a field and button
+	 * @param	string $groupname name used when pairing a text field and button
 	 * @return	string css class(es)
 	 * @see		getButtonClass(), getField()
 	 */
@@ -306,6 +307,7 @@
 
 		return $this->id_field_class_name . '-' . $groupname;
 	}
+
 	/**
 	 * Used to insert a WordPress styled button, should be paired with a text
 	 * field element.
@@ -320,7 +322,7 @@
 		$groupname = isset($attr['groupname']) ? $attr['groupname'] : $this->groupname ;
 
 		$tab = isset($attr['tab']) ? $attr['tab'] : $this->tab ;
-
+		
 		$attr_default = array
 		(
 			'label' => 'Add Media',
@@ -396,7 +398,6 @@
 						send_to_editor = function(html)
 						{
 							clearInterval(interval);
-
 							if (wpalchemy_mediafield)
 							{
 								var src = html.match(/src=['|"](.*?)['|"] alt=/i);
@@ -404,15 +405,22 @@
 
 								var href = html.match(/href=['|"](.*?)['|"]/i);
 								href = (href && href[1]) ? href[1] : '' ;
-
 								var url = src ? src : href ;
+								/* hack mic */
+								var mediaID = html.match(/((wp-att-)|.(attachment_id=)|(wp-image-))[0-9]*/i);
 
-								var mediaID = html.match(/wp-image-(.*)"/i);
-								mediaID = (mediaID && mediaID[1]) ? mediaID[1] : '' ;
+								console.log(html, mediaID);							
+								//mediaID = (mediaID && mediaID[1]) ? mediaID[0] : '' ;
+								mediaID = mediaID[0].split('-');
+								mediaID = mediaID[2];
+								
+
 								wpalchemy_mediafield.val(url);
+
 								wpalchemy_mediaidfield.val(mediaID);
 								
 								send_myid(mediaID, wpalchemy_mediafield_selector);
+								/* end of hack mic */
 
 								// reset insert button label
 								setInsertButtonLabel(wpalchemy_insert_button_label);
@@ -427,8 +435,6 @@
 							tb_remove();
 						}
 
-
-
 						function getInsertButtonLabel()
 						{
 							return $('#TB_iframeContent').contents().find('.media-item .savesend input[type=submit], #insertonlybutton').val();
@@ -437,9 +443,10 @@
 						function setInsertButtonLabel(label)
 						{
 							$('#TB_iframeContent').contents().find('.media-item .savesend input[type=submit], #insertonlybutton').val(label);
-						}
-
-						$('[class*=<?php echo $this->button_class_name; ?>]').live('click', function()
+						}				
+						//$('[class*="<?php echo $this->button_class_name; ?>"]').on('click', function()
+						//https://github.com/maniaks/wpalchemy/commit/9e55cd9c3071b57b83ff1e8bc86564478d2eb873
+						$('body').on('click', '[class*=<?php echo $this->button_class_name; ?>]', function()
 						{
 							var name = $(this).attr('class').match(/<?php echo $this->button_class_name; ?>-([a-zA-Z0-9_-]*)/i);
 							name = (name && name[1]) ? name[1] : '' ;
@@ -447,9 +454,11 @@
 							var data = $(this).attr('class').match(/({.*})/i);
 							data = (data && data[1]) ? data[1] : '' ;
 							data = eval("(" + (data.indexOf('{') < 0 ? '{' + data + '}' : data) + ")");
+							/* hack mic */
 							wpalchemy_mediafield_selector = '.<?php echo $this->id_field_class_name; ?>-' + name;
 							wpalchemy_mediafield = $('.<?php echo $this->field_class_name; ?>-' + name, $(this).closest('.postbox'));
 							wpalchemy_mediaidfield = $('.<?php echo $this->id_field_class_name; ?>-' + name, $(this).closest('.postbox'));
+							/* end of hack */
 
 							function iframeSetup()
 							{
