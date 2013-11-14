@@ -15,7 +15,7 @@ var Blog = (function (blog){
                 Blog.mybiolist = new blog.Collections.BioList();
                 Blog.mybio = new blog.Models.Bio();
 
-                Blog.mynews = new blog.Models.News();
+                Blog.mynews = new blog.Collections.NewsList();
                 Blog.mynotice = new blog.Models.Notice();
 
                 Blog.currentView = new Backbone.View();
@@ -123,7 +123,7 @@ var Blog = (function (blog){
 
               $("#mainbb").empty();
 
-              Blog.mynews.fetch({
+              Blog.mynews.all().fetch({
                 //update: true,
                 success: function(results) {
                   Blog.newsview.render(results);

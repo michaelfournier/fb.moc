@@ -53,11 +53,11 @@ var Blog = (function (blog) {
                 //http://www.experts-exchange.com/Programming/Languages/Scripting/JavaScript/A_3586-Sorting-Arrays-and-Collections-in-JavaScript.html
                 this.comparator = function(v1,v2) {
                     var t=v1; v1=v2; v2=t;
-                    if ( v1.get('custom_fields')['_pinfos_annee'] < v2.get('custom_fields')['_pinfos_annee'] ) return -1; 
-                    if ( v1.get('custom_fields')['_pinfos_annee'] > v2.get('custom_fields')['_pinfos_annee'] ) return 1; 
+                    if ( v1.get('custom_fields')['_pinfos_annee'] < v2.get('custom_fields')['_pinfos_annee'] ) return -1;
+                    if ( v1.get('custom_fields')['_pinfos_annee'] > v2.get('custom_fields')['_pinfos_annee'] ) return 1;
                     // else, they are equal
-                       if ( v1.get('slug') < v2.get('slug') ) return 1; 
-                       if ( v1.get('slug') > v2.get('slug') ) return -1;                    
+                       if ( v1.get('slug') < v2.get('slug') ) return 1;
+                       if ( v1.get('slug') > v2.get('slug') ) return -1;
                    return 0;
                 };
                 this.sortkey = 'annees';

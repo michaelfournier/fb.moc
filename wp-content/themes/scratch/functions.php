@@ -88,6 +88,7 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
 //if (is_admin()) {
   include_once 'metaboxes/setup.php';
   include_once 'metaboxes/simple-image-spec.php';
+  include_once 'metaboxes/simple-image-02-spec.php';
   include_once 'metaboxes/repeating-mediagallery-spec.php';
   include_once 'metaboxes/repeating-videogallery-spec.php';
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
@@ -162,6 +163,17 @@ function my_encode_meta($response) {
     }
   }
 
+  // news //
+  if(isset($response['posts'])) {
+    if($mytype == 'news') {
+      foreach ($response['posts'] as $post) {
+        add_gallery($post);
+        add_postOrder($post);
+        add_mytaxonomies($post, 'newstype');
+
+      }
+    }
+  };
   return $response;
 }
 
@@ -183,7 +195,7 @@ function add_gallery($post) {
   }
   ///
 
-  if(isset($gallerypics)) {
+  if(isset($gallerypics) && !empty($gallerypics)) {
     foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
       $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');      
@@ -205,9 +217,11 @@ function add_gallery($post) {
 
 if(!empty($customthumb)) {
     $customthumburl = wp_get_attachment_image_src($customthumb, 'full');
+    $customthumbmedium = $themepath.'/timthumb.php?src='.$customthumburl[0].'&w=220&h=140q=100'; 
     $customthumbmini = $themepath.'/timthumb.php?src='.$customthumburl[0].'&w=120&h=77q=100'; 
     $post->customthumb[] = $customthumburl[0];
     $post->customthumbmini[] = $customthumbmini;
+    $post->customthumbmedium[] = $customthumbmedium;
 }
 
 if(!empty($gallerypics)) {
@@ -217,11 +231,19 @@ if(!empty($gallerypics)) {
     $post->thumbnormal[] = $imagethumb;
     $post->thumbmini[] = $imagethumbmini;
 }
-  
-
   return;
 }
 
+function add_mytaxonomies($post, $tax) {
+  $tax = wp_get_post_terms( $post->id, $tax);
+  $post->tax = $tax;
+  return;
+}
+
+function add_postOrder($post) {
+  $repost = get_post($post->id);
+  $post->menu_order = $repost->menu_order;
+}
 
 function add_myauthors($post) {
   $mylang = qtrans_getLanguage();

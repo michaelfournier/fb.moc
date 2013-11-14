@@ -42,7 +42,7 @@ html, body {
 
 body {
 	background-color: white;
-	font-family: 'istok', Arial, Helvetica, sans-serif;
+	font-family: 'karla', Arial, Helvetica, sans-serif;
 	font-size:(12/@font-size)*1em;
 	line-height: @line/12;
 	color: @black90;
@@ -213,8 +213,7 @@ figcaption {
 	clear: both;
 	float: left;
 	border-top: 0px;
-	height: 35px;
-	padding: @unit 0 0 0;
+	padding: @unit/2 0 0 0;
 }
 
 #wraplist-list a h5 {
@@ -249,7 +248,7 @@ figcaption {
 	position: relative;
 	float: left;
 	.box-sizing();
-	padding : 0 @unit/2 @unit*1.5 0;
+	padding : 0 @unit/1.5 @unit*1.5 0;
 	margin: 0;
 	/*margin-left: -@unit;
 	margin-right: @unit;*/
@@ -478,26 +477,56 @@ nav#sorting li:first-child a {
 
 #txtwrapper h3 {
 	font-weight: bold;
-	padding-top: @unit;
 	text-transform: uppercase;
-	margin-top: @unit;
+	padding: @unit 0 @unit/1.5 0;
+	border-bottom: 1px dotted @black30;
+	margin: 0;
+	letter-spacing: 2px;
 }
 
-#txtwrapper h3:first-child {
-	border: 0;
-	padding: 0;
+.news #txtwrapper h3{
+	padding-top: 0;
 	margin: 0;
 }
 
-.news #txtwrapper h3 {
-	border-top: 1px dotted @black30;
-}
+.infosnews p:last-child { margin: 0;}
+
 
 .news #txtwrapper h4 {
-	font-weight: normal;
+	margin: 0;
 }
 
+.news .sub {
+	float: left;
+}
 
+.news figure {
+	float: right;
+	width: 30%;
+	.box-sizing();
+}
+
+.news figure img {
+	max-width: 100%;
+}
+
+.sub .infosnews {
+	float: right;
+	padding: @unit/1.5 0;
+	.box-sizing();
+	width: 96%;
+	border-bottom: 1px dotted @black30;
+}
+
+.sub .infosnews:last-child {
+	border: 0;
+}
+
+.news .infosnews div {
+	float: left;
+	width: 70%;
+	.box-sizing();
+}
 
 /* GALLERIE MEDIA */
 

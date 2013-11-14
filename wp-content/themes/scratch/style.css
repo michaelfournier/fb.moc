@@ -829,6 +829,34 @@ textarea {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'karla';
+  src: url('webfonts/karla-bolditalic-webfont.eot');
+  src: url('webfonts/karla-bolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('webfonts/karla-bolditalic-webfont.woff') format('woff'), url('webfonts/karla-bolditalic-webfont.ttf') format('truetype'), url('webfonts/karla-bolditalic-webfont.svg#karlabolditalic') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'karla';
+  src: url('webfonts/karla-regular-webfont.eot');
+  src: url('webfonts/karla-regular-webfont.eot?#iefix') format('embedded-opentype'), url('webfonts/karla-regular-webfont.woff') format('woff'), url('webfonts/karla-regular-webfont.ttf') format('truetype'), url('webfonts/karla-regular-webfont.svg#karlaregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'karla';
+  src: url('webfonts/karla-italic-webfont.eot');
+  src: url('webfonts/karla-italic-webfont.eot?#iefix') format('embedded-opentype'), url('webfonts/karla-italic-webfont.woff') format('woff'), url('webfonts/karla-italic-webfont.ttf') format('truetype'), url('webfonts/karla-italic-webfont.svg#karlaitalic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'karla';
+  src: url('webfonts/karla-bold-webfont.eot');
+  src: url('webfonts/karla-bold-webfont.eot?#iefix') format('embedded-opentype'), url('webfonts/karla-bold-webfont.woff') format('woff'), url('webfonts/karla-bold-webfont.ttf') format('truetype'), url('webfonts/karla-bold-webfont.svg#karlabold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
 /* ===== Primary Styles ========================================================
 Author: vacuumRandom
 ========================================================================== *//*------------------*/
@@ -853,7 +881,7 @@ body {
 /* GENERIC */
 body {
   background-color: white;
-  font-family: 'istok', Arial, Helvetica, sans-serif;
+  font-family: 'karla', Arial, Helvetica, sans-serif;
   font-size: 0.8571428571428571em;
   line-height: 1.3333333333333333;
   color: #1a1a1a;
@@ -1004,8 +1032,7 @@ a.actif,
   clear: both;
   float: left;
   border-top: 0px;
-  height: 35px;
-  padding: 1.1428571428571428em 0 0 0;
+  padding: 0.5714285714285714em 0 0 0;
 }
 #wraplist-list a h5 {
   display: inline;
@@ -1038,7 +1065,7 @@ a.actif,
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 0 0.5714285714285714em 1.7142857142857142em 0;
+  padding: 0 0.7619047619047619em 1.7142857142857142em 0;
   margin: 0;
   /*margin-left: -@unit;
 	margin-right: @unit;*/
@@ -1255,20 +1282,59 @@ nav#sorting li:first-child a {
 }
 #txtwrapper h3 {
   font-weight: bold;
-  padding-top: 1.1428571428571428em;
   text-transform: uppercase;
-  margin-top: 1.1428571428571428em;
-}
-#txtwrapper h3:first-child {
-  border: 0;
-  padding: 0;
+  padding: 1.1428571428571428em 0 0.7619047619047619em 0;
+  border-bottom: 1px dotted #b3b3b3;
   margin: 0;
+  letter-spacing: 2px;
 }
 .news #txtwrapper h3 {
-  border-top: 1px dotted #b3b3b3;
+  padding-top: 0;
+  margin: 0;
+}
+.infosnews p:last-child {
+  margin: 0;
 }
 .news #txtwrapper h4 {
-  font-weight: normal;
+  margin: 0;
+}
+.news .sub {
+  float: left;
+}
+.news figure {
+  float: right;
+  width: 30%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.news figure img {
+  max-width: 100%;
+}
+.sub .infosnews {
+  float: right;
+  padding: 0.7619047619047619em 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 96%;
+  border-bottom: 1px dotted #b3b3b3;
+}
+.sub .infosnews:last-child {
+  border: 0;
+}
+.news .infosnews div {
+  float: left;
+  width: 70%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 /* GALLERIE MEDIA */
 #visuel {
@@ -2330,6 +2396,7 @@ SMARTPHONES
     width: 100%;
     padding-left: 0;
     min-height: 1.1428571428571428em;
+    height: 100%;
     padding: 0;
     margin: 0 auto;
     background-color: white;
@@ -2350,7 +2417,7 @@ SMARTPHONES
     overflow-y: auto;
   }
   .news #txtwrapper {
-    max-width: 650px;
+    max-width: 600px;
     padding: 0;
     margin: 0;
     float: left;
@@ -2375,10 +2442,6 @@ SMARTPHONES
   .news #txtwrapper {
     height: auto;
     padding-top: 1.1428571428571428em;
-  }
-  #txtwrapper *:first-child {
-    margin-top: 0;
-    padding-top: 0;
   }
   .txt #txtwrapper p {
     font-size: 1.0714285714285714em;

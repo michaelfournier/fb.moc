@@ -24,7 +24,7 @@
 				<? echo $wp_media_access->getIdField(array('name'=> $mb->get_the_name(), 'value'=> $mb->get_the_value())); ?>
 			</div>
 			<!-- bouton ajouter image -->	
-				<? echo $wp_media_access->getButton(array('text'=> 'Choisir une image')); ?>
+				<? echo $wp_media_access->getButton(array('label'=> 'Choisir une image')); ?>
 				<a class="button" href="" onclick="jQuery('#file_name, #pic').empty(); jQuery('.mediaid-nn').val(''); return false;">supprimer le fichier</a>
 			<!-- nom de l'image -->
 			<p>
@@ -39,4 +39,3 @@
 	</div>
  
 </div>
-

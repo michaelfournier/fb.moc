@@ -392,7 +392,45 @@
 	<script type="text/template" id="news_template">
 		<div id="wrapper">		
 			<section style="background:none" class="maincontent news">
-				<div id="txtwrapper"><%= mynews.get('content') %>
+				<div id="txtwrapper">
+				<%  var tab = []; tab[-1] = 0; %>
+					<% _.each(mynews, function (news, i) { %>
+						<% tab[i] = news.get('tax')[0]['name']; %>
+						<% if ( String(tab[i-1]) !== String(tab[i])) { %>
+							<% if (i > 0) { %></section><% } %>
+							<section class="sub">
+								<h3><%= news.get('tax')[0]['name'] %></h3>
+								<div class="infosnews">
+									<% if (_.isEmpty(news.get('customthumbmedium')) === false) { %> 
+										<div style='width:70%'>
+											<h4><%= news.get('title') %></h4>						
+											<%= news.get('content') %>
+										</div>
+										<figure style='width:30%'><img src='<%= news.get('customthumbmedium') %>' /></figure>
+									<% } else { %>
+										<div style="width: 100%">
+											<h4><%= news.get('title') %></h4>						
+											<%= news.get('content') %>
+										</div>	
+									<% } %>	
+								</div>
+							<% } else { %>
+								<div class="infosnews">
+									<% if (_.isEmpty(news.get('customthumbmedium')) === false) { %> 
+										<div style='width:70%'>
+											<h4><%= news.get('title') %></h4>						
+											<%= news.get('content') %>
+										</div>
+										<figure style='width:30%'><img src='<%= news.get('customthumbmedium') %>' /></figure>
+									<% } else { %>
+										<div style="width: 100%">
+											<h4><%= news.get('title') %></h4>						
+											<%= news.get('content') %>
+										</div>	
+									<% } %>									
+								</div>
+							<% } %>
+						<% }); %>
 				</div>
 			</section>
 		</div>
