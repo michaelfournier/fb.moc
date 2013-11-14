@@ -2279,8 +2279,7 @@ SMARTPHONES
   }
   .jTscroller a {
     display: block;
-    /*width: @tranche;*/
-  
+    width: 260px;
     white-space: nowrap;
     padding: 0.2857142857142857em 0 0 0;
   }
@@ -2458,6 +2457,7 @@ SMARTPHONES
   /* SIDEBAR */
   #sidebar {
     width: 28.57142857142857%;
+    min-width: 260px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;

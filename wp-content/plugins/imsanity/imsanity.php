@@ -4,11 +4,11 @@ Plugin Name: Imsanity
 Plugin URI: http://verysimple.com/products/imsanity/
 Description: Imsanity stops insanely huge image uploads
 Author: Jason Hinkle
-Version: 2.1.7
+Version: 2.2.3
 Author URI: http://verysimple.com/
 */
 
-define('IMSANITY_VERSION','2.1.7');
+define('IMSANITY_VERSION','2.2.3');
 define('IMSANITY_SCHEMA_VERSION','1.1');
 
 define('IMSANITY_DEFAULT_MAX_WIDTH',1024);
@@ -109,7 +109,8 @@ function imsanity_handle_upload($params)
 
 			list($newW, $newH) = wp_constrain_dimensions($oldW, $oldH, $maxW, $maxH);
 
-			$resizeResult = image_resize( $oldPath, $newW, $newH, false, null, null, $quality);
+			// this is wordpress prior to 3.5 (image_resize deprecated as of 3.5)
+			$resizeResult = imsanity_image_resize( $oldPath, $newW, $newH, false, null, null, $quality);
 
 			/* uncomment to debug error handling code: */
 			// $resizeResult = new WP_Error('invalid_image', __(print_r($_REQUEST)), $oldPath);

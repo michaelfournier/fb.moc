@@ -59,7 +59,7 @@ var Blog = (function (blog) {
             })
             .progress( function( instance, image ) {
                 //console.log(image);
-                $(image).animate({opacity: 1});
+                $(image.img).animate({opacity: 1});
             });
             //-----------------------------------///            
             return this;

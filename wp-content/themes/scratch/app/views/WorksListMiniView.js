@@ -21,30 +21,29 @@ var Blog = (function (blog) {
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             var myworksminielt = this.$el.find('#workslistmini');
             myworksminielt.imagesLoaded(function() {
-                   // fonction auto scroll vignettes // 
-                    myworksminielt.imagesLoaded(function(){
-                        $(this).thumbnailScroller({
-                                scrollerType:'hoverPrecise',
-                                        scrollerOrientation:'vertical',
-                                        acceleration:4,
-                                        scrollSpeed: 800,
-                                        noScrollCenterSpace:1
-                            });
-                    });
-
-            if(!myworksminielt.hasClass("mCustomScrollbar")) {
-                myworksminielt.mCustomScrollbar({
-                    set_height: "100%",
-                    scrollInertia: 150,
-                    autoDraggerLength:false,
-                    theme: "dark"
+                // fonction auto scroll vignettes // 
+                myworksminielt.thumbnailScroller({
+                        scrollerType:'hoverPrecise',
+                                scrollerOrientation:'vertical',
+                                acceleration:4,
+                                scrollSpeed: 800,
+                                noScrollCenterSpace:1
                 });
-            }
-            
+
+
             //myworksminielt.mCustomScrollbar("update");
             //that.$el.find("#unfoldworks a").click();
                         
             });
+
+                    if(!myworksminielt.hasClass("mCustomScrollbar")) {
+                    myworksminielt.mCustomScrollbar({
+                        set_height: "100%",
+                        scrollInertia: 150,
+                        autoDraggerLength:false,
+                        theme: "dark"
+                    });
+                }
             
             return this;
         },

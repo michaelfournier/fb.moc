@@ -4,9 +4,12 @@ Plugin Name: Peter's Login Redirect
 Plugin URI: http://www.theblog.ca/wplogin-redirect
 Description: Redirect users to different locations after logging in. Define a set of rules for specific users, user with specific roles, users with specific capabilities, and a blanket rule for all other users. This is all managed in Settings > Login/logout redirects.
 Author: Peter Keung
-Version: 2.6.1
+Version: 2.7.2
 Change Log:
-2012-12-22: 2.6.1: Allow editors to manage redirects in WordPress 3.5+ (required capability is now "manage_categories" instead of "manage_links").
+2013-10-07  2.7.2: Support PHP 5 static function calls, bumping WordPress requirement to 3.2+.
+2013-07-05  2.7.1: Bug fix: Role-based login URLs weren't saving correctly.
+2013-07-04  2.7.0: Add logout redirect URL control per-user, per-role, and per-level
+2012-12-22  2.6.1: Allow editors to manage redirects in WordPress 3.5+ (required capability is now "manage_categories" instead of "manage_links").
 2012-09-22  2.6.0: Added support for URL variable "http_referer" (note the single "r") to redirect the user back to the page that hosted the login form, as long as the login page isn't the standard wp-login.php. There are several caveats to this, such as: If you want to redirect only on certain forms and/or specify a redirect on the standard wp-login.php page, you should modify the form itself to use a "redirect_to" form variable instead.
 2012-06-15  2.5.3: Bug fix: Fallback redirect rule wouldn't update properly if logout URL was blank on MySQL installs with strict mode enabled (thanks kvandekrol!)
 2012-02-06  2.5.2: Bug fix: Fallback redirect rule updates were broken for non-English installs.
@@ -65,7 +68,7 @@ class rulRedirectFunctionCollection
         Defaults are defined here, but the settings values should be edited in the WordPress admin panel.
         If no setting is asked for, then it returns an array of all settings; otherwise it returns a specific setting
     */
-    function get_settings( $setting=false )
+    static function get_settings( $setting=false )
     {
         $rul_settings = array();
 
@@ -114,11 +117,11 @@ class rulRedirectFunctionCollection
             return false;
         }
     }
-    function get_settings_from_options_table()
+    static function get_settings_from_options_table()
     {
         return get_option( 'rul_settings', array() );
     }
-    function set_setting( $setting = false, $value = false )
+    static function set_setting( $setting = false, $value = false )
     {
         if( $setting )
         {
@@ -135,7 +138,7 @@ class rulRedirectFunctionCollection
         This extra function is necessary to support the use case where someone was previously logged in
         Thanks to http://wordpress.org/support/topic/97314 for this function
     */
-    function redirect_current_user_can($capability, $current_user)
+    static function redirect_current_user_can($capability, $current_user)
     {
         global $wpdb;
 
@@ -155,7 +158,7 @@ class rulRedirectFunctionCollection
     /*
         A generic function to return the value mapped to a particular variable
     */
-    function rul_get_variable( $variable, $user )
+    static function rul_get_variable( $variable, $user )
     {
         $variable_value = apply_filters( 'rul_replace_variable', false, $variable, $user );
         if( !$variable_value )
@@ -211,7 +214,7 @@ class rulRedirectFunctionCollection
     /*
         Replaces the syntax [variable]variable_name[/variable] with whatever has been mapped to the variable_name in the rul_get_variable function
     */
-    function rul_replace_variable( $string, $user )
+    static function rul_replace_variable( $string, $user )
     {
         preg_match_all( "/\[variable\](.*?)\[\/variable\]/is", $string, $out );
 
@@ -226,7 +229,7 @@ class rulRedirectFunctionCollection
     /*
         Allow users to be redirected to external URLs as specified by redirect rules
     */
-    function rul_trigger_allowed_host( $url )
+    static function rul_trigger_allowed_host( $url )
     {
         global $rul_allowed_hosts;
         $url_parsed = parse_url( $url );
@@ -236,7 +239,7 @@ class rulRedirectFunctionCollection
             add_filter( 'allowed_redirect_hosts', array( 'rulRedirectFunctionCollection', 'rul_add_allowed_host' ), 10, 1 );
         }
     }
-    function rul_add_allowed_host( $hosts )
+    static function rul_add_allowed_host( $hosts )
     {
         global $rul_allowed_hosts;
         return array_merge( $hosts, $rul_allowed_hosts );
@@ -246,7 +249,7 @@ class rulRedirectFunctionCollection
 // Functions specific to logout redirecting
 class rulLogoutFunctionCollection
 {
-    function logout_redirect()
+    static function logout_redirect()
     {   
         $rul_local_only = rulRedirectFunctionCollection::get_settings( 'rul_local_only' );
         $rul_allow_post_redirect_override_logout = rulRedirectFunctionCollection::get_settings( 'rul_allow_post_redirect_override_logout' );
@@ -282,7 +285,7 @@ class rulLogoutFunctionCollection
     // Get the logout redirect URL according to defined rules
     // Functionality for user-, role-, and capability-specific redirect rules is available
     // Note that only the "all other users" redirect URL is currently implemented in the UI
-    function get_redirect_url( $user, $requested_redirect_to )
+    static function get_redirect_url( $user, $requested_redirect_to )
     {
         global $wpdb, $rul_db_addresses;
         
@@ -381,7 +384,7 @@ class rulLogoutFunctionCollection
 // Functions for redirecting post-registration
 class rulRedirectPostRegistration
 {
-    function post_registration_wrapper( $requested_redirect_to )
+    static function post_registration_wrapper( $requested_redirect_to )
     {
         /*
             Some limitations:
@@ -399,7 +402,7 @@ class rulRedirectPostRegistration
     }
     
     // Looks up the redirect URL, if any
-    function get_redirect_url( $requested_redirect_to )
+    static function get_redirect_url( $requested_redirect_to )
     {
         global $wpdb, $rul_db_addresses;
         
@@ -670,7 +673,8 @@ if (is_admin()) {
     }
     
     // Processes the rule updates per user
-    function rul_submit_username($usernames, $addresses) {
+    function rul_submit_username( $usernames, $addresses, $addresses_logout )
+    {
         global $wpdb, $rul_db_addresses;
 
         // Open the informational div
@@ -683,32 +687,36 @@ if (is_admin()) {
         // Process the rule changes
         // ----------------------------------
 
-        if($usernames && $addresses) {
+        if( $usernames && ( $addresses || $addresses_logout ) )
+        {
             $rul_submit_success = true;
             $rul_usernames_updated = array();
             $rul_username_keys = array_keys($usernames);
             $rul_username_loop = 0;
             
             // Loop through all submitted usernames
-            foreach( $usernames as $username ) {
+            foreach( $usernames as $username )
+            {
                 $i = $rul_username_keys[$rul_username_loop];
 
-                if ( username_exists($username) ) {
-
+                if ( username_exists( $username ) )
+                {
                     // Check to see whether it matches the "local URL" test
-                    $address = rul_safe_redirect($addresses[$i]);
-                
-                    if (!$address) {
+                    $address = rul_safe_redirect( $addresses[$i] );
+                    $address_logout = rul_safe_redirect( $addresses_logout[$i] );
+
+                    if( !$address && !$address_logout )
+                    {
                         $rul_submit_success = false;
                         $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-local or invalid URL submitted for user ','peterloginrd')  . $username .  '****</strong></p>';
                     }
-                    
-                    
-                    else {
+                    else
+                    {
                         // Update the existing entry or insert a new one
-                        $rul_update_username = $wpdb->query('REPLACE INTO ' . $rul_db_addresses . ' SET rul_url = \'' . $address . '\', rul_type = \'user\', rul_value = \'' . $username . '\'');
+                        $rul_update_username = $wpdb->query( "REPLACE INTO $rul_db_addresses SET rul_url = '$address', rul_url_logout = '$address_logout', rul_type = 'user', rul_value = '$username'" );
                         
-                        if (!$rul_update_username) {
+                        if( !$rul_update_username )
+                        {
                             $rul_submit_success = false;
                             $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown error updating user-specific URL for user ','peterloginrd') . $username . '****</strong></p>';
                         }
@@ -717,7 +725,8 @@ if (is_admin()) {
                     // Make a note that we've updated this username
                     $rul_usernames_updated[] = $username;
                 }
-                elseif ($username != -1) {
+                elseif ($username != -1)
+                {
                     $rul_submit_success = false;
                     $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-existent username submitted ','peterloginrd') .'****</strong></p>';
                 }
@@ -726,12 +735,13 @@ if (is_admin()) {
             }
             
             // Prepare the "not in" MySQL code
-            $rul_usernames_notin = "'" . implode( "','", $rul_usernames_updated ) . "'";            
+            $rul_usernames_notin = "'" . implode( "','", $rul_usernames_updated ) . "'";
             
             // Delete all username rules in the database that weren't updated (in other words, the user unchecked the box next to it)
             $wpdb->query('DELETE FROM ' . $rul_db_addresses . ' WHERE rul_type = \'user\' AND rul_value NOT IN (' . $rul_usernames_notin . ')');
             
-            if ($rul_submit_success) {
+            if( $rul_submit_success )
+            {
                 $rul_process_submit .= '<p>'.__('Successfully updated user-specific URLs','peterloginrd').'</p>';
             }
         }
@@ -744,7 +754,8 @@ if (is_admin()) {
     }
 
     // Processes the rule updates per role
-    function rul_submit_role($roles, $addresses) {
+    function rul_submit_role( $roles, $addresses, $addresses_logout )
+    {
         global $wpdb, $rul_db_addresses;
 
         // Open the informational div
@@ -757,33 +768,38 @@ if (is_admin()) {
         // Process the rule changes
         // ----------------------------------
 
-        if($roles && $addresses) {
+        if( $roles && ( $addresses || $addresses_logout ) )
+        {
             $rul_submit_success = true;
             $rul_roles_updated = array();
             $rul_role_keys = array_keys($roles);
             $rul_role_loop = 0;
             
             // Loop through all submitted roles
-            foreach( $roles as $role ) {
+            foreach( $roles as $role )
+            {
                 $i = $rul_role_keys[$rul_role_loop];
                 
                 // Get a list of roles in the system so that we can verify that a valid role was submitted
                 $rul_existing_rolenames = rul_returnrolenames();
-                if ( isset($rul_existing_rolenames[$role]) ) {
-
+                if( isset($rul_existing_rolenames[$role]) )
+                {
                     // Check to see whether it matches the "local URL" test
-                    $address = rul_safe_redirect($addresses[$i]);
-                
-                    if (!$address) {
+                    $address = rul_safe_redirect( $addresses[$i] );
+                    $address_logout = rul_safe_redirect( $addresses_logout[$i] );
+
+                    if( !$address && !$address_logout )
+                    {
                         $rul_submit_success = false;
                         $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-local or invalid URL submitted for role ','peterloginrd') . $role . '****</strong></p>';
                     }
-                    
-                    else {
+                    else
+                    {
                         // Update the existing entry or insert a new one
-                        $rul_update_role = $wpdb->query('REPLACE INTO ' . $rul_db_addresses . ' SET rul_url = \'' . $address . '\', rul_type = \'role\', rul_value = \'' . $role . '\'');
+                        $rul_update_role = $wpdb->query( "REPLACE INTO $rul_db_addresses SET rul_url = '$address', rul_url_logout = '$address_logout', rul_type = 'role', rul_value = '$role'" );
                         
-                        if (!$rul_update_role) {
+                        if( !$rul_update_role )
+                        {
                             $rul_submit_success = false;
                             $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown error updating role-specific URL for role ','peterloginrd') . $role . '****</strong></p>';
                         }
@@ -818,7 +834,8 @@ if (is_admin()) {
         return $rul_process_submit;
     }
     
-    function rul_submit_level($levels, $orders, $addresses) {
+    function rul_submit_level( $levels, $orders, $addresses, $addresses_logout )
+    {
         global $wpdb, $rul_db_addresses;
 
         // Open the informational div
@@ -831,14 +848,16 @@ if (is_admin()) {
         // Process the rule changes
         // ----------------------------------
 
-        if($levels && $addresses) {
+        if( $levels && ( $addresses || $addresses_logout ) )
+        {
             $rul_submit_success = true;
             $rul_levels_updated = array();
             $rul_level_keys = array_keys($levels);
             $rul_level_loop = 0;
             
             // Loop through all submitted levels
-            foreach( $levels as $level ) {
+            foreach( $levels as $level )
+            {
                 $i = $rul_level_keys[$rul_level_loop];
                 
                 // Build the array of existing level names
@@ -846,23 +865,26 @@ if (is_admin()) {
                 
                 // The order should only be between 0 and 99
                 $order = abs(intval($orders[$i]));
-                if ($order > 99) {
+                if( $order > 99 )
+                {
                     $order = 0;
                 }
 
-                if ( isset($rul_existing_levelnames[$level]) ) {
-
+                if( isset( $rul_existing_levelnames[$level] ) )
+                {
                     // Check to see whether it passes the "local URL" test
-                    $address = rul_safe_redirect($addresses[$i]);
-                
-                    if (!$address) {
+                    $address = rul_safe_redirect( $addresses[$i] );
+                    $address_logout = rul_safe_redirect( $addresses_logout[$i] );
+
+                    if( !$address && !$address_logout )
+                    {
                         $rul_submit_success = false;
                         $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-local or invalid URL submitted for level ','peterloginrd')  . $level . '****</strong></p>';
                     }
-                    
-                    else {
+                    else
+                    {
                         // Update the existing entry or insert a new one
-                        $rul_update_level = $wpdb->query('REPLACE INTO ' . $rul_db_addresses . ' SET rul_url = \'' . $address . '\', rul_type = \'level\', rul_value = \'' . $level . '\', rul_order = ' . $order);
+                        $rul_update_level = $wpdb->query( "REPLACE INTO $rul_db_addresses SET rul_url = '$address', rul_url_logout = '$address_logout', rul_type = 'level', rul_value = '$level', rul_order = $order" );
                         
                         if (!$rul_update_level) {
                             $rul_submit_success = false;
@@ -873,7 +895,8 @@ if (is_admin()) {
                     // Make a note that this level was updated
                     $rul_levels_updated[] = $level;
                 }
-                elseif ($level != -1) {
+                elseif( $level != -1 )
+                {
                     $rul_submit_success = false;
                     $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-existent level submitted ','peterloginrd') .'****</strong></p>';
                 }
@@ -1112,15 +1135,15 @@ if (is_admin()) {
         // Process submitted information to update redirect rules
         if( isset( $_POST['rul_usernamesubmit'] ) )
         {
-            $rul_process_submit = rul_submit_username( $_POST['rul_username'], $_POST['rul_usernameaddress'] );
+            $rul_process_submit = rul_submit_username( $_POST['rul_username'], $_POST['rul_usernameaddress'], $_POST['rul_username_logout'] );
         }
         elseif( isset( $_POST['rul_rolesubmit'] ) )
         {
-            $rul_process_submit = rul_submit_role( $_POST['rul_role'], $_POST['rul_roleaddress'] );
+            $rul_process_submit = rul_submit_role( $_POST['rul_role'], $_POST['rul_roleaddress'], $_POST['rul_role_logout'] );
         }
         elseif( isset( $_POST['rul_levelsubmit'] ) )
         {
-            $rul_process_submit = rul_submit_level( $_POST['rul_level'], $_POST['rul_levelorder'], $_POST['rul_leveladdress'] );
+            $rul_process_submit = rul_submit_level( $_POST['rul_level'], $_POST['rul_levelorder'], $_POST['rul_leveladdress'], $_POST['rul_level_logout'] );
         }
         elseif( isset( $_POST['rul_allupdatesubmit'] ) )
         {
@@ -1177,6 +1200,7 @@ if (is_admin()) {
                     $rul_usernamevalues .= '<tr>';
                     $rul_usernamevalues .= '<td><p><input type="checkbox" name="rul_username[' . $i_user . ']" value="' . $rul_value . '" checked="checked" /> ' . $rul_value . '</p></td>';
                     $rul_usernamevalues .= '<td><p><input type="text" size="90" maxlength="500" name="rul_usernameaddress[' . $i_user . ']" value="' . $rul_url . '" /></p></td>';
+                    $rul_usernamevalues .= '<td><p><input type="text" size="90" maxlength="500" name="rul_username_logout[' . $i_user . ']" value="' . $rul_url_logout . '" /></p></td>';
                     $rul_usernamevalues .= '</tr>';
                     
                     $rul_usernames_existing[] = $rul_value;
@@ -1190,6 +1214,7 @@ if (is_admin()) {
                     $rul_rolevalues .= '<tr>';
                     $rul_rolevalues .= '<td><p><input type="checkbox" name="rul_role[' . $i_role . ']" value="' . $rul_value . '" checked="checked" /> ' . $rul_value . '</p></td>';
                     $rul_rolevalues .= '<td><p><input type="text" size="90" maxlength="500" name="rul_roleaddress[' . $i_role . ']" value="' . $rul_url . '" /></p></td>';
+                    $rul_rolevalues .= '<td><p><input type="text" size="90" maxlength="500" name="rul_role_logout[' . $i_role . ']" value="' . $rul_url_logout . '" /></p></td>';
                     $rul_rolevalues .= '</tr>';
                     
                     $rul_roles_existing[$rul_value] = '';
@@ -1202,6 +1227,7 @@ if (is_admin()) {
                     $rul_levelvalues .= '<td><p><input type="checkbox" name="rul_level[' . $i_level . ']" value="' . $rul_value . '" checked="checked" /> ' . $rul_value . '</p></td>';
                     $rul_levelvalues .= '<td><p><input type="text" size="2" maxlength="2" name="rul_levelorder[' . $i_level . ']" value="' . $rul_order . '" /></p></td>';
                     $rul_levelvalues .= '<td><p><input type="text" size="90" maxlength="500" name="rul_leveladdress[' . $i_level . ']" value="' . $rul_url . '" /></p></td>';
+                    $rul_levelvalues .= '<td><p><input type="text" size="90" maxlength="500" name="rul_level_logout[' . $i_level . ']" value="' . $rul_url_logout . '" /></p></td>';
                     $rul_levelvalues .= '</tr>';
 
                     $rul_levels_existing[$rul_value] = '';
@@ -1235,6 +1261,7 @@ if (is_admin()) {
             <tr>
                 <th><?php _e('Username', 'peterloginrd' ); ?></th>
                 <th><?php _e('URL', 'peterloginrd' ); ?></th>
+                <th><?php _e('Logout URL', 'peterloginrd' ); ?></th>
             </tr>
             <?php print $rul_usernamevalues; ?>
             
@@ -1245,6 +1272,7 @@ if (is_admin()) {
                 <?php print rul_returnusernames($rul_usernames_existing); ?>
             </select>
             <br /><?php _e('URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_usernameaddress[<?php print $i_user; ?>]" />
+            <br /><?php _e('Logout URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_username_logout[<?php print $i_user; ?>]" />
         </p>
         <p class="submit"><input type="submit" name="rul_usernamesubmit" value="<?php _e('Update', 'peterloginrd' ); ?>" /></p>
         </form>
@@ -1255,6 +1283,7 @@ if (is_admin()) {
             <tr>
                 <th><?php _e('Role', 'peterloginrd' ); ?></th>
                 <th><?php _e('URL', 'peterloginrd' ); ?></th>
+                <th><?php _e('Logout URL', 'peterloginrd' ); ?></th>
             </tr>
             <?php print $rul_rolevalues; ?>
             
@@ -1265,6 +1294,7 @@ if (is_admin()) {
                 <?php print rul_returnroleoptions($rul_roles_existing); ?>
             </select>
             <br /><?php _e('URL:', 'peterloginrd' ); ?>  <input type="text" size="90" maxlength="500" name="rul_roleaddress[<?php print $i_role; ?>]" />
+            <br /><?php _e('Logout URL:', 'peterloginrd' ); ?>  <input type="text" size="90" maxlength="500" name="rul_role_logout[<?php print $i_role; ?>]" />
         </p>
         <p class="submit"><input type="submit" name="rul_rolesubmit" value="<?php _e( 'Update', 'peterloginrd' ); ?>" /></p>
         </form> 
@@ -1276,6 +1306,7 @@ if (is_admin()) {
                 <th><?php _e('Level', 'peterloginrd' ); ?></th>
                 <th><?php _e('Order', 'peterloginrd' ); ?></th>
                 <th><?php _e('URL', 'peterloginrd' ); ?></th>
+                <th><?php _e('Logout URL', 'peterloginrd' ); ?></th>
             </tr>
             <?php print $rul_levelvalues; ?>
             
@@ -1287,6 +1318,7 @@ if (is_admin()) {
             </select>
             <br /><?php _e('Order:', 'peterloginrd' ); ?> <input type="text" size="2" maxlength="2" name="rul_levelorder[<?php print $i_level; ?>]" />
             <br /><?php _e('URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_leveladdress[<?php print $i_level; ?>]" />
+            <br /><?php _e('Logout URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_level_logout[<?php print $i_level; ?>]" />
         </p>
         <p class="submit"><input type="submit" name="rul_levelsubmit" value="<?php _e('Update', 'peterloginrd' ); ?>" /></p>
         </form> 

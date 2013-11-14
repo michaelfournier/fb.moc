@@ -11,7 +11,6 @@ class JSON_API {
     add_action('update_option_json_api_base', array(&$this, 'flush_rewrite_rules'));
     add_action('pre_update_option_json_api_controllers', array(&$this, 'update_controllers'));
   }
-
   
   function template_redirect() {
     // Check to see if there's an appropriate API controller + method    
@@ -21,6 +20,10 @@ class JSON_API {
     $active_controllers = array_intersect($available_controllers, $enabled_controllers);
     
     if ($controller) {
+      
+      if (empty($this->query->dev)) {
+        error_reporting(0);
+      }
       
       if (!in_array($controller, $active_controllers)) {
         $this->error("Unknown controller '$controller'.");
@@ -44,6 +47,7 @@ class JSON_API {
         $this->response->setup();
         
         // Run action hooks for method
+        do_action("json_api", $controller, $method);
         do_action("json_api-{$controller}-$method");
         
         // Error out if nothing is found
@@ -51,42 +55,50 @@ class JSON_API {
           $this->error('Not found');
         }
         
-    // Run the method
-		$md5_file_name = md5( implode('|', $_REQUEST ) );
-    /* on nomme les fichiers cache de la même manière que dans le plugin quick-cache */
-		$cachefile = WP_CONTENT_DIR . '/cache/qc-c-json-api_' . $md5_file_name . '-cache.html';
-		$cachetime = 18000;
-		
-		if (file_exists($cachefile) && time() - $cachetime < @filemtime($cachefile))
-		{
-		  if (!headers_sent()) {
-			header('HTTP/1.1 200 OK');
-			header('Content-Type: text/plain; charset: UTF-8', true);
-      header("Pragma: cache");
-      header("Cache-Control: cache, max-age=$cachetime");
-      // header ("Content-Type: text/javascript; charset=utf-8");
-      // header ("Expires: " . gmdate ("D, d M Y H:i:s", strtotime ("-1 week")) . " GMT");
-      // header ("Last-Modified: " . gmdate ("D, d M Y H:i:s") . " GMT");
-      // header ("Cache-Control: no-cache, must-revalidate, max-age=0");
-      // header ("Pragma: no-cache");
-			// nocache_headers();
-		  } else {
-			echo '<pre>';
-		  }			
-		  $result = file_get_contents($cachefile);
+        // Run the method
+        //$result = $this->controller->$method();
+        
         // Handle the result
-			echo $result;
-		} else {
-		// if there is either no file OR the file to too old, render the page and capture the HTML.
-			$result = $this->controller->$method();
-			ob_start();
-        // Handle the result
-				$this->response->respond($result);
-				$fp = fopen($cachefile, 'w');
-				fwrite($fp, ob_get_contents());
-				fclose($fp);
-			  ob_end_flush();
-		}       
+        //$this->response->respond($result);
+
+        /* hack pour le cache */
+        $md5_file_name = md5( implode('|', $_REQUEST ) );
+        /* on nomme les fichiers cache de la même manière que dans le plugin quick-cache */
+        $cachefile = WP_CONTENT_DIR . '/cache/qc-c-json-api_' . $md5_file_name . '-cache.html';
+        $cachetime = 18000;
+        
+        if (file_exists($cachefile))
+        {
+          if (!headers_sent()) {
+          header('HTTP/1.1 200 OK');
+          header('Content-Type: text/plain; charset: UTF-8', true);
+          header("Pragma: cache");
+          header("Cache-Control: max-age=$cachetime");
+          // header ("Content-Type: text/javascript; charset=utf-8");
+          // header ("Expires: " . gmdate ("D, d M Y H:i:s", strtotime ("-1 week")) . " GMT");
+          // header ("Last-Modified: " . gmdate ("D, d M Y H:i:s") . " GMT");
+          // header ("Cache-Control: no-cache, must-revalidate, max-age=0");
+          // header ("Pragma: no-cache");
+          //nocache_headers();
+          } else {
+          echo '<pre>';
+          }     
+          $result = file_get_contents($cachefile);
+            // Handle the result
+          echo $result;
+        } else {
+        // if there is either no file OR the file to too old, render the page and capture the HTML.
+          $result = $this->controller->$method();
+          ob_start();
+            // Handle the result
+            $this->response->respond($result);
+            $fp = fopen($cachefile, 'w');
+            fwrite($fp, ob_get_contents());
+            fclose($fp);
+            ob_end_flush();
+        }
+        /* fin du hack */
+        
         // Done!
         exit;
       }
@@ -202,7 +214,7 @@ class JSON_API {
                   echo '<a href="' . wp_nonce_url('options-general.php?page=json-api&amp;action=activate&amp;controller=' . $controller, 'update-options') . '" title="' . __('Activate this controller') . '" class="edit">' . __('Activate') . '</a>';
                 }
                   
-                if ($info['url']) {
+                if (!empty($info['url'])) {
                   echo ' | ';
                   echo '<a href="' . $info['url'] . '" target="_blank">Docs</a></div>';
                 }
@@ -215,7 +227,7 @@ class JSON_API {
                 <?php
                 
                 foreach($info['methods'] as $method) {
-                  $url = $this->get_method_url($controller, $method, array('dev' => 1));
+                  $url = $this->get_method_url($controller, $method);
                   if ($active) {
                     echo "<code><a href=\"$url\">$method</a></code> ";
                   } else {
@@ -306,14 +318,22 @@ class JSON_API {
   function get_controllers() {
     $controllers = array();
     $dir = json_api_dir();
-    $dh = opendir("$dir/controllers");
-    while ($file = readdir($dh)) {
-      if (preg_match('/(.+)\.php$/', $file, $matches)) {
-        $controllers[] = $matches[1];
-      }
-    }
+    $this->check_directory_for_controllers("$dir/controllers", $controllers);
+    $this->check_directory_for_controllers(get_stylesheet_directory(), $controllers);
     $controllers = apply_filters('json_api_controllers', $controllers);
     return array_map('strtolower', $controllers);
+  }
+  
+  function check_directory_for_controllers($dir, &$controllers) {
+    $dh = opendir($dir);
+    while ($file = readdir($dh)) {
+      if (preg_match('/(.+)\.php$/i', $file, $matches)) {
+        $src = file_get_contents("$dir/$file");
+        if (preg_match("/class\s+JSON_API_{$matches[1]}_Controller/i", $src)) {
+          $controllers[] = $matches[1];
+        }
+      }
+    }
   }
   
   function controller_is_active($controller) {
@@ -371,9 +391,19 @@ class JSON_API {
   }
   
   function controller_path($controller) {
-    $dir = json_api_dir();
+    $json_api_dir = json_api_dir();
+    $json_api_path = "$json_api_dir/controllers/$controller.php";
+    $theme_dir = get_stylesheet_directory();
+    $theme_path = "$theme_dir/$controller.php";
+    if (file_exists($theme_path)) {
+      $path = $theme_path;
+    } else if (file_exists($json_api_path)) {
+      $path = $json_api_path;
+    } else {
+      $path = null;
+    }
     $controller_class = $this->controller_class($controller);
-    return apply_filters("{$controller_class}_path", "$dir/controllers/$controller.php");
+    return apply_filters("{$controller_class}_path", $path);
   }
   
   function get_nonce_id($controller, $method) {

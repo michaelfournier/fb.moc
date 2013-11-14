@@ -715,13 +715,14 @@ var Blog = (function (blog) {
             });
         },
         showOnLoaded : function() {
+          var $that = this.$el.find(".maincontent");
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
-               $(this).find("#visuel").removeClass('spinner2');
+               $that.find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
-              $(this).parent().find("#sidebar").mCustomScrollbar("update");
-              $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
+              $that.parent().find("#sidebar").mCustomScrollbar("update");
+              $that.find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
             });
         }
 
@@ -1504,30 +1505,29 @@ var Blog = (function (blog) {
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             var myworksminielt = this.$el.find('#workslistmini');
             myworksminielt.imagesLoaded(function() {
-                   // fonction auto scroll vignettes // 
-                    myworksminielt.imagesLoaded(function(){
-                        $(this).thumbnailScroller({
-                                scrollerType:'hoverPrecise',
-                                        scrollerOrientation:'vertical',
-                                        acceleration:4,
-                                        scrollSpeed: 800,
-                                        noScrollCenterSpace:1
-                            });
-                    });
-
-            if(!myworksminielt.hasClass("mCustomScrollbar")) {
-                myworksminielt.mCustomScrollbar({
-                    set_height: "100%",
-                    scrollInertia: 150,
-                    autoDraggerLength:false,
-                    theme: "dark"
+                // fonction auto scroll vignettes // 
+                myworksminielt.thumbnailScroller({
+                        scrollerType:'hoverPrecise',
+                                scrollerOrientation:'vertical',
+                                acceleration:4,
+                                scrollSpeed: 800,
+                                noScrollCenterSpace:1
                 });
-            }
-            
+
+
             //myworksminielt.mCustomScrollbar("update");
             //that.$el.find("#unfoldworks a").click();
                         
             });
+
+                    if(!myworksminielt.hasClass("mCustomScrollbar")) {
+                    myworksminielt.mCustomScrollbar({
+                        set_height: "100%",
+                        scrollInertia: 150,
+                        autoDraggerLength:false,
+                        theme: "dark"
+                    });
+                }
             
             return this;
         },
@@ -1658,7 +1658,7 @@ var Blog = (function (blog) {
             })
             .progress( function( instance, image ) {
                 //console.log(image);
-                $(image).animate({opacity: 1});
+                $(image.img).animate({opacity: 1});
             });
             //-----------------------------------///            
             return this;
