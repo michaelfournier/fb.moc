@@ -1466,6 +1466,16 @@ nav li a.actif {
 }
 .fullwindow .maincontent {
   display: table;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  clear: none;
+  float: left;
+  width: 100%;
+  padding-left: 28.57142857142857%;
+  min-height: 1.1428571428571428em;
 }
 .fullwindow #media {
   display: table-cell;
@@ -2208,8 +2218,7 @@ SMARTPHONES
   }
   /* TOOLS */
   #navgal {
-    position: absolute;
-    left: 28.57142857142857%;
+    float: left;
     width: 1.1428571428571428em;
     z-index: 6;
   }
@@ -2340,16 +2349,14 @@ SMARTPHONES
   }
   /* MAIN CONTENT */
   .maincontent {
+    /*.divise(1,1, @tranche, none, left);*/
+  
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     clear: none;
-    float: left;
-    width: 100%;
-    padding-left: 28.57142857142857%;
-    min-height: 1.1428571428571428em;
     /*height: 100%;*/
   
   }
@@ -2456,14 +2463,15 @@ SMARTPHONES
   }
   /* SIDEBAR */
   #sidebar {
-    width: 28.57142857142857%;
+    width: 30%;
     min-width: 260px;
+    float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    position: absolute;
+    position: relative;
     margin-top: 2.2857142857142856em;
     padding: 0 0 2.2857142857142856em 0;
     max-width: 28.57142857142857%;

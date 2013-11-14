@@ -52,7 +52,7 @@
 
 	/* TOOLS */
 
-	#navgal { position: absolute; left: @tranche; width: @unit; z-index: 6;}
+	#navgal { float: left; width: @unit; z-index: 6;}
 
 	#tools {
 		position: relative;
@@ -173,7 +173,9 @@
 	/* MAIN CONTENT */
 
 	.maincontent {
-		.divise(1,1, @tranche, none, left);
+		/*.divise(1,1, @tranche, none, left);*/
+		.box-sizing();
+		clear: none;
 		/*height: 100%;*/
 	}
 
@@ -257,10 +259,11 @@
 
 	#sidebar {
 		//.divise(1,5, 0, none, left);
-		width: @tranche;
+		width: 30%;
 		min-width: 260px;
+		float: left;
 		.box-sizing();
-		position: absolute;
+		position: relative;
 		margin-top: @unit*2;
 		padding: 0 0 @unit*2 0;
 		max-width: @tranche;

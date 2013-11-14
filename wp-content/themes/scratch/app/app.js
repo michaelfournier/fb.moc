@@ -1695,7 +1695,7 @@ var Blog = (function (blog){
                 });
                 // on calcule la hauteur de #wrapper //
                 //$(window).on("resize", _.bind(this.myheight, this));
-                $(window).on( 'resize', _.bind($.throttle( 50, false, this.myheight), this));
+                $(window).on( 'resize', _.bind($.debounce( 100, false, this.myheight), this));
                 this.myheight();
             },
             routes : {
@@ -1731,11 +1731,11 @@ var Blog = (function (blog){
                 if (Modernizr.mq('screen and (min-width: 768px)')) {
                    $(document).find('#wrapper, #workslistmini').css("height", contentheight);
                     mypic.css("max-height", contentheight - legendheight);
-                   if (ratioctnr >= ratiopic ) {
+                   if (ratioctnr > ratiopic ) {
                        mypic.addClass("horizontale");
                        $(document).find("#ctn-media").addClass("horizontale");
                        //alert(mypic.width());
-                   } else if (ratioctnr < ratiopic ) {
+                   } else if (ratioctnr <= ratiopic ) {
                        mypic.removeClass("horizontale");
                        $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
                    }
