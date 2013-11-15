@@ -923,6 +923,7 @@ nav a {
 nav li {
   display: inline-block;
   float: left;
+  position: relative;
 }
 a {
   color: #1a1a1a;
@@ -994,6 +995,14 @@ a.actif,
 #tools li a {
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
+}
+.submenu li {
+  clear: both;
+  width: 100%;
+}
+.submenu a {
+  width: 100%;
+  text-align: center;
 }
 /* INDEX WORKS */
 .segment {
@@ -1257,6 +1266,7 @@ nav#sorting li:first-child a {
 }
 #sidebar #text p {
   text-align: justify;
+  line-height: 1.6;
 }
 #sidebar #text p:first-child {
   margin-top: 0;
@@ -2216,6 +2226,62 @@ SMARTPHONES
   li#qtrans .actif {
     display: none;
   }
+  #mainmenu li:hover .submenu {
+    display: block;
+  }
+  .submenu {
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-top: 2.057142857142857em;
+    margin-left: -90px;
+    width: 180px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0.5714285714285714em;
+    z-index: 99;
+    border: 1px solid #dcdcdc;
+    background-color: white;
+  }
+  /* shared with before and after */
+  .submenu:before,
+  .submenu:after {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    width: 0;
+    border: 8px solid transparent;
+    /* arrow size */
+  
+  }
+  /* these arrows will point up */
+  /* top-stacked, smaller arrow */
+  .submenu:before {
+    border-bottom-color: #fff;
+    /* arrow color */
+  
+    /* positioning */
+  
+    position: absolute;
+    top: -16px;
+    left: 80px;
+    z-index: 2;
+  }
+  /* arrow which acts as a background shadow */
+  .submenu:after {
+    border-bottom-color: #dcdcdc;
+    /* arrow color */
+  
+    /* positioning */
+  
+    position: absolute;
+    top: -17px;
+    left: 80px;
+    z-index: -1;
+  }
   /* TOOLS */
   #navgal {
     float: left;
@@ -2480,7 +2546,9 @@ SMARTPHONES
     z-index: 5;
   }
   #sidebar.text {
+    min-width: 200px;
     width: 200px;
+    position: absolute;
     margin-top: 0;
     padding: 0;
   }

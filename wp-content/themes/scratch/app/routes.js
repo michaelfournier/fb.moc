@@ -294,6 +294,19 @@ var Blog = (function (blog){
         }
     });
 
+    // $(document).find('#btn-pdf').on("click", function() {
+    //   $elt = $(this).parent().find(".submenu");
+    //   if ( $elt.is( ":hidden" ) ) {
+    //     $elt.show();
+    //   } else {
+    //     $elt.hide();
+    //   }
+    // });
+    // $(document).find('.submenu').on("mouseleave", function() {
+    //   $(this).hide();
+    // });
+
+
 
   //Backbone.history.start();
 

@@ -88,6 +88,7 @@ nav a {
 nav li{
 	display: inline-block;
 	float:left;
+	position: relative;
 }
 
 a {
@@ -171,8 +172,17 @@ figcaption {
 }
 
 
-/* INDEX WORKS */
+.submenu li {
+	clear: both;
+	width: 100%;
+}
 
+.submenu a {
+	width: 100%;
+	text-align: center;
+}
+
+/* INDEX WORKS */
 .segment {
 	display: inline;
 }
@@ -444,6 +454,7 @@ nav#sorting li:first-child a {
 }
 #sidebar #text p{
 	text-align: justify;
+	line-height: 1.6;
 }
 #sidebar #text p:first-child {
 	margin-top: 0;

@@ -1045,14 +1045,15 @@ var Blog = (function (blog) {
             });
         },
         showOnLoaded : function() {
+          var $that = this.$el.find(".maincontent");
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
                Blog.myapprouter.myheight();
-               $(this).find("#visuel").removeClass('spinner2');
-               $(this).animate({'opacity': 1});
+               $that.find("#visuel").removeClass('spinner2');
+               $that.animate({'opacity': 1});
                // on actualise la scrollbar
-              $(this).parent().find("#sidebar").mCustomScrollbar("update");
-              $(this).find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
+              $that.parent().find("#sidebar").mCustomScrollbar("update");
+              $that.find('#visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 1}, 400);
             });
         }
     });
@@ -1963,6 +1964,19 @@ var Blog = (function (blog){
 
         }
     });
+
+    // $(document).find('#btn-pdf').on("click", function() {
+    //   $elt = $(this).parent().find(".submenu");
+    //   if ( $elt.is( ":hidden" ) ) {
+    //     $elt.show();
+    //   } else {
+    //     $elt.hide();
+    //   }
+    // });
+    // $(document).find('.submenu').on("mouseleave", function() {
+    //   $(this).hide();
+    // });
+
 
 
   //Backbone.history.start();

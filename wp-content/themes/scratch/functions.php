@@ -94,6 +94,7 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
   include_once 'metaboxes/infostextes-meta-spec.php';
   include_once 'metaboxes/infosbio-meta-spec.php';
+  include_once 'metaboxes/pdf-meta-spec.php';
   //include_once 'metaboxes/repeating-external-links-spec.php';
 
  // include_once 'metaboxes/datepicker-meta-spec.php';

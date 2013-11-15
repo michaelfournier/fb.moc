@@ -18,7 +18,6 @@
     <meta name="author" content="vacuumRandom"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- meta facebook -->
 
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=20131102-1647" />
     <link type="text/plain" rel="author" href="/humans.txt" />
@@ -37,11 +36,27 @@
 		<nav id="main_nav">	
 		<?
 		$pages = get_pages('sort_column=menu_order&exclude=357');
+
 		?>
 		<ul id="mainmenu">
 		<? foreach($pages as $page) { ?>
-			<li>
+			<li>				
+				<? if ($page->post_name == 'pdf') { 
+				   $tabpdf = get_post_meta($page->ID, "_pfilespdf_blocspics", true);
+				?>
+				<a id="btn-pdf" data-bypass href='#'><span><?= $page->post_title; ?></span></a>
+					<ul class="submenu">
+						<? foreach ($tabpdf as $key => $pdf) { ?>
+						<? $mypdfurl = wp_get_attachment_url($pdf['image']); ?>
+							<li>
+								<a data-bypass href="<?= $mypdfurl; ?>"><?= $pdf['titlepdf']; ?></a>
+							</li>
+						<? } ?>
+					</ul>
+
+				<? } else { ?>
 				<a href='<?= "#".$page->post_name;?>'><span><?= $page->post_title; ?></span></a>
+				<? } ?>
 			</li>
 		<? } ?>
 		</ul><!-- #container -->
