@@ -32,7 +32,7 @@
 			</p>
 
 			<div class="block">
-				<span>IMPORTANT : insérer ici une vignette personnalisée, si la vignette générée automatiquement ne convient pas, et ou si il n'y a que des vidéos dans l'article, ATTENTION la taille de la vignette doit être de 200 X 120 px</span>			
+				<span>IMPORTANT : insérer ici une vignette personnalisée, si la vignette générée automatiquement ne convient pas, et ou si il n'y a que des vidéos dans l'article, ATTENTION la taille de la vignette doit être de 250 X 160 px</span>			
 			</div>
 
 		</div>

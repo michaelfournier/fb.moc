@@ -407,19 +407,20 @@
 								href = (href && href[1]) ? href[1] : '' ;
 								var url = src ? src : href ;
 								/* hack mic */
-								var mediaID = html.match(/((wp-att-)|.(attachment_id=)|(wp-image-))[0-9]*/i);
+								var tabmediaID = html.match(/((wp-att-)|(attachment_id=)|(wp-image-))[0-9]+/i);
 
-								console.log(html, mediaID);							
+														
 								//mediaID = (mediaID && mediaID[1]) ? mediaID[0] : '' ;
-								mediaID = mediaID[0].split('-');
-								mediaID = mediaID[2];
-								
+								//mediaID = mediaID[0].split('-');
+								//mediaID = mediaID[2];
+								mediaID = tabmediaID[0].match(/[0-9]+/g);
+								console.log(mediaID[0]);	
 
 								wpalchemy_mediafield.val(url);
 
-								wpalchemy_mediaidfield.val(mediaID);
+								wpalchemy_mediaidfield.val(mediaID[0]);
 								
-								send_myid(mediaID, wpalchemy_mediafield_selector);
+								send_myid(mediaID[0], wpalchemy_mediafield_selector);
 								/* end of hack mic */
 
 								// reset insert button label

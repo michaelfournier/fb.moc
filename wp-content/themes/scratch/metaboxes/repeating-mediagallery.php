@@ -115,7 +115,7 @@ function my_action_javascript() { ?>
 				<? echo $wp_media_access->getIdField(array('name'=> $mb->get_the_name(), 'value'=> $mb->get_the_value())); ?>
 			</div>
 			<!-- bouton ajouter image -->	
-				<? echo $wp_media_access->getButton(array('text'=> 'Choisir une image')); ?>
+				<? echo $wp_media_access->getButton(array('label'=> 'Choisir une image')); ?>
 			<!-- nom de l'image -->
 			<p>
 				<span id="pic_name"><em><? if(!empty($file_id)) echo get_the_title($mb->get_the_value());?></em></span>
