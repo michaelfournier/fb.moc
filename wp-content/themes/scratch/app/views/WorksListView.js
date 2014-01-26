@@ -31,36 +31,47 @@ var Blog = (function (blog) {
 
             var mycontainer = this.$el.find('#wraplist');
 
+            // définition des param de masonry //
+            mycontainer.masonry({
+                itemSelector : '.wrapthumb',
+                isAnimated: !Modernizr.csstransitions,
+                columnWidth: ".wrapthumb",
+                animationOptions: {
+                    duration: 'fast',
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+
             this.$el.imagesLoaded()
             .done( function( instance, image ) {
                 /* */
-                mycontainer.masonry({
-                    itemSelector : '.wrapthumb',
-                    isAnimated: true,
-                    columnWidth: ".wrapthumb",
-                    animationOptions: {
-                        duration: 'fast',
-                        easing: 'linear',
-                        queue: false
-                    }
-                });
+                
                 parentcontainer.mCustomScrollbar({
                         set_height: "100%",
                         scrollInertia: 150,
                         autoDraggerLength:false,
+                        advanced: {
+                            updateOnContentResize: true
+                        },
                         theme: "dark"
                 });
 
                 Blog.myapprouter.myheight();
+                parentcontainer.mCustomScrollbar("update");
+                setTimeout(function(){ mycontainer.masonry(); }, 1000);
                 
             })
             .fail( function() {
                 console.log('all images loaded, at least one is broken');
             })
             .progress( function( instance, image ) {
-                //console.log(image);
-                $(image.img).animate({opacity: 1});
+                $(image.img.offsetParent).stop().animate({opacity: 1},{ complete : mycontainer.masonry() });
+                //refresh de masonry, évite les bugs d'affichage //
+                
             });
+
+
             //-----------------------------------///            
             return this;
         }

@@ -202,7 +202,8 @@ function add_gallery($post) {
   if(isset($gallerypics) && !empty($gallerypics)) {
     foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
-      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');      
+      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');
+      $imagethumb =  wp_get_attachment_image_src($idpic['image'], 'thumbnail');   
       $imagemetas = get_post($idpic['image']);
       $tabgallery = array(
       'type' => 'image',
@@ -220,8 +221,8 @@ function add_gallery($post) {
 
 
 if(!empty($customthumb)) {
-    $customthumburl = wp_get_attachment_image_src($customthumb, 'full');
-    $customthumbmedium = $themepath.'/timthumb.php?src='.$customthumburl[0].'&w=220&h=140q=100'; 
+    $customthumburl = wp_get_attachment_image_src($customthumb, 'large');
+    $customthumbmedium = $themepath.'/timthumb.php?src='.$customthumburl[0].'&w=280&h=180q=100'; 
     $customthumbmini = $themepath.'/timthumb.php?src='.$customthumburl[0].'&w=120&h=77q=100'; 
     $post->customthumb[] = $customthumburl[0];
     $post->customthumbmini[] = $customthumbmini;
@@ -230,8 +231,8 @@ if(!empty($customthumb)) {
 
 if(!empty($gallerypics)) {
     $imagefull = wp_get_attachment_image_src($gallerypics[0]['image'], 'full');
-    $imagethumb = $themepath.'/timthumb.php?src='.$imagefull[0].'&w=250&h=160&zc=1&q=100';
-    $imagethumbmini = $themepath.'/timthumb.php?src='.$imagefull[0].'&w=120&h=77q=100';  
+    $imagethumb = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=280&h=180&zc=1&q=100';
+    $imagethumbmini = $themepath.'/timthumb.php?src='.$imagelarge[0].'&w=120&h=77q=100';  
     $post->thumbnormal[] = $imagethumb;
     $post->thumbmini[] = $imagethumbmini;
 }

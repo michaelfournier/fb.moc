@@ -70,11 +70,11 @@ var Blog = (function (blog){
                        $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
                    }
                    $(document).find("#ctn-media").css('width', mypic.width());
-                   $(document).find(".mCustomScrollbar").mCustomScrollbar("update");
+                   //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
                  } else {
                     $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
                     $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
-                    $(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
+                    //$(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
                  }
 
                 $(document).find("body").removeClass('spinner');

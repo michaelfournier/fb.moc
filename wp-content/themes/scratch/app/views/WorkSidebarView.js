@@ -18,10 +18,10 @@ var Blog = (function (blog) {
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
+                    autoDraggerLength:false,
                     theme: "dark"
                 });
-                 
-            //sidebar.mCustomScrollbar("disable");       
+                
             return this;
         },
 

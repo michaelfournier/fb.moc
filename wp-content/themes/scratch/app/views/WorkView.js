@@ -3,14 +3,10 @@ var Blog = (function (blog) {
     blog.Views.WorkView = blog.Views.BaseView.extend({
         el : $("#mainbb"),
         initialize : function (data) {
-           // this.model = data;
+           this.model = data;
             this.template = _.template($("#mainworks_template").html());
             // on remt i à 0 //
             this.i = 0;
-            var caca = data;
-            this.model = caca;
-
-
         },
 
         renderPictures : function () {

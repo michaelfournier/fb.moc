@@ -1148,10 +1148,10 @@ var Blog = (function (blog) {
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
+                    autoDraggerLength:false,
                     theme: "dark"
                 });
-                 
-            //sidebar.mCustomScrollbar("disable");       
+                
             return this;
         },
 
@@ -1191,14 +1191,10 @@ var Blog = (function (blog) {
     blog.Views.WorkView = blog.Views.BaseView.extend({
         el : $("#mainbb"),
         initialize : function (data) {
-           // this.model = data;
+           this.model = data;
             this.template = _.template($("#mainworks_template").html());
             // on remt i à 0 //
             this.i = 0;
-            var caca = data;
-            this.model = caca;
-
-
         },
 
         renderPictures : function () {
@@ -1631,36 +1627,47 @@ var Blog = (function (blog) {
 
             var mycontainer = this.$el.find('#wraplist');
 
+            // définition des param de masonry //
+            mycontainer.masonry({
+                itemSelector : '.wrapthumb',
+                isAnimated: !Modernizr.csstransitions,
+                columnWidth: ".wrapthumb",
+                animationOptions: {
+                    duration: 'fast',
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+
             this.$el.imagesLoaded()
             .done( function( instance, image ) {
                 /* */
-                mycontainer.masonry({
-                    itemSelector : '.wrapthumb',
-                    isAnimated: true,
-                    columnWidth: ".wrapthumb",
-                    animationOptions: {
-                        duration: 'fast',
-                        easing: 'linear',
-                        queue: false
-                    }
-                });
+                
                 parentcontainer.mCustomScrollbar({
                         set_height: "100%",
                         scrollInertia: 150,
                         autoDraggerLength:false,
+                        advanced: {
+                            updateOnContentResize: true
+                        },
                         theme: "dark"
                 });
 
                 Blog.myapprouter.myheight();
+                parentcontainer.mCustomScrollbar("update");
+                setTimeout(function(){ mycontainer.masonry(); }, 1000);
                 
             })
             .fail( function() {
                 console.log('all images loaded, at least one is broken');
             })
             .progress( function( instance, image ) {
-                //console.log(image);
-                $(image.img).animate({opacity: 1});
+                $(image.img.offsetParent).stop().animate({opacity: 1},{ complete : mycontainer.masonry() });
+                //refresh de masonry, évite les bugs d'affichage //
+                
             });
+
+
             //-----------------------------------///            
             return this;
         }
@@ -1741,11 +1748,11 @@ var Blog = (function (blog){
                        $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
                    }
                    $(document).find("#ctn-media").css('width', mypic.width());
-                   $(document).find(".mCustomScrollbar").mCustomScrollbar("update");
+                   //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
                  } else {
                     $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
                     $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
-                    $(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
+                    //$(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
                  }
 
                 $(document).find("body").removeClass('spinner');
