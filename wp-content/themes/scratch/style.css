@@ -977,6 +977,10 @@ a.actif,
   position: relative;
 }
 /* HEADER */
+#mobiletitle {
+  margin: 0 0 0.5714285714285714em 0;
+  display: none;
+}
 /* menu */
 #mainmenu a:hover {
   text-decoration: underline;
@@ -991,18 +995,76 @@ a.actif,
   width: 100%;
   float: left;
 }
-#main_nav a span,
+#main_nav a,
 #tools li a {
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
+}
+#mainmenu li:hover .submenu {
+  display: block;
 }
 .submenu li {
   clear: both;
   width: 100%;
 }
-.submenu a {
+#main_nav .submenu a {
   width: 100%;
+  padding: 0;
+  border: none;
   text-align: center;
+}
+.submenu {
+  display: none;
+  position: absolute;
+  left: 50%;
+  margin-top: 2.057142857142857em;
+  margin-left: -90px;
+  width: 180px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0.5714285714285714em;
+  z-index: 99;
+  border: 1px solid #dcdcdc;
+  background-color: white;
+}
+/* shared with before and after */
+.submenu:before,
+.submenu:after {
+  content: ' ';
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 8px solid transparent;
+  /* arrow size */
+
+}
+/* these arrows will point up */
+/* top-stacked, smaller arrow */
+.submenu:before {
+  border-bottom-color: #fff;
+  /* arrow color */
+
+  /* positioning */
+
+  position: absolute;
+  top: -16px;
+  left: 80px;
+  z-index: 2;
+}
+/* arrow which acts as a background shadow */
+.submenu:after {
+  border-bottom-color: #dcdcdc;
+  /* arrow color */
+
+  /* positioning */
+
+  position: absolute;
+  top: -17px;
+  left: 80px;
+  z-index: -1;
 }
 /* INDEX WORKS */
 .segment {
@@ -1211,8 +1273,7 @@ nav#sorting li:first-child a {
   height: 15px;
   width: 15px;
 }
-#nextwork,
-#prevwork,
+.nextprevwork,
 #btnfull {
   padding-left: 0.5714285714285714em;
 }
@@ -1231,8 +1292,9 @@ nav#sorting li:first-child a {
   background-position: 0px center;
 }
 /* SIDEBAR */
-#sidebar a#toogletext {
+#toogletext {
   padding-top: 0;
+  margin-bottom: 0.5714285714285714em;
 }
 #toogletext #up {
   display: none;
@@ -1260,6 +1322,7 @@ nav#sorting li:first-child a {
 }
 #sidebar #text {
   display: none;
+  clear: both;
   text-align: justify;
 }
 #sidebar #text p {
@@ -2079,6 +2142,9 @@ Media Queries
 SMARTPHONES 
 ========================================================================== */
 @media screen and (max-width: 768px) {
+  body {
+    font-size: 1em;
+  }
   #smartphone {
     display: block;
   }
@@ -2106,14 +2172,14 @@ SMARTPHONES
   #navworks {
     float: right;
   }
+  #mainmenu li:first-child {
+    display: none;
+  }
   #navgal li a {
     padding: 0.5714285714285714em;
   }
   #navgal li:first-child a {
     padding-left: 0;
-  }
-  #wraplist-list {
-    -webkit-column-count: 2;
   }
   .wrapthumb {
     width: 33.33333333333333%;
@@ -2121,6 +2187,58 @@ SMARTPHONES
   #wraplist-list {
     -webkit-column-count: 2;
     -webkit-column-width: 50%;
+  }
+  /* BTN WORKS */
+  .nextprevworks a,
+  #btnfull a {
+    border: 0.5714285714285714em solid #ffffff;
+  }
+  #toogletext {
+    float: left;
+    padding: 0.5714285714285714em;
+    border: 1px solid #dcdcdc;
+  }
+  .nextprevworks,
+  #btnfull {
+    padding: 0;
+    margin-left: 0.5714285714285714em;
+    border: 1px solid #dcdcdc;
+    width: auto;
+    height: auto;
+  }
+  #unfoldworks,
+  #nextwork {
+    border-right: 1px solid #dcdcdc;
+    padding: 0;
+  }
+  /* MENU */
+  #main_header {
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 1.1428571428571428em;
+  }
+  #mobiletitle {
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+  #mainmenu {
+    width: 100%;
+  }
+  #main_nav li {
+    width: 20%;
+  }
+  #main_nav li:last-child a {
+    border-right: 1px solid #dcdcdc;
+    padding: 0 1.1428571428571428em;
+  }
+  #main_nav li a {
+    text-align: center;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
   }
 }
 @media only screen and (max-width: 500px) {
@@ -2223,62 +2341,6 @@ SMARTPHONES
   }
   li#qtrans .actif {
     display: none;
-  }
-  #mainmenu li:hover .submenu {
-    display: block;
-  }
-  .submenu {
-    display: none;
-    position: absolute;
-    left: 50%;
-    margin-top: 2.057142857142857em;
-    margin-left: -90px;
-    width: 180px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0.5714285714285714em;
-    z-index: 99;
-    border: 1px solid #dcdcdc;
-    background-color: white;
-  }
-  /* shared with before and after */
-  .submenu:before,
-  .submenu:after {
-    content: ' ';
-    height: 0;
-    position: absolute;
-    width: 0;
-    border: 8px solid transparent;
-    /* arrow size */
-  
-  }
-  /* these arrows will point up */
-  /* top-stacked, smaller arrow */
-  .submenu:before {
-    border-bottom-color: #fff;
-    /* arrow color */
-  
-    /* positioning */
-  
-    position: absolute;
-    top: -16px;
-    left: 80px;
-    z-index: 2;
-  }
-  /* arrow which acts as a background shadow */
-  .submenu:after {
-    border-bottom-color: #dcdcdc;
-    /* arrow color */
-  
-    /* positioning */
-  
-    position: absolute;
-    top: -17px;
-    left: 80px;
-    z-index: -1;
   }
   /* TOOLS */
   #navgal {

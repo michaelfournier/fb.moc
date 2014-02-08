@@ -149,6 +149,11 @@ figcaption {
 
 /* HEADER */
 
+#mobiletitle {
+	margin: 0 0 @unit/2 0;
+	display: none;
+}
+
 /* menu */
 #mainmenu a:hover {
 	text-decoration: underline;
@@ -166,20 +171,72 @@ figcaption {
 	float: left;
 }
 
-#main_nav a span, #tools li a {
+#main_nav a, #tools li a {
 	border-left: 1px solid @black10;
 	padding: 0 @unit;
 }
 
+#mainmenu li:hover .submenu {
+	display: block;
+}
 
 .submenu li {
 	clear: both;
 	width: 100%;
 }
 
-.submenu a {
+#main_nav .submenu a {
 	width: 100%;
+	padding: 0;
+	border: none;
 	text-align: center;
+}
+
+	.submenu { 
+		display: none;
+		position: absolute;
+	    left:50%;
+	    margin-top: @unit*1.8;
+	    margin-left:-90px;
+	    width:180px;
+	    .box-sizing();
+	    padding: @unit/2;
+	    z-index: 99;
+	    border: 1px solid @black10;
+	    background-color: white;
+	}
+
+	/* shared with before and after */
+	.submenu:before, .submenu:after {
+		content: ' ';
+		height: 0;
+		position: absolute;
+		width: 0;
+		border: 8px solid transparent; /* arrow size */
+	}
+
+/* these arrows will point up */
+
+/* top-stacked, smaller arrow */
+.submenu:before {
+	border-bottom-color: #fff;  /* arrow color */
+
+	/* positioning */
+	position: absolute;
+	top: -16px;
+	left: 80px;
+	z-index: 2;
+}
+
+/* arrow which acts as a background shadow */
+.submenu:after {
+	border-bottom-color: @black10;  /* arrow color */
+
+	/* positioning */
+	position: absolute;
+	top: -17px;
+	left: 80px;
+	z-index: -1;
 }
 
 /* INDEX WORKS */
@@ -406,7 +463,7 @@ nav#sorting li:first-child a {
 	width: 15px;
 }
 
-#nextwork, #prevwork, #btnfull {
+.nextprevwork, #btnfull {
 	padding-left: @unit/2;
 }
 
@@ -424,8 +481,9 @@ nav#sorting li:first-child a {
 }
 
 /* SIDEBAR */
-#sidebar a#toogletext {
+#toogletext {
 	padding-top: 0;
+	margin-bottom: @unit/2;
 }
 
 #toogletext #up { display:none; }
@@ -451,6 +509,7 @@ nav#sorting li:first-child a {
 }
 #sidebar #text {
 	display: none;
+	clear: both;
 	text-align: justify;
 }
 #sidebar #text p{

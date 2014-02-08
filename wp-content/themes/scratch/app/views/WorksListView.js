@@ -43,19 +43,20 @@ var Blog = (function (blog) {
                 }
             });
 
+            parentcontainer.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    autoDraggerLength:false,
+                    advanced: {
+                        updateOnContentResize: true
+                    },
+                    theme: "dark"
+            });
+
             this.$el.imagesLoaded()
             .done( function( instance, image ) {
                 /* */
-                
-                parentcontainer.mCustomScrollbar({
-                        set_height: "100%",
-                        scrollInertia: 150,
-                        autoDraggerLength:false,
-                        advanced: {
-                            updateOnContentResize: true
-                        },
-                        theme: "dark"
-                });
+
 
                 Blog.myapprouter.myheight();
                 parentcontainer.mCustomScrollbar("update");

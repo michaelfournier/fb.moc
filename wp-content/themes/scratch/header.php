@@ -33,6 +33,7 @@
 	<div id="smartphone">smarphone</div>
 	<div id="tablette">tablette</div>
 	<header id="main_header">
+		<h2 id="mobiletitle">Fayçal Baghriche</h2>
 		<nav id="main_nav">	
 		<?
 		$pages = get_pages('sort_column=menu_order&exclude=357');
