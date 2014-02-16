@@ -4,13 +4,16 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#workslistmain_template").html());
+            //console.log(Blog.Templates['workslistmain']());
+            //var userDetailTemplate = window['JST']['templates/home/UserDetailTemplate.tpl'](data 
+            this.template = blog.Templates['worksListMain']();
             _.bindAll(this, 'render');
 
 
         },
         render : function () {
-            var renderedContent = this.template();
+            console.log(this.template);
+            var renderedContent = this.template;
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
             this.renderWorksList();
@@ -70,7 +73,7 @@ var Blog = (function (blog) {
         displaylist : function(e) {
             $("#displaying a").removeClass("actif");
             $(e.currentTarget).addClass("actif");
-            Blog.myworkslistview.template = Blog.myworkslistview.templatelist;
+            Blog.myworkslistview.template = 'worksList';
             Blog.myworkslist.displaymode = 'list';
             //console.log(this.collection.displaymode);
             Blog.myworkslistview.render();
@@ -81,7 +84,7 @@ var Blog = (function (blog) {
         displaythumb : function(e) {
             $("#displaying a").removeClass("actif");
             $(e.currentTarget).addClass("actif");
-            Blog.myworkslistview.template = Blog.myworkslistview.templatethumb;
+            Blog.myworkslistview.template = 'worksListThumbs';
             Blog.myworkslist.displaymode = 'thumbs';
             //Blog.myworkslistview.render();
             // on classe par date en vue thumb //

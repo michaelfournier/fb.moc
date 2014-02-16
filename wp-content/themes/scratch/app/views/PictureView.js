@@ -4,18 +4,15 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#picture_template").html());
         },
         render : function () {
-            var renderedContent = this.template({mypicture: this.model});
+            var renderedContent = blog.Templates['picture']({mypicture: this.model});
             var content = this.$el.find('#visuel');
             content.addClass('spinner2');
             var that = this;
-            
             this.$el.find('.maincontent #visuel, #btn-media-next, #btn-media-prev').animate({'opacity': 0}, 300, function() {
               content.html(renderedContent);
               that.showOnLoaded();
-              
             });
         },
         showOnLoaded : function() {

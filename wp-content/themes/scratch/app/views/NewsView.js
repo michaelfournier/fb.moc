@@ -4,13 +4,12 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
-            this.template = _.template($("#news_template").html());
         },
         render : function () {
             console.log(this.collection);
             // on efface le contenu de #mainbb
             this.$el.html("");
-            var renderedContent = this.template({mynews: this.collection.models});
+            var renderedContent = blog.Templates['news']({mynews: this.collection.models});
             this.$el.html(renderedContent).find("#txtwrapper").css('opacity', 0);
             // Blog.myapprouter.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');
@@ -21,7 +20,7 @@ var Blog = (function (blog) {
                     scrollInertia: 150,
                     theme: "dark"
                 });
-            };
+            }
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
             Blog.myapprouter.myheight();
             

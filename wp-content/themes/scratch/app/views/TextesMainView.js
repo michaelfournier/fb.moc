@@ -3,13 +3,12 @@ var Blog = (function (blog) {
     blog.Views.TextesMainView = blog.Views.BaseView.extend({
         el : $("#mainbb"),
         initialize : function (data) {
-
-            this.template = _.template($("#maintexts_template").html());
+            this.template = blog.Templates['textesMain']();
             //this.mytextssidebarview = new blog.Views.TextesSidebarView(Blog.mytexteslist);
             _.bindAll(this, 'render');
         },
         render : function () {
-            this.$el.html(this.template());
+            this.$el.html(this.template);
             // la fonction renderNested est héritée de la vue BaseView //
             var renderNested = this.renderNested;
             var parentview = this.$el;

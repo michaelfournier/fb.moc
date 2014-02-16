@@ -8,7 +8,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             console.log(this.model);
-            var renderedContent = this.template({mynotice: this.model});
+            var renderedContent = blog.Templates['notice']({mynotice: this.model});
             this.$el.html(renderedContent).find("#txtwrapper").css('opacity', 0);
             Blog.myapprouter.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');

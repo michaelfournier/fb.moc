@@ -4,7 +4,7 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
            this.model = data;
-            this.template = _.template($("#mainworks_template").html());
+           this.template = blog.Templates['workMain']();
             // on remt i à 0 //
             this.i = 0;
         },

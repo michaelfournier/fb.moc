@@ -10,6 +10,7 @@ var Blog = (function () {
 	blog.Collections = {};
 	blog.Views = {};
 	blog.Router = {};
+	blog.Templates = {};
 
 	return blog;
 

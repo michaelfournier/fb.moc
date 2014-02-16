@@ -4,7 +4,6 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
-            this.template = _.template($("#navgallery_template").html());
             //this.templatesinglepic = _.template($("#navgallery_template").html());
             // compteur //
             this.idpic = 0;
@@ -20,7 +19,7 @@ var Blog = (function (blog) {
 
         },
         render : function () {
-            var renderedContent = this.template({gallery : this.collection.models});
+            var renderedContent = blog.Templates['picturesGalNav']({gallery : this.collection.models});
             // nb d'images //
             this.gallerylength = this.collection.models.length;
 

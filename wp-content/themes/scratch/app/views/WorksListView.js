@@ -3,12 +3,8 @@ var Blog = (function (blog) {
     blog.Views.WorksListView = Backbone.View.extend({
         initialize : function (data) {
             this.collection = data;
-
-            this.templatethumb = _.template($("#works_list_template_thumb").html());
-            this.templatelist = _.template($("#works_list_template_list").html());
             // par défaut le template et l'affichage par vignettes
-            this.template = this.templatethumb;
-
+            this.template = 'worksListThumbs';
             //_.bindAll(this, 'render');
             // on s'abonne aux tris de la collection avec la fonction this.render()
              this.collection.bind("sort", this.render, this); // remember: every function that uses 'this' as the current object should be in here
@@ -16,12 +12,11 @@ var Blog = (function (blog) {
             // this.collection.bind('change', this.render, this);
             // this.collection.bind('add', this.render);
             // this.collection.bind('remove', this.render);
-           
 
         },
         render : function () {
             // on instancie la vue worklisttools //
-            var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
+            var renderedContent = blog.Templates[this.template]({works : this.collection.models, sortkey: this.collection.sortkey});
             //this.hideInfos();
 
             // on fait apparaitre dans #mainbb la liste des works en fondu //

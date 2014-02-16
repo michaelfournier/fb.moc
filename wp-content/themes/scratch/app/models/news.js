@@ -37,14 +37,16 @@ var Blog = (function (blog) {
                 //http://www.experts-exchange.com/Programming/Languages/Scripting/JavaScript/A_3586-Sorting-Arrays-and-Collections-in-JavaScript.html
                 this.comparator = function(v1,v2) {
                     var t=v1; v1=v2; v2=t;
-                    if ( v1.get('tax')[0]['term_id'] < v2.get('tax')[0]['term_id'] ) return 1;
-                    if ( v1.get('tax')[0]['term_id'] > v2.get('tax')[0]['term_id'] ) return -1;
+                    console.log(v1.get('tax')[0].term_id);
+                    console.log(v1.get('title'));
+                    if ( v1.get('tax')[0].term_id < v2.get('tax')[0].term_id) return 1;
+                    if ( v1.get('tax')[0].term_id > v2.get('tax')[0].term_id) return -1;
                     // else, they are equal
-                       if ( v1.get('menu_order') < v2.get('menu_order') ) return 1;
-                       if ( v1.get('menu_order') > v2.get('menu_order') ) return -1;
+                       if ( v1.get('menu_order') < v2.get('menu_order')) return 1;
+                       if ( v1.get('menu_order') > v2.get('menu_order')) return -1;
                    return 0;
                 };
-                this.sortkey = 'annees';
+                this.sortkey = 'newstype';
                 this.sort();
         },
         initialize : function() {

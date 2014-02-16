@@ -4,10 +4,9 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
-            this.template = _.template($("#workslisttools_template").html());
         },
         render : function () {
-            var renderedContent = this.template({sortkey: Blog.myworkslist.sortkey, displaymode: Blog.myworkslist.displaymode});
+            var renderedContent = blog.Templates['workListTools']({sortkey: Blog.myworkslist.sortkey, displaymode: Blog.myworkslist.displaymode});
             this.$el.html(renderedContent);
             return this;
         }

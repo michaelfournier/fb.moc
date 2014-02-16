@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     // Files to be concatenated … (source and destination files)
     concat: {
       js: {
-        src: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
+        src: ['app/namespace.js', 'app/templates.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
         dest: 'app/app.js'
       }
     },
@@ -52,6 +52,20 @@ module.exports = function (grunt) {
       dist: {
         src: ['<%= concat.js.dest %>'],
         dest: 'app/app.min.js'
+      }
+    },
+
+    jst: {
+      compile: {
+          options: {
+              namespace: 'Blog.Templates',
+              processName: function (filename) {
+                  return filename.split('/').pop().split('.')[0];
+              }
+          },
+          files: {
+              'app/templates.js': ['app/templates/*.html']
+          }
       }
     },
 
@@ -67,8 +81,8 @@ module.exports = function (grunt) {
         }
       },
       scripts: {
-        files: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
-        tasks: ['concat', 'uglify'],
+        files: ['app/namespace.js', 'app/templates/*.html', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
+        tasks: ['jst', 'concat', 'uglify'],
         options: {
           nospawn: true
         }
@@ -93,6 +107,7 @@ module.exports = function (grunt) {
 
   // Load the plugins that provide the tasks we specified in package.json.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -102,6 +117,6 @@ module.exports = function (grunt) {
 
   // This is the default task being executed if Grunt
   // is called without any further parameter.
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jst', 'concat', 'uglify']);
 
 };

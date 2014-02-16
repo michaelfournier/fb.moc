@@ -4,13 +4,13 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
-            this.template = _.template($("#home_template").html());
+            this.template = blog.Templates['home']();
         },
         render : function() {
             // on insère un gros bouton pour le roll over du menu sur la home
 
             console.log(this.collection);
-            var renderedContent = this.template();
+            var renderedContent = this.template;
             this.$el.html(renderedContent);
             var picsArray = [];
             _.each(this.collection.models, function(data) {

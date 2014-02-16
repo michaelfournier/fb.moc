@@ -2,7 +2,6 @@ var Blog = (function (blog) {
 
     blog.Views.BioSidebarView = Backbone.View.extend({
         initialize : function (data) {
-            this.template = _.template($("#sidebar_texts_template").html());
             _.bindAll(this, 'render');
             this.collection = data;
             // this.collection.bind('reset', this.render);
@@ -15,7 +14,7 @@ var Blog = (function (blog) {
             if(!this.collection.slug){
               this.collection.slug = this.collection.at(0).get('slug');
             }
-            var renderedContent = this.template({textes: this.collection.models, slug: this.collection.slug});
+            var renderedContent = blog.Templates['textesSidebar']({textes: this.collection.models, slug: this.collection.slug});
             i = 1;
             this.$el.html(renderedContent).find('a').each(function() {
                 $(this).delay(i * 50).animate({opacity: 1});

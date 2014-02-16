@@ -3,9 +3,7 @@ var Blog = (function (blog) {
     blog.Views.BioMainView = blog.Views.BaseView.extend({
         el : $("#mainbb"),
         initialize : function (data) {
-
-            this.template = _.template($("#bio_template").html());
-
+            this.template = blog.Templates['bio']();
             _.bindAll(this, 'render');
              //this.collection.bind('sort', 'render');
             // this.collection.bind('change', this.render);
@@ -13,9 +11,7 @@ var Blog = (function (blog) {
             // this.collection.bind('remove', this.render);
         },
         render : function () {
-            console.log('rrr', this);
-            this.$el.html(this.template());
-            
+            this.$el.html(this.template);
             // la fonction renderNested est héritée de la vue BaseView //
             var renderNested = this.renderNested;
             var parentview = this.$el;

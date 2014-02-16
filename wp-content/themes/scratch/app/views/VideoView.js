@@ -4,10 +4,9 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#video_template").html());
         },
         render : function () {
-            var renderedContent = this.template({myvideo: this.model});
+            var renderedContent = blog.Templates['video']({myvideo: this.model});
             var content = this.$el.find('#visuel');
             content.addClass('spinner2');
             var that = this;

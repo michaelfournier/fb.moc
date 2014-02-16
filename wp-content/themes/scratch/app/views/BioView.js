@@ -4,7 +4,7 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#bio_template").html());
+            this.template = blog.Templates['bio']();
         },
         render : function () {
             console.log(this.model);

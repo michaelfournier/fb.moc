@@ -2,7 +2,6 @@ var Blog = (function (blog) {
 
     blog.Views.TextesContentView = Backbone.View.extend({
         initialize : function (data) {
-            this.template = _.template($("#content_texts_template").html());
             _.bindAll(this, 'render');
             this.model = data;
             // this.collection.bind('reset', this.render);
@@ -12,7 +11,7 @@ var Blog = (function (blog) {
         },
         render : function () {
             var mycontent = this.$el;
-            var renderedContent = this.template({texte: this.model});
+            var renderedContent = blog.Templates['textesContent']({texte: this.model});
               this.$el.animate({
                 opacity: 0
               }, {
@@ -24,6 +23,8 @@ var Blog = (function (blog) {
                         if(!mycontenttxt.hasClass("mCustomScrollbar")) {
                             mycontenttxt.mCustomScrollbar({
                                 set_height: "100%",
+                                autoHideScrollbar: true,
+                                autoDraggerLength: false,
                                 scrollInertia: 150,
                                 theme: "dark"
                             });

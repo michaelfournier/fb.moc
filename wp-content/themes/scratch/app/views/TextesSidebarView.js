@@ -2,7 +2,6 @@ var Blog = (function (blog) {
 
     blog.Views.TextesSidebarView = Backbone.View.extend({
         initialize : function (data) {
-            this.template = _.template($("#sidebar_texts_template").html());
             _.bindAll(this, 'render');
             this.collection = data;
             // this.collection.bind('reset', this.render);
@@ -12,7 +11,7 @@ var Blog = (function (blog) {
 
         },
         render : function () {
-            var renderedContent = this.template({textes: this.collection.models, slug: this.collection.slug});
+            var renderedContent = blog.Templates['textesSidebar']({textes: this.collection.models, slug: this.collection.slug});
             i = 1;
             this.$el.html(renderedContent).find('a').each(function() {
                 $(this).delay(i * 50).animate({opacity: 1});

@@ -4,15 +4,13 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.collection = data;
-            
-            this.template = _.template($("#works_listmini_template").html());
             _.bindAll(this, 'render');
         },
         render : function () {
 
             //this.$el.find('.maincontent').remove();
             var that = this;
-            var renderedContent = this.template({works : this.collection.models, sortkey: this.collection.sortkey});
+            var renderedContent = blog.Templates['worksListMini']({works : this.collection.models, sortkey: this.collection.sortkey});
             // on fait apparaitre dans #mainbb la liste des works en fondu //
             i = 1;
             this.$el.append(renderedContent);
