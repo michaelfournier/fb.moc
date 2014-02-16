@@ -1,0 +1,28 @@
+	<!-- template pour la workslist thumb -->
+	<div id="wraplist">
+      	<%  var tab = [];
+             tab[-1] = 0;
+         %>
+	    <% _.each(works ,function(work, i){ %>
+              <% if (_.isEmpty(work.get('gallery')) === false || _.isEmpty(work.get('customthumb')) === false ) { %>
+              	<%  
+              		if (sortkey === 'annees') {
+              			tab[i] = works[i].get('custom_fields')['_pinfos_annee'];
+              		} else if (sortkey === 'categories') {
+              			tab[i] = works[i].get('categories')[0]['title'];
+              		}
+              	%>
+          		<div class="wrapthumb">
+                    <a class="workthumb" data-id="<%= work.get("id") %>" title="<%= work.get("title") %>" href="#works/<%= work.get('slug') %>">       	
+                    	<% if (_.isEmpty(work.get('customthumb')) === true) { %>
+                    		<img src='<%= work.get('thumbnormal') %>' />
+                    	<% } else { %>
+                    		<img src='<%= work.get('customthumb') %>' />
+                    	<% } %>
+                    </a>
+                    <h5 class="worktitle"><%= work.get("title") %></h5>
+
+             	</div>             			
+              <% } %>    
+	    <% }); %>
+</div>

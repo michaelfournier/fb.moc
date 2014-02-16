@@ -1,0 +1,13 @@
+<!-- template  pour textes sidebar -->
+<div id="sidebarwrapper">	
+	 <% _.each(textes, function (texte, i) { %>
+	 	<a style="opacity:0" href="#<%= texte.get('type') %>/<%= texte.get('slug') %>">
+		 	<h4 <% if (slug === texte.get('slug')) { %> class="actif" <% } %>><%= texte.get('title') %></h4>
+		 	<h5>
+		 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>
+		 		<%= auteur['prenom']+" "+auteur['nom'] %>
+		 	<% }); %>
+		 	</h5>
+	 	</a>
+	 <% }); %>
+</div>

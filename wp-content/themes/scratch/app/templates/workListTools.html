@@ -1,0 +1,22 @@
+<!-- template pour les outils de trie et d'affichage de workslist -->
+<div id="indextools">
+	<nav id="displaying">
+		<ul>
+			<li>
+				<a <% if (displaymode === "thumbs") { %> class="actif" <% } %> data-bypass id='displaythumb'>
+				</a>
+			</li>
+			<li>
+				<a <% if (displaymode === "list") { %> class="actif" <% } %> data-bypass id='displaylist'>
+				</a>
+			</li>
+			
+		</ul>
+	</nav>
+	<nav id="sorting" <% if (displaymode === "list") { %> style="display:block" <% } %>>
+		<ul>
+			<li><a <% if (sortkey === "annees") { %> class="actif" <% } %> data-bypass id='sortbydate'>date</a></li>
+			<li><a <% if (sortkey === "categories") { %> class="actif" <% } %> data-bypass  id='sortbycat'>categories</a></li>
+		</ul>
+	</nav>
+</div>

@@ -1,0 +1,20 @@
+<!-- template  pour textes content -->
+<div id="txtwrapper"><%= texte.get('post').content %></div>
+<aside id="rightbar">
+
+	<% if (texte.get('post').custom_fields['_pinfostextes_fileurl']) { %>
+	 	<a class="btn-pdf" data-bypass href='<%= texte.get('post').custom_fields['_pinfostextes_fileurl'] %> ' target="_blank"><span id="downloadpdf"></span><% if(wp_vars.lang === "en") { %>download text as pdf <% } else { %>télécharger le texte en pdf <% } %> </a>
+	<% } %>
+
+	<% if (texte.get('post').custom_fields['_pinfosbio_fileurl']) { %>
+	 	<a class="btn-pdf" data-bypass href='<%= texte.get('post').custom_fields['_pinfosbio_fileurl'] %> ' target="_blank"><span id="downloadpdf"></span><% if(wp_vars.lang === "en") { %>download text as pdf <% } else { %>télécharger le texte en pdf <% } %> </a>
+	<% } %>
+
+	<% if (texte.get('post').worksconnected) { %>
+		<% _.each( texte.get('post').worksconnected, function (work, i) { %>
+	 		<a title="<%= work['title'] %>" href='#works/<%= work['slug'] %> '>
+	 			<img src="<%= work['thumb'] %>" />
+	 		</a>
+		<% }); %>
+	<% } %>
+</aside>

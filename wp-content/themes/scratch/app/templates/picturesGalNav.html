@@ -1,0 +1,8 @@
+<!-- template pour la nav pictureGalNavView --> 
+	    <% if(_.size(gallery) > 1) { %>
+	    		<ul>
+			        <% _.each(gallery, function (picture, i) { %>       	
+			            	<li><a data-bypass="<%= i %>" class="linkpic"><%= i+1 %></a></li>
+			        <% }); %>
+	        	</ul>
+	    <% } %>

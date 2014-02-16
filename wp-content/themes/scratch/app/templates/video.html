@@ -1,0 +1,11 @@
+<!-- template pour video -->
+<% 
+vwidth = myvideo.get('width');
+vheight = myvideo.get('height');
+vratio = (vwidth/vheight);
+%>
+<div id="video">
+	<%= myvideo.get('html') %>
+</div>
+<img style="visibility:hidden" data-ratio="<%= vratio %>" src="<%= myvideo.get('thumbnail_url') %>" />
+<figcaption id="legend"><%= myvideo.get('legend') %></figcaption>
