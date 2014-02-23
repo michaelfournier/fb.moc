@@ -997,6 +997,7 @@ a.actif,
 }
 #main_nav a,
 #tools li a {
+  text-transform: uppercase;
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
 }
@@ -1198,7 +1199,7 @@ nav#sorting {
 nav#sorting li:first-child a {
   border: 0px;
 }
-#main_nav li:first-child a span,
+#main_nav li:first-child a,
 #tools nav li:first-child a {
   padding-left: 0px;
   border: 0px;
@@ -2339,10 +2340,6 @@ SMARTPHONES
   /* HEADER */
   #secondmenu {
     float: right;
-  }
-  #secondmenu li#qtrans {
-    border-left: 1px solid #b3b3b3;
-    padding-left: 1.1428571428571428em;
   }
   li#qtrans span {
     border: none;

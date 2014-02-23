@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         dest: 'app/app.min.js'
       }
     },
-
+    // javascipt templates //
     jst: {
       compile: {
           options: {
@@ -75,13 +75,13 @@ module.exports = function (grunt) {
         livereload: true
       },
       php : {
-        files: '*.php',
+        files: ['*.php', 'app/templates/*.html'],
         options: {
           nospawn: true
         }
       },
       scripts: {
-        files: ['app/namespace.js', 'app/templates/*.html', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
+        files: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
         tasks: ['jst', 'concat', 'uglify'],
         options: {
           nospawn: true

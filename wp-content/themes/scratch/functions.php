@@ -90,7 +90,7 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
   include_once 'metaboxes/simple-image-spec.php';
   include_once 'metaboxes/simple-image-02-spec.php';
   include_once 'metaboxes/repeating-mediagallery-spec.php';
-    include_once 'metaboxes/repeating-mediagallerypage-spec.php';
+  include_once 'metaboxes/repeating-mediagallerypage-spec.php';
   include_once 'metaboxes/repeating-videogallery-spec.php';
   include_once 'metaboxes/infosoeuvres-meta-spec.php';
   include_once 'metaboxes/infostextes-meta-spec.php';

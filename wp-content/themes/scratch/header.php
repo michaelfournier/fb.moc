@@ -36,21 +36,24 @@
 		<h2 id="mobiletitle">Fayçal Baghriche</h2>
 		<nav id="main_nav">	
 		<?
-		$pages = get_pages('sort_column=menu_order&exclude=357');
+		$pages = get_pages('sort_column=menu_order&exclude=581');
 
 		?>
 		<ul id="mainmenu">
 		<? foreach($pages as $page) { ?>
 			<li>				
 				<? if ($page->post_name == 'pdf') { 
-				   $tabpdf = get_post_meta($page->ID, "_pfilespdf_blocspics", true);
+				   global $filespdf_mb;
+				   $metapdf = get_post_meta($page->ID, $filespdf_mb->get_the_id(), true);
+				   $tabpdf = trad_customfield($metapdf, 'pdf');
+				  // print_r($tabpdf);
 				?>
 				<a id="btn-pdf" data-bypass href='#'><span><?= $page->post_title; ?></span></a>
 					<ul class="submenu">
-						<? foreach ($tabpdf as $key => $pdf) { ?>
-						<? $mypdfurl = wp_get_attachment_url($pdf['image']); ?>
+						<? foreach ($tabpdf as $key => $value) { ?>
+						<? $mypdfurl = wp_get_attachment_url($value['pdfid']); ?>
 							<li>
-								<a data-bypass href="<?= $mypdfurl; ?>"><?= $pdf['titlepdf']; ?></a>
+								<a data-bypass href="<?= $mypdfurl; ?>"><?= $value['title']; ?></a>
 							</li>
 						<? } ?>
 					</ul>
@@ -63,11 +66,13 @@
 		</ul><!-- #container -->
 		<div id="spin"></div>
 		<ul id='secondmenu'>
-			<? $page = new WP_Query( 'page_id=357' ); ?>
+			<? $page = new WP_Query( 'page_id=581' ); ?>
 		<? if ( $page->have_posts() ):
-		while ( $page->have_posts() ) : $page->the_post(); ?>
-			<li><a href='<?= "#".$post->post_name;?>'><span><?= $post->post_title; ?></span></a></li>
+			while ( $page->have_posts() ) : $page->the_post(); ?>
+				<li><a href='<?= "#".$post->post_name;?>'><span><?= $post->post_title; ?></span></a></li>
 			<? $mylang = qtrans_getLanguage(); ?>
+		<?php endwhile; // end of the loop. ?>		
+		<?php endif; // end of the loop. ?>	
 			<li id="qtrans">
 				<? if ($mylang == 'en') { ?>
 					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>fra</span></a>	
@@ -75,8 +80,6 @@
 					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>eng</span></a>
 				<? } ?>
 			</li>	
-		<?php endwhile; // end of the loop. ?>		
-		<?php endif; // end of the loop. ?>	
 		</ul>
 
 		</nav>
