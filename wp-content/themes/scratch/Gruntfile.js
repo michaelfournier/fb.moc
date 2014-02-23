@@ -80,6 +80,13 @@ module.exports = function (grunt) {
           nospawn: true
         }
       },
+      html : {
+        files: ['app/templates/*.html'],
+        tasks: ['jst', 'concat', 'uglify'],
+        options: {
+          nospawn: true
+        }
+      },
       scripts: {
         files: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
         tasks: ['jst', 'concat', 'uglify'],

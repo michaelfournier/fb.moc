@@ -105,9 +105,9 @@ this["Blog"]["Templates"]["notice"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!-- template pour mentions -->\n<section id="tools"></section>\n<div id="wrapper">\t\t\n\t<section style="background:none" class="maincontent notice">\n\t\t<div id="txtwrapper">\n\t\t\t<div id="uberwrapper">\n\t\t\t\t' +
+__p += '<!-- template pour mentions -->\n<section id="tools"></section>\n<div id="wrapper">\t\t\n\t<section style="background:none" class="maincontent notice">\n\t\t<div id="txtwrapper">\n\t\t\t' +
 ((__t = ( mynotice.get('content') )) == null ? '' : __t) +
-'\n\t\t\t</div>\n\t\t</div>\n\t</section>\n</div>\n';
+'\n\t\t</div>\n\t</section>\n</div>\n';
 
 }
 return __p
@@ -703,7 +703,7 @@ var Blog = (function (blog) {
 
 	blog.Models.Notice = Backbone.Model.extend({
         query : function () {
-            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=notice';
+            this.urlRoot = wp_vars.blogurl+'/api/get_post?post_type=page&include=id,content,title,slug&slug=contact';
             return this;
         },
          parse: function (response) {
@@ -1159,7 +1159,6 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#notice_template").html());
         },
         render : function () {
             console.log(this.model);
@@ -2167,7 +2166,7 @@ var Blog = (function (blog){
                 "texts/:slug_post" : "displayText",
                 "bio" : "displayBio",
                 "bio/:slug_post" : "displayBio",
-                "notice" : "notice",
+                "contact" : "notice",
                 "home" : "home",
                 "news" : "news",
                 "" : "home",
@@ -2264,10 +2263,8 @@ var Blog = (function (blog){
               });
 
             },
-
             notice : function () {
-            
-              this.selectMenu('notice');
+              this.selectMenu('contact');
               this.killbackstrech();
                   // on instancie la vue news
                 Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
@@ -2281,7 +2278,6 @@ var Blog = (function (blog){
                   }
                 });
             },
-
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();

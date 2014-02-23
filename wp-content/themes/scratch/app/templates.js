@@ -88,9 +88,9 @@ this["Blog"]["Templates"]["notice"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!-- template pour mentions -->\n<section id="tools"></section>\n<div id="wrapper">\t\t\n\t<section style="background:none" class="maincontent notice">\n\t\t<div id="txtwrapper">\n\t\t\t<div id="uberwrapper">\n\t\t\t\t' +
+__p += '<!-- template pour mentions -->\n<section id="tools"></section>\n<div id="wrapper">\t\t\n\t<section style="background:none" class="maincontent notice">\n\t\t<div id="txtwrapper">\n\t\t\t' +
 ((__t = ( mynotice.get('content') )) == null ? '' : __t) +
-'\n\t\t\t</div>\n\t\t</div>\n\t</section>\n</div>\n';
+'\n\t\t</div>\n\t</section>\n</div>\n';
 
 }
 return __p

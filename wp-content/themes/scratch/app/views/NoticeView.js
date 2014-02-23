@@ -4,7 +4,6 @@ var Blog = (function (blog) {
         el : $("#mainbb"),
         initialize : function (data) {
             this.model = data;
-            this.template = _.template($("#notice_template").html());
         },
         render : function () {
             console.log(this.model);

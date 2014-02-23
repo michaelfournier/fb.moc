@@ -35,7 +35,7 @@ var Blog = (function (blog){
                 "texts/:slug_post" : "displayText",
                 "bio" : "displayBio",
                 "bio/:slug_post" : "displayBio",
-                "notice" : "notice",
+                "contact" : "notice",
                 "home" : "home",
                 "news" : "news",
                 "" : "home",
@@ -132,10 +132,8 @@ var Blog = (function (blog){
               });
 
             },
-
             notice : function () {
-            
-              this.selectMenu('notice');
+              this.selectMenu('contact');
               this.killbackstrech();
                   // on instancie la vue news
                 Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
@@ -149,7 +147,6 @@ var Blog = (function (blog){
                   }
                 });
             },
-
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();

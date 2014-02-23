@@ -1365,7 +1365,7 @@ nav#sorting li:first-child a {
   font-weight: bold;
   text-transform: uppercase;
   padding: 1.1428571428571428em 0 0.7619047619047619em 0;
-  border-bottom: 1px dotted #b3b3b3;
+  border-bottom: 1px solid #dcdcdc;
   margin: 0;
   letter-spacing: 2px;
 }
@@ -1404,7 +1404,7 @@ nav#sorting li:first-child a {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   width: 96%;
-  border-bottom: 1px dotted #b3b3b3;
+  border-bottom: 1px solid #dcdcdc;
 }
 .sub .infosnews:last-child {
   border: 0;
@@ -2555,22 +2555,12 @@ SMARTPHONES
     height: 100%;
     overflow-y: auto;
   }
-  .news #txtwrapper {
+  .news #txtwrapper,
+  .notice #txtwrapper {
     max-width: 600px;
     padding: 0;
     margin: 0;
     float: left;
-  }
-  .notice #txtwrapper {
-    max-width: 500px;
-    padding: 0;
-    margin: 0 auto;
-    background: none;
-  }
-  .notice .mCSB_container {
-    padding-right: 1.1428571428571428em;
-    margin: 0;
-    background-color: white;
   }
   #txtwrapper #uberwrapper {
     max-width: 500px;
