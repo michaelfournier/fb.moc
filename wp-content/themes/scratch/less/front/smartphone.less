@@ -8,7 +8,7 @@ SMARTPHONES
 
 	#workslistmini, #unfoldworks { display: none; }
 	#navgal li { float: left; }
-	#mainbb, #main_header { padding: @unit; .box-sizing(); }
+	#mainbb, #main_header{ padding: @unit; .box-sizing(); }
 	#navworks { float: right;}
 
 	#mainmenu li:first-child {
@@ -72,17 +72,41 @@ SMARTPHONES
 		width: 100%;
 
 	}
-	#main_nav li {
-		width: (1/5)*100%;
+
+	#mainmenu .submenu li:first-child {
+		display: block;
 	}
 
+	#mainmenu .submenu li:first-child a {
+		border-top: none;
+		padding-top: 0;
+	}
+
+    .submenu {
+    	padding-left: @unit;
+    }
+
+	#main_nav li {
+		width: 100%;
+	}
+
+    #main_nav li:first-child a {
+    	padding: @unit @unit/2;
+    	border-top: 1px dotted @black30;
+    }
+
 	#main_nav li:last-child a {
-		border-right: 1px solid @black10;
-		padding: 0 @unit;		
+		border-right: none;	
 	}
 
 	#main_nav li a {
-		text-align: center;
+		display: block;
+		border-left: 0;
+		border-right: 0;
+		text-decoration: none;
+		padding: @unit @unit/2;
+		border-top: 1px dotted @black30;
+		text-align: left;
 		width: 100%;
 		.box-sizing();
 	}

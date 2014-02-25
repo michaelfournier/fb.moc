@@ -985,7 +985,7 @@ a.actif,
 #mainmenu a:hover {
   text-decoration: underline;
 }
-#mainmenu .actif {
+#main_nav .actif {
   text-decoration: underline;
 }
 #main_header {
@@ -1000,72 +1000,6 @@ a.actif,
   text-transform: uppercase;
   border-left: 1px solid #dcdcdc;
   padding: 0 1.1428571428571428em;
-}
-#mainmenu li:hover .submenu {
-  display: block;
-}
-.submenu li {
-  clear: both;
-  width: 100%;
-}
-#main_nav .submenu a {
-  width: 100%;
-  padding: 0;
-  border: none;
-  text-align: center;
-}
-.submenu {
-  display: none;
-  position: absolute;
-  left: 50%;
-  margin-top: 2.057142857142857em;
-  margin-left: -90px;
-  width: 180px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0.5714285714285714em;
-  z-index: 99;
-  border: 1px solid #dcdcdc;
-  background-color: white;
-}
-/* shared with before and after */
-.submenu:before,
-.submenu:after {
-  content: ' ';
-  height: 0;
-  position: absolute;
-  width: 0;
-  border: 8px solid transparent;
-  /* arrow size */
-
-}
-/* these arrows will point up */
-/* top-stacked, smaller arrow */
-.submenu:before {
-  border-bottom-color: #fff;
-  /* arrow color */
-
-  /* positioning */
-
-  position: absolute;
-  top: -16px;
-  left: 80px;
-  z-index: 2;
-}
-/* arrow which acts as a background shadow */
-.submenu:after {
-  border-bottom-color: #dcdcdc;
-  /* arrow color */
-
-  /* positioning */
-
-  position: absolute;
-  top: -17px;
-  left: 80px;
-  z-index: -1;
 }
 /* INDEX WORKS */
 .segment {
@@ -2235,15 +2169,34 @@ SMARTPHONES
   #mainmenu {
     width: 100%;
   }
+  #mainmenu .submenu li:first-child {
+    display: block;
+  }
+  #mainmenu .submenu li:first-child a {
+    border-top: none;
+    padding-top: 0;
+  }
+  .submenu {
+    padding-left: 1.1428571428571428em;
+  }
   #main_nav li {
-    width: 20%;
+    width: 100%;
+  }
+  #main_nav li:first-child a {
+    padding: 1.1428571428571428em 0.5714285714285714em;
+    border-top: 1px dotted #b3b3b3;
   }
   #main_nav li:last-child a {
-    border-right: 1px solid #dcdcdc;
-    padding: 0 1.1428571428571428em;
+    border-right: none;
   }
   #main_nav li a {
-    text-align: center;
+    display: block;
+    border-left: 0;
+    border-right: 0;
+    text-decoration: none;
+    padding: 1.1428571428571428em 0.5714285714285714em;
+    border-top: 1px dotted #b3b3b3;
+    text-align: left;
     width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -2348,6 +2301,72 @@ SMARTPHONES
   }
   li#qtrans .actif {
     display: none;
+  }
+  .submenu {
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-top: 2.057142857142857em;
+    margin-left: -90px;
+    width: 180px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0.5714285714285714em;
+    z-index: 99;
+    border: 1px solid #dcdcdc;
+    background-color: white;
+  }
+  /* shared with before and after */
+  .submenu:before,
+  .submenu:after {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    width: 0;
+    border: 8px solid transparent;
+    /* arrow size */
+  
+  }
+  #mainmenu li:hover .submenu {
+    display: block;
+  }
+  .submenu li {
+    clear: both;
+    width: 100%;
+  }
+  #main_nav .submenu a {
+    width: 100%;
+    padding: 0;
+    border: none;
+    text-align: center;
+  }
+  /* these arrows will point up */
+  /* top-stacked, smaller arrow */
+  .submenu:before {
+    border-bottom-color: #fff;
+    /* arrow color */
+  
+    /* positioning */
+  
+    position: absolute;
+    top: -16px;
+    left: 80px;
+    z-index: 2;
+  }
+  /* arrow which acts as a background shadow */
+  .submenu:after {
+    border-bottom-color: #dcdcdc;
+    /* arrow color */
+  
+    /* positioning */
+  
+    position: absolute;
+    top: -17px;
+    left: 80px;
+    z-index: -1;
   }
   /* TOOLS */
   #navgal {

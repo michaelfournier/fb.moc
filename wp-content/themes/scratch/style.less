@@ -159,7 +159,7 @@ figcaption {
 	text-decoration: underline;
 }
 
-#mainmenu .actif {
+#main_nav .actif {
 	text-decoration: underline;
 }
 
@@ -177,68 +177,7 @@ figcaption {
 	padding: 0 @unit;
 }
 
-#mainmenu li:hover .submenu {
-	display: block;
-}
 
-.submenu li {
-	clear: both;
-	width: 100%;
-}
-
-#main_nav .submenu a {
-	width: 100%;
-	padding: 0;
-	border: none;
-	text-align: center;
-}
-
-	.submenu { 
-		display: none;
-		position: absolute;
-	    left:50%;
-	    margin-top: @unit*1.8;
-	    margin-left:-90px;
-	    width:180px;
-	    .box-sizing();
-	    padding: @unit/2;
-	    z-index: 99;
-	    border: 1px solid @black10;
-	    background-color: white;
-	}
-
-	/* shared with before and after */
-	.submenu:before, .submenu:after {
-		content: ' ';
-		height: 0;
-		position: absolute;
-		width: 0;
-		border: 8px solid transparent; /* arrow size */
-	}
-
-/* these arrows will point up */
-
-/* top-stacked, smaller arrow */
-.submenu:before {
-	border-bottom-color: #fff;  /* arrow color */
-
-	/* positioning */
-	position: absolute;
-	top: -16px;
-	left: 80px;
-	z-index: 2;
-}
-
-/* arrow which acts as a background shadow */
-.submenu:after {
-	border-bottom-color: @black10;  /* arrow color */
-
-	/* positioning */
-	position: absolute;
-	top: -17px;
-	left: 80px;
-	z-index: -1;
-}
 
 /* INDEX WORKS */
 .segment {
