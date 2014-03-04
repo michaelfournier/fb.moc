@@ -11,7 +11,7 @@ var Blog = (function (blog) {
             this.$el.html("");
             var renderedContent = blog.Templates['news']({mynews: this.collection.models});
             this.$el.html(renderedContent).find("#txtwrapper").css('opacity', 0);
-            // Blog.myapprouter.myheight();
+            // Blog.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');
             mycontenttxt.mCustomScrollbar("destroy");
             if(!mycontenttxt.hasClass("mCustomScrollbar")) {
@@ -22,7 +22,7 @@ var Blog = (function (blog) {
                 });
             }
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             
         }
 

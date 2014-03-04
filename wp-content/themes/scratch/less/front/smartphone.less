@@ -9,7 +9,9 @@ SMARTPHONES
 	#workslistmini, #unfoldworks { display: none; }
 	#navgal li { float: left; }
 	#mainbb, #main_header{ padding: @unit; .box-sizing(); }
-	#navworks { float: right;}
+	#navworks { 
+		float: right;
+	}
 
 	#mainmenu li:first-child {
 		display: none;
@@ -35,7 +37,7 @@ SMARTPHONES
 		border: @unit/2 solid white;		
 	}
 
-	#toogletext {
+	#sidebar #toogletext {
 		float: left;
 		padding: @unit/2;
 		border: 1px solid @black10;
@@ -57,20 +59,30 @@ SMARTPHONES
 
 
 /* MENU */
-	#main_header {
-		border-bottom: 1px solid @black10;
-		margin-bottom: @unit;	
+	#mobile_header {
+		float: left;
+		width: 100%;
+		border-bottom: 1px solid @black90;
 	}
 
 	#mobiletitle {
-		width: 100%;
-		text-align: center;
-		display: block;
+		float: left;
+		display: inline-block;
+	}
+
+	#mobilemenu {
+		display: inline-block;
+		min-height: 27px;
+		width: 39px;
+		line-height: 2;
+		float: right;
+		background: url('img/mobilemenu.png') no-repeat;
+		background-position: right center;
+		background-size: 30px 23px;
 	}
 
 	#mainmenu {
 		width: 100%;
-
 	}
 
 	#mainmenu .submenu li:first-child {
@@ -86,8 +98,15 @@ SMARTPHONES
     	padding-left: @unit;
     }
 
+    #main_nav {
+    	display: none;
+    	width: 100%;
+    	float: left;
+    }
+
 	#main_nav li {
 		width: 100%;
+		background-color: #EFEFEF;
 	}
 
     #main_nav li:first-child a {
@@ -104,11 +123,17 @@ SMARTPHONES
 		border-left: 0;
 		border-right: 0;
 		text-decoration: none;
-		padding: @unit @unit/2;
+		padding: @unit @unit;
 		border-top: 1px dotted @black30;
 		text-align: left;
 		width: 100%;
 		.box-sizing();
+	}
+
+	#secondmenu {
+		border-bottom: 1px solid @black90;
+		float: left;
+		width: 100%;
 	}
 
 
@@ -118,11 +143,11 @@ SMARTPHONES
 @media only screen and (max-width: 500px) {
  	#smartphone { display: block;}
 	#tablette, #intermediaire, #bureau  { display: none;}	
-	.wrapthumb { width: (1/2)*100%; }
+	.wrapthumb { width: 49%; }
 
 	#wraplist-list {
-		-webkit-column-count: 1;
-		-webkit-column-width: 100%;
+		column-count: 1;
+		column-width: 100%;
 	}
 
 }

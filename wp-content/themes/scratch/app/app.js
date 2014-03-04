@@ -1,10 +1,47 @@
 var Blog = (function () {
 	var blog = {
 		init: function () {
-			
-		}
+			console.log("ok");
+		},
+        // fonction pour donner une hauteur à #mainbb //
+        myheight: function () {
+            $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
+            // on calcule la hauteur de la div #content //
+            var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
+            //alert($('#main_header').height());
+            var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
+                
+            legendheight = $("#wrapper #legend").height();
+            // $("#wrapper").find("#sidebar").css("height", imageheight);
+            var mypic = $(document).find('#visuel img');
+            var myctnr = $(document).find('#media');
+            ratioctnr = Math.round(myctnr.width() / contentheight * 100) / 100;
+            ratiopic = Math.round(mypic.attr("data-ratio") *100 ) / 100;
+  
+            console.log(ratioctnr+"  "+ratiopic);
+            // on test si la largeur fait au moins 768px //
+            if (Modernizr.mq('screen and (min-width: 768px)')) {
+               $(document).find('#main_nav').removeAttr('style');
+               $(document).find('#wrapper, #workslistmini').css("height", contentheight);
+                mypic.css("max-height", contentheight - legendheight);
+               if (ratioctnr > ratiopic ) {
+                   mypic.addClass("horizontale");
+                   $(document).find("#ctn-media").addClass("horizontale");
+                   //alert(mypic.width());
+               } else if (ratioctnr <= ratiopic ) {
+                   mypic.removeClass("horizontale");
+                   $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
+               }
+               $(document).find("#ctn-media").css('width', mypic.width());
+               //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
+            } else {
+               $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
+               $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
+               $(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
+            }
+            $(document).find("body").removeClass('spinner');
+        }
 	};
-
 
 	blog.Models = {};
 	blog.Collections = {};
@@ -936,7 +973,7 @@ var Blog = (function (blog) {
                   }
                 });
 
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             $(document).find("body").addClass('spinner');
 
             return this;
@@ -1040,7 +1077,7 @@ var Blog = (function (blog) {
             console.log(this.model);
             var renderedContent = this.template({mybio: this.model});
             this.$el.html(renderedContent).find(".bio").css('opacity', 0);
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');
             mycontenttxt.mCustomScrollbar("destroy"); 
             if(!mycontenttxt.hasClass("mCustomScrollbar")) {
@@ -1134,7 +1171,7 @@ var Blog = (function (blog) {
             this.$el.html("");
             var renderedContent = blog.Templates['news']({mynews: this.collection.models});
             this.$el.html(renderedContent).find("#txtwrapper").css('opacity', 0);
-            // Blog.myapprouter.myheight();
+            // Blog.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');
             mycontenttxt.mCustomScrollbar("destroy");
             if(!mycontenttxt.hasClass("mCustomScrollbar")) {
@@ -1145,7 +1182,7 @@ var Blog = (function (blog) {
                 });
             }
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             
         }
 
@@ -1164,7 +1201,7 @@ var Blog = (function (blog) {
             console.log(this.model);
             var renderedContent = blog.Templates['notice']({mynotice: this.model});
             this.$el.html(renderedContent).find("#txtwrapper").css('opacity', 0);
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');
             mycontenttxt.mCustomScrollbar("destroy"); 
             if(!mycontenttxt.hasClass("mCustomScrollbar")) {
@@ -1203,7 +1240,7 @@ var Blog = (function (blog) {
           var $that = this.$el.find(".maincontent");
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
-               Blog.myapprouter.myheight();
+               Blog.myheight();
                $that.find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
               $that.parent().find("#sidebar").mCustomScrollbar("update");
@@ -1354,7 +1391,7 @@ var Blog = (function (blog) {
                                 theme: "dark"
                             });
                         }
-                         Blog.myapprouter.myheight();
+                         Blog.myheight();
                         mycontenttxt.mCustomScrollbar("update");
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
                 }
@@ -1400,7 +1437,7 @@ var Blog = (function (blog) {
 
                 });
             }
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             $(document).find("body").addClass('spinner');
 
             return this;
@@ -1508,7 +1545,7 @@ var Blog = (function (blog) {
           var $that = this.$el.find(".maincontent");
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
-               Blog.myapprouter.myheight();
+               Blog.myheight();
                $that.find("#visuel").removeClass('spinner2');
                $that.animate({'opacity': 1});
                // on actualise la scrollbar
@@ -1537,7 +1574,7 @@ var Blog = (function (blog) {
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
             
-           // Blog.myapprouter.myheight();
+           // Blog.myheight();
 
             return this;
         },
@@ -1870,7 +1907,7 @@ var Blog = (function (blog) {
                   renderNested(parentview, myworkslistview, ".maincontent_index", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
                   renderNested(parentview, myworkslisttoolsview, "#tools");
-                 // Blog.myapprouter.myheight();
+                 // Blog.myheight();
                 }
                 
               });
@@ -1995,12 +2032,12 @@ var Blog = (function (blog) {
 
         gofullwindow : function() {
             $(document).find('html').addClass('fullwindow');
-            Blog.myapprouter.myheight();
+            Blog.myheight();
         },
 
         closefullwindow : function() {
             $(document).find('html').removeClass('fullwindow');
-            Blog.myapprouter.myheight();
+            Blog.myheight();
         },
   
         scrolltoactive : function () {
@@ -2106,7 +2143,7 @@ var Blog = (function (blog) {
                 /* */
 
 
-                Blog.myapprouter.myheight();
+                Blog.myheight();
                 parentcontainer.mCustomScrollbar("update");
                 setTimeout(function(){ mycontainer.masonry(); }, 1000);
                 
@@ -2154,10 +2191,6 @@ var Blog = (function (blog){
                 this.bind("route",function(router, route) {
                     console.log("Different Page: " + router + route);
                 });
-                // on calcule la hauteur de #wrapper //
-                //$(window).on("resize", _.bind(this.myheight, this));
-                $(window).on( 'resize', _.bind($.debounce( 100, false, this.myheight), this));
-                this.myheight();
             },
             routes : {
                 "works/:slug_post" : "displayWork",
@@ -2171,46 +2204,6 @@ var Blog = (function (blog){
                 "news" : "news",
                 "" : "home",
                 "*path" : "home"
-            },
-            // fonction pour donner une hauteur à #mainbb //
-             myheight: function() {
-                  $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
-                    // on calcule la hauteur de la div #content //
-                    var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
-                    //alert($('#main_header').height());
-                    var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
-                    
-                    legendheight = $("#wrapper #legend").height();
-                   // $("#wrapper").find("#sidebar").css("height", imageheight);
-                   var mypic = $(document).find('#visuel img');
-                   var myctnr = $(document).find('#media');
-                   ratioctnr = Math.round(myctnr.width() / contentheight * 100) / 100;
-                   ratiopic = Math.round(mypic.attr("data-ratio") *100 ) / 100;
-
-                   console.log(ratioctnr+"  "+ratiopic);
-                // on test si la largeur fait au moins 600px //
-                if (Modernizr.mq('screen and (min-width: 768px)')) {
-                   $(document).find('#wrapper, #workslistmini').css("height", contentheight);
-                    mypic.css("max-height", contentheight - legendheight);
-                   if (ratioctnr > ratiopic ) {
-                       mypic.addClass("horizontale");
-                       $(document).find("#ctn-media").addClass("horizontale");
-                       //alert(mypic.width());
-                   } else if (ratioctnr <= ratiopic ) {
-                       mypic.removeClass("horizontale");
-                       $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
-                   }
-                   $(document).find("#ctn-media").css('width', mypic.width());
-                   //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
-                 } else {
-                    $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
-                    $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
-                    $(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
-                 }
-
-                $(document).find("body").removeClass('spinner');
-
-                    //console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {
@@ -2440,3 +2433,22 @@ var Blog = (function (blog){
 
 	return blog;
 }(Blog));
+(function($) {
+  // on calcule la hauteur de #wrapper //
+  Blog.myheight();
+
+  //$(window).on("resize", _.bind(this.myheight, this));
+  $(window).on( 'resize', _.bind($.debounce( 100, false, Blog.myheight), this));
+
+  $('#mobilemenu').on('click', function () {
+      var elt = $('#main_nav');
+      if ( elt.is( ":hidden" ) ) {
+          elt.slideDown( "fast" , function() {
+          });
+      } else {
+          elt.slideUp("fast", function() {
+            $(this).removeAttr('style');
+          });
+      }
+  });
+})(jQuery);

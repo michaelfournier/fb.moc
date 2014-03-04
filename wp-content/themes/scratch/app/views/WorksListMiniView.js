@@ -54,12 +54,12 @@ var Blog = (function (blog) {
 
         gofullwindow : function() {
             $(document).find('html').addClass('fullwindow');
-            Blog.myapprouter.myheight();
+            Blog.myheight();
         },
 
         closefullwindow : function() {
             $(document).find('html').removeClass('fullwindow');
-            Blog.myapprouter.myheight();
+            Blog.myheight();
         },
   
         scrolltoactive : function () {

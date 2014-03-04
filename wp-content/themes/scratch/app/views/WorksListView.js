@@ -53,7 +53,7 @@ var Blog = (function (blog) {
                 /* */
 
 
-                Blog.myapprouter.myheight();
+                Blog.myheight();
                 parentcontainer.mCustomScrollbar("update");
                 setTimeout(function(){ mycontainer.masonry(); }, 1000);
                 

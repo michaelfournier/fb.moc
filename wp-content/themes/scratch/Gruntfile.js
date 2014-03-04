@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     // Files to be concatenated … (source and destination files)
     concat: {
       js: {
-        src: ['app/namespace.js', 'app/templates.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
+        src: ['app/namespace.js', 'app/templates.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js', 'app/scripts.js'],
         dest: 'app/app.js'
       }
     },
@@ -69,6 +69,22 @@ module.exports = function (grunt) {
       }
     },
 
+    autoprefixer: {
+      options: {
+        // Task-specific options go here.
+      },
+      // prefix the specified file
+      single_file: {
+        options: {
+          // Target-specific options go here.
+        },
+        src: 'style.css'
+      },
+      no_dest: {
+        src: 'style.css' // globbing is also possible here
+      }
+    },
+
    // Tasks being executed with 'grunt watch'
     watch: {
       options: {
@@ -88,7 +104,7 @@ module.exports = function (grunt) {
         }
       },
       scripts: {
-        files: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js'],
+        files: ['app/namespace.js', 'app/models/*.js', 'app/views/*.js', 'app/routes.js', 'app/scripts.js'],
         tasks: ['jst', 'concat', 'uglify'],
         options: {
           nospawn: true
@@ -96,7 +112,7 @@ module.exports = function (grunt) {
       },
       less : {
         files : ['style.less', 'cssreset/*.less', 'less/front/*.less'],
-        tasks: 'less'
+        tasks: ['less', 'autoprefixer']
       },
       cssmin : {
         files : 'style.css',
@@ -120,6 +136,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
 
   // This is the default task being executed if Grunt

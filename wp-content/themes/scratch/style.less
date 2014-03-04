@@ -146,6 +146,9 @@ figcaption {
 	position: relative;
 }
 
+#main_nav.show { display: block; }
+#main_nav.hide { display: none; }
+
 
 /* HEADER */
 
@@ -195,19 +198,20 @@ figcaption {
 }
 
 #wraplist-list {
-	-webkit-column-count: 1;
-	-webkit-column-width: 100%;
-	-webkit-column-gap: @unit*2;
+	column-count: 1;
+	column-width: 100%;
+	column-gap: @unit*2;
 	width: 100%;
 }
 
 #wraplist-list .segment {
-	display: inline-block;
 	-webkit-column-break-inside: avoid;
-	float: left;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
 	clear: both;
 	width: 100%;
 	padding: 0 0 @unit 0;
+	display: inline-block;
 }
 
 #wraplist-list .wrapthumb {
@@ -298,7 +302,7 @@ figcaption {
 
 .workthumb img {
 	width: 100%;
-	max-width: 260px;
+	max-width: 230px;
 }
 
 /* TOOLS */

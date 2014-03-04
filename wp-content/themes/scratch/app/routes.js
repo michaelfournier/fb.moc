@@ -23,10 +23,6 @@ var Blog = (function (blog){
                 this.bind("route",function(router, route) {
                     console.log("Different Page: " + router + route);
                 });
-                // on calcule la hauteur de #wrapper //
-                //$(window).on("resize", _.bind(this.myheight, this));
-                $(window).on( 'resize', _.bind($.debounce( 100, false, this.myheight), this));
-                this.myheight();
             },
             routes : {
                 "works/:slug_post" : "displayWork",
@@ -40,46 +36,6 @@ var Blog = (function (blog){
                 "news" : "news",
                 "" : "home",
                 "*path" : "home"
-            },
-            // fonction pour donner une hauteur à #mainbb //
-             myheight: function() {
-                  $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
-                    // on calcule la hauteur de la div #content //
-                    var contentheight = Math.ceil($(window).height() - $('#main_header').outerHeight(true) - $('#tools').outerHeight(true) - 10);
-                    //alert($('#main_header').height());
-                    var contentwidth = $(window).width() - $('#sidebar').outerWidth(true);
-                    
-                    legendheight = $("#wrapper #legend").height();
-                   // $("#wrapper").find("#sidebar").css("height", imageheight);
-                   var mypic = $(document).find('#visuel img');
-                   var myctnr = $(document).find('#media');
-                   ratioctnr = Math.round(myctnr.width() / contentheight * 100) / 100;
-                   ratiopic = Math.round(mypic.attr("data-ratio") *100 ) / 100;
-
-                   console.log(ratioctnr+"  "+ratiopic);
-                // on test si la largeur fait au moins 600px //
-                if (Modernizr.mq('screen and (min-width: 768px)')) {
-                   $(document).find('#wrapper, #workslistmini').css("height", contentheight);
-                    mypic.css("max-height", contentheight - legendheight);
-                   if (ratioctnr > ratiopic ) {
-                       mypic.addClass("horizontale");
-                       $(document).find("#ctn-media").addClass("horizontale");
-                       //alert(mypic.width());
-                   } else if (ratioctnr <= ratiopic ) {
-                       mypic.removeClass("horizontale");
-                       $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
-                   }
-                   $(document).find("#ctn-media").css('width', mypic.width());
-                   //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
-                 } else {
-                    $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
-                    $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
-                    $(document).find(".mCustomScrollbar").mCustomScrollbar("disable");
-                 }
-
-                $(document).find("body").removeClass('spinner');
-
-                    //console.log(legendheight);
             },
             // cette fonction est appelé quand on clic sur un onglet du menu afin de changer sa classe
             selectMenu: function (route) {

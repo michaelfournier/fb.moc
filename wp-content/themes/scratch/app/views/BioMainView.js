@@ -33,7 +33,7 @@ var Blog = (function (blog) {
                   }
                 });
 
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             $(document).find("body").addClass('spinner');
 
             return this;

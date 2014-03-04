@@ -10,7 +10,7 @@ var Blog = (function (blog) {
             console.log(this.model);
             var renderedContent = this.template({mybio: this.model});
             this.$el.html(renderedContent).find(".bio").css('opacity', 0);
-            Blog.myapprouter.myheight();
+            Blog.myheight();
             var mycontenttxt = this.$el.find('#txtwrapper');
             mycontenttxt.mCustomScrollbar("destroy"); 
             if(!mycontenttxt.hasClass("mCustomScrollbar")) {

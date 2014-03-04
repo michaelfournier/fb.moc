@@ -43,7 +43,7 @@ var Blog = (function (blog) {
                   renderNested(parentview, myworkslistview, ".maincontent_index", result);
                   // on rend la vue workslisttoolsview dans #tools comme enfant de parentview //
                   renderNested(parentview, myworkslisttoolsview, "#tools");
-                 // Blog.myapprouter.myheight();
+                 // Blog.myheight();
                 }
                 
               });

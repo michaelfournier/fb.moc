@@ -19,7 +19,7 @@ var Blog = (function (blog) {
           var $that = this.$el.find(".maincontent");
            this.$el.find(".maincontent").imagesLoaded(function() {
                //actions to perform when the image is loaded
-               Blog.myapprouter.myheight();
+               Blog.myheight();
                $that.find("#visuel").removeClass('spinner2');
                // on actualise la scrollbar
               $that.parent().find("#sidebar").mCustomScrollbar("update");

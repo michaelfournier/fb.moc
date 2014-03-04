@@ -15,7 +15,7 @@ var Blog = (function (blog) {
             //on fait apparaitre dans #mainbb worksmainview//
             this.$el.html(renderedContent);
             
-           // Blog.myapprouter.myheight();
+           // Blog.myheight();
 
             return this;
         },
