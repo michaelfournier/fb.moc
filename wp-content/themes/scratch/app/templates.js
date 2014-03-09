@@ -5,7 +5,7 @@ this["Blog"]["Templates"]["bio"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!-- template pour bio/biblio -->\n<section id="tools"></section>\n<div id="wrapper">\t\t\n\t<section id="sidebar" class="text"></section>\n\t<section style="opacity:0" class="maincontent bio">\n\t</section>\n</div>';
+__p += '<!-- template pour bio/biblio -->\n<section id="tools"></section>\n<div id="wrapper">\t\t\n\t<section id="sidebar" class="bio"></section>\n\t<section style="opacity:0" class="maincontent bio">\n\t</section>\n</div>';
 
 }
 return __p
@@ -201,9 +201,9 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template  pour textes sidebar -->\n<div id="sidebarwrapper">\t\n\t ';
+__p += '<!-- template  pour textes sidebar -->\n<div id="mobilesubmenu">\n\t<a data-bypass href="#">\n\t\t<h4>-- SELECT A TEXT --<span id="icon"></span></h4>\n\t\t\n\t</a>\n</div>\n<div id="sidebarwrapper">\t\n\t ';
  _.each(textes, function (texte, i) { ;
-__p += '\n\t \t<a style="opacity:0" href="#' +
+__p += '\n\t \t<a class="btn" style="opacity:0" href="#' +
 ((__t = ( texte.get('type') )) == null ? '' : __t) +
 '/' +
 ((__t = ( texte.get('slug') )) == null ? '' : __t) +
@@ -287,7 +287,7 @@ this["Blog"]["Templates"]["workMain"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '\t<!-- template pour mainworks -->\n<section id="tools">\n<div id="hiddentitle"></div>\n<a id="closefull" title="close" data-bypass href="#"></a>\n\t<nav id="navworks">\n \t\t<div id="unfoldworks"><a data-bypass href="#"></a></div>\n \t\t<div class="nextprevworks" id="prevwork"><a  href=""></a></div>\t\n\t\t<div class="nextprevworks" id="nextwork"><a href=""></a></div>\n\t\t<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>\n\t</nav>\n</section>\n<div id="wrapper">\t\t\t\n\t<section id="sidebar">\n\t\t<h3></h3>\n\t\t<h4></h4>\n\t\t<p id=\'description\'></p>\n\t</section>\n\t<section class="maincontent">\n\t\t<nav id="navgal"></nav>\n\t\t\t<div id="media">\n\t\t\t\t<div data-bypass id="ctn-media">\n\t\t\t\t\t<a data-bypass id="btn-media-next"></a>\n\t\t\t\t\t<a data-bypass id="btn-media-prev"></a>\n\t\t\t\t\t<figure id="visuel"></figure>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</section>\n</div>\t';
+__p += '\t<!-- template pour mainworks -->\n<section id="tools">\n<div id="hiddentitle"></div>\n<a id="closefull" title="close" data-bypass href="#"></a>\n\t<nav id="navworks">\n \t\t<div id="unfoldworks" class="nextprevworks"><a data-bypass href="#"></a></div>\n \t\t<div class="nextprevworks" id="indexworks"><a href="#works"></a></div>\n \t\t<div class="nextprevworks" id="prevwork"><a  href=""></a></div>\t\n\t\t<div class="nextprevworks" id="nextwork"><a href=""></a></div>\n\t\t<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>\n\t</nav>\n</section>\n<div id="wrapper">\t\t\t\n\t<section id="sidebar">\n\t\t<h3></h3>\n\t\t<h4></h4>\n\t\t<p id=\'description\'></p>\n\t</section>\n\t<section class="maincontent">\n\t\t<nav id="navgal"></nav>\n\t\t\t<div id="media">\n\t\t\t\t<div data-bypass id="ctn-media">\n\t\t\t\t\t<a data-bypass id="btn-media-next"></a>\n\t\t\t\t\t<a data-bypass id="btn-media-prev"></a>\n\t\t\t\t\t<figure id="visuel"></figure>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</section>\n</div>\t';
 
 }
 return __p
@@ -300,9 +300,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<!-- template pour la sidebar work -->\n<h3>' +
 ((__t = ( work.get('title') )) == null ? '' : __t) +
-'&nbsp;</h3>\n<h4>&mdash; ' +
+'&nbsp;<span id="date">&mdash; ' +
 ((__t = ( work.get('custom_fields')['_pinfos_annee'][0] )) == null ? '' : __t) +
-'</h4>\n<p id="description">' +
+'</span></h3>\n<p id="description">' +
 ((__t = ( work.get('custom_fields')['_pinfos_description'] )) == null ? '' : __t) +
 '</p>\n';
  if ( work.get('content').length > 10 )  { ;

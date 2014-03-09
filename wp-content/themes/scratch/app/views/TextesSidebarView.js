@@ -34,9 +34,23 @@ var Blog = (function (blog) {
             this.$el.find('h4').removeClass('actif');
             $(item.currentTarget).find("h4").addClass('actif');
         },
-
+      
+        toggleMenu : function (elt) {
+            var myelt = this.$el.find('#sidebarwrapper');
+            if ( myelt.is( ":hidden" ) ) {
+                //$(elt.currentTarget).css('border-bottom', '0');
+                myelt.slideDown( "fast" , function() {
+                });
+            } else {
+                myelt.slideUp("fast", function() {
+                  $(this).removeAttr('style');
+                });
+            }
+        }, 
         events: {
-            "click #sidebarwrapper a" : "showactif"
+            "click #sidebarwrapper a.btn" : "showactif",
+            "click #mobilesubmenu a" : "toggleMenu"
+
         }
    
     });

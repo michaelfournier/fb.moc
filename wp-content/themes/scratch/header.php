@@ -35,7 +35,7 @@
 	<header id="main_header">
 	    <div id="mobile_header">
 			<h2 id="mobiletitle">Fayçal Baghriche</h2>
-			<a id="mobilemenu" data-bypass href="#"></a>
+			<div id="mobilemenu"><a data-bypass href="#"></a></div>
 		</div>
 		<nav id="main_nav">	
 		<?

@@ -10,7 +10,9 @@ SMARTPHONES
 	#navgal li { float: left; }
 	#mainbb, #main_header{ padding: @unit; .box-sizing(); }
 	#navworks { 
-		float: right;
+		float: left;
+		width: 100%;
+		margin-bottom: @unit;
 	}
 
 	#mainmenu li:first-child {
@@ -31,32 +33,14 @@ SMARTPHONES
 		-webkit-column-count: 2;
 		-webkit-column-width: (1/2)*100%;
 	}
-
-	/* BTN WORKS */
-	.nextprevworks a, #btnfull a {
+	/* BTN WORK */
+	#mobilemenu a, #mobilesubmenu a, #indextools a, .nextprevworks a, #btnfull a {
 		border: @unit/2 solid white;		
 	}
 
-	#sidebar #toogletext {
-		float: left;
-		padding: @unit/2;
-		border: 1px solid @black10;
+	#tools #sorting li a {
+		line-height: 1.1
 	}
-
-	.nextprevworks, #btnfull {
-		padding: 0;
-		margin-left: @unit/2;
-		border: 1px solid @black10;
-		width: auto;
-		height: auto;		
-	}
-
-	#unfoldworks, #nextwork {
-		border-right: 1px solid @black10;
-		padding: 0;
-	}
-
-
 
 /* MENU */
 	#mobile_header {
@@ -70,15 +54,30 @@ SMARTPHONES
 		display: inline-block;
 	}
 
-	#mobilemenu {
+	#sidebar.text #mobilesubmenu { display: block; }
+
+	#sidebar #mobilesubmenu h4 { line-height : 1;}
+
+	#mobilemenu a, #mobilesubmenu #icon {
 		display: inline-block;
-		min-height: 27px;
-		width: 39px;
+		min-height: 17px;
+		width: 25px;
 		line-height: 2;
 		float: right;
 		background: url('img/mobilemenu.png') no-repeat;
-		background-position: right center;
-		background-size: 30px 23px;
+		background-color: black;
+	}
+
+	#sidebar #mobilesubmenu a {
+		display: block;
+		min-height: 0;
+		width: 100%;
+		float: left;
+		padding-left: @unit/2;
+		padding-right: @unit/2;
+		border: 1px solid @black10;
+		background-position: 98% center;
+		.box-sizing();
 	}
 
 	#mainmenu {
@@ -135,6 +134,15 @@ SMARTPHONES
 		float: left;
 		width: 100%;
 	}
+
+    .text #sidebarwrapper {
+    	float: left;
+    	display: none;
+    	width: 100%;
+    	.box-sizing();
+		padding: 0 @unit/2;
+		border: 1px solid @black10;
+    }
 
 
 }

@@ -12,6 +12,12 @@
 		overflow-y:	hidden;
 	}
 
+	#sidebar h3 { 
+		margin-top: @unit/3;
+		float: left;
+		width: 100%;
+	}
+
 	.wrapthumb { width: (1/3)*100%; }
 	#main_wrapper {
 		//max-width: 1600px;w
@@ -116,12 +122,6 @@
 
 	#navgal { float: left; width: @unit; z-index: 6;}
 
-	#tools {
-		position: relative;
-		.divise(1,1, 0, none, left);
-		min-height: 0;
-	}
-
 	#indextools {
 		.divise(1,1, 0, none, left);
 	}
@@ -132,6 +132,35 @@
 		left: 0;
 		z-index: 1;
 	}
+
+/*	#tools #sorting li a {
+		border-left: none;
+		border-right: 1px solid @black10;
+		padding: 0 @unit;
+	}*/
+
+/*	#tools #displaying a {
+		padding:0;
+		border:0;
+	}*/
+
+	#tools nav li:last-child a {
+		padding-right: 0;
+	}
+
+/*	#displaylist, #displaythumb {
+		margin: 0 @unit;
+	}*/
+
+/*	#tools nav li:first-child a {
+		padding-left: 0px;
+		border: 0px;
+	}*/
+
+	#indexworks { display: none; }
+
+
+
 
 	/* timeline */
 	#workslistmini {
@@ -273,6 +302,14 @@
 		overflow-y: auto;
 	}
 
+	#txtwrapper h3 {
+		padding: 0 0 @unit/1.5 0;
+    }
+
+	#txtwrapper *:first-child {
+		margin-top: 0;
+	}
+
 	.news #txtwrapper, .notice #txtwrapper {
 		max-width: 600px;
 		padding: 0;
@@ -322,7 +359,7 @@
 		//border-bottom: @unit solid @bgcolor;
 	}
 
-	#sidebar.text { min-width : 200px; width: 200px; position: absolute; margin-top:0; padding:0;}
+	#sidebar.text, #sidebar.bio { min-width : 200px; width: 200px; position: absolute; margin-top:0; padding:0;}
 
 	#sidebarwrapper h3 {
 		margin: 0;
