@@ -92,7 +92,10 @@ var Blog = (function (blog){
               this.selectMenu('contact');
               this.killbackstrech();
                   // on instancie la vue news
-                Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
+                if (!Blog.noticeview) {
+                   Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
+                }
+                $("#mainbb").empty();
                   // on charge les données dans mynews
                 Blog.mynotice.query().fetch({
                   //update: true,
@@ -237,13 +240,12 @@ var Blog = (function (blog){
           // calls this anyways.  The fragment is sliced from the root.
           Backbone.history.navigate(href.attr, true);
           // on écrit l'adresse dans le btn switch lang //
-          if ( root === "fr" ) {
+          if ( wp_vars.lang == "fr" ) {
             langprefix = "/";
           } else {
             langprefix = "/fr/";
           }
           $('#qtrans a').attr("href", langprefix+Backbone.history.fragment);
-
         }
     });
 
