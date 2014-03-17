@@ -2313,9 +2313,7 @@ SMARTPHONES
   }
 }
 @media only screen and (max-width: 350px) {
-  .wrapthumb {
-    width: 100%;
-  }
+  /*.wrapthumb { width: 100%; }*/
 }
 /* only screen and (max-width: 810px) */
 /* =============================================================================

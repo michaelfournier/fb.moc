@@ -49,7 +49,6 @@ var Blog = (function (blog) {
         },
 
         picvidswitcher : function(p, v) {
-
             // si il ya au moins 1 image et 1 video //
             if (p > 0 && v > 0) {
                 $("#picvidswitcher").html('<ul><li><a id="images" href="#" data-bypass>images('+p+')</a></li><li><a id="videos" href="#" data-bypass>vidéos('+v+')</a></li></ul>');
@@ -78,7 +77,6 @@ var Blog = (function (blog) {
         },
 
         render : function () {
-
             // on ecrit le titre dans hiddentitle //
             this.$el.find("#tools #hiddentitle").html("<h3>"+this.model.get('title')+"&nbsp;</h3>"+"<h4>&mdash; "+this.model.get('custom_fields')['_pinfos_annee'][0]+"</h4>");
             // on active la vignette active dans workslist mini //
@@ -117,27 +115,23 @@ var Blog = (function (blog) {
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
-            });
-          
+            });          
             return this;
         },
-
-
         scrolltonextprev : function(e) {
             slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             //this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug, {callbacks: this.showactif(slug)});
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug);
             //this.$el.find("#workslistmini").scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
         },
-
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
             this.$el.find('.jTscroller a').removeClass('actif');
             item.addClass('actif');
+            console.log("what");
         },
-
         nextwork : function() {
             //on cherche le numéro d'index du model dans lacollection //
 

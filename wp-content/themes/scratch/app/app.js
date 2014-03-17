@@ -32,7 +32,7 @@ var Blog = (function () {
                $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
            }
            $(document).find("#ctn-media").css('width', mypic.width());
-           //$(document).find(".mCustomScrollbar").mCustomScrollbar("update");
+           $(document).find(".mCustomScrollbar").mCustomScrollbar("update");
         } else {
            $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
            $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
@@ -151,14 +151,26 @@ return __p
 
 this["Blog"]["Templates"]["picture"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template pour image avec lien (gallery) -->\n<img data-ratio="' +
+__p += '<!-- template pour image avec lien (gallery) -->\n';
+
+var resolution;
+if (Modernizr.mq('screen and (max-width: 768px)')) {
+	resolution = 'large';
+} else {
+	resolution = 'full';
+}
+;
+__p += '\n<img data-ratio="' +
 ((__t = ( mypicture.get('ratio') )) == null ? '' : __t) +
 '" src="' +
-((__t = ( mypicture.get('full') )) == null ? '' : __t) +
+((__t = ( mypicture.get(resolution) )) == null ? '' : __t) +
 '" />\n<figcaption id="legend">' +
 ((__t = ( mypicture.get('legend') )) == null ? '' : __t) +
+'' +
+((__t = ( resolution )) == null ? '' : __t) +
 '</figcaption>';
 
 }
@@ -1744,7 +1756,6 @@ var Blog = (function (blog) {
         },
 
         picvidswitcher : function(p, v) {
-
             // si il ya au moins 1 image et 1 video //
             if (p > 0 && v > 0) {
                 $("#picvidswitcher").html('<ul><li><a id="images" href="#" data-bypass>images('+p+')</a></li><li><a id="videos" href="#" data-bypass>vidéos('+v+')</a></li></ul>');
@@ -1773,7 +1784,6 @@ var Blog = (function (blog) {
         },
 
         render : function () {
-
             // on ecrit le titre dans hiddentitle //
             this.$el.find("#tools #hiddentitle").html("<h3>"+this.model.get('title')+"&nbsp;</h3>"+"<h4>&mdash; "+this.model.get('custom_fields')['_pinfos_annee'][0]+"</h4>");
             // on active la vignette active dans workslist mini //
@@ -1812,27 +1822,23 @@ var Blog = (function (blog) {
               
                 $(this).fadeIn('fast', function() { that.picvidswitcher(galleryimageslength, galleryvideoslength);});
                 
-            });
-          
+            });          
             return this;
         },
-
-
         scrolltonextprev : function(e) {
             slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             //this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug, {callbacks: this.showactif(slug)});
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug);
             //this.$el.find("#workslistmini").scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
         },
-
         showactif : function(slug) {
             item = this.$el.find("#"+slug);
             this.$el.find('.jTscroller a').removeClass('actif');
             item.addClass('actif');
+            console.log("what");
         },
-
         nextwork : function() {
             //on cherche le numéro d'index du model dans lacollection //
 
@@ -1994,6 +2000,7 @@ var Blog = (function (blog) {
     blog.Views.WorksListMiniView = Backbone.View.extend({
         el : $("#mainbb"),
         initialize : function (data) {
+
             this.collection = data;
             _.bindAll(this, 'render');
         },
@@ -2054,23 +2061,27 @@ var Blog = (function (blog) {
         },
   
         scrolltoactive : function () {
-            var activeitem = this.$el.find("#"+this.collection.workslug);
+            var myID = "#"+this.collection.workslug;
+            var activeitem = this.$el.find(myID);
             //console.log(activeitem);
+            var that = this;
             this.$el.find("#workslistmini").mCustomScrollbar("update");
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug, {callbacks: this.showactif(activeitem)});
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", myID, {callbacks: this.showactif(activeitem)});
             //this.$el.find('.jTscroller').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
         },
 
         showactif : function(item) {
-            this.$el.find('.jTscroller a').removeClass('actif');
+            //this.$el.find('.jTscroller a').removeClass('actif');
             //console.log(this.$el.find('.jTscroller img'));
             item.addClass('actif');
+            console.log(item);
         },
 
         toggleworks : function(e) {
-            elt = this.$el.find("#workslistmini");
+            var elt = this.$el.find("#workslistmini");
+            var myWidth = 100*(2/7)+'%';
             if (elt.width() <= 0) {
-                elt.stop(true, true).animate({'width': '260px', complete: this.scrolltoactive()}, 150);
+                elt.stop(true, true).animate({'width': myWidth, complete: this.scrolltoactive()}, 150);
                 this.$el.find("#unfoldworks a").addClass('fold');
                 
             } else {

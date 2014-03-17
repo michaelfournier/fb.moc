@@ -3,6 +3,7 @@ var Blog = (function (blog) {
     blog.Views.WorksListMiniView = Backbone.View.extend({
         el : $("#mainbb"),
         initialize : function (data) {
+
             this.collection = data;
             _.bindAll(this, 'render');
         },
@@ -63,23 +64,27 @@ var Blog = (function (blog) {
         },
   
         scrolltoactive : function () {
-            var activeitem = this.$el.find("#"+this.collection.workslug);
+            var myID = "#"+this.collection.workslug;
+            var activeitem = this.$el.find(myID);
             //console.log(activeitem);
+            var that = this;
             this.$el.find("#workslistmini").mCustomScrollbar("update");
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug, {callbacks: this.showactif(activeitem)});
+            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", myID, {callbacks: this.showactif(activeitem)});
             //this.$el.find('.jTscroller').scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(activeitem) } );
         },
 
         showactif : function(item) {
-            this.$el.find('.jTscroller a').removeClass('actif');
+            //this.$el.find('.jTscroller a').removeClass('actif');
             //console.log(this.$el.find('.jTscroller img'));
             item.addClass('actif');
+            console.log(item);
         },
 
         toggleworks : function(e) {
-            elt = this.$el.find("#workslistmini");
+            var elt = this.$el.find("#workslistmini");
+            var myWidth = 100*(2/7)+'%';
             if (elt.width() <= 0) {
-                elt.stop(true, true).animate({'width': '260px', complete: this.scrolltoactive()}, 150);
+                elt.stop(true, true).animate({'width': myWidth, complete: this.scrolltoactive()}, 150);
                 this.$el.find("#unfoldworks a").addClass('fold');
                 
             } else {

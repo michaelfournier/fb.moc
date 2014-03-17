@@ -1,3 +1,11 @@
 <!-- template pour image avec lien (gallery) -->
-<img data-ratio="<%= mypicture.get('ratio') %>" src="<%= mypicture.get('full') %>" />
-<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>
+<%
+var resolution;
+if (Modernizr.mq('screen and (max-width: 768px)')) {
+	resolution = 'large';
+} else {
+	resolution = 'full';
+}
+%>
+<img data-ratio="<%= mypicture.get('ratio') %>" src="<%= mypicture.get(resolution) %>" />
+<figcaption id="legend"><%= mypicture.get('legend') %><%= resolution %></figcaption>

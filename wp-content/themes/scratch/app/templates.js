@@ -98,14 +98,26 @@ return __p
 
 this["Blog"]["Templates"]["picture"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template pour image avec lien (gallery) -->\n<img data-ratio="' +
+__p += '<!-- template pour image avec lien (gallery) -->\n';
+
+var resolution;
+if (Modernizr.mq('screen and (max-width: 768px)')) {
+	resolution = 'large';
+} else {
+	resolution = 'full';
+}
+;
+__p += '\n<img data-ratio="' +
 ((__t = ( mypicture.get('ratio') )) == null ? '' : __t) +
 '" src="' +
-((__t = ( mypicture.get('full') )) == null ? '' : __t) +
+((__t = ( mypicture.get(resolution) )) == null ? '' : __t) +
 '" />\n<figcaption id="legend">' +
 ((__t = ( mypicture.get('legend') )) == null ? '' : __t) +
+'' +
+((__t = ( resolution )) == null ? '' : __t) +
 '</figcaption>';
 
 }
