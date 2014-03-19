@@ -882,7 +882,7 @@ body {
   background-color: #FFFF99;
   z-index: 9999;
   display: none;
-  font-size: 0.7142857142857143em;
+  font-size: 0.7857142857142857em;
 }
 /* GENERIC */
 body {
@@ -1002,7 +1002,7 @@ a.actif,
 }
 #main_header {
   position: relative;
-  padding: 0.5714285714285714em 0;
+  padding: 0.7619047619047619em 0;
   background-color: white;
   width: 100%;
   float: left;
@@ -1308,6 +1308,7 @@ nav#sorting {
 }
 #sidebar a:first-child {
   border: 0;
+  padding-top: 0;
 }
 #sidebar h4,
 #hiddentitle h4 {
@@ -1329,7 +1330,6 @@ nav#sorting {
 /* textes & paragraphes */
 .news p,
 #sidebar #text {
-  color: #666666;
   margin-top: 0;
 }
 #sidebar #text {
@@ -1368,6 +1368,10 @@ nav#sorting {
   padding: 1.1428571428571428em 0 0.7619047619047619em 0;
   border-bottom: 1px solid #dcdcdc;
   margin: 0;
+}
+.txt #txtwrapper h3 {
+  font-weight: normal;
+  border-bottom: none;
 }
 .news #txtwrapper h3 {
   padding-top: 0;
@@ -1542,6 +1546,7 @@ nav li a.actif {
 .fullwindow #mainbb {
   margin: 0;
   width: 100%;
+  max-width: none;
 }
 .fullwindow #closefull {
   display: block;
@@ -1587,7 +1592,6 @@ nav li a.actif {
 }
 .fullwindow #hiddentitle h3 {
   float: none;
-  color: white;
   display: inline-block;
 }
 .fullwindow #hiddentitle h4 {
@@ -1609,9 +1613,7 @@ nav li a.actif {
 .fullwindow #btn-media-prev {
   position: fixed;
 }
-.fullwindow body {
-  background-color: rgba(0, 0, 0, 0.96);
-}
+/*.fullwindow body { background-color: rgba(0, 0, 0, 0.96);}*/
 /* basic scrollbar styling */
 /* vertical scrollbar */
 .mCSB_container {
@@ -2219,6 +2221,7 @@ SMARTPHONES
     min-height: 0;
     width: 100%;
     float: left;
+    padding-top: 0.5714285714285714em;
     padding-left: 0.5714285714285714em;
     padding-right: 0.5714285714285714em;
     border: 1px solid #dcdcdc;
@@ -2669,14 +2672,14 @@ SMARTPHONES
     box-sizing: border-box;
     position: relative;
     background-color: white;
-    padding: 0.7619047619047619em 0.38095238095238093em 0.7619047619047619em 1.1428571428571428em;
-    max-width: 700px;
+    padding: 0 0.38095238095238093em 0.7619047619047619em 1.1428571428571428em;
+    max-width: 800px;
     margin: 0 auto;
     height: 100%;
     overflow-y: auto;
   }
   #txtwrapper h3 {
-    padding: 0 0 0.7619047619047619em 0;
+    padding: 0 0 0.5714285714285714em 0;
   }
   #txtwrapper *:first-child {
     margin-top: 0;
@@ -2712,6 +2715,8 @@ SMARTPHONES
   }
   /* SIDEBAR */
   #sidebar {
+    /*.divise(1,5, 0, none, left);*/
+  
     width: 30%;
     min-width: 260px;
     float: left;
@@ -2727,6 +2732,8 @@ SMARTPHONES
     height: 100%;
     overflow-y: auto;
     z-index: 5;
+    /*border-bottom: @unit solid @bgcolor;*/
+  
   }
   #sidebar.text,
   #sidebar.bio {
@@ -2751,7 +2758,7 @@ SMARTPHONES
     position: absolute;
     top: 0;
     right: 0;
-    padding: 0.7619047619047619em;
+    padding: 0 0.7619047619047619em;
     max-width: 28.57142857142857%;
     height: 100%;
     overflow-y: auto;
@@ -2824,6 +2831,12 @@ SMARTPHONES
 @media screen and (min-width: 1400px) {
   .wrapthumb {
     width: 16.666666666666664%;
+  }
+  #mainbb,
+  #main_nav {
+    margin: 0 auto;
+    max-width: 1400px;
+    float: none;
   }
 }
 /* only screen and (min-width: 810px) */

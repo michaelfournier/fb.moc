@@ -23,7 +23,10 @@ var Blog = (function (blog) {
                 sidebar.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
-                    theme: "dark"
+                    theme: "dark",
+                    advanced:{
+                        updateOnContentResize: true
+                    }
                 });
             }
             $(document).find("body").removeClass('spinner');

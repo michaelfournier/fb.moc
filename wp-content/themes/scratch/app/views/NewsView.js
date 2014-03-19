@@ -18,7 +18,10 @@ var Blog = (function (blog) {
                 mycontenttxt.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
-                    theme: "dark"
+                    theme: "dark",
+                    advanced:{
+                        updateOnContentResize: true
+                    }
                 });
             }
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});

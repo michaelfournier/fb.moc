@@ -18,7 +18,10 @@ var Blog = (function (blog) {
                     set_height: "100%",
                     scrollInertia: 150,
                     autoDraggerLength:false,
-                    theme: "dark"
+                    theme: "dark",
+                    advanced:{
+                        updateOnContentResize: true
+                    }
                 });
                 
             return this;

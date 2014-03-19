@@ -35,7 +35,7 @@ var Blog = (function (blog) {
         },
         mouseOut : function(e) {
                 var elt = this.$el.find("#big-btn-home-up");
-                this.$el.parent().parent().find("#main_header").stop(true, true).animate({'top':"-40px"}, { complete: function() {elt.css("z-index", 1);}});
+                this.$el.parent().parent().find("#main_header").stop(true, true).animate({'top':"-50px"}, { complete: function() {elt.css("z-index", 1);}});
     
         }
     });

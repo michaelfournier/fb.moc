@@ -202,11 +202,13 @@ function add_gallery($post) {
   if(isset($gallerypics) && !empty($gallerypics)) {
     foreach($gallerypics as $idpic) {
       $imagelarge =  wp_get_attachment_image_src($idpic['image'], 'large'); 
-      $imagefull=  wp_get_attachment_image_src($idpic['image'], 'full');
+      $imagefull =  wp_get_attachment_image_src($idpic['image'], 'full');
+      $imagemedium =  wp_get_attachment_image_src($idpic['image'], 'medium');
       $imagethumb =  wp_get_attachment_image_src($idpic['image'], 'thumbnail');   
       $imagemetas = get_post($idpic['image']);
       $tabgallery = array(
       'type' => 'image',
+      'medium' => $imagemedium[0],
       'large' =>   $imagelarge[0],   
       'full' =>  $imagefull[0],
       'ratio' =>  $imagefull[1]/$imagefull[2],   

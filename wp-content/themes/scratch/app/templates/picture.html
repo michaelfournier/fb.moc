@@ -1,11 +1,15 @@
 <!-- template pour image avec lien (gallery) -->
 <%
 var resolution;
-if (Modernizr.mq('screen and (max-width: 768px)')) {
-	resolution = 'large';
-} else {
+if (Modernizr.mq('screen and (min-width: 1200px)')) {
 	resolution = 'full';
+} else if (Modernizr.mq('screen and (min-width: 768px)')) {
+	resolution = 'large';
+} else if (Modernizr.mq('screen and (max-width: 500px)')) {
+	resolution = 'medium';
+} else {
+	resolution = 'medium';
 }
 %>
 <img data-ratio="<%= mypicture.get('ratio') %>" src="<%= mypicture.get(resolution) %>" />
-<figcaption id="legend"><%= mypicture.get('legend') %><%= resolution %></figcaption>
+<figcaption id="legend"><%= mypicture.get('legend') %></figcaption>

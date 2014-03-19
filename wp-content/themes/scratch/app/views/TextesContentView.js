@@ -26,7 +26,10 @@ var Blog = (function (blog) {
                                 autoHideScrollbar: true,
                                 autoDraggerLength: false,
                                 scrollInertia: 150,
-                                theme: "dark"
+                                theme: "dark",
+                                advanced:{
+                                    updateOnContentResize: true
+                                }
                             });
                         }
                          Blog.myheight();

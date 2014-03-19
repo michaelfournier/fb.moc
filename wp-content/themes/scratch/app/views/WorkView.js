@@ -119,18 +119,18 @@ var Blog = (function (blog) {
             return this;
         },
         scrolltonextprev : function(e) {
-            slug = $(e.currentTarget).attr('data-slug');
+            var slug = $(e.currentTarget).attr('data-slug');
             var activeitem = this.$el.find("#"+slug);
             //this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+this.collection.workslug);
-            this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug);
+            // this.$el.find("#workslistmini").mCustomScrollbar("update");
+            // this.$el.find("#workslistmini").mCustomScrollbar("scrollTo", "#"+slug, {callbacks: false});
             //this.$el.find("#workslistmini").scrollTo( activeitem, 400, {axis:'x', easing:'easeOutQuart', onAfter: this.showactif(slug) } );
             this.undelegateEvents();
         },
         showactif : function(slug) {
-            item = this.$el.find("#"+slug);
+            var item = this.$el.find("#"+slug);
             this.$el.find('.jTscroller a').removeClass('actif');
             item.addClass('actif');
-            console.log("what");
         },
         nextwork : function() {
             //on cherche le numéro d'index du model dans lacollection //
@@ -139,15 +139,18 @@ var Blog = (function (blog) {
 
             var lastindex = this.collection.length - 1;
             // on détermine le slug du prochain model dans la collection //
-            nextmodel = this.collection.at(index+1);
-            prevmodel = this.collection.at(index-1);
+            var nextmodel = this.collection.at(index+1);
+            var prevmodel = this.collection.at(index-1);
+            var slugprev;
+            var slugnext;
+            var nexthref;
 
             if(prevmodel) {
                 slugprev = prevmodel.get('slug');
             } else {
                 slugprev = this.collection.at(lastindex).get('slug');
             }
-            prevhref = "#works/"+slugprev;
+            var prevhref = "#works/"+slugprev;
 
             if(nextmodel) {
                 slugnext = nextmodel.get('slug');

@@ -20,9 +20,9 @@ var Blog = (function (blog){
 
                 Blog.currentView = new Backbone.View();
 
-                this.bind("route",function(router, route) {
-                    console.log("Different Page: " + router + route);
-                });
+                // this.bind("route",function(router, route) {
+                //     console.log("Different Page: " + router + route);
+                // });
             },
             routes : {
                 "works/:slug_post" : "displayWork",
@@ -129,18 +129,6 @@ var Blog = (function (blog){
               }
               this.switchView(Blog.mymainworkview);
               Blog.mymainworkview.renderWork(slug_post);
-
-  
-             // if (Blog.myworkview) Blog.myworkview.undelegateEvents();
-              // Blog.myworkview = new blog.Views.WorkView(Blog.mywork);
-              //   // on charge les données dans myworkslist
-              //   Blog.mywork.query(slug_post).fetch({
-              //     update: true,
-              //     success: function(results) {
-              //       // on rend la vue avec les resultats de la requete //
-              //       Blog.myworkview.render(results);
-              //     }
-              //   });
             },
 
             displayText : function (slug_post) {
@@ -175,15 +163,10 @@ var Blog = (function (blog){
               }
 
               if(slug_post) {
-
                 Blog.mybiolist.slug = slug_post;
-
                 this.switchView(Blog.biomainview);
-
                 Blog.biomainview.renderText(slug_post);
-
               } else {
-
                 Blog.mybiolist.slug = "";
                 Blog.biomainview.render();
                 Blog.currentView = Blog.biomainview;

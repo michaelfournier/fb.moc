@@ -295,15 +295,15 @@
 		.box-sizing();
 		position: relative;
 		background-color: white;
-		padding: @unit/1.5 @unit/3 @unit/1.5 @unit;
-		max-width: 700px;
+		padding: 0 @unit/3 @unit/1.5 @unit;
+		max-width: 800px;
 		margin: 0 auto;
 		height: 100%;
 		overflow-y: auto;
 	}
 
 	#txtwrapper h3 {
-		padding: 0 0 @unit/1.5 0;
+		padding: 0 0 @unit/2 0;
     }
 
 	#txtwrapper *:first-child {
@@ -343,7 +343,7 @@
 	/* SIDEBAR */
 
 	#sidebar {
-		//.divise(1,5, 0, none, left);
+		/*.divise(1,5, 0, none, left);*/
 		width: 30%;
 		min-width: 260px;
 		float: left;
@@ -355,7 +355,7 @@
 		height: 100%;
 		overflow-y: auto;
 		z-index: 5;
-		//border-bottom: @unit solid @bgcolor;
+		/*border-bottom: @unit solid @bgcolor;*/
 	}
 
 	#sidebar.text, #sidebar.bio { min-width : 200px; width: 200px; position: absolute; margin-top:0; padding:0;}
@@ -374,7 +374,7 @@
 		position: absolute;
 		top: 0;
 		right:0;
-		padding: @unit/1.5;
+		padding: 0 @unit/1.5;
 		max-width: @tranche;
 		height: 100%;
 		overflow-y: auto;
@@ -436,4 +436,11 @@
 
 @media screen and (min-width: 1400px) {
 	.wrapthumb { width: (1/6)*100%; }
+	#mainbb, #main_nav {
+		margin: 0 auto;
+		max-width: 1400px;
+		float: none;
+	}
+
+
 }  

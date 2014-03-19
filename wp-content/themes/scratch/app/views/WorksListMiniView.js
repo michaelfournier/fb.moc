@@ -3,7 +3,6 @@ var Blog = (function (blog) {
     blog.Views.WorksListMiniView = Backbone.View.extend({
         el : $("#mainbb"),
         initialize : function (data) {
-
             this.collection = data;
             _.bindAll(this, 'render');
         },
@@ -19,30 +18,18 @@ var Blog = (function (blog) {
             //this.$el.find('#unfoldworks').css('display', 'block');
             // on applique l'autoscroll quand toutes les vignettes sont chargée//
             var myworksminielt = this.$el.find('#workslistmini');
-            myworksminielt.imagesLoaded(function() {
-                // fonction auto scroll vignettes // 
-                myworksminielt.thumbnailScroller({
-                        scrollerType:'hoverPrecise',
-                                scrollerOrientation:'vertical',
-                                acceleration:4,
-                                scrollSpeed: 800,
-                                noScrollCenterSpace:1
+
+            if(!myworksminielt.hasClass("mCustomScrollbar")) {
+                myworksminielt.mCustomScrollbar({
+                    set_height: "100%",
+                    scrollInertia: 150,
+                    autoDraggerLength:false,
+                    theme: "dark",
+                    advanced:{
+                        updateOnContentResize: true
+                    }
                 });
-
-
-            //myworksminielt.mCustomScrollbar("update");
-            //that.$el.find("#unfoldworks a").click();
-                        
-            });
-
-                    if(!myworksminielt.hasClass("mCustomScrollbar")) {
-                    myworksminielt.mCustomScrollbar({
-                        set_height: "100%",
-                        scrollInertia: 150,
-                        autoDraggerLength:false,
-                        theme: "dark"
-                    });
-                }
+            }
             
             return this;
         },
@@ -77,14 +64,14 @@ var Blog = (function (blog) {
             //this.$el.find('.jTscroller a').removeClass('actif');
             //console.log(this.$el.find('.jTscroller img'));
             item.addClass('actif');
-            console.log(item);
         },
 
         toggleworks : function(e) {
+            var that = this;
             var elt = this.$el.find("#workslistmini");
             var myWidth = 100*(2/7)+'%';
             if (elt.width() <= 0) {
-                elt.stop(true, true).animate({'width': myWidth, complete: this.scrolltoactive()}, 150);
+                elt.stop(true, true).animate({'width': myWidth, complete: function() { that.scrolltoactive(); }}, 150);
                 this.$el.find("#unfoldworks a").addClass('fold');
                 
             } else {
@@ -92,6 +79,7 @@ var Blog = (function (blog) {
                 elt.stop(true, true).animate({'width': 0}, 150);
                 this.$el.find("#unfoldworks a").removeClass('fold');
             }
+            this.$el.find("#workslistmini").mCustomScrollbar("update");
         }
 
      

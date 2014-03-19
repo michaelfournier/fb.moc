@@ -104,10 +104,14 @@ with (obj) {
 __p += '<!-- template pour image avec lien (gallery) -->\n';
 
 var resolution;
-if (Modernizr.mq('screen and (max-width: 768px)')) {
-	resolution = 'large';
-} else {
+if (Modernizr.mq('screen and (min-width: 1200px)')) {
 	resolution = 'full';
+} else if (Modernizr.mq('screen and (min-width: 768px)')) {
+	resolution = 'large';
+} else if (Modernizr.mq('screen and (max-width: 500px)')) {
+	resolution = 'medium';
+} else {
+	resolution = 'medium';
 }
 ;
 __p += '\n<img data-ratio="' +
@@ -116,8 +120,6 @@ __p += '\n<img data-ratio="' +
 ((__t = ( mypicture.get(resolution) )) == null ? '' : __t) +
 '" />\n<figcaption id="legend">' +
 ((__t = ( mypicture.get('legend') )) == null ? '' : __t) +
-'' +
-((__t = ( resolution )) == null ? '' : __t) +
 '</figcaption>';
 
 }

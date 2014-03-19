@@ -17,7 +17,10 @@ var Blog = (function (blog) {
                 mycontenttxt.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
-                    theme: "dark"
+                    theme: "dark",
+                    advanced:{
+                        updateOnContentResize: true
+                    }
                 });
             }          
             this.$el.find(".bio").animate({'opacity': 1},{duration: 500, complete: function() {}});

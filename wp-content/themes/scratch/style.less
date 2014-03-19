@@ -35,7 +35,7 @@ html, body {
 	background-color: #FFFF99;
 	z-index: 9999;
 	display:none;
-	font-size:(10/@font-size)*1em;
+	font-size:(11/@font-size)*1em;
 }
 
 /* GENERIC */
@@ -168,7 +168,7 @@ figcaption {
 
 #main_header { 
 	position: relative;
-	padding: @unit/2 0;
+	padding: @unit/1.5 0;
 	background-color: white;
 	width: 100%;
 	float: left;
@@ -479,6 +479,7 @@ nav#sorting {
 
 #sidebar a:first-child {
 	border: 0;
+	padding-top: 0;
 }
 
 #sidebar h4, #hiddentitle h4 {
@@ -501,7 +502,6 @@ nav#sorting {
 
 	/* textes & paragraphes */
 .news p, #sidebar #text {
-	color: @black60;
 	margin-top: 0;
 }
 #sidebar #text {
@@ -549,6 +549,12 @@ nav#sorting {
 	border-bottom: 1px solid @black10;
 	margin: 0;
 }
+
+.txt #txtwrapper h3 {
+	font-weight: normal;
+	border-bottom: none;
+}
+
 
 .news #txtwrapper h3{
 	padding-top: 0;
@@ -725,7 +731,7 @@ nav#sorting {
 /* fullwindow */
 .fullwindow #workslistmini { display: none; }
 .fullwindow #btn-media-next, #btn-media-prev { top: 0;}
-.fullwindow #mainbb { margin: 0; width: 100%;}
+.fullwindow #mainbb { margin: 0; width: 100%; max-width: none;}
 .fullwindow #closefull { display: block; }
 .fullwindow .maincontent { display: table; .divise(1,1, @tranche, none, left);}
 .fullwindow #media { display: table-cell; vertical-align: middle;}
@@ -733,13 +739,13 @@ nav#sorting {
 .fullwindow #sidebar, .fullwindow #main_nav, .fullwindow #navgal, .fullwindow #navworks {display: none;}
 .fullwindow #tools { text-align: center; margin: 0; padding: 0; }
 .fullwindow #hiddentitle  { display: block;}
-.fullwindow #hiddentitle h3 { float: none; color: white; display: inline-block; }
+.fullwindow #hiddentitle h3 { float: none; display: inline-block; }
 .fullwindow #hiddentitle h4 { display: inline-block; }
 .fullwindow #main_header { display: none; margin: 0; padding: 0;}
 .fullwindow .maincontent { padding: 0; }
 .fullwindow #ctn-media { margin: 0 auto; float: none;}
 .fullwindow #btn-media-next, .fullwindow #btn-media-prev { position: fixed; }
-.fullwindow body { background-color: rgba(0, 0, 0, 0.96);}
+/*.fullwindow body { background-color: rgba(0, 0, 0, 0.96);}*/
 
 
 
