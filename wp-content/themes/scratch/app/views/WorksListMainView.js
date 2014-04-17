@@ -88,7 +88,7 @@ var Blog = (function (blog) {
             Blog.myworkslist.displaymode = 'thumbs';
             //Blog.myworkslistview.render();
             // on classe par date en vue thumb //
-            Blog.myworkslist.sortByDate();
+            //Blog.myworkslist.sortByDate();
             // le bouton date est actif //
             this.$el.find("#sorting a").removeClass("actif");
             this.$el.find("#sortbydate").addClass("actif");

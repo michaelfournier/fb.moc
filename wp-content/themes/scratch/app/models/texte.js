@@ -23,7 +23,7 @@ var Blog = (function (blog) {
 	blog.Collections.TextesList = Backbone.Collection.extend({
 		model : blog.Models.Texte,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=texts&custom_fields=_pinfostextes_sortname&include=custom_fields,id,auteurs,title,slug,type&key=_pinfostextes_sortname&order=asc';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=texts&custom_fields=_pinfostextes_sortname&include=custom_fields,id,auteurs,title,slug,type&lang='+wp_vars.lang;
             return this;
         },
         // on parse la réponse pour avoir accès aux posts

@@ -38,9 +38,9 @@ __p += '\n\t\t\t\t\t';
  if (i > 0) { ;
 __p += '</section>';
  } ;
-__p += '\n\t\t\t\t\t<section class="sub">\n\t\t\t\t\t\t<h3>' +
+__p += '\n\t\t\t\t\t<section class="sub">\n\t\t\t\t\t\t<h4>' +
 ((__t = ( news.get('tax')[0]['name'] )) == null ? '' : __t) +
-'</h3>\n\t\t\t\t\t\t<div class="infosnews">\n\t\t\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t\t<div class="infosnews">\n\t\t\t\t\t\t\t';
  if (_.isEmpty(news.get('customthumbmedium')) === false) { ;
 __p += ' \n\t\t\t\t\t\t\t\t<div style=\'width:70%\'>\n\t\t\t\t\t\t\t\t\t<h4>' +
 ((__t = ( news.get('title') )) == null ? '' : __t) +
@@ -154,15 +154,17 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template  pour textes content -->\n<div id="txtwrapper">' +
+__p += '<!-- template  pour textes content -->\n';
+ if (texte.get('post').custom_fields['_pinfostextes_fileurl'] || texte.get('post').custom_fields['_pinfosbio_fileurl'] || texte.get('post').worksconnected) { ;
+__p += '\n<div id="txtwrapper" style="padding-right:200px">' +
 ((__t = ( texte.get('post').content )) == null ? '' : __t) +
-'</div>\n<aside id="rightbar">\n\n\t';
+'</div>\n<aside id="rightbar">\n\t';
  if (texte.get('post').custom_fields['_pinfostextes_fileurl']) { ;
 __p += '\n\t \t<a class="btn-pdf" data-bypass href=\'' +
 ((__t = ( texte.get('post').custom_fields['_pinfostextes_fileurl'] )) == null ? '' : __t) +
-' \' target="_blank"><span id="downloadpdf"></span>';
+'\' target="_blank"><span id="downloadpdf"></span>';
  if(wp_vars.lang === "en") { ;
-__p += 'download text as pdf ';
+__p += 'download text aspdf ';
  } else { ;
 __p += 'télécharger le texte en pdf ';
  } ;
@@ -172,10 +174,10 @@ __p += '\n\n\t';
  if (texte.get('post').custom_fields['_pinfosbio_fileurl']) { ;
 __p += '\n\t \t<a class="btn-pdf" data-bypass href=\'' +
 ((__t = ( texte.get('post').custom_fields['_pinfosbio_fileurl'] )) == null ? '' : __t) +
-' \' target="_blank"><span id="downloadpdf"></span>';
+' \'\ttarget="_blank"><span id="downloadpdf"></span>';
  if(wp_vars.lang === "en") { ;
-__p += 'download text as pdf ';
- } else { ;
+__p += 'download text aspdf ';
+ }	 else { ;
 __p += 'télécharger le texte en pdf ';
  } ;
 __p += ' </a>\n\t';
@@ -194,7 +196,13 @@ __p += '\n\t \t\t<a title="' +
  }); ;
 __p += '\n\t';
  } ;
-__p += '\n</aside>';
+__p += '\n</aside>\n';
+ } else { ;
+__p += '\n<div id="txtwrapper">' +
+((__t = ( texte.get('post').content )) == null ? '' : __t) +
+'</div>\n';
+ } ;
+
 
 }
 return __p
@@ -217,7 +225,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<!-- template  pour textes sidebar -->\n<div id="mobilesubmenu">\n\t<a data-bypass href="#">\n\t\t<h4>-- SELECT A TEXT --<span id="icon"></span></h4>\n\t\t\n\t</a>\n</div>\n<div id="sidebarwrapper">\t\n\t ';
  _.each(textes, function (texte, i) { ;
-__p += '\n\t \t<a class="btn" style="opacity:0" href="#' +
+__p += '\n\t \t<a class="btn" id="' +
+((__t = ( texte.get('slug') )) == null ? '' : __t) +
+'" style="opacity:0" href="#' +
 ((__t = ( texte.get('type') )) == null ? '' : __t) +
 '/' +
 ((__t = ( texte.get('slug') )) == null ? '' : __t) +
@@ -271,7 +281,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template pour les outils de trie et d\'affichage de workslist -->\n<div id="indextools">\n\t<nav id="displaying">\n\t\t<ul>\n\t\t\t<li>\n\t\t\t\t<a ';
+__p += '<!-- template pour les outils de tri et d\'affichage de workslist -->\n<div id="indextools">\n\t<nav id="displaying" style="visibility:hidden;">\n\t\t<ul>\n\t\t\t<li>\n\t\t\t\t<a ';
  if (displaymode === "thumbs") { ;
 __p += ' class="actif" ';
  } ;
@@ -301,7 +311,7 @@ this["Blog"]["Templates"]["workMain"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '\t<!-- template pour mainworks -->\n<section id="tools">\n<div id="hiddentitle"></div>\n<a id="closefull" title="close" data-bypass href="#"></a>\n\t<nav id="navworks">\n \t\t<div id="unfoldworks" class="nextprevworks"><a data-bypass href="#"></a></div>\n \t\t<div class="nextprevworks" id="indexworks"><a href="#works"></a></div>\n \t\t<div class="nextprevworks" id="prevwork"><a  href=""></a></div>\t\n\t\t<div class="nextprevworks" id="nextwork"><a href=""></a></div>\n\t\t<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>\n\t</nav>\n</section>\n<div id="wrapper">\t\t\t\n\t<section id="sidebar">\n\t\t<h3></h3>\n\t\t<h4></h4>\n\t\t<p id=\'description\'></p>\n\t</section>\n\t<section class="maincontent">\n\t\t<nav id="navgal"></nav>\n\t\t\t<div id="media">\n\t\t\t\t<div data-bypass id="ctn-media">\n\t\t\t\t\t<a data-bypass id="btn-media-next"></a>\n\t\t\t\t\t<a data-bypass id="btn-media-prev"></a>\n\t\t\t\t\t<figure id="visuel"></figure>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</section>\n</div>\t';
+__p += '\t<!-- template pour mainworks -->\n<section id="tools">\n<div id="hiddentitle"></div>\n<a id="closefull" title="close" data-bypass href="#"></a>\n\t<nav id="navworks">\n\t<div id="subnavworks1">\n \t\t<div id="unfoldworks" class="nextprevworks"><a data-bypass href="#"></a></div>\n \t\t<div class="nextprevworks" id="indexworks"><a href="#works"></a></div>\n \t</div>\n \t\t<div id="subnavworks2">\n \t\t\t<div class="nextprevworks" id="prevwork"><a  href=""></a></div>\t\n\t\t\t<div class="nextprevworks" id="nextwork"><a href=""></a></div>\n\t\t\t<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>\n\t\t</div>\n\t</nav>\n</section>\n<div id="wrapper">\t\t\t\n\t<section id="sidebar">\n\t\t<h3></h3>\n\t\t<h4></h4>\n\t\t<p id=\'description\'></p>\n\t</section>\n\t<section class="maincontent">\n\t\t<nav id="navgal"></nav>\n\t\t\t<div id="media">\n\t\t\t\t<div data-bypass id="ctn-media">\n\t\t\t\t\t<a data-bypass id="btn-media-next"></a>\n\t\t\t\t\t<a data-bypass id="btn-media-prev"></a>\n\t\t\t\t\t<figure id="visuel"></figure>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</section>\n</div>\t';
 
 }
 return __p

@@ -10,7 +10,7 @@ var Blog = (function (blog) {
             // this.collection.bind('add', this.render);
             // this.collection.bind('remove', this.render);
         },
-        render : function () {
+        render : function (slug_post) {
             this.$el.html(this.template);
             // la fonction renderNested est héritée de la vue BaseView //
             var renderNested = this.renderNested;
@@ -29,7 +29,10 @@ var Blog = (function (blog) {
                     renderNested( parentview, mybiosidebarview, "#sidebar", results);
                     // on rend le contenu //
                     //console.log(Blog.mybiolist.at(0));
-                    that.renderText();
+                    if (Blog.mybiolist.slug) {
+                       that.renderText(Blog.mybiolist.slug);
+                    }
+
                   }
                 });
 
@@ -39,24 +42,23 @@ var Blog = (function (blog) {
             return this;
         },
 
-        renderText : function(myslug) {
+        renderText : function (myslug) {
             this.$el.find(".maincontent").empty();
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
            // si le slug du post n'est pas présent //
-            if (!myslug) {
-                // definition du texte à charger par défaut: on prend le premier de la liste de la colllection //                   
-                slug = Blog.mybiolist.at(0).get('slug');
-                Blog.mybiolist.slug = slug;
-               // console.log(slug);
+            if (myslug) {
+                var slug = myslug;
             } else {
-                slug = myslug;
+                // definition du texte à charger par défaut: on prend le premier de la liste de la colllection //                   
+                var slug = Blog.mybiolist.at(0).get('slug');
+                Blog.mybiolist.slug = slug;             
             }
             //alert(slug);
              // si mybiosidebarview n'est pas définie, on instancie la vue, et charge les données, puis on l'imbrique dans la vue principale //
             //if (this.mybiocontentview  === undefined) {
-                // on instancie la vue mybiosidebarview en utilisant la vue TextesContentView
+            // on instancie la vue mybiosidebarview en utilisant la vue TextesContentView
             var mybiocontentview = new blog.Views.TextesContentView(Blog.mybio);
             //};
             //console.log(slug);

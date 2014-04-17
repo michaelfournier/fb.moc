@@ -7,7 +7,7 @@
 </div>
 <div id="sidebarwrapper">	
 	 <% _.each(textes, function (texte, i) { %>
-	 	<a class="btn" style="opacity:0" href="#<%= texte.get('type') %>/<%= texte.get('slug') %>">
+	 	<a class="btn" id="<%= texte.get('slug') %>" style="opacity:0" href="#<%= texte.get('type') %>/<%= texte.get('slug') %>">
 		 	<h4 <% if (slug === texte.get('slug')) { %> class="actif" <% } %>><%= texte.get('title') %></h4>
 		 	<h5>
 		 	<% _.each(texte.get('auteurs'), function (auteur, i) { %>

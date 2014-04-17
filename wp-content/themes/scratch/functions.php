@@ -22,7 +22,8 @@ function my_scripts() {
 
   wp_enqueue_script( 'underscore', get_template_directory_uri() . '/app/libs/vendors/underscore.js', null, false, false);
   wp_enqueue_script( 'backbone', get_template_directory_uri() . '/app/libs/vendors/backbone.js', 'underscore', false, false);
-  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131102-1647', 'backbone', false, true );
+ // wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.js?v=20131102-1647', 'backbone', false, true );
+  wp_enqueue_script( 'my-app', get_template_directory_uri() . '/app/app.min.js?v=20131102-1647', 'backbone', false, true );
 };
 
 // permet l'appel ajax des vignettes dans les metabox ///
@@ -87,8 +88,10 @@ add_filter('image_size_names_choose', 'custom_wmu_image_sizes');
 // ajout de metaboxes //
 //if (is_admin()) {
   include_once 'metaboxes/setup.php';
+
   include_once 'metaboxes/simple-image-spec.php';
   include_once 'metaboxes/simple-image-02-spec.php';
+
   include_once 'metaboxes/repeating-mediagallery-spec.php';
   include_once 'metaboxes/repeating-mediagallerypage-spec.php';
   include_once 'metaboxes/repeating-videogallery-spec.php';
@@ -119,6 +122,8 @@ function my_encode_meta($response) {
       // on écrit qq chose dans pinfos_description pour éviter les erreurs lors de l'appel sur le front //
       $post->custom_fields->_pinfos_description = "";
       add_gallery($post);
+      // ajoute le menu_order dans le json//
+      add_postOrder($post);
       //$post->test = get_post_meta($post->id, "_pinfos_description_fr", TRUE);
       $wp_custom_fields = get_post_custom($post->id);
       //foreach ($keys as $key) {
@@ -187,6 +192,7 @@ function add_gallery($post) {
   $gallerypics = get_post_meta($post->id, "_pmediagallery_blocspics", TRUE);
   $galleryvideos = get_post_meta($post->id, "_pvideosgallery_blocsvideos", TRUE);
   $customthumb = get_post_meta($post->id, "_psolopic_customthumb", TRUE);
+  //$presskit = get_post_meta($post->id, "_pinfos_presskit", TRUE);
 
   $themepath = get_bloginfo('template_url');
 
@@ -424,7 +430,7 @@ function remove_row_actions( $actions )
 }
 
 // permet le trie par meta date de début //
-add_filter( 'manage_edit-works_sortable_columns', 'my_works_sortable_columns' );
+//add_filter( 'manage_edit-works_sortable_columns', 'my_works_sortable_columns' );
 function my_works_sortable_columns( $columns ) {
   $columns['years'] = '_pinfos_annee';
   return $columns;
@@ -447,21 +453,22 @@ function meta_filter_works( $query ) {
 }
 
 /* Only run our customization on the 'edit.php' page in the admin. */
-add_action( 'load-edit.php', 'devpress_edit_works_load');
+add_action( 'load-edit.php', 'devpress_edit_works_load' );
+
 
 function devpress_edit_works_load() {
   add_filter( 'request', 'devpress_sort_works');
 }
 /* Sorts the projects. */
 function devpress_sort_works( $vars ) {
-//remove_filter( 'pre_get_posts', 'meta_filter_projets' );
+//remove_filter( 'pre_get_posts', 'meta_filter_works' );
   /* Check if we're viewing the 'movie' post type. */
   if ( isset( $vars['post_type'] ) && 'works' == $vars['post_type'] ) {
 
     /* Check if 'orderby' is set to 'duration'. */
     if ( isset( $vars['orderby'] ) && '_pinfos_annee' == $vars['orderby'] ) {
       // on desactive le tri par defaut //
-      remove_filter( 'pre_get_posts', 'meta_filter_works' );
+       remove_filter( 'pre_get_posts', 'meta_filter_works' );
       /* Merge the query vars with our custom variables. */
       $vars = array_merge(
         $vars,
@@ -470,12 +477,13 @@ function devpress_sort_works( $vars ) {
           'orderby' => 'meta_value'
         )
       );
-    } else if (isset( $vars['orderby'] ) && 'menu_order' == $vars['orderby']){
+    } else if (isset( $vars['orderby'] ) && 'menu_order' == $vars['orderby']) {
       /* Merge the query vars with our custom variables. */
       $vars = array_merge(
         $vars,
         array(
-          'orderby' => 'menu_order'
+          'order'=> 'DESC',
+          'orderby' => 'id'
         )
       );      
     }
@@ -519,6 +527,7 @@ function my_edit_works_columns( $columns ) {
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => __( 'Title' ),
+    //'order' => __( 'Order'),
     'category' => __( 'Category' ),
     'years' => __( 'Année' ),
   );
@@ -553,6 +562,9 @@ global $post;
       echo $meta;
       /* If no terms were found, output a default message. */
       break;
+    case 'order' :
+       $meta = $post->menu_order;
+       echo $meta;
     /* Just break out of the switch statement for everything else. */
     default :
       break;
@@ -573,5 +585,23 @@ add_filter('custom_menu_order', 'custom_menu_order');
 add_filter('menu_order', 'custom_menu_order');  
 
 } // fin if admin
+
+function check_publish(){
+    global $current_user, $post;
+        
+    $capability = 'publish_';
+    // Check current post type...if we have one available
+    if($post->post_type != ''){
+        // Set the capability we are looking for to publish_s
+        $capability .= $post->post_type . 's';
+    } else {
+        // Set the default capability to publish_posts
+        $capability .= 'posts';
+    }
+    
+    // Check if the user has rights to publish a post
+    return current_user_can($capability);
+}
+add_filter('ws_plugin__qcache_ms_user_can_see_admin_header_controls', true);
 
 ?>

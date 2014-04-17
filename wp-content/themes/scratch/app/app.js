@@ -31,6 +31,7 @@ var Blog = (function () {
                $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
            }
            $("#ctn-media").css('width', mypic.width());
+           $("#subnavworks2").css('max-width', mypic.width());
         } else {
            $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
            $(document).find("#ctn-media, #visuel img").removeClass("horizontale");
@@ -89,9 +90,9 @@ __p += '\n\t\t\t\t\t';
  if (i > 0) { ;
 __p += '</section>';
  } ;
-__p += '\n\t\t\t\t\t<section class="sub">\n\t\t\t\t\t\t<h3>' +
+__p += '\n\t\t\t\t\t<section class="sub">\n\t\t\t\t\t\t<h4>' +
 ((__t = ( news.get('tax')[0]['name'] )) == null ? '' : __t) +
-'</h3>\n\t\t\t\t\t\t<div class="infosnews">\n\t\t\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t\t<div class="infosnews">\n\t\t\t\t\t\t\t';
  if (_.isEmpty(news.get('customthumbmedium')) === false) { ;
 __p += ' \n\t\t\t\t\t\t\t\t<div style=\'width:70%\'>\n\t\t\t\t\t\t\t\t\t<h4>' +
 ((__t = ( news.get('title') )) == null ? '' : __t) +
@@ -205,15 +206,17 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template  pour textes content -->\n<div id="txtwrapper">' +
+__p += '<!-- template  pour textes content -->\n';
+ if (texte.get('post').custom_fields['_pinfostextes_fileurl'] || texte.get('post').custom_fields['_pinfosbio_fileurl'] || texte.get('post').worksconnected) { ;
+__p += '\n<div id="txtwrapper" style="padding-right:200px">' +
 ((__t = ( texte.get('post').content )) == null ? '' : __t) +
-'</div>\n<aside id="rightbar">\n\n\t';
+'</div>\n<aside id="rightbar">\n\t';
  if (texte.get('post').custom_fields['_pinfostextes_fileurl']) { ;
 __p += '\n\t \t<a class="btn-pdf" data-bypass href=\'' +
 ((__t = ( texte.get('post').custom_fields['_pinfostextes_fileurl'] )) == null ? '' : __t) +
-' \' target="_blank"><span id="downloadpdf"></span>';
+'\' target="_blank"><span id="downloadpdf"></span>';
  if(wp_vars.lang === "en") { ;
-__p += 'download text as pdf ';
+__p += 'download text aspdf ';
  } else { ;
 __p += 'télécharger le texte en pdf ';
  } ;
@@ -223,10 +226,10 @@ __p += '\n\n\t';
  if (texte.get('post').custom_fields['_pinfosbio_fileurl']) { ;
 __p += '\n\t \t<a class="btn-pdf" data-bypass href=\'' +
 ((__t = ( texte.get('post').custom_fields['_pinfosbio_fileurl'] )) == null ? '' : __t) +
-' \' target="_blank"><span id="downloadpdf"></span>';
+' \'\ttarget="_blank"><span id="downloadpdf"></span>';
  if(wp_vars.lang === "en") { ;
-__p += 'download text as pdf ';
- } else { ;
+__p += 'download text aspdf ';
+ }	 else { ;
 __p += 'télécharger le texte en pdf ';
  } ;
 __p += ' </a>\n\t';
@@ -245,7 +248,13 @@ __p += '\n\t \t\t<a title="' +
  }); ;
 __p += '\n\t';
  } ;
-__p += '\n</aside>';
+__p += '\n</aside>\n';
+ } else { ;
+__p += '\n<div id="txtwrapper">' +
+((__t = ( texte.get('post').content )) == null ? '' : __t) +
+'</div>\n';
+ } ;
+
 
 }
 return __p
@@ -268,7 +277,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<!-- template  pour textes sidebar -->\n<div id="mobilesubmenu">\n\t<a data-bypass href="#">\n\t\t<h4>-- SELECT A TEXT --<span id="icon"></span></h4>\n\t\t\n\t</a>\n</div>\n<div id="sidebarwrapper">\t\n\t ';
  _.each(textes, function (texte, i) { ;
-__p += '\n\t \t<a class="btn" style="opacity:0" href="#' +
+__p += '\n\t \t<a class="btn" id="' +
+((__t = ( texte.get('slug') )) == null ? '' : __t) +
+'" style="opacity:0" href="#' +
 ((__t = ( texte.get('type') )) == null ? '' : __t) +
 '/' +
 ((__t = ( texte.get('slug') )) == null ? '' : __t) +
@@ -322,7 +333,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- template pour les outils de trie et d\'affichage de workslist -->\n<div id="indextools">\n\t<nav id="displaying">\n\t\t<ul>\n\t\t\t<li>\n\t\t\t\t<a ';
+__p += '<!-- template pour les outils de tri et d\'affichage de workslist -->\n<div id="indextools">\n\t<nav id="displaying" style="visibility:hidden;">\n\t\t<ul>\n\t\t\t<li>\n\t\t\t\t<a ';
  if (displaymode === "thumbs") { ;
 __p += ' class="actif" ';
  } ;
@@ -352,7 +363,7 @@ this["Blog"]["Templates"]["workMain"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '\t<!-- template pour mainworks -->\n<section id="tools">\n<div id="hiddentitle"></div>\n<a id="closefull" title="close" data-bypass href="#"></a>\n\t<nav id="navworks">\n \t\t<div id="unfoldworks" class="nextprevworks"><a data-bypass href="#"></a></div>\n \t\t<div class="nextprevworks" id="indexworks"><a href="#works"></a></div>\n \t\t<div class="nextprevworks" id="prevwork"><a  href=""></a></div>\t\n\t\t<div class="nextprevworks" id="nextwork"><a href=""></a></div>\n\t\t<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>\n\t</nav>\n</section>\n<div id="wrapper">\t\t\t\n\t<section id="sidebar">\n\t\t<h3></h3>\n\t\t<h4></h4>\n\t\t<p id=\'description\'></p>\n\t</section>\n\t<section class="maincontent">\n\t\t<nav id="navgal"></nav>\n\t\t\t<div id="media">\n\t\t\t\t<div data-bypass id="ctn-media">\n\t\t\t\t\t<a data-bypass id="btn-media-next"></a>\n\t\t\t\t\t<a data-bypass id="btn-media-prev"></a>\n\t\t\t\t\t<figure id="visuel"></figure>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</section>\n</div>\t';
+__p += '\t<!-- template pour mainworks -->\n<section id="tools">\n<div id="hiddentitle"></div>\n<a id="closefull" title="close" data-bypass href="#"></a>\n\t<nav id="navworks">\n\t<div id="subnavworks1">\n \t\t<div id="unfoldworks" class="nextprevworks"><a data-bypass href="#"></a></div>\n \t\t<div class="nextprevworks" id="indexworks"><a href="#works"></a></div>\n \t</div>\n \t\t<div id="subnavworks2">\n \t\t\t<div class="nextprevworks" id="prevwork"><a  href=""></a></div>\t\n\t\t\t<div class="nextprevworks" id="nextwork"><a href=""></a></div>\n\t\t\t<div id="btnfull"><a title="full window" data-bypass href="#"></a></div>\n\t\t</div>\n\t</nav>\n</section>\n<div id="wrapper">\t\t\t\n\t<section id="sidebar">\n\t\t<h3></h3>\n\t\t<h4></h4>\n\t\t<p id=\'description\'></p>\n\t</section>\n\t<section class="maincontent">\n\t\t<nav id="navgal"></nav>\n\t\t\t<div id="media">\n\t\t\t\t<div data-bypass id="ctn-media">\n\t\t\t\t\t<a data-bypass id="btn-media-next"></a>\n\t\t\t\t\t<a data-bypass id="btn-media-prev"></a>\n\t\t\t\t\t<figure id="visuel"></figure>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</section>\n</div>\t';
 
 }
 return __p
@@ -608,7 +619,7 @@ var Blog = (function (blog) {
     blog.Collections.BioList = Backbone.Collection.extend({
         model : blog.Models.Bio,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=bio&include=,d,auteurs,title,slug,type&order=asc';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=bio&include=id,title,slug,type&lang='+wp_vars.lang;
             return this;
         },
         // on parse la réponse pour avoir accès aux posts
@@ -843,7 +854,7 @@ var Blog = (function (blog) {
 	blog.Collections.TextesList = Backbone.Collection.extend({
 		model : blog.Models.Texte,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=texts&custom_fields=_pinfostextes_sortname&include=custom_fields,id,auteurs,title,slug,type&key=_pinfostextes_sortname&order=asc';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=texts&custom_fields=_pinfostextes_sortname&include=custom_fields,id,auteurs,title,slug,type&lang='+wp_vars.lang;
             return this;
         },
         // on parse la réponse pour avoir accès aux posts
@@ -889,7 +900,7 @@ var Blog = (function (blog) {
 	blog.Collections.WorksList = Backbone.Collection.extend({
 		model : blog.Models.Work,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=works&key=_pinfos_annee&custom_fields=_pinfos_annee,_pinfos_description&order=desc&include=id,title,categories,content,gallery,custom_fields,slug&count=-1';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=works&custom_fields=_pinfos_annee,_pinfos_description&key=_pinfos_annee&order=desc&include=id,title,categories,content,gallery,custom_fields,slug&count=-1';
             return this;
         },
         query : function () {
@@ -961,7 +972,7 @@ var Blog = (function (blog) {
             // this.collection.bind('add', this.render);
             // this.collection.bind('remove', this.render);
         },
-        render : function () {
+        render : function (slug_post) {
             this.$el.html(this.template);
             // la fonction renderNested est héritée de la vue BaseView //
             var renderNested = this.renderNested;
@@ -980,7 +991,10 @@ var Blog = (function (blog) {
                     renderNested( parentview, mybiosidebarview, "#sidebar", results);
                     // on rend le contenu //
                     //console.log(Blog.mybiolist.at(0));
-                    that.renderText();
+                    if (Blog.mybiolist.slug) {
+                       that.renderText(Blog.mybiolist.slug);
+                    }
+
                   }
                 });
 
@@ -990,24 +1004,23 @@ var Blog = (function (blog) {
             return this;
         },
 
-        renderText : function(myslug) {
+        renderText : function (myslug) {
             this.$el.find(".maincontent").empty();
             // la fonction renderNested est héritée de la vue BaseView //
             var parentview = this.$el;
             var renderNested = this.renderNested;
            // si le slug du post n'est pas présent //
-            if (!myslug) {
-                // definition du texte à charger par défaut: on prend le premier de la liste de la colllection //                   
-                slug = Blog.mybiolist.at(0).get('slug');
-                Blog.mybiolist.slug = slug;
-               // console.log(slug);
+            if (myslug) {
+                var slug = myslug;
             } else {
-                slug = myslug;
+                // definition du texte à charger par défaut: on prend le premier de la liste de la colllection //                   
+                var slug = Blog.mybiolist.at(0).get('slug');
+                Blog.mybiolist.slug = slug;             
             }
             //alert(slug);
              // si mybiosidebarview n'est pas définie, on instancie la vue, et charge les données, puis on l'imbrique dans la vue principale //
             //if (this.mybiocontentview  === undefined) {
-                // on instancie la vue mybiosidebarview en utilisant la vue TextesContentView
+            // on instancie la vue mybiosidebarview en utilisant la vue TextesContentView
             var mybiocontentview = new blog.Views.TextesContentView(Blog.mybio);
             //};
             //console.log(slug);
@@ -1044,6 +1057,7 @@ var Blog = (function (blog) {
             if(!this.collection.slug){
               this.collection.slug = this.collection.at(0).get('slug');
             }
+            //console.log(this.collection);
             var renderedContent = blog.Templates['textesSidebar']({textes: this.collection.models, slug: this.collection.slug});
             i = 1;
             this.$el.html(renderedContent).find('a').each(function() {
@@ -1065,15 +1079,15 @@ var Blog = (function (blog) {
             $(document).find("body").removeClass('spinner');
             sidebar.mCustomScrollbar("update");
             return this;
-        },
-        showactif : function(item) {
-            this.$el.find('h4').removeClass('actif');
-            $(item.currentTarget).find("h4").addClass('actif');
-        },
-
-        events: {
-            "click #sidebarwrapper a" : "showactif"
         }
+        // showactif : function(item) {
+        //     this.$el.find('h4').removeClass('actif');
+        //     $(item.currentTarget).find("h4").addClass('actif');
+        // },
+
+        // events: {
+        //     "click #sidebarwrapper a" : "showactif"
+        // }
    
     });
 
@@ -1195,12 +1209,16 @@ var Blog = (function (blog) {
                 mycontenttxt.mCustomScrollbar({
                     set_height: "100%",
                     scrollInertia: 150,
+                    autoHideScrollbar: true,
+                    autoDraggerLength: false,
                     theme: "dark",
                     advanced:{
                         updateOnContentResize: true
                     }
                 });
             }
+            Blog.myheight();
+            mycontenttxt.mCustomScrollbar("update");
             this.$el.find("#txtwrapper").animate({'opacity': 1},{duration: 300, complete: function() {}});
             Blog.myheight();
             
@@ -1397,6 +1415,10 @@ var Blog = (function (blog) {
         render : function () {
             var mycontent = this.$el;
             var renderedContent = blog.Templates['textesContent']({texte: this.model});
+
+              $('title').text(this.model.get('post').title + ' | ' + wp_vars.blogname);
+
+              var slug = this.model.get('post').slug;
               this.$el.animate({
                 opacity: 0
               }, {
@@ -1417,15 +1439,24 @@ var Blog = (function (blog) {
                                 }
                             });
                         }
-                         Blog.myheight();
+                        Blog.myheight();
                         mycontenttxt.mCustomScrollbar("update");
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
+
                 }
               });
 
-            
+            this.showactif(slug);
             
             return this;
+        },
+
+        showactif : function(slug) {
+            var mysidebar = $('#sidebarwrapper');
+            var $item = $('a#' + slug );
+            console.log($item);
+            mysidebar.find('h4').removeClass('actif');
+            $item.find('h4').addClass('actif');
         }
    
     });
@@ -1805,6 +1836,7 @@ var Blog = (function (blog) {
         },
 
         render : function () {
+            $('title').text(this.model.get('title') + ' | ' + wp_vars.blogname);
             // on ecrit le titre dans hiddentitle //
             this.$el.find("#tools #hiddentitle").html("<h3>"+this.model.get('title')+"&nbsp;</h3>"+"<h4>&mdash; "+this.model.get('custom_fields')['_pinfos_annee'][0]+"</h4>");
             // on active la vignette active dans workslist mini //
@@ -1995,7 +2027,7 @@ var Blog = (function (blog) {
             Blog.myworkslist.displaymode = 'thumbs';
             //Blog.myworkslistview.render();
             // on classe par date en vue thumb //
-            Blog.myworkslist.sortByDate();
+            //Blog.myworkslist.sortByDate();
             // le bouton date est actif //
             this.$el.find("#sorting a").removeClass("actif");
             this.$el.find("#sortbydate").addClass("actif");
@@ -2247,8 +2279,14 @@ var Blog = (function (blog){
               $('#main_nav a[href="#'+route+'"]').addClass('actif');
             },
 
+            setTitle : function () {
+               $('title').text($('#main_nav .actif span').text() + ' | ' + wp_vars.blogname);
+
+            },
+
             home : function () {
               this.selectMenu('home');
+              $('title').text('home | ' + wp_vars.blogname);
               $(document).find("body").addClass('spinner');
               $("#mainbb").empty();
               //this.killbackstrech();
@@ -2274,6 +2312,8 @@ var Blog = (function (blog){
             news : function () {
               this.killbackstrech();
               this.selectMenu('news');
+              $('#main_nav .actif span').text();
+              this.setTitle();
               $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.newsview) {
@@ -2295,6 +2335,7 @@ var Blog = (function (blog){
             notice : function () {
               this.selectMenu('contact');
               this.killbackstrech();
+              this.setTitle();
                   // on instancie la vue news
                 if (!Blog.noticeview) {
                    Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
@@ -2313,6 +2354,7 @@ var Blog = (function (blog){
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();
+              this.setTitle();
               $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {
@@ -2338,6 +2380,7 @@ var Blog = (function (blog){
             displayText : function (slug_post) {
               this.selectMenu('texts');
               this.killbackstrech();
+              this.setTitle();
               $(document).find("body").addClass('spinner');
               // on instancie la vue TextesMainView si elle n'existe pas
               if (!Blog.textesmainview) {
@@ -2366,7 +2409,7 @@ var Blog = (function (blog){
                   Blog.biomainview = new blog.Views.BioMainView();
               }
 
-              if(slug_post) {
+              if(slug_post) {              
                 Blog.mybiolist.slug = slug_post;
                 this.switchView(Blog.biomainview);
                 Blog.biomainview.renderText(slug_post);

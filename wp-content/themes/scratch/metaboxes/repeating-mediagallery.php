@@ -15,10 +15,10 @@ function my_action_javascript() { ?>
       
       jQuery.post(ajaxurl, data, function(response) {
         // affiche la vignette //
-        console.log(response);
-        jQuery(response.selector).closest('.wpa_group, .mypic').find('.preview').html(response.image_html);
+        console.log(response.selector);
+        jQuery(response.selector).closest('.inside').find('.preview').html(response.image_html);
         // affiche le nom de l'image
-        jQuery(response.selector).closest('.wpa_group').find('#pic_name').html(response.file_name);
+        jQuery(response.selector).closest('.mypic').find('#pic_name').html(response.file_name);
       });
   }
 </script>

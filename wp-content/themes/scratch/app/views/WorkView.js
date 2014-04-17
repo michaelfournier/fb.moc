@@ -77,6 +77,7 @@ var Blog = (function (blog) {
         },
 
         render : function () {
+            $('title').text(this.model.get('title') + ' | ' + wp_vars.blogname);
             // on ecrit le titre dans hiddentitle //
             this.$el.find("#tools #hiddentitle").html("<h3>"+this.model.get('title')+"&nbsp;</h3>"+"<h4>&mdash; "+this.model.get('custom_fields')['_pinfos_annee'][0]+"</h4>");
             // on active la vignette active dans workslist mini //

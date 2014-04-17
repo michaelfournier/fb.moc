@@ -12,6 +12,10 @@ var Blog = (function (blog) {
         render : function () {
             var mycontent = this.$el;
             var renderedContent = blog.Templates['textesContent']({texte: this.model});
+
+              $('title').text(this.model.get('post').title + ' | ' + wp_vars.blogname);
+
+              var slug = this.model.get('post').slug;
               this.$el.animate({
                 opacity: 0
               }, {
@@ -32,15 +36,24 @@ var Blog = (function (blog) {
                                 }
                             });
                         }
-                         Blog.myheight();
+                        Blog.myheight();
                         mycontenttxt.mCustomScrollbar("update");
                        $(mycontent).animate({'opacity': 1}, {duration: 500});
+
                 }
               });
 
-            
+            this.showactif(slug);
             
             return this;
+        },
+
+        showactif : function(slug) {
+            var mysidebar = $('#sidebarwrapper');
+            var $item = $('a#' + slug );
+            console.log($item);
+            mysidebar.find('h4').removeClass('actif');
+            $item.find('h4').addClass('actif');
         }
    
     });

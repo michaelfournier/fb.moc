@@ -14,6 +14,7 @@ var Blog = (function (blog) {
             if(!this.collection.slug){
               this.collection.slug = this.collection.at(0).get('slug');
             }
+            //console.log(this.collection);
             var renderedContent = blog.Templates['textesSidebar']({textes: this.collection.models, slug: this.collection.slug});
             i = 1;
             this.$el.html(renderedContent).find('a').each(function() {
@@ -35,15 +36,15 @@ var Blog = (function (blog) {
             $(document).find("body").removeClass('spinner');
             sidebar.mCustomScrollbar("update");
             return this;
-        },
-        showactif : function(item) {
-            this.$el.find('h4').removeClass('actif');
-            $(item.currentTarget).find("h4").addClass('actif');
-        },
-
-        events: {
-            "click #sidebarwrapper a" : "showactif"
         }
+        // showactif : function(item) {
+        //     this.$el.find('h4').removeClass('actif');
+        //     $(item.currentTarget).find("h4").addClass('actif');
+        // },
+
+        // events: {
+        //     "click #sidebarwrapper a" : "showactif"
+        // }
    
     });
 

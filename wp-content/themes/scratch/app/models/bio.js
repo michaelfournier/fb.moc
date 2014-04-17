@@ -23,7 +23,7 @@ var Blog = (function (blog) {
     blog.Collections.BioList = Backbone.Collection.extend({
         model : blog.Models.Bio,
         all : function () {
-            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=bio&include=,d,auteurs,title,slug,type&order=asc';
+            this.url = wp_vars.blogurl+'/api/Mikictrl/get_custom_posts?post_type=bio&include=id,title,slug,type&lang='+wp_vars.lang;
             return this;
         },
         // on parse la réponse pour avoir accès aux posts

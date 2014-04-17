@@ -43,8 +43,14 @@ var Blog = (function (blog){
               $('#main_nav a[href="#'+route+'"]').addClass('actif');
             },
 
+            setTitle : function () {
+               $('title').text($('#main_nav .actif span').text() + ' | ' + wp_vars.blogname);
+
+            },
+
             home : function () {
               this.selectMenu('home');
+              $('title').text('home | ' + wp_vars.blogname);
               $(document).find("body").addClass('spinner');
               $("#mainbb").empty();
               //this.killbackstrech();
@@ -70,6 +76,8 @@ var Blog = (function (blog){
             news : function () {
               this.killbackstrech();
               this.selectMenu('news');
+              $('#main_nav .actif span').text();
+              this.setTitle();
               $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.newsview) {
@@ -91,6 +99,7 @@ var Blog = (function (blog){
             notice : function () {
               this.selectMenu('contact');
               this.killbackstrech();
+              this.setTitle();
                   // on instancie la vue news
                 if (!Blog.noticeview) {
                    Blog.noticeview = new blog.Views.NoticeView(Blog.mynotice);
@@ -109,6 +118,7 @@ var Blog = (function (blog){
             displayWorksList : function () {
               this.selectMenu('works');
               this.killbackstrech();
+              this.setTitle();
               $(document).find("body").addClass('spinner');
               // on instancie la vue MainWorksView et on la rend si elle n'existe pas
               if (!Blog.mymainworkslistview) {
@@ -134,6 +144,7 @@ var Blog = (function (blog){
             displayText : function (slug_post) {
               this.selectMenu('texts');
               this.killbackstrech();
+              this.setTitle();
               $(document).find("body").addClass('spinner');
               // on instancie la vue TextesMainView si elle n'existe pas
               if (!Blog.textesmainview) {
@@ -162,7 +173,7 @@ var Blog = (function (blog){
                   Blog.biomainview = new blog.Views.BioMainView();
               }
 
-              if(slug_post) {
+              if(slug_post) {              
                 Blog.mybiolist.slug = slug_post;
                 this.switchView(Blog.biomainview);
                 Blog.biomainview.renderText(slug_post);

@@ -27,7 +27,6 @@ function my_action_javascript() { ?>
 }
 ?>
 <div class="my_meta_control">
-<? print_r($mb->meta['pdf_fr']); ?>
     <!-- ENGLISH VERSION -->
 	<div class="wpa_group">
 	<? $mb->the_field('pdf_en'); ?>	

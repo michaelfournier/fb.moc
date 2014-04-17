@@ -31,6 +31,7 @@ var Blog = (function () {
                $(document).find("#ctn-media").removeClass("horizontale").removeAttr("style");
            }
            $("#ctn-media").css('width', mypic.width());
+           $("#subnavworks2").css('max-width', mypic.width());
         } else {
            $(document).find('#wrapper, #workslistmini, #visuel img').removeAttr("style");
            $(document).find("#ctn-media, #visuel img").removeClass("horizontale");

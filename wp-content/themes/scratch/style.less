@@ -48,6 +48,14 @@ body {
 	color: @black90;
 }
 
+a:focus { 
+    outline: none; 
+}
+
+#btn-pdf {
+   color: @black30;
+}
+
 h3 , h4, h5{
 	
 	margin: 0 0 @unit/3 0;
@@ -73,14 +81,15 @@ h5 {
 ul { padding: 0; margin: 0;} 
 
 nav {
-	font-size:(12/@font-size)*1em;	
+	font-family: 'sourcesanspro';
+	font-size:(13/@font-size)*1em;	
 	letter-spacing: 0px;
 }
 
 nav a {
 	float: left;	
 	text-decoration: none;
-	color: @black90;
+	color: @black30;
 	text-transform: lowercase;	
 	display: block;
 }
@@ -102,7 +111,7 @@ a:hover, a:visited:hover, a:hover h4 {
 }
 
 a:visited {
-	color: @black90;
+	/*color: @black90;*/
 }
 
 p {
@@ -158,13 +167,10 @@ figcaption {
 }
 
 /* menu */
-#mainmenu a:hover {
-	text-decoration: underline;
+#mainmenu a:hover, #main_nav .actif {
+	color: @black90;
 }
 
-#main_nav .actif {
-	text-decoration: underline;
-}
 
 #main_header { 
 	position: relative;
@@ -176,8 +182,8 @@ figcaption {
 
 #main_nav a {
 	text-transform: uppercase;
-	border-left: 1px solid @black10;
-	padding: @unit/5 @unit;
+	/*border-left: 1px solid @black10;*/
+	padding: @unit/5 @unit/2;
 }
 
 #tools #sorting li a {
@@ -416,10 +422,6 @@ nav#sorting {
 	background-color: @hovercolor;
 }
 
-#unfoldworks, #nextwork {
-	padding-right: @unit/2;
-	border-right: 1px solid @black30;
-}
 
 #unfoldworks a.fold {
 	background-position: 0px center;
@@ -432,14 +434,11 @@ nav#sorting {
 
 	#sidebar #toogletext {
 		float: left;
-		padding: @unit/2;
-		border: 1px solid @black10;
 	}
 
 	#indextools li, .nextprevworks, #btnfull, #mobilemenu {
 		padding: 0;
 		margin-left: @unit/2;
-		border: 1px solid @black10;
 		width: auto;
 		height: auto;		
 	}
@@ -453,7 +452,6 @@ nav#sorting {
 	}
    
 	#unfoldworks, #nextwork {
-		border-right: 1px solid @black10;
 		padding: 0;
 	}
 
@@ -588,7 +586,7 @@ nav#sorting {
 	padding: @unit/1.5 0;
 	.box-sizing();
 	width: 96%;
-	border-bottom: 1px solid @black10;
+	/*border-bottom: 1px solid @black10;*/
 }
 
 .sub .infosnews:last-child {
@@ -627,21 +625,21 @@ nav#sorting {
 
 #btn-media-next {
 	right: 0;
-	background: url('img/chevron_droite.png') no-repeat;
+	background: url('img/gal-forward.png') no-repeat;
     background-position: 200% center;
 }
 
 #btn-media-next:hover {
-	background-position: right 60%;
+	background-position: 99% 60%;
 }
 
 #btn-media-prev:hover {
-	background-position: left 60%;
+	background-position: 1% 60%;
 }
 
 #btn-media-prev {
 	left:0;
-	background: url('img/chevron_gauche.png') no-repeat;
+	background: url('img/gal-backward.png') no-repeat;
 	background-position: 200% center;
 }
 
@@ -689,7 +687,7 @@ nav#sorting {
 	padding: 0 0 0 @unit/2;
 	border: 0;
 	text-decoration: none;
-	color: @black10;
+	color: @black30;
 	float: right;
 	letter-spacing: 0px;
 }
@@ -718,12 +716,16 @@ nav#sorting {
 	position: fixed;
 	display: none;
 	top: 0;
-	left:0;
+	right:0;
 	width: 36px;
 	height: 36px;
     z-index: 1000;
-	background: url('img/closefull.png') no-repeat;
+	background: url('img/close-full.png') @black30 no-repeat;
 	background-position: center center;
+}
+
+#closefull:hover {
+	background-color: @black90;
 }
 
 

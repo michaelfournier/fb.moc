@@ -8,7 +8,7 @@
 				<% if ( String(tab[i-1]) !== String(tab[i])) { %>
 					<% if (i > 0) { %></section><% } %>
 					<section class="sub">
-						<h3><%= news.get('tax')[0]['name'] %></h3>
+						<h4><%= news.get('tax')[0]['name'] %></h4>
 						<div class="infosnews">
 							<% if (_.isEmpty(news.get('customthumbmedium')) === false) { %> 
 								<div style='width:70%'>

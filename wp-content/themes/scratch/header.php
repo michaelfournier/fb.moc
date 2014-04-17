@@ -18,20 +18,14 @@
     <meta name="author" content="vacuumRandom"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
-	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=2014028-2056" />
-    <link type="text/plain" rel="author" href="/humans.txt" />
-   <!-- <script data-main="<?= get_template_directory_uri(); ?>/app/main" src="<?= get_template_directory_uri(); ?>/app/libs/vendors/require.js"></script>-->
-    <!--<script src="<?= get_template_directory_uri(); ?>/app/libs/vendors/modernizr-2.6.2.min.js"></script>-->
+	<!-- <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css?v=2014028-2056" /> -->
+	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.min.css?v=20140323" />
     <?php wp_head(); ?>
 </head>
 
 
 <body <?php body_class(); ?>>
-	<div id="bureau">bureau</div>
-	<div id="intermediaire">intermediaire</div>
-	<div id="smartphone">smarphone</div>
-	<div id="tablette">tablette</div>
+
 	<header id="main_header">
 	    <div id="mobile_header">
 			<h2 id="mobiletitle">Fayçal Baghriche</h2>
@@ -56,7 +50,7 @@
 						<? foreach ($tabpdf as $key => $value) { ?>
 						<? $mypdfurl = wp_get_attachment_url($value['pdfid']); ?>
 							<li>
-								<a data-bypass href="<?= $mypdfurl; ?>"><?= $value['title']; ?></a>
+								<a data-bypass target="_blank" href="<?= $mypdfurl; ?>"><?= $value['title']; ?></a>
 							</li>
 						<? } ?>
 					</ul>
@@ -78,7 +72,7 @@
 		<?php endif; // end of the loop. ?>	
 			<li id="qtrans">
 				<? if ($mylang == 'en') { ?>
-					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>fra</span></a>	
+					<a data-bypass href="<?= qtrans_convertURL(null, 'fr'); ?>"><span>fr</span></a>	
 				<? } else { ?>
 					<a data-bypass href="<?= qtrans_convertURL(null, 'en'); ?>"><span>eng</span></a>
 				<? } ?>

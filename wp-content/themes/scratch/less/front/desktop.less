@@ -20,10 +20,10 @@
 
 	.wrapthumb { width: (1/3)*100%; }
 	#main_wrapper {
-		//max-width: 1600px;w
+		/*max-width: 1600px;
 		.divise(1,1, 0, none, none);
-		//padding: 0 50px;
-		//margin: 0 auto;
+		padding: 0 50px;
+		margin: 0 auto;*/
 	}
 	#main_header {
 		margin: 0 0 @unit 0;
@@ -36,6 +36,11 @@
 	}
 
 	/* HEADER */
+
+	#mainmenu > li:first-child a {
+		color: @black90;
+       padding-right: @unit*3.5;
+	}
 
 	#secondmenu {
 		float: right;
@@ -118,21 +123,25 @@
 }
 
 
-	/* TOOLS */
+/* TOOLS */
 
-	#navgal { float: left; width: @unit; z-index: 6;}
+#navgal { float: left; width: @unit; z-index: 6;}
 
-	#indextools {
-		.divise(1,1, 0, none, left);
-	}
+#indextools {
+	.divise(1,1, 0, none, left);
+}
 
-	nav#navworks {
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 1;
-	}
-
+nav#navworks {
+	float: left;
+	width: 100%;
+	z-index: 1;
+	width: 100%;
+	margin-bottom: @unit/2;
+	.box-sizing();
+}
+.nextprevworks {
+	margin: 0 @unit/2 0 0;
+}
 /*	#tools #sorting li a {
 		border-left: none;
 		border-right: 1px solid @black10;
@@ -267,6 +276,7 @@
 		/*.divise(1,1, @tranche, none, left);*/
 		.box-sizing();
 		clear: none;
+		/*padding-left: @unit/1.5;*/
 		/*height: 100%;*/
 	}
 
@@ -277,7 +287,7 @@
 
 	.maincontent.txt, .maincontent.bio {
 		.divise(1,1, 200px, none, left);
-		padding-right: 200px;
+		/*padding-right: 200px;*/
 		overflow-y: hidden;
 		height: 100%;
 	}
@@ -292,11 +302,10 @@
 	}
 
 	#txtwrapper {
-		.box-sizing();
 		position: relative;
 		background-color: white;
-		padding: 0 @unit/3 @unit/1.5 @unit;
-		max-width: 800px;
+		padding: 0 @unit/3 @unit/1.5 @unit*2.5;
+		max-width: 650px;
 		margin: 0 auto;
 		height: 100%;
 		overflow-y: auto;
@@ -331,7 +340,8 @@
 
 
 	.txt #txtwrapper p {
-		font-size:(15/@font-size)*1em;
+		text-align: justify;
+		font-size:(13/@font-size)*1em;
 		line-height: @line/11;
 	}
 
@@ -349,13 +359,32 @@
 		float: left;
 		.box-sizing();
 		position: relative;
-		margin-top: @unit*2;
-		padding: 0 0 @unit*2 0;
+		margin-top: 0;
+		padding: 0 0 0 0;
 		max-width: @tranche;
 		height: 100%;
 		overflow-y: auto;
 		z-index: 5;
 		/*border-bottom: @unit solid @bgcolor;*/
+	}
+
+	#subnavworks1 {
+		float: left;
+		min-width: 278px;
+		/*max-width: @tranche;*/
+		/*padding-right: @unit*1.9;*/
+        width: 30%;
+	}
+
+	#subnavworks2 {
+		width: 70%;
+		float: left;
+		/*padding-left: @unit;*/
+		.box-sizing();
+	}
+
+	#sidebar #toogletext {
+		font-weight: bold;
 	}
 
 	#sidebar.text, #sidebar.bio { min-width : 200px; width: 200px; position: absolute; margin-top:0; padding:0;}
